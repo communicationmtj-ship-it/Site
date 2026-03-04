@@ -9,6 +9,8 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import List
 import uuid
 from datetime import datetime, timezone
+from models import QuoteRequest, ContactRequest
+from email_service import send_quote_email, send_contact_email
 
 
 ROOT_DIR = Path(__file__).parent
@@ -65,6 +67,79 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     
     return status_checks
+
+# Quote endpoint
+@api_router.post("/quote")
+async def submit_quote(request: QuoteRequest):
+    """
+    Handle quote form submission
+    """
+    try:
+        # Save to database
+        quote_dict = request.model_dump()
+        quote_dict['id'] = str(uuid.uuid4())
+        quote_dict['timestamp'] = datetime.now(timezone.utc).isoformat()
+        quote_dict['status'] = 'pending'
+        
+        await db.quotes.insert_one(quote_dict)
+        
+        # Send email notification
+        send_quote_email(
+            name=request.name,
+            company=request.company,
+            email=request.email,
+            phone=request.phone,
+            service_type=request.serviceType,
+            message=request.message
+        )
+        
+        return {
+            "status": "success",
+            "message": "Votre demande de devis a été envoyée avec succès. Nous vous contacterons dans les plus brefs délais."
+        }
+        
+    except Exception as e:
+        logger.error(f"Error submitting quote: {str(e)}")
+        return {
+            "status": "error",
+            "message": "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer."
+        }
+
+# Contact endpoint
+@api_router.post("/contact")
+async def submit_contact(request: ContactRequest):
+    """
+    Handle contact form submission
+    """
+    try:
+        # Save to database
+        contact_dict = request.model_dump()
+        contact_dict['id'] = str(uuid.uuid4())
+        contact_dict['timestamp'] = datetime.now(timezone.utc).isoformat()
+        contact_dict['status'] = 'pending'
+        
+        await db.contacts.insert_one(contact_dict)
+        
+        # Send email notification
+        send_contact_email(
+            name=request.name,
+            email=request.email,
+            phone=request.phone,
+            subject=request.subject,
+            message=request.message
+        )
+        
+        return {
+            "status": "success",
+            "message": "Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais."
+        }
+        
+    except Exception as e:
+        logger.error(f"Error submitting contact: {str(e)}")
+        return {
+            "status": "error",
+            "message": "Une erreur est survenue lors de l'envoi de votre message. Veuillez réessayer."
+        }
 
 # Include the router in the main app
 app.include_router(api_router)

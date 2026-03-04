@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { FileText, Send, CheckCircle } from 'lucide-react';
 import { quoteForm } from '../data/mock';
-import { useToast } from '../hooks/use-toast';
+import { toast } from '../components/ui/sonner';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Quote = () => {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -24,23 +26,32 @@ const Quote = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Simulate form submission
-    console.log('Quote form submitted:', formData);
-    
-    toast({
-      title: "Demande envoyée !",
-      description: "Nous vous contacterons dans les plus brefs délais.",
-    });
+    // Call backend API
+    axios.post(`${BACKEND_URL}/api/quote`, formData)
+      .then(response => {
+        console.log('Quote submitted:', response.data);
+        
+        toast.success("Demande envoyée !", {
+          description: response.data.message || "Nous vous contacterons dans les plus brefs délais.",
+        });
 
-    // Reset form
-    setFormData({
-      name: '',
-      company: '',
-      email: '',
-      phone: '',
-      serviceType: '',
-      message: '',
-    });
+        // Reset form
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          phone: '',
+          serviceType: '',
+          message: '',
+        });
+      })
+      .catch(error => {
+        console.error('Error submitting quote:', error);
+        
+        toast.error("Erreur", {
+          description: error.response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
+        });
+      });
   };
 
   const serviceTypes = [

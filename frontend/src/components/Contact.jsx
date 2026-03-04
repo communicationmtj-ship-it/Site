@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { contactInfo, companyInfo } from '../data/mock';
-import { useToast } from '../hooks/use-toast';
+import { toast } from '../components/ui/sonner';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Contact = () => {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,22 +25,31 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Simulate form submission
-    console.log('Contact form submitted:', formData);
-    
-    toast({
-      title: "Message envoyé !",
-      description: "Nous vous répondrons dans les plus brefs délais.",
-    });
+    // Call backend API
+    axios.post(`${BACKEND_URL}/api/contact`, formData)
+      .then(response => {
+        console.log('Contact submitted:', response.data);
+        
+        toast.success("Message envoyé !", {
+          description: response.data.message || "Nous vous répondrons dans les plus brefs délais.",
+        });
 
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-    });
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+        });
+      })
+      .catch(error => {
+        console.error('Error submitting contact:', error);
+        
+        toast.error("Erreur", {
+          description: error.response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
+        });
+      });
   };
 
   return (
