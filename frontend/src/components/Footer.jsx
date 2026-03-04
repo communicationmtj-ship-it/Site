@@ -20,7 +20,7 @@ const Footer = () => {
           <div>
             <div className="mb-4">
               <img 
-                src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/k9j0bmt0_Prepare%20to%20change%20for%20the%20better..jpeg" 
+                src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png" 
                 alt="MTJ Sécurité Privée"
                 className="h-16 w-auto object-contain"
               />

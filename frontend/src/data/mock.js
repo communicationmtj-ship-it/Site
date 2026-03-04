@@ -55,7 +55,6 @@ export const services = [
     features: [
       "Prévention incendie",
       "Évacuation d'urgence",
-      "Formation sécurité",
       "Gestion des équipements de sécurité"
     ]
   }
