@@ -5,6 +5,7 @@ import { services } from '../data/mock';
 const Services = () => {
   const iconMap = {
     Shield: Shield,
+    Dog: Shield,
     Flame: Flame,
   };
 
@@ -23,7 +24,7 @@ const Services = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const IconComponent = iconMap[service.icon] || Shield;
             

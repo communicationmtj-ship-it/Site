@@ -66,6 +66,7 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>Agent de sécurité</li>
+              <li>Sécurité cynophile</li>
               <li>SSIAP</li>
               <li>Sécurité événementielle</li>
               <li>Gardiennage</li>

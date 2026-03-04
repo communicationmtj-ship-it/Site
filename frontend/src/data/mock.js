@@ -34,6 +34,18 @@ export const services = [
     ]
   },
   {
+    id: 2,
+    title: "SÉCURITÉ CYNOPHILE",
+    description: "Notre unité cynophile dispose de chiens dressés pour la détection, la surveillance et l'intervention. Nos équipes sont certifiées et expérimentées dans toutes les situations d'intervention.",
+    icon: "Dog",
+    features: [
+      "Surveillance avec unité cynophile",
+      "Détection de substances",
+      "Sécurité événementielle",
+      "Intervention rapide"
+    ]
+  },
+  {
     id: 3,
     title: "SSIAP",
     subtitle: "Service de Sécurité Incendie et d'Assistance à Personnes",
