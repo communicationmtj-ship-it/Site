@@ -29,22 +29,11 @@ const Hero = () => {
           {/* Trident Icon */}
           <div className="flex justify-center animate-fade-in">
             <div className="p-6 bg-amber-400/10 backdrop-blur-sm rounded-full border-2 border-amber-400/30">
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-amber-400"
-              >
-                <path
-                  d="M12 2L12 22M12 2L8 6M12 2L16 6M12 10L7 5M12 10L17 5M12 14L6 8M12 14L18 8"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png" 
+                alt="MTJ Trident"
+                className="w-16 h-16 object-contain"
+              />
             </div>
           </div>
 
