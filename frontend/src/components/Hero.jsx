@@ -26,17 +26,6 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center">
         <div className="max-w-5xl mx-auto space-y-8">
-          {/* Trident Icon */}
-          <div className="flex justify-center animate-fade-in">
-            <div className="p-6 bg-amber-400/10 backdrop-blur-sm rounded-full border-2 border-amber-400/30">
-              <img 
-                src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png" 
-                alt="MTJ Trident"
-                className="w-16 h-16 object-contain"
-              />
-            </div>
-          </div>
-
           {/* Main Heading */}
           <div className="space-y-4 animate-fade-in-up">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-wider leading-tight">
