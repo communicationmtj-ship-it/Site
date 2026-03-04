@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 COMPANY_EMAIL = "mtj.securiteprivee@gmail.com"
 
-def send_quote_email(name: str, company: Optional[str], email: str, phone: str, service_type: str, message: str):
+def send_quote_email(name: str, company: Optional[str], email: str, phone: str, service_type: str, message: str, attachment_path: Optional[str] = None):
     """
     Send quote request email to company
     """
@@ -20,6 +20,8 @@ def send_quote_email(name: str, company: Optional[str], email: str, phone: str, 
         msg['Subject'] = f"Nouvelle demande de devis - {service_type}"
         
         # Email body
+        attachment_info = f"\nPièce jointe : {attachment_path}" if attachment_path else "\nPas de pièce jointe"
+        
         body = f"""
 Nouvelle demande de devis reçue :
 
@@ -45,6 +47,8 @@ MESSAGE
 {message}
 
 ===========================================
+{attachment_info}
+===========================================
 
 Cette demande a été envoyée depuis le formulaire de devis du site MTJ SÉCURITÉ PRIVÉE.
         """
@@ -55,10 +59,8 @@ Cette demande a été envoyée depuis le formulaire de devis du site MTJ SÉCURI
         logger.info(f"Quote email prepared for {COMPANY_EMAIL}")
         logger.info(f"From: {name} ({email})")
         logger.info(f"Service: {service_type}")
-        
-        # TODO: Configure SMTP when credentials are available
-        # This is a placeholder that logs instead of sending
-        # Real SMTP will be configured later
+        if attachment_path:
+            logger.info(f"Attachment: {attachment_path}")
         
         return True
         
@@ -66,7 +68,7 @@ Cette demande a été envoyée depuis le formulaire de devis du site MTJ SÉCURI
         logger.error(f"Error preparing quote email: {str(e)}")
         return False
 
-def send_contact_email(name: str, email: str, phone: Optional[str], subject: str, message: str):
+def send_contact_email(name: str, email: str, phone: Optional[str], subject: str, message: str, attachment_path: Optional[str] = None):
     """
     Send contact form email to company
     """
@@ -78,6 +80,8 @@ def send_contact_email(name: str, email: str, phone: Optional[str], subject: str
         msg['Subject'] = f"Nouveau message de contact - {subject}"
         
         # Email body
+        attachment_info = f"\nPièce jointe : {attachment_path}" if attachment_path else "\nPas de pièce jointe"
+        
         body = f"""
 Nouveau message de contact reçu :
 
@@ -102,6 +106,8 @@ MESSAGE
 {message}
 
 ===========================================
+{attachment_info}
+===========================================
 
 Ce message a été envoyé depuis le formulaire de contact du site MTJ SÉCURITÉ PRIVÉE.
         """
@@ -112,6 +118,8 @@ Ce message a été envoyé depuis le formulaire de contact du site MTJ SÉCURIT�
         logger.info(f"Contact email prepared for {COMPANY_EMAIL}")
         logger.info(f"From: {name} ({email})")
         logger.info(f"Subject: {subject}")
+        if attachment_path:
+            logger.info(f"Attachment: {attachment_path}")
         
         return True
         

@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, UploadFile, File, Form
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -6,15 +6,19 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
-from models import QuoteRequest, ContactRequest
 from email_service import send_quote_email, send_contact_email
+import shutil
 
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+
+# Create uploads directory
+UPLOAD_DIR = ROOT_DIR / 'uploads'
+UPLOAD_DIR.mkdir(exist_ok=True)
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
@@ -70,27 +74,62 @@ async def get_status_checks():
 
 # Quote endpoint
 @api_router.post("/quote")
-async def submit_quote(request: QuoteRequest):
+async def submit_quote(
+    name: str = Form(...),
+    email: str = Form(...),
+    phone: str = Form(...),
+    serviceType: str = Form(...),
+    message: str = Form(...),
+    company: Optional[str] = Form(None),
+    attachment: Optional[UploadFile] = File(None)
+):
     """
-    Handle quote form submission
+    Handle quote form submission with optional file attachment
     """
     try:
+        attachment_path = None
+        attachment_filename = None
+        
+        # Save attachment if provided
+        if attachment:
+            # Generate unique filename
+            file_extension = Path(attachment.filename).suffix
+            unique_filename = f"{uuid.uuid4()}{file_extension}"
+            attachment_path = UPLOAD_DIR / unique_filename
+            
+            # Save file
+            with open(attachment_path, "wb") as buffer:
+                shutil.copyfileobj(attachment.file, buffer)
+            
+            attachment_filename = attachment.filename
+            logger.info(f"Attachment saved: {unique_filename}")
+        
         # Save to database
-        quote_dict = request.model_dump()
-        quote_dict['id'] = str(uuid.uuid4())
-        quote_dict['timestamp'] = datetime.now(timezone.utc).isoformat()
-        quote_dict['status'] = 'pending'
+        quote_dict = {
+            'id': str(uuid.uuid4()),
+            'name': name,
+            'company': company,
+            'email': email,
+            'phone': phone,
+            'serviceType': serviceType,
+            'message': message,
+            'attachment_filename': attachment_filename,
+            'attachment_path': str(attachment_path) if attachment_path else None,
+            'timestamp': datetime.now(timezone.utc).isoformat(),
+            'status': 'pending'
+        }
         
         await db.quotes.insert_one(quote_dict)
         
         # Send email notification
         send_quote_email(
-            name=request.name,
-            company=request.company,
-            email=request.email,
-            phone=request.phone,
-            service_type=request.serviceType,
-            message=request.message
+            name=name,
+            company=company,
+            email=email,
+            phone=phone,
+            service_type=serviceType,
+            message=message,
+            attachment_path=str(attachment_path) if attachment_path else None
         )
         
         return {
@@ -107,26 +146,59 @@ async def submit_quote(request: QuoteRequest):
 
 # Contact endpoint
 @api_router.post("/contact")
-async def submit_contact(request: ContactRequest):
+async def submit_contact(
+    name: str = Form(...),
+    email: str = Form(...),
+    subject: str = Form(...),
+    message: str = Form(...),
+    phone: Optional[str] = Form(None),
+    attachment: Optional[UploadFile] = File(None)
+):
     """
-    Handle contact form submission
+    Handle contact form submission with optional file attachment
     """
     try:
+        attachment_path = None
+        attachment_filename = None
+        
+        # Save attachment if provided
+        if attachment:
+            # Generate unique filename
+            file_extension = Path(attachment.filename).suffix
+            unique_filename = f"{uuid.uuid4()}{file_extension}"
+            attachment_path = UPLOAD_DIR / unique_filename
+            
+            # Save file
+            with open(attachment_path, "wb") as buffer:
+                shutil.copyfileobj(attachment.file, buffer)
+            
+            attachment_filename = attachment.filename
+            logger.info(f"Attachment saved: {unique_filename}")
+        
         # Save to database
-        contact_dict = request.model_dump()
-        contact_dict['id'] = str(uuid.uuid4())
-        contact_dict['timestamp'] = datetime.now(timezone.utc).isoformat()
-        contact_dict['status'] = 'pending'
+        contact_dict = {
+            'id': str(uuid.uuid4()),
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'subject': subject,
+            'message': message,
+            'attachment_filename': attachment_filename,
+            'attachment_path': str(attachment_path) if attachment_path else None,
+            'timestamp': datetime.now(timezone.utc).isoformat(),
+            'status': 'pending'
+        }
         
         await db.contacts.insert_one(contact_dict)
         
         # Send email notification
         send_contact_email(
-            name=request.name,
-            email=request.email,
-            phone=request.phone,
-            subject=request.subject,
-            message=request.message
+            name=name,
+            email=email,
+            phone=phone,
+            subject=subject,
+            message=message,
+            attachment_path=str(attachment_path) if attachment_path else None
         )
         
         return {

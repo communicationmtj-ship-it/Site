@@ -15,6 +15,8 @@ const Quote = () => {
     serviceType: '',
     message: '',
   });
+  const [attachment, setAttachment] = useState(null);
+  const [fileName, setFileName] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -23,11 +25,44 @@ const Quote = () => {
     });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Limit file size to 10MB
+      if (file.size > 10 * 1024 * 1024) {
+        toast({
+          title: "Fichier trop volumineux",
+          description: "La taille maximale est de 10 Mo.",
+          variant: "destructive",
+        });
+        return;
+      }
+      setAttachment(file);
+      setFileName(file.name);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    // Create FormData for file upload
+    const submitData = new FormData();
+    submitData.append('name', formData.name);
+    submitData.append('company', formData.company || '');
+    submitData.append('email', formData.email);
+    submitData.append('phone', formData.phone);
+    submitData.append('serviceType', formData.serviceType);
+    submitData.append('message', formData.message);
+    if (attachment) {
+      submitData.append('attachment', attachment);
+    }
+    
     // Call backend API
-    axios.post(`${BACKEND_URL}/api/quote`, formData)
+    axios.post(`${BACKEND_URL}/api/quote`, submitData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
       .then(response => {
         console.log('Quote submitted:', response.data);
         
@@ -44,6 +79,11 @@ const Quote = () => {
           serviceType: '',
           message: '',
         });
+        setAttachment(null);
+        setFileName('');
+        // Reset file input
+        const fileInput = document.getElementById('quote-attachment');
+        if (fileInput) fileInput.value = '';
       })
       .catch(error => {
         console.error('Error submitting quote:', error);
@@ -189,6 +229,32 @@ const Quote = () => {
                   className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors resize-none"
                   placeholder="Décrivez vos besoins en matière de sécurité..."
                 />
+              </div>
+
+              {/* Attachment */}
+              <div>
+                <label htmlFor="quote-attachment" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">
+                  Pièce jointe (optionnel)
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="quote-attachment"
+                    onChange={handleFileChange}
+                    className="hidden"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                  />
+                  <label
+                    htmlFor="quote-attachment"
+                    className="w-full bg-neutral-900 border border-amber-400/30 text-gray-400 px-4 py-3 cursor-pointer hover:border-amber-400 transition-colors flex items-center justify-between"
+                  >
+                    <span>{fileName || "Choisir un fichier (PDF, DOC, Image - Max 10 Mo)"}</span>
+                    <FileText size={20} className="text-amber-400" />
+                  </label>
+                </div>
+                {fileName && (
+                  <p className="text-sm text-amber-400 mt-2">Fichier sélectionné : {fileName}</p>
+                )}
               </div>
 
               {/* Submit Button */}
