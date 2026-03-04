@@ -4,9 +4,9 @@ export const companyInfo = {
   name: "MTJ SECURITE PRIVÉE",
   slogan: "VOTRE SÉCURITÉ, NOTRE MISSION.",
   motto: "Avec Force et Honneur Toujours servir",
-  phone: "+33 6 XX XX XX XX",
-  email: "contact@mtj-securite.fr",
-  address: "Adresse à définir",
+  phone: "07 60 73 82 06",
+  email: "mtj.securiteprivee@gmail.com",
+  address: "31 rue Chevalier Paul",
 };
 
 export const aboutUs = {
