@@ -23,7 +23,7 @@ const Services = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {services.map((service, index) => {
             const IconComponent = iconMap[service.icon] || Shield;
             
@@ -72,39 +72,6 @@ const Services = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Special highlight for K9 Unit */}
-        <div className="mt-16 relative">
-          <div className="grid lg:grid-cols-2 gap-8 items-center bg-gradient-to-r from-black to-neutral-900 border border-amber-400/30 p-8 lg:p-12">
-            <div>
-              <h3 className="text-3xl md:text-4xl font-black text-amber-400 mb-4 uppercase tracking-wider">
-                MAÎTRE-CHIEN
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Notre unité cynophile est composée de maîtres-chiens hautement qualifiés et de chiens spécialement dressés pour la sécurité et la détection. Cette collaboration homme-animal offre une efficacité incomparable dans la surveillance et l'intervention.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <div className="bg-amber-400/10 px-4 py-2 border border-amber-400/30">
-                  <p className="text-amber-400 font-semibold">Détection</p>
-                </div>
-                <div className="bg-amber-400/10 px-4 py-2 border border-amber-400/30">
-                  <p className="text-amber-400 font-semibold">Surveillance</p>
-                </div>
-                <div className="bg-amber-400/10 px-4 py-2 border border-amber-400/30">
-                  <p className="text-amber-400 font-semibold">Intervention</p>
-                </div>
-              </div>
-            </div>
-            <div className="relative h-[400px]">
-              <img
-                src="https://customer-assets.emergentagent.com/job_24fc2e4e-22c8-49ad-ae48-a4221e89d53a/artifacts/oi6cpa87_IMG_2316.jpeg"
-                alt="Maître-chien MTJ Sécurité"
-                className="w-full h-full object-cover shadow-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

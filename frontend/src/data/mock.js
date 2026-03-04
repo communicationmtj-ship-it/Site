@@ -34,19 +34,6 @@ export const services = [
     ]
   },
   {
-    id: 2,
-    title: "SÉCURITÉ CYNOPHILE",
-    subtitle: "MAÎTRE-CHIEN",
-    description: "Notre unité cynophile dispose de chiens dressés pour la détection, la surveillance et l'intervention. Les maîtres-chiens de MTJ SÉCURITÉ sont certifiés et expérimentés dans toutes les situations d'intervention.",
-    icon: "Dog",
-    features: [
-      "Surveillance avec maîtres-chiens",
-      "Détection de substances",
-      "Sécurité événementielle",
-      "Intervention rapide"
-    ]
-  },
-  {
     id: 3,
     title: "SSIAP",
     subtitle: "Service de Sécurité Incendie et d'Assistance à Personnes",
