@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 COMPANY_EMAIL = "mtj.securiteprivee@gmail.com"
 RECRUITMENT_EMAIL = "rex.mtjsecuriteprivee@gmail.com"
-RECRUITMENT_EMAIL_PASSWORD = "aemaavzboobgdgse"  # Gmail app password (16 chars, lowercase)
+RECRUITMENT_EMAIL_PASSWORD = "aemaavzboobgdgzo"  # Gmail app password
 
 def send_email_smtp(to_email: str, subject: str, body: str, from_email: str = RECRUITMENT_EMAIL, attachment_paths: list = None):
     """
