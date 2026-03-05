@@ -28,9 +28,13 @@ const Footer = () => {
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               {companyInfo.slogan}
             </p>
-            <p className="text-gray-500 text-xs italic">
-              {companyInfo.motto}
-            </p>
+            <div className="text-gray-500 text-xs space-y-2">
+              <p className="font-semibold text-amber-400">AUT -083-2024-05-22-2024084324</p>
+              <p className="leading-relaxed">
+                L612-14 du CSI L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient.
+                Elle n'engage en aucune manière la responsabilité des pouvoirs publics.
+              </p>
+            </div>
           </div>
 
           {/* Quick Links */}
