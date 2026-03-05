@@ -55,13 +55,12 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { label: 'Accueil', id: 'hero' },
     { label: 'À propos', id: 'about' },
     { label: 'Nos métiers', id: 'services' },
     { label: 'Interventions', id: 'domains' },
     { label: 'Devis', id: 'quote' },
-    { label: 'Contact', id: 'contact' },
     { label: 'Recrutement', id: 'recrutement', isRoute: true },
+    { label: 'Contact', id: 'contact' },
   ];
 
   return (
