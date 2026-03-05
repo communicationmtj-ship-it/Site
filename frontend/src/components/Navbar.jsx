@@ -73,20 +73,14 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div 
-            className="cursor-pointer flex items-center space-x-3" 
+            className="cursor-pointer flex items-center" 
             onClick={() => navigate('/')}
           >
             <img 
               src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png" 
               alt="MTJ Sécurité Privée"
-              className="h-12 md:h-14 w-auto object-contain"
+              className="h-12 md:h-16 w-auto object-contain"
             />
-            <div className="hidden md:block">
-              <h1 className="text-xl md:text-2xl font-bold text-white tracking-wider leading-tight">
-                MTJ <span className="text-amber-400">SÉCURITÉ</span>
-              </h1>
-              <p className="text-xs text-amber-400 tracking-widest">PRIVÉE</p>
-            </div>
           </div>
 
           {/* Hamburger Menu Button - Always visible */}
