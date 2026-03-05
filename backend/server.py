@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
-from email_service import send_quote_email, send_contact_email
+from email_service import send_quote_email, send_contact_email, send_recruitment_email
 import shutil
 
 
@@ -211,6 +211,76 @@ async def submit_contact(
         return {
             "status": "error",
             "message": "Une erreur est survenue lors de l'envoi de votre message. Veuillez réessayer."
+        }
+
+# Recrutement endpoint
+@api_router.post("/recrutement")
+async def submit_recruitment(
+    firstName: str = Form(...),
+    lastName: str = Form(...),
+    email: str = Form(...),
+    phone: str = Form(...),
+    message: str = Form(...),
+    attachments: List[UploadFile] = File(...)
+):
+    """
+    Handle recruitment application submission with multiple file attachments
+    """
+    try:
+        attachment_paths = []
+        attachment_filenames = []
+        
+        # Save all attachments
+        for attachment in attachments:
+            # Generate unique filename
+            file_extension = Path(attachment.filename).suffix
+            unique_filename = f"{uuid.uuid4()}{file_extension}"
+            attachment_path = UPLOAD_DIR / unique_filename
+            
+            # Save file
+            with open(attachment_path, "wb") as buffer:
+                shutil.copyfileobj(attachment.file, buffer)
+            
+            attachment_paths.append(str(attachment_path))
+            attachment_filenames.append(attachment.filename)
+            logger.info(f"Recruitment attachment saved: {unique_filename}")
+        
+        # Save to database
+        recruitment_dict = {
+            'id': str(uuid.uuid4()),
+            'firstName': firstName,
+            'lastName': lastName,
+            'email': email,
+            'phone': phone,
+            'message': message,
+            'attachment_filenames': attachment_filenames,
+            'attachment_paths': attachment_paths,
+            'timestamp': datetime.now(timezone.utc).isoformat(),
+            'status': 'pending'
+        }
+        
+        await db.recruitments.insert_one(recruitment_dict)
+        
+        # Send email notification
+        send_recruitment_email(
+            first_name=firstName,
+            last_name=lastName,
+            email=email,
+            phone=phone,
+            message=message,
+            attachment_paths=attachment_paths
+        )
+        
+        return {
+            "status": "success",
+            "message": "Votre candidature a été envoyée avec succès. Nous examinerons votre profil et vous contacterons rapidement."
+        }
+        
+    except Exception as e:
+        logger.error(f"Error submitting recruitment application: {str(e)}")
+        return {
+            "status": "error",
+            "message": "Une erreur est survenue lors de l'envoi de votre candidature. Veuillez réessayer."
         }
 
 # Include the router in the main app

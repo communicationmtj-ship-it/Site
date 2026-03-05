@@ -7,6 +7,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 COMPANY_EMAIL = "mtj.securiteprivee@gmail.com"
+RECRUITMENT_EMAIL = "rex.mtjsecuriteprivee@gmail.com"
 
 def send_quote_email(name: str, company: Optional[str], email: str, phone: str, service_type: str, message: str, attachment_path: Optional[str] = None):
     """
@@ -125,4 +126,60 @@ Ce message a été envoyé depuis le formulaire de contact du site MTJ SÉCURIT�
         
     except Exception as e:
         logger.error(f"Error preparing contact email: {str(e)}")
+        return False
+
+def send_recruitment_email(first_name: str, last_name: str, email: str, phone: str, message: str, attachment_paths: list):
+    """
+    Send recruitment application email to HR
+    """
+    try:
+        # Create message
+        msg = MIMEMultipart()
+        msg['From'] = email
+        msg['To'] = RECRUITMENT_EMAIL
+        msg['Subject'] = f"Nouvelle candidature - {first_name} {last_name}"
+        
+        # Email body
+        attachments_info = "\n".join([f"- {path}" for path in attachment_paths]) if attachment_paths else "Aucune pièce jointe"
+        
+        body = f"""
+Nouvelle candidature reçue :
+
+===========================================
+INFORMATIONS CANDIDAT
+===========================================
+
+Prénom : {first_name}
+Nom : {last_name}
+Email : {email}
+Téléphone portable : {phone}
+
+===========================================
+MESSAGE DE MOTIVATION
+===========================================
+
+{message}
+
+===========================================
+PIÈCES JOINTES
+===========================================
+
+{attachments_info}
+
+===========================================
+
+Cette candidature a été envoyée depuis le formulaire de recrutement du site MTJ SÉCURITÉ PRIVÉE.
+        """
+        
+        msg.attach(MIMEText(body, 'plain'))
+        
+        # For now, just log the email
+        logger.info(f"Recruitment email prepared for {RECRUITMENT_EMAIL}")
+        logger.info(f"Candidate: {first_name} {last_name} ({email})")
+        logger.info(f"Attachments: {len(attachment_paths)}")
+        
+        return True
+        
+    except Exception as e:
+        logger.error(f"Error preparing recruitment email: {str(e)}")
         return False

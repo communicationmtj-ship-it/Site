@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -7,12 +8,13 @@ import Domains from "./components/Domains";
 import Quote from "./components/Quote";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Recrutement from "./components/Recrutement";
 import { Toaster } from "./components/ui/sonner";
 import "./App.css";
 
-function App() {
+const HomePage = () => {
   return (
-    <div className="App">
+    <>
       <Navbar />
       <Hero />
       <About />
@@ -21,7 +23,20 @@ function App() {
       <Quote />
       <Contact />
       <Footer />
-      <Toaster />
+    </>
+  );
+};
+
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/recrutement" element={<Recrutement />} />
+        </Routes>
+        <Toaster />
+      </BrowserRouter>
     </div>
   );
 }

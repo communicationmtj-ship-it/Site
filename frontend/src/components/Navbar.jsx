@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { companyInfo } from '../data/mock';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,10 +18,30 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // If we're on recrutement page and trying to go to home sections
+    if (location.pathname === '/recrutement' && sectionId !== 'recrutement') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleNavClick = (link) => {
+    if (link.isRoute) {
+      navigate('/recrutement');
       setIsMobileMenuOpen(false);
+    } else {
+      scrollToSection(link.id);
     }
   };
 
@@ -29,6 +52,7 @@ const Navbar = () => {
     { label: 'Interventions', id: 'domains' },
     { label: 'Devis', id: 'quote' },
     { label: 'Contact', id: 'contact' },
+    { label: 'Recrutement', id: 'recrutement', isRoute: true },
   ];
 
   return (
@@ -42,7 +66,7 @@ const Navbar = () => {
           {/* Logo */}
           <div 
             className="cursor-pointer flex items-center" 
-            onClick={() => scrollToSection('hero')}
+            onClick={() => navigate('/')}
           >
             <img 
               src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png" 
@@ -56,7 +80,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleNavClick(link)}
                 className="text-white hover:text-amber-400 font-medium tracking-wide transition-colors duration-300 text-sm uppercase"
               >
                 {link.label}
@@ -81,7 +105,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleNavClick(link)}
                 className="block w-full text-left text-white hover:text-amber-400 font-medium tracking-wide transition-colors duration-300 py-3 text-base uppercase border-b border-gray-800"
               >
                 {link.label}
