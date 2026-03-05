@@ -35,18 +35,31 @@ export const services = [
   },
   {
     id: 2,
-    title: "SÉCURITÉ CYNOPHILE",
-    description: "Notre unité cynophile dispose de chiens dressés pour la détection, la surveillance et l'intervention. Nos équipes sont certifiées et expérimentées dans toutes les situations d'intervention.",
+    title: "CYNO D'INTERVENTION",
+    description: "Notre équipe cyno d'intervention est spécialisée dans la sécurité avec chiens d'intervention. Nos binômes maître-chien sont formés pour intervenir rapidement et efficacement dans toutes les situations nécessitant une sécurité renforcée.",
     icon: "Dog",
     features: [
-      "Surveillance avec unité cynophile",
-      "Détection de substances",
+      "Surveillance avec chiens d'intervention",
+      "Intervention rapide",
       "Sécurité événementielle",
-      "Intervention rapide"
+      "Patrouilles cynophiles"
     ]
   },
   {
     id: 3,
+    title: "CYNODEX",
+    subtitle: "Détection d'Explosifs",
+    description: "Notre unité CYNODEX est spécialisée dans la détection d'explosifs avec des chiens hautement entraînés. Nos équipes certifiées garantissent la sécurité de vos événements et installations.",
+    icon: "Dog",
+    features: [
+      "Détection d'explosifs",
+      "Sécurisation d'événements",
+      "Inspection de sites sensibles",
+      "Intervention préventive"
+    ]
+  },
+  {
+    id: 4,
     title: "SSIAP",
     subtitle: "Service de Sécurité Incendie et d'Assistance à Personnes",
     description: "Nos agents SSIAP certifiés assurent la sécurité incendie de vos établissements recevant du public. Ils garantissent le respect des normes de sécurité et la protection des personnes.",

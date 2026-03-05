@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Mail, Phone, MapPin } from 'lucide-react';
+import { Shield, Mail, Phone, MapPin, Instagram } from 'lucide-react';
 import { companyInfo } from '../data/mock';
 
 const Footer = () => {
@@ -66,7 +66,8 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>Agent de sécurité</li>
-              <li>Sécurité cynophile</li>
+              <li>Cyno d'intervention</li>
+              <li>CYNODEX - Détection d'explosifs</li>
               <li>SSIAP</li>
               <li>Sécurité événementielle</li>
               <li>Gardiennage</li>
@@ -91,6 +92,17 @@ const Footer = () => {
               <li className="flex items-start space-x-3">
                 <MapPin size={16} className="text-amber-400 mt-1 flex-shrink-0" />
                 <span className="text-gray-400 text-sm">{companyInfo.address}</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <Instagram size={16} className="text-amber-400 mt-1 flex-shrink-0" />
+                <a 
+                  href="https://www.instagram.com/mtj.securite.privee?igsh=MXVyc2ZhbTg1bTV0OQ%3D%3D&utm_source=qr" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 text-sm hover:text-amber-400 transition-colors"
+                >
+                  @mtj.securite.privee
+                </a>
               </li>
             </ul>
           </div>
