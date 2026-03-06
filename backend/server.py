@@ -9,12 +9,12 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
-from email_service import send_quote_email, send_contact_email, send_recruitment_email
 import shutil
-
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+
+from email_service import send_quote_email, send_contact_email, send_recruitment_email
 
 # Create uploads directory
 UPLOAD_DIR = ROOT_DIR / 'uploads'
