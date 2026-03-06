@@ -70,15 +70,10 @@ const Domains = () => {
                 <div className="relative max-w-lg mx-auto">
                   {/* Styled map image with color adaptation */}
                   <img 
-                    src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/h0pjrrc8_941CC3D1-4BE4-401A-A61B-6EDF1EC71A7D.png" 
+                    src="https://customer-assets.emergentagent.com/job_0174947c-2805-4743-ab31-25d401c12cb2/artifacts/1zlxc5t3_IMG_0117.png" 
                     alt="Carte des zones d'intervention MTJ Sécurité"
                     className="w-full h-auto"
-                    style={{
-                      filter: 'brightness(0.9) contrast(1.1) saturate(0.8) hue-rotate(-20deg)',
-                      background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
-                      borderRadius: '8px',
-                      padding: '20px'
-                    }}
+                    data-testid="intervention-map-image"
                   />
                 </div>
               </div>

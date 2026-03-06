@@ -1,7 +1,7 @@
 # PRD - MTJ SÉCURITÉ PRIVÉE - Site Vitrine
 
 **Date de création:** 4 Mars 2026  
-**Dernière mise à jour:** 4 Mars 2026
+**Dernière mise à jour:** 6 Mars 2026
 
 ---
 
@@ -33,14 +33,27 @@ Construire un site vitrine pour MTJ SÉCURITÉ PRIVÉE avec les sections suivant
 ### Phase 1 - Frontend avec Mock Data (4 Mars 2026)
 
 **Sections créées:**
-- ✅ Navbar avec navigation smooth scroll et logo image
-- ✅ Hero section : "VOTRE SÉCURITÉ, NOTRE MISSION"
-- ✅ À propos (Qui sommes-nous) avec statistiques 24/7 et 100% engagement
-- ✅ Nos Métiers : Agent de prévention, Sécurité cynophile (Maître-chien), SSIAP
-- ✅ Domaine d'intervention : 5 domaines (Événementiel, Sites industriels, Chantiers, Résidentiel, ERP)
-- ✅ Formulaire de devis (mock)
-- ✅ Formulaire de contact (mock)
-- ✅ Footer complet avec navigation et informations
+- Navbar avec navigation smooth scroll et logo image
+- Hero section : "VOTRE SÉCURITÉ, NOTRE MISSION"
+- À propos (Qui sommes-nous) avec statistiques 24/7 et 100% engagement
+- Nos Métiers : Agent de prévention, Sécurité cynophile (Cyno d'Intervention + CYNODEX), SSIAP
+- Domaine d'intervention : 5 domaines (Événementiel, Sites industriels, Chantiers, Résidentiel, ERP)
+- Formulaire de devis avec pièce jointe
+- Formulaire de contact avec pièce jointe
+- Footer complet avec lien Instagram et mentions légales
+- Page Recrutement (/recrutement) avec formulaire de candidature et téléversement de fichiers
+
+### Phase 2 - Backend & Emails (4-5 Mars 2026)
+
+- API FastAPI opérationnelle (endpoints: /api/devis, /api/contact, /api/recrutement)
+- Stockage fichiers téléversés dans /app/backend/uploads/
+- Envoi d'emails fonctionnel pour le recrutement (rex.mtjsecuriteprivee@gmail.com)
+- Stockage des soumissions dans MongoDB
+
+### Phase 3 - Ajustements visuels (6 Mars 2026)
+
+- Carte de France stylisée mise à jour avec image fournie par le client (zones verte/bleue, marqueurs Bordeaux/Toulon/Nice)
+- Menu horizontal fixe sur desktop
 
 **Design:**
 - Palette : Noir (#000), Beige/Stone (#d4c5b9), Amber/Doré (#fbbf24)
@@ -88,14 +101,13 @@ Construire un site vitrine pour MTJ SÉCURITÉ PRIVÉE avec les sections suivant
 
 ## 🎯 Backlog Priorisé
 
-### P0 - Critique (Backend)
-- [ ] Créer l'API backend FastAPI
-- [ ] Implémenter envoi d'emails pour formulaires
-- [ ] Intégration formulaire de devis avec backend
-- [ ] Intégration formulaire de contact avec backend
+### P0 - Critique
+- [x] Créer l'API backend FastAPI
+- [x] Carte de France avec image stylisée du client
+- [x] Envoi d'emails pour recrutement (rex.mtjsecuriteprivee@gmail.com)
+- [ ] Envoi d'emails devis/contact (BLOQUÉ - mot de passe d'application Gmail pour mtj.securiteprivee@gmail.com requis)
 
 ### P1 - Important
-- [ ] Système de gestion des demandes de devis (admin)
 - [ ] Validation des formulaires côté serveur
 - [ ] Rate limiting pour les soumissions
 
@@ -107,20 +119,19 @@ Construire un site vitrine pour MTJ SÉCURITÉ PRIVÉE avec les sections suivant
 
 ---
 
-## 🚀 Prochaines Étapes
+## Prochaines Étapes
 
-1. **Validation client du frontend**
-2. **Mise à jour des coordonnées** (téléphone, email, adresse)
-3. **Développement backend** pour formulaires fonctionnels
-4. **Tests end-to-end**
-5. **Déploiement production**
+1. **Obtenir le mot de passe d'application Gmail** pour `mtj.securiteprivee@gmail.com` (activer envoi emails devis/contact)
+2. **Refactoring** : Extraire les sections de Home.js en composants séparés (déjà fait partiellement)
+3. **Tests end-to-end**
+4. **Déploiement production**
 
 ---
 
-## 📝 Notes Techniques
+## Notes Techniques
 
-- Les formulaires sont actuellement en mock (console.log + toast)
-- Les données de contact sont à personnaliser dans `/app/frontend/src/data/mock.js`
+- Envoi d'emails pour recrutement : FONCTIONNEL (rex.mtjsecuriteprivee@gmail.com / mot de passe app dans backend/.env)
+- Envoi d'emails pour devis/contact : NON FONCTIONNEL (en attente des identifiants SMTP)
 - Images hébergées via Emergent assets
 - Logo au format image intégré
 
