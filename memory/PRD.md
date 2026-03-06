@@ -52,7 +52,8 @@ Construire un site vitrine pour MTJ SÉCURITÉ PRIVÉE avec les sections suivant
 
 ### Phase 3 - Ajustements visuels (6 Mars 2026)
 
-- Carte de France stylisée mise à jour avec image fournie par le client (zones verte/bleue, marqueurs Bordeaux/Toulon/Nice)
+- Carte de France SVG vectorielle créée (composant FranceMap.jsx) avec départements, zones nord/sud, marqueurs villes
+- Utilisation du package @svg-maps/france.departments pour les contours départementaux
 - Menu horizontal fixe sur desktop
 
 **Design:**

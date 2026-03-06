@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Building2, HardHat, Home, Users } from 'lucide-react';
 import { interventionDomains } from '../data/mock';
+import FranceMap from './FranceMap';
 
 const Domains = () => {
   const iconMap = {
@@ -67,15 +68,7 @@ const Domains = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Custom styled France Map */}
               <div className="relative">
-                <div className="relative max-w-lg mx-auto">
-                  {/* Styled map image with color adaptation */}
-                  <img 
-                    src="https://customer-assets.emergentagent.com/job_0174947c-2805-4743-ab31-25d401c12cb2/artifacts/1zlxc5t3_IMG_0117.png" 
-                    alt="Carte des zones d'intervention MTJ Sécurité"
-                    className="w-full h-auto"
-                    data-testid="intervention-map-image"
-                  />
-                </div>
+                <FranceMap />
               </div>
               
               {/* Zone Details */}
