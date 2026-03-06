@@ -83,11 +83,13 @@ const Domains = () => {
                     {/* Zone Nord - Grand déplacement (lighter overlay) */}
                     <rect x="0" y="0" width="1080" height="550" 
                           fill="#f59e0b" fillOpacity="0.15" 
+                          stroke="none"
                           className="transition-all duration-300" />
                     
                     {/* Zone Sud - Notre secteur (stronger overlay) */}
                     <rect x="0" y="550" width="1080" height="530" 
                           fill="#f59e0b" fillOpacity="0.4" 
+                          stroke="none"
                           className="transition-all duration-300" />
                     
                     {/* Separation line */}
@@ -133,31 +135,31 @@ const Domains = () => {
                       </text>
                     </g>
                     
-                    {/* City markers */}
+                    {/* City markers - positioned at real locations */}
                     <g>
-                      {/* Toulon - Siège (avec étoile) */}
-                      <g transform="translate(820, 870)">
+                      {/* Bordeaux - Côte ouest/atlantique */}
+                      <circle cx="220" cy="660" r="14" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
+                      <text x="150" y="650" className="fill-white font-bold" 
+                            style={{fontSize: '24px'}}>
+                        Bordeaux
+                      </text>
+                      
+                      {/* Toulon - Côte méditerranée sud-est */}
+                      <g transform="translate(800, 890)">
                         <circle r="20" fill="#ef4444" stroke="#fff" strokeWidth="4" />
                         <path d="M 0,-12 L 3,-4 L 12,0 L 3,4 L 0,12 L -3,4 L -12,0 L -3,-4 Z" 
                               fill="#fff" />
                       </g>
-                      <text x="850" y="880" className="fill-white font-black" 
+                      <text x="830" y="900" className="fill-white font-black" 
                             style={{fontSize: '26px'}}>
                         ⭐ TOULON
                       </text>
                       
-                      {/* Monaco */}
-                      <circle cx="940" cy="850" r="14" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
-                      <text x="960" y="858" className="fill-white font-bold" 
+                      {/* Monaco - Extrême sud-est, près de l'Italie */}
+                      <circle cx="920" cy="880" r="14" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
+                      <text x="940" y="888" className="fill-white font-bold" 
                             style={{fontSize: '24px'}}>
                         Monaco
-                      </text>
-                      
-                      {/* Bordeaux */}
-                      <circle cx="180" cy="680" r="14" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
-                      <text x="80" y="665" className="fill-white font-bold" 
-                            style={{fontSize: '24px'}}>
-                        Bordeaux
                       </text>
                     </g>
                   </svg>
