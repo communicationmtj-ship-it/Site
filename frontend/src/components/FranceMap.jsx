@@ -79,8 +79,8 @@ const FranceMap = () => {
         ))}
       </g>
 
-      {/* "GRAND DÉPLACEMENT" bordered banner */}
-      <g transform="translate(300, 185)">
+      {/* "GRAND DÉPLACEMENT" bordered banner - centered on north zone */}
+      <g transform="translate(279, 190)">
         <rect x="-155" y="-30" width="310" height="60" rx="6"
           fill="rgba(0,0,0,0.65)" stroke="#fbbf24" strokeWidth="1.5" />
         <text x="0" y="-4" textAnchor="middle"
@@ -93,8 +93,8 @@ const FranceMap = () => {
         </text>
       </g>
 
-      {/* "NOTRE SECTEUR" bordered banner */}
-      <g transform="translate(300, 385)">
+      {/* "NOTRE SECTEUR" bordered banner - centered on south zone */}
+      <g transform="translate(350, 390)">
         <rect x="-110" y="-18" width="220" height="36" rx="6"
           fill="rgba(0,0,0,0.7)" stroke="#fbbf24" strokeWidth="1.5" />
         <text x="0" y="7" textAnchor="middle"
