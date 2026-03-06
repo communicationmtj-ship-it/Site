@@ -5,8 +5,10 @@ const SOUTH_DEPARTMENTS = new Set([
   '04', '05', '06', '07', '09', '11', '12', '13', '15',
   '24', '26', '30', '31', '32', '33', '34', '40', '43',
   '46', '47', '48', '64', '65', '66', '81', '82', '83',
-  '84', '2A', '2B'
+  '84'
 ]);
+
+const CORSICA_DEPARTMENTS = new Set(['2A', '2B']);
 
 const CITIES = [
   { name: 'Bordeaux', x: 188, y: 400 },
@@ -15,8 +17,9 @@ const CITIES = [
 ];
 
 const FranceMap = () => {
-  const northDepts = franceData.locations.filter(l => !SOUTH_DEPARTMENTS.has(l.id));
+  const northDepts = franceData.locations.filter(l => !SOUTH_DEPARTMENTS.has(l.id) && !CORSICA_DEPARTMENTS.has(l.id));
   const southDepts = franceData.locations.filter(l => SOUTH_DEPARTMENTS.has(l.id));
+  const corsicaDepts = franceData.locations.filter(l => CORSICA_DEPARTMENTS.has(l.id));
 
   return (
     <svg
@@ -73,6 +76,20 @@ const FranceMap = () => {
             d={dept.path}
             fill="url(#southGrad)"
             stroke="#78350f"
+            strokeWidth="0.5"
+            strokeLinejoin="round"
+          />
+        ))}
+      </g>
+
+      {/* Corsica - gray */}
+      <g filter="url(#texture)" style={{ cursor: 'default' }}>
+        {corsicaDepts.map(dept => (
+          <path
+            key={dept.id}
+            d={dept.path}
+            fill="url(#northGrad)"
+            stroke="#555"
             strokeWidth="0.5"
             strokeLinejoin="round"
           />
