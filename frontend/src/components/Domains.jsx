@@ -65,51 +65,76 @@ const Domains = () => {
             </h3>
             
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* France Map */}
+              {/* Real France Map */}
               <div className="relative">
-                <svg viewBox="0 0 400 500" className="w-full h-auto">
-                  {/* Nord de la France - Grand déplacement */}
-                  <path
-                    d="M 200 50 L 180 70 L 160 90 L 140 110 L 130 130 L 120 160 L 110 190 L 100 220 L 95 240 L 90 250 L 200 245 L 310 250 L 305 240 L 300 220 L 290 190 L 280 160 L 270 130 L 260 110 L 240 90 L 220 70 Z"
-                    fill="#f59e0b"
-                    fillOpacity="0.2"
-                    stroke="#f59e0b"
-                    strokeWidth="2"
-                    className="hover:fill-opacity-30 transition-all duration-300"
-                  />
+                <svg viewBox="0 0 600 700" className="w-full h-auto max-w-md mx-auto">
+                  <defs>
+                    <linearGradient id="gradSouth" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" style={{stopColor: '#f59e0b', stopOpacity: 0.6}} />
+                      <stop offset="100%" style={{stopColor: '#f59e0b', stopOpacity: 0.8}} />
+                    </linearGradient>
+                    <linearGradient id="gradNorth" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" style={{stopColor: '#f59e0b', stopOpacity: 0.2}} />
+                      <stop offset="100%" style={{stopColor: '#f59e0b', stopOpacity: 0.3}} />
+                    </linearGradient>
+                  </defs>
                   
-                  {/* Sud de la France - Notre secteur (Monaco à Bordeaux) */}
+                  {/* Contour de la France - Zone Nord (Grand déplacement) */}
                   <path
-                    d="M 90 250 L 95 260 L 100 280 L 105 310 L 110 340 L 120 370 L 135 400 L 150 420 L 170 440 L 190 455 L 210 465 L 230 455 L 250 440 L 270 420 L 285 400 L 300 370 L 310 340 L 315 310 L 318 280 L 310 250 Z"
-                    fill="#f59e0b"
-                    fillOpacity="0.5"
+                    d="M 300 50 L 320 60 L 340 75 L 360 95 L 375 115 L 385 135 L 395 155 L 405 180 L 410 210 L 415 240 L 420 270 L 425 300 L 425 330 L 100 330 L 95 300 L 90 270 L 85 240 L 80 210 L 75 180 L 70 155 L 65 135 L 70 115 L 80 95 L 100 75 L 130 60 L 160 50 L 200 45 L 250 45 Z"
+                    fill="url(#gradNorth)"
                     stroke="#f59e0b"
                     strokeWidth="3"
-                    className="hover:fill-opacity-70 transition-all duration-300"
+                    className="transition-all duration-300"
                   />
                   
-                  {/* Légende Nord */}
-                  <text x="200" y="150" textAnchor="middle" className="fill-amber-400 text-sm font-bold uppercase">
+                  {/* Zone Sud (Monaco à Bordeaux) - Notre secteur principal */}
+                  <path
+                    d="M 100 330 L 105 360 L 110 390 L 115 420 L 125 455 L 140 490 L 160 525 L 185 555 L 215 580 L 250 600 L 285 610 L 320 605 L 355 590 L 385 565 L 410 535 L 430 500 L 440 465 L 445 430 L 445 395 L 440 360 L 425 330 Z"
+                    fill="url(#gradSouth)"
+                    stroke="#f59e0b"
+                    strokeWidth="4"
+                    className="transition-all duration-300"
+                  />
+                  
+                  {/* Ligne de séparation entre les deux zones */}
+                  <line x1="100" y1="330" x2="425" y2="330" stroke="#fbbf24" strokeWidth="3" strokeDasharray="5,5" />
+                  
+                  {/* Légende Nord avec fond */}
+                  <rect x="180" y="160" width="240" height="70" fill="#000" fillOpacity="0.8" stroke="#f59e0b" strokeWidth="2" rx="5" />
+                  <text x="300" y="185" textAnchor="middle" className="fill-amber-400 text-base font-bold uppercase">
                     Grand Déplacement
                   </text>
-                  <text x="200" y="170" textAnchor="middle" className="fill-white text-xs">
-                    Intervention
+                  <text x="300" y="210" textAnchor="middle" className="fill-white text-sm">
+                    Intervention sur demande
                   </text>
                   
-                  {/* Légende Sud */}
-                  <text x="200" y="330" textAnchor="middle" className="fill-amber-400 text-lg font-black uppercase">
+                  {/* Légende Sud avec fond */}
+                  <rect x="150" y="430" width="300" height="90" fill="#000" fillOpacity="0.9" stroke="#f59e0b" strokeWidth="3" rx="5" />
+                  <text x="300" y="460" textAnchor="middle" className="fill-amber-400 text-xl font-black uppercase">
                     Notre Secteur
                   </text>
-                  <text x="200" y="355" textAnchor="middle" className="fill-white text-sm font-semibold">
+                  <text x="300" y="485" textAnchor="middle" className="fill-white text-base font-semibold">
                     Monaco ↔ Bordeaux
                   </text>
+                  <text x="300" y="505" textAnchor="middle" className="fill-amber-200 text-sm">
+                    Zone prioritaire 24/7
+                  </text>
                   
-                  {/* Points de repère */}
-                  <circle cx="310" cy="380" r="4" fill="#fbbf24" />
-                  <text x="320" y="385" className="fill-white text-xs">Monaco</text>
-                  
-                  <circle cx="95" cy="340" r="4" fill="#fbbf24" />
-                  <text x="40" y="345" className="fill-white text-xs">Bordeaux</text>
+                  {/* Marqueurs de villes */}
+                  <g>
+                    {/* Monaco */}
+                    <circle cx="415" cy="485" r="6" fill="#fbbf24" stroke="#fff" strokeWidth="2" />
+                    <text x="430" y="490" className="fill-white text-xs font-bold">Monaco</text>
+                    
+                    {/* Bordeaux */}
+                    <circle cx="105" cy="410" r="6" fill="#fbbf24" stroke="#fff" strokeWidth="2" />
+                    <text x="40" y="415" className="fill-white text-xs font-bold">Bordeaux</text>
+                    
+                    {/* Toulon (siège) */}
+                    <circle cx="360" cy="530" r="8" fill="#ef4444" stroke="#fff" strokeWidth="2" />
+                    <text x="375" y="535" className="fill-white text-sm font-bold">⭐ Toulon</text>
+                  </g>
                 </svg>
               </div>
               
