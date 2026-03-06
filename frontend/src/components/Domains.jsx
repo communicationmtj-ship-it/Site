@@ -65,102 +65,103 @@ const Domains = () => {
             </h3>
             
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Accurate France Map based on real contours */}
+              {/* Real France Map Image with overlays */}
               <div className="relative">
-                <svg viewBox="0 0 551.13 551.13" className="w-full h-auto max-w-lg mx-auto">
-                  <defs>
-                    <linearGradient id="gradSouth" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" style={{stopColor: '#f59e0b', stopOpacity: 0.7}} />
-                      <stop offset="100%" style={{stopColor: '#f59e0b', stopOpacity: 0.9}} />
-                    </linearGradient>
-                    <linearGradient id="gradNorth" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" style={{stopColor: '#f59e0b', stopOpacity: 0.15}} />
-                      <stop offset="100%" style={{stopColor: '#f59e0b', stopOpacity: 0.25}} />
-                    </linearGradient>
-                  </defs>
+                <div className="relative max-w-lg mx-auto">
+                  {/* Base map image */}
+                  <img 
+                    src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/o8468091_IMG_0114.png" 
+                    alt="Carte de France"
+                    className="w-full h-auto"
+                  />
                   
-                  {/* France mainland outline - realistic path */}
-                  <g transform="translate(20, 20)">
-                    {/* Zone Nord - Grand déplacement */}
-                    <path
-                      d="M 140,40 L 160,35 L 190,30 L 220,28 L 250,25 L 280,24 L 310,26 L 340,30 L 370,38 L 395,48 L 415,60 L 435,75 L 450,92 L 462,110 L 472,130 L 478,150 L 482,170 L 485,190 L 487,210 L 488,230 L 488,250 L 30,250 L 30,230 L 28,210 L 27,190 L 28,170 L 30,150 L 34,130 L 40,110 L 48,92 L 58,75 L 72,60 L 88,48 L 105,38 L 122,32 Z"
-                      fill="url(#gradNorth)"
-                      stroke="#f59e0b"
-                      strokeWidth="2.5"
-                      className="transition-all duration-300 hover:stroke-width-4"
-                    />
+                  {/* SVG Overlay for zones and markers */}
+                  <svg 
+                    viewBox="0 0 1080 1080" 
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                  >
+                    {/* Zone Nord - Grand déplacement (lighter overlay) */}
+                    <rect x="0" y="0" width="1080" height="550" 
+                          fill="#f59e0b" fillOpacity="0.15" 
+                          className="transition-all duration-300" />
                     
-                    {/* Zone Sud - Notre secteur (Monaco à Bordeaux) */}
-                    <path
-                      d="M 30,250 L 28,270 L 26,290 L 26,310 L 28,335 L 32,360 L 38,385 L 46,410 L 58,435 L 72,458 L 90,478 L 112,495 L 138,508 L 165,517 L 195,522 L 225,523 L 255,521 L 285,516 L 312,508 L 338,496 L 362,481 L 384,463 L 404,443 L 422,422 L 437,400 L 450,377 L 460,353 L 468,328 L 474,303 L 478,278 L 482,260 L 488,250 Z"
-                      fill="url(#gradSouth)"
-                      stroke="#f59e0b"
-                      strokeWidth="3.5"
-                      className="transition-all duration-300 hover:stroke-width-5"
-                    />
+                    {/* Zone Sud - Notre secteur (stronger overlay) */}
+                    <rect x="0" y="550" width="1080" height="530" 
+                          fill="#f59e0b" fillOpacity="0.4" 
+                          className="transition-all duration-300" />
                     
-                    {/* Ligne de séparation horizontale */}
-                    <line x1="30" y1="250" x2="488" y2="250" 
-                          stroke="#fbbf24" strokeWidth="3" strokeDasharray="8,6" 
+                    {/* Separation line */}
+                    <line x1="0" y1="550" x2="1080" y2="550" 
+                          stroke="#fbbf24" strokeWidth="6" strokeDasharray="15,10" 
                           className="animate-pulse" />
                     
-                    {/* Labels with better visibility */}
+                    {/* Labels */}
                     <g>
                       {/* Nord label */}
-                      <rect x="150" y="120" width="220" height="65" fill="#000" fillOpacity="0.85" 
-                            stroke="#f59e0b" strokeWidth="2" rx="8" />
-                      <text x="260" y="145" textAnchor="middle" className="fill-amber-400 font-bold uppercase" 
-                            style={{fontSize: '18px'}}>
-                        Grand Déplacement
+                      <rect x="340" y="220" width="400" height="110" 
+                            fill="#000" fillOpacity="0.85" 
+                            stroke="#f59e0b" strokeWidth="4" rx="12" />
+                      <text x="540" y="265" textAnchor="middle" 
+                            className="fill-amber-400 font-bold uppercase" 
+                            style={{fontSize: '36px'}}>
+                        GRAND DÉPLACEMENT
                       </text>
-                      <text x="260" y="170" textAnchor="middle" className="fill-white" 
-                            style={{fontSize: '13px'}}>
+                      <text x="540" y="305" textAnchor="middle" 
+                            className="fill-white" 
+                            style={{fontSize: '24px'}}>
                         Intervention sur demande
                       </text>
                       
                       {/* Sud label */}
-                      <rect x="120" y="340" width="280" height="95" fill="#000" fillOpacity="0.92" 
-                            stroke="#f59e0b" strokeWidth="3" rx="8" />
-                      <text x="260" y="370" textAnchor="middle" className="fill-amber-400 font-black uppercase" 
-                            style={{fontSize: '24px'}}>
-                        Notre Secteur
+                      <rect x="280" y="720" width="520" height="150" 
+                            fill="#000" fillOpacity="0.92" 
+                            stroke="#f59e0b" strokeWidth="5" rx="12" />
+                      <text x="540" y="775" textAnchor="middle" 
+                            className="fill-amber-400 font-black uppercase" 
+                            style={{fontSize: '48px'}}>
+                        NOTRE SECTEUR
                       </text>
-                      <text x="260" y="395" textAnchor="middle" className="fill-white font-semibold" 
-                            style={{fontSize: '16px'}}>
+                      <text x="540" y="820" textAnchor="middle" 
+                            className="fill-white font-semibold" 
+                            style={{fontSize: '32px'}}>
                         Monaco ↔ Bordeaux
                       </text>
-                      <text x="260" y="420" textAnchor="middle" className="fill-amber-200" 
-                            style={{fontSize: '12px'}}>
+                      <text x="540" y="855" textAnchor="middle" 
+                            className="fill-amber-200" 
+                            style={{fontSize: '22px'}}>
                         Zone prioritaire • Intervention 24/7
                       </text>
                     </g>
                     
                     {/* City markers */}
                     <g>
-                      {/* Toulon - Siège (étoile) */}
-                      <g transform="translate(390, 430)">
-                        <circle r="10" fill="#ef4444" stroke="#fff" strokeWidth="2.5" />
-                        <path d="M 0,-6 L 1.5,-2 L 6,0 L 1.5,2 L 0,6 L -1.5,2 L -6,0 L -1.5,-2 Z" 
+                      {/* Toulon - Siège (avec étoile) */}
+                      <g transform="translate(820, 870)">
+                        <circle r="20" fill="#ef4444" stroke="#fff" strokeWidth="4" />
+                        <path d="M 0,-12 L 3,-4 L 12,0 L 3,4 L 0,12 L -3,4 L -12,0 L -3,-4 Z" 
                               fill="#fff" />
                       </g>
-                      <text x="408" y="435" className="fill-white font-bold" style={{fontSize: '13px'}}>
+                      <text x="850" y="880" className="fill-white font-black" 
+                            style={{fontSize: '26px'}}>
                         ⭐ TOULON
                       </text>
                       
                       {/* Monaco */}
-                      <circle cx="465" cy="410" r="7" fill="#fbbf24" stroke="#fff" strokeWidth="2" />
-                      <text x="477" y="415" className="fill-white font-semibold" style={{fontSize: '12px'}}>
+                      <circle cx="940" cy="850" r="14" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
+                      <text x="960" y="858" className="fill-white font-bold" 
+                            style={{fontSize: '24px'}}>
                         Monaco
                       </text>
                       
                       {/* Bordeaux */}
-                      <circle cx="42" cy="320" r="7" fill="#fbbf24" stroke="#fff" strokeWidth="2" />
-                      <text x="15" y="310" className="fill-white font-semibold" style={{fontSize: '12px'}}>
+                      <circle cx="180" cy="680" r="14" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
+                      <text x="80" y="665" className="fill-white font-bold" 
+                            style={{fontSize: '24px'}}>
                         Bordeaux
                       </text>
                     </g>
-                  </g>
-                </svg>
+                  </svg>
+                </div>
               </div>
               
               {/* Zone Details */}
