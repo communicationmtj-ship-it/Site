@@ -65,104 +65,21 @@ const Domains = () => {
             </h3>
             
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Real France Map Image with overlays */}
+              {/* Custom styled France Map */}
               <div className="relative">
                 <div className="relative max-w-lg mx-auto">
-                  {/* Base map image */}
+                  {/* Styled map image with color adaptation */}
                   <img 
-                    src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/o8468091_IMG_0114.png" 
-                    alt="Carte de France"
+                    src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/h0pjrrc8_941CC3D1-4BE4-401A-A61B-6EDF1EC71A7D.png" 
+                    alt="Carte des zones d'intervention MTJ Sécurité"
                     className="w-full h-auto"
+                    style={{
+                      filter: 'brightness(0.9) contrast(1.1) saturate(0.8) hue-rotate(-20deg)',
+                      background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+                      borderRadius: '8px',
+                      padding: '20px'
+                    }}
                   />
-                  
-                  {/* SVG Overlay for zones and markers */}
-                  <svg 
-                    viewBox="0 0 1080 1080" 
-                    className="absolute inset-0 w-full h-full pointer-events-none"
-                  >
-                    {/* Zone Nord - Grand déplacement (lighter overlay) */}
-                    <rect x="0" y="0" width="1080" height="550" 
-                          fill="#f59e0b" fillOpacity="0.15" 
-                          stroke="none"
-                          className="transition-all duration-300" />
-                    
-                    {/* Zone Sud - Notre secteur (stronger overlay) */}
-                    <rect x="0" y="550" width="1080" height="530" 
-                          fill="#f59e0b" fillOpacity="0.4" 
-                          stroke="none"
-                          className="transition-all duration-300" />
-                    
-                    {/* Separation line */}
-                    <line x1="0" y1="550" x2="1080" y2="550" 
-                          stroke="#fbbf24" strokeWidth="6" strokeDasharray="15,10" 
-                          className="animate-pulse" />
-                    
-                    {/* Labels */}
-                    <g>
-                      {/* Nord label */}
-                      <rect x="340" y="220" width="400" height="110" 
-                            fill="#000" fillOpacity="0.85" 
-                            stroke="#f59e0b" strokeWidth="4" rx="12" />
-                      <text x="540" y="265" textAnchor="middle" 
-                            className="fill-amber-400 font-bold uppercase" 
-                            style={{fontSize: '36px'}}>
-                        GRAND DÉPLACEMENT
-                      </text>
-                      <text x="540" y="305" textAnchor="middle" 
-                            className="fill-white" 
-                            style={{fontSize: '24px'}}>
-                        Intervention sur demande
-                      </text>
-                      
-                      {/* Sud label */}
-                      <rect x="280" y="720" width="520" height="150" 
-                            fill="#000" fillOpacity="0.92" 
-                            stroke="#f59e0b" strokeWidth="5" rx="12" />
-                      <text x="540" y="775" textAnchor="middle" 
-                            className="fill-amber-400 font-black uppercase" 
-                            style={{fontSize: '48px'}}>
-                        NOTRE SECTEUR
-                      </text>
-                      <text x="540" y="820" textAnchor="middle" 
-                            className="fill-white font-semibold" 
-                            style={{fontSize: '32px'}}>
-                        Monaco ↔ Bordeaux
-                      </text>
-                      <text x="540" y="855" textAnchor="middle" 
-                            className="fill-amber-200" 
-                            style={{fontSize: '22px'}}>
-                        Zone prioritaire • Intervention 24/7
-                      </text>
-                    </g>
-                    
-                    {/* City markers - positioned at real locations */}
-                    <g>
-                      {/* Bordeaux - Côte ouest/atlantique */}
-                      <circle cx="220" cy="660" r="14" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
-                      <text x="150" y="650" className="fill-white font-bold" 
-                            style={{fontSize: '24px'}}>
-                        Bordeaux
-                      </text>
-                      
-                      {/* Toulon - Côte méditerranée sud-est */}
-                      <g transform="translate(800, 890)">
-                        <circle r="20" fill="#ef4444" stroke="#fff" strokeWidth="4" />
-                        <path d="M 0,-12 L 3,-4 L 12,0 L 3,4 L 0,12 L -3,4 L -12,0 L -3,-4 Z" 
-                              fill="#fff" />
-                      </g>
-                      <text x="830" y="900" className="fill-white font-black" 
-                            style={{fontSize: '26px'}}>
-                        ⭐ TOULON
-                      </text>
-                      
-                      {/* Monaco - Extrême sud-est, près de l'Italie */}
-                      <circle cx="920" cy="880" r="14" fill="#fbbf24" stroke="#fff" strokeWidth="3" />
-                      <text x="940" y="888" className="fill-white font-bold" 
-                            style={{fontSize: '24px'}}>
-                        Monaco
-                      </text>
-                    </g>
-                  </svg>
                 </div>
               </div>
               
@@ -173,20 +90,24 @@ const Domains = () => {
                     🎯 Notre Secteur Principal
                   </h4>
                   <p className="text-gray-300 mb-4 leading-relaxed">
-                    <strong className="text-white">De Monaco à Bordeaux</strong> - Zone d'intervention prioritaire avec nos équipes dédiées disponibles 24/7.
+                    <strong className="text-white">De Bordeaux à Nice</strong> - Zone d'intervention prioritaire avec nos équipes dédiées disponibles 24/7. Siège basé à Toulon.
                   </p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Intervention rapide</span>
+                      <span>Intervention rapide - Disponibilité immédiate</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Équipes locales dédiées</span>
+                      <span>Équipes locales dédiées basées à Toulon</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Disponibilité 24h/24</span>
+                      <span>Service 24h/24 et 7j/7</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-amber-400 mr-2">✓</span>
+                      <span>Couverture : Bordeaux, Toulon, Nice et toute la côte sud</span>
                     </li>
                   </ul>
                 </div>
@@ -196,20 +117,24 @@ const Domains = () => {
                     🚀 Grand Déplacement
                   </h4>
                   <p className="text-gray-300 mb-4 leading-relaxed">
-                    <strong className="text-white">Reste de la France</strong> - Nous intervenons sur l'ensemble du territoire pour vos besoins spécifiques.
+                    <strong className="text-white">Reste de la France</strong> - Nous intervenons sur l'ensemble du territoire français pour vos besoins spécifiques et événements.
                   </p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Sur devis personnalisé</span>
+                      <span>Intervention sur devis personnalisé</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Événements & missions spéciales</span>
+                      <span>Sécurité événementielle & missions spéciales</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Planification à l'avance</span>
+                      <span>Planification à l'avance recommandée</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-amber-400 mr-2">✓</span>
+                      <span>Couverture nationale complète</span>
                     </li>
                   </ul>
                 </div>

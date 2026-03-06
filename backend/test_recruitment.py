@@ -2,7 +2,7 @@ import requests
 import sys
 
 # Test recruitment email
-url = "https://business-profile-21.preview.emergentagent.com/api/recrutement"
+url = "https://recrutement-staging.preview.emergentagent.com/api/recrutement"
 
 # Create test data
 data = {
