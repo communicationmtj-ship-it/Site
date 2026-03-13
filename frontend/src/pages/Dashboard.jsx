@@ -57,6 +57,10 @@ export default function Dashboard() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
       });
+      if (res.status === 429) {
+        setAuthError('Trop de tentatives. Veuillez patienter quelques minutes.');
+        return;
+      }
       const data = await res.json();
       if (data.status === 'success') {
         sessionStorage.setItem('dashboard_token', data.token);
