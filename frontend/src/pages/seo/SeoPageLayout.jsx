@@ -4,8 +4,11 @@ import { ChevronRight, Phone, Mail, MapPin } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
+const DEFAULT = '#FBBF24';
+
 const SeoPageLayout = ({ data }) => {
   const navigate = useNavigate();
+  const c = data.themeColor || DEFAULT;
 
   useEffect(() => {
     document.title = data.metaTitle;
@@ -35,16 +38,16 @@ const SeoPageLayout = ({ data }) => {
                 <li><ChevronRight size={14} /></li>
               </>
             )}
-            <li className="text-amber-400">{data.breadcrumbCurrent}</li>
+            <li style={{ color: c }}>{data.breadcrumbCurrent}</li>
           </ol>
         </nav>
 
         {/* Hero / H1 + Introduction */}
         <header className="container mx-auto px-4 lg:px-8 py-8 lg:py-14">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-amber-400 tracking-wider uppercase leading-tight" data-testid="seo-h1">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-wider uppercase leading-tight" style={{ color: c }} data-testid="seo-h1">
             {data.h1}
           </h1>
-          <div className="w-20 h-1 bg-amber-400 mt-4 mb-6"></div>
+          <div className="w-20 h-1 mt-4 mb-6" style={{ backgroundColor: c }}></div>
           <p className="text-gray-300 text-base lg:text-lg max-w-4xl leading-relaxed whitespace-pre-line">
             {data.introduction}
           </p>
@@ -53,8 +56,8 @@ const SeoPageLayout = ({ data }) => {
         {/* Content Sections */}
         <div className="container mx-auto px-4 lg:px-8 space-y-12 pb-8">
           {data.sections.map((section, i) => (
-            <section key={i} className="bg-neutral-900 border border-amber-400/10 p-6 lg:p-10">
-              <h2 className="text-xl md:text-2xl font-bold text-amber-400 uppercase tracking-wide mb-6" data-testid={`seo-h2-${i}`}>
+            <section key={i} className="bg-neutral-900 border p-6 lg:p-10" style={{ borderColor: `${c}1a` }}>
+              <h2 className="text-xl md:text-2xl font-bold uppercase tracking-wide mb-6" style={{ color: c }} data-testid={`seo-h2-${i}`}>
                 {section.h2}
               </h2>
               {section.intro && (
@@ -62,14 +65,14 @@ const SeoPageLayout = ({ data }) => {
               )}
               <div className="space-y-6">
                 {section.subsections.map((sub, j) => (
-                  <div key={j} className="pl-4 border-l-2 border-amber-400/30">
+                  <div key={j} className="pl-4 border-l-2" style={{ borderColor: `${c}44` }}>
                     <h3 className="text-lg font-semibold text-white mb-2">{sub.h3}</h3>
                     <p className="text-gray-400 leading-relaxed">{sub.content}</p>
                     {sub.list && (
                       <ul className="mt-3 space-y-1">
                         {sub.list.map((item, k) => (
                           <li key={k} className="text-gray-400 text-sm flex items-start gap-2">
-                            <span className="text-amber-400 mt-0.5">&#10003;</span>
+                            <span className="mt-0.5" style={{ color: c }}>&#10003;</span>
                             <span>{item}</span>
                           </li>
                         ))}
@@ -83,19 +86,18 @@ const SeoPageLayout = ({ data }) => {
 
           {/* FAQ Section */}
           {data.faq && (
-            <section className="bg-neutral-900 border border-amber-400/10 p-6 lg:p-10" data-testid="seo-faq">
-              <h2 className="text-xl md:text-2xl font-bold text-amber-400 uppercase tracking-wide mb-6">
+            <section className="bg-neutral-900 border p-6 lg:p-10" style={{ borderColor: `${c}1a` }} data-testid="seo-faq">
+              <h2 className="text-xl md:text-2xl font-bold uppercase tracking-wide mb-6" style={{ color: c }}>
                 Questions fréquentes
               </h2>
               <div className="space-y-6">
                 {data.faq.map((item, i) => (
-                  <div key={i} className="pl-4 border-l-2 border-amber-400/30">
+                  <div key={i} className="pl-4 border-l-2" style={{ borderColor: `${c}44` }}>
                     <h3 className="text-lg font-semibold text-white mb-2">{item.question}</h3>
                     <p className="text-gray-400 leading-relaxed">{item.answer}</p>
                   </div>
                 ))}
               </div>
-              {/* FAQ Schema.org JSON-LD */}
               <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "FAQPage",
@@ -109,13 +111,13 @@ const SeoPageLayout = ({ data }) => {
           )}
 
           {/* Conclusion */}
-          <section className="bg-neutral-900 border border-amber-400/10 p-6 lg:p-10">
+          <section className="bg-neutral-900 border p-6 lg:p-10" style={{ borderColor: `${c}1a` }}>
             <p className="text-gray-300 leading-relaxed text-base lg:text-lg whitespace-pre-line">{data.conclusion}</p>
           </section>
 
           {/* CTA */}
-          <div className="bg-black border-2 border-amber-400/30 p-8 text-center">
-            <h2 className="text-2xl font-black text-amber-400 uppercase tracking-wider mb-4">
+          <div className="bg-black border-2 p-8 text-center" style={{ borderColor: `${c}44` }}>
+            <h2 className="text-2xl font-black uppercase tracking-wider mb-4" style={{ color: c }}>
               Demandez votre devis gratuit
             </h2>
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
@@ -130,12 +132,13 @@ const SeoPageLayout = ({ data }) => {
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }, 300);
                 }}
-                className="bg-amber-400 text-black font-bold px-8 py-3 uppercase tracking-wider hover:bg-amber-300 transition-colors"
+                className="text-black font-bold px-8 py-3 uppercase tracking-wider transition-opacity hover:opacity-90"
+                style={{ backgroundColor: c }}
                 data-testid="seo-cta-devis"
               >
                 Demander un devis
               </button>
-              <a href="tel:0760738206" className="flex items-center gap-2 text-amber-400 font-semibold hover:text-amber-300 transition-colors">
+              <a href="tel:0760738206" className="flex items-center gap-2 font-semibold transition-opacity hover:opacity-80" style={{ color: c }}>
                 <Phone size={18} /> 07 60 73 82 06
               </a>
             </div>
@@ -151,8 +154,11 @@ const SeoPageLayout = ({ data }) => {
               <h2 className="text-lg font-bold text-white mb-4">Pages associées</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {data.relatedLinks.map((link, i) => (
-                  <Link key={i} to={link.href} className="bg-neutral-900 border border-amber-400/10 p-4 hover:border-amber-400/40 transition-all group">
-                    <span className="text-amber-400 group-hover:text-amber-300 font-semibold text-sm">{link.label}</span>
+                  <Link key={i} to={link.href} className="bg-neutral-900 border p-4 transition-all group" style={{ borderColor: `${c}1a` }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${c}66`; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${c}1a`; }}
+                  >
+                    <span className="font-semibold text-sm" style={{ color: c }}>{link.label}</span>
                   </Link>
                 ))}
               </div>

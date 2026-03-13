@@ -3,6 +3,7 @@ import SeoPageLayout from './SeoPageLayout';
 
 const data = {
   slug: '/protection-rapprochee',
+  themeColor: '#68187B',
   metaTitle: 'Protection Rapprochée — Sécurité des Personnes | MTJ Sécurité Rapprochée',
   metaDescription: 'MTJ Sécurité Rapprochée assure la protection physique des personnalités, dirigeants, célébrités et particuliers exposés. Agents de protection rapprochée formés et certifiés à Toulon, Nice, Toulouse et dans toute la France.',
   breadcrumbCurrent: 'Protection rapprochée',
