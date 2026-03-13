@@ -17,16 +17,19 @@ CONTACT_EMAIL_PASSWORD = os.environ.get("CONTACT_EMAIL_PASSWORD")
 COMMERCIAL_EMAIL_PASSWORD = os.environ.get("COMMERCIAL_EMAIL_PASSWORD")
 
 
-def send_email_smtp(to_email: str, subject: str, body: str, from_email: str, password: str, attachment_paths: list = None):
+COMMERCIAL_EMAIL = os.environ.get("COMMERCIAL_EMAIL", "commercialmtj.securiteprivee@gmail.com")
+
+
+def send_email_smtp(to_email: str, subject: str, body: str, from_email: str, password: str, attachment_paths: list = None, content_type: str = "plain"):
     """
-    Send email via Gmail SMTP
+    Send email via Gmail SMTP. content_type can be 'plain' or 'html'.
     """
     try:
         msg = MIMEMultipart()
         msg['From'] = from_email
         msg['To'] = to_email
         msg['Subject'] = subject
-        msg.attach(MIMEText(body, 'plain'))
+        msg.attach(MIMEText(body, content_type))
 
         if attachment_paths:
             for file_path in attachment_paths:
