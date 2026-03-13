@@ -71,11 +71,6 @@ const Engagement = () => {
             <p className="text-amber-400 font-bold text-lg uppercase tracking-widest">La Direction</p>
           </div>
 
-          {/* Legal notice */}
-          <p className="text-gray-600 text-xs text-center leading-relaxed">
-            Art. L612-14 du CSI : L'autorisation d'exercice ne confere aucune prerogative de puissance publique a l'entreprise ou aux personnes qui en beneficient
-          </p>
-
         </div>
       </div>
     </section>
