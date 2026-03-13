@@ -27,7 +27,7 @@ export const services = [
     description: "Nos agents de prévention et de sécurité assurent la surveillance et la protection de vos sites. Formés aux dernières techniques de sécurité, ils garantissent un environnement sûr pour vos activités professionnelles et personnelles.",
     icon: "Shield",
     link: "/agent-securite-prevention",
-    color: "#1A0BA8",
+    color: "#AC8631",
     features: [
       "Surveillance de sites",
       "Contrôle d'accès",
@@ -41,7 +41,7 @@ export const services = [
     description: "Notre équipe cyno d'intervention est spécialisée dans la sécurité avec chiens d'intervention. Nos binômes maître-chien sont formés pour intervenir rapidement et efficacement dans toutes les situations nécessitant une sécurité renforcée.",
     icon: "Dog",
     link: "/securite-cynophile-maitre-chien",
-    color: "#1A0BA8",
+    color: "#AC8631",
     features: [
       "Surveillance avec chiens d'intervention",
       "Intervention rapide",
@@ -56,7 +56,7 @@ export const services = [
     description: "Notre unité CYNODEX est spécialisée dans la détection d'explosifs avec des chiens hautement entraînés. Nos équipes certifiées garantissent la sécurité de vos événements et installations.",
     icon: "Dog",
     link: "/detection-explosifs-cynodex",
-    color: "#1A0BA8",
+    color: "#AC8631",
     features: [
       "Détection d'explosifs",
       "Sécurisation d'événements",

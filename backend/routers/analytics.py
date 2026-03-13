@@ -248,13 +248,13 @@ async def generate_monthly_report():
 
     def section(title, headers, data, columns):
         header_cells = "".join(
-            f'<th style="padding:10px 14px;text-align:left;background:#1a1a1a;color:#d4c5b9;font-weight:600;border-bottom:2px solid #c5a028;">{h}</th>'
+            f'<th style="padding:10px 14px;text-align:left;background:#1a1a1a;color:#d4c5b9;font-weight:600;border-bottom:2px solid #AC8631;">{h}</th>'
             for h in headers
         )
         return f'''
         <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;border-collapse:collapse;border-radius:6px;overflow:hidden;border:1px solid #e5e0da;">
             <tr><td colspan="{len(headers)}" style="background:#1a1a1a;padding:14px 18px;">
-                <span style="color:#c5a028;font-size:16px;font-weight:700;letter-spacing:0.5px;">{title}</span>
+                <span style="color:#AC8631;font-size:16px;font-weight:700;letter-spacing:0.5px;">{title}</span>
             </td></tr>
             <tr>{header_cells}</tr>
             {_html_table_rows(data, columns)}
@@ -269,7 +269,7 @@ async def generate_monthly_report():
 
     <!-- Header -->
     <tr><td style="background:#1a1a1a;padding:32px 40px;text-align:center;">
-        <h1 style="margin:0;color:#c5a028;font-size:24px;font-weight:800;letter-spacing:1px;">MTJ SECURITE PRIVEE</h1>
+        <h1 style="margin:0;color:#AC8631;font-size:24px;font-weight:800;letter-spacing:1px;">MTJ SECURITE PRIVEE</h1>
         <p style="margin:8px 0 0;color:#d4c5b9;font-size:14px;">Rapport mensuel — {month_name}</p>
     </td></tr>
 
@@ -304,7 +304,7 @@ async def generate_monthly_report():
                 <td width="33%" style="padding-right:6px;">
                     <table width="100%" cellpadding="0" cellspacing="0" style="background:#1a1a1a;border-radius:6px;">
                         <tr><td style="padding:14px;text-align:center;">
-                            <p style="margin:0;font-size:22px;font-weight:700;color:#c5a028;">{len(quotes_emails)}</p>
+                            <p style="margin:0;font-size:22px;font-weight:700;color:#AC8631;">{len(quotes_emails)}</p>
                             <p style="margin:4px 0 0;font-size:11px;color:#d4c5b9;text-transform:uppercase;">Devis</p>
                         </td></tr>
                     </table>
@@ -312,7 +312,7 @@ async def generate_monthly_report():
                 <td width="33%" style="padding:0 6px;">
                     <table width="100%" cellpadding="0" cellspacing="0" style="background:#1a1a1a;border-radius:6px;">
                         <tr><td style="padding:14px;text-align:center;">
-                            <p style="margin:0;font-size:22px;font-weight:700;color:#c5a028;">{len(contacts_emails)}</p>
+                            <p style="margin:0;font-size:22px;font-weight:700;color:#AC8631;">{len(contacts_emails)}</p>
                             <p style="margin:4px 0 0;font-size:11px;color:#d4c5b9;text-transform:uppercase;">Contacts</p>
                         </td></tr>
                     </table>
@@ -320,7 +320,7 @@ async def generate_monthly_report():
                 <td width="33%" style="padding-left:6px;">
                     <table width="100%" cellpadding="0" cellspacing="0" style="background:#1a1a1a;border-radius:6px;">
                         <tr><td style="padding:14px;text-align:center;">
-                            <p style="margin:0;font-size:22px;font-weight:700;color:#c5a028;">{len(recruits_emails)}</p>
+                            <p style="margin:0;font-size:22px;font-weight:700;color:#AC8631;">{len(recruits_emails)}</p>
                             <p style="margin:4px 0 0;font-size:11px;color:#d4c5b9;text-transform:uppercase;">Candidatures</p>
                         </td></tr>
                     </table>
@@ -343,7 +343,7 @@ async def generate_monthly_report():
     <!-- Footer -->
     <tr><td style="background:#1a1a1a;padding:24px 40px;text-align:center;">
         <p style="margin:0;color:#888;font-size:12px;">Ce rapport est genere automatiquement par le site MTJ Securite Privee.</p>
-        <p style="margin:6px 0 0;color:#c5a028;font-size:12px;">31 rue Chevalier Paul, 83200 Toulon | 07 60 73 82 06</p>
+        <p style="margin:6px 0 0;color:#AC8631;font-size:12px;">31 rue Chevalier Paul, 83200 Toulon | 07 60 73 82 06</p>
     </td></tr>
 
 </table>

@@ -4,7 +4,7 @@ import { ChevronRight, Phone, Mail, MapPin } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
-const DEFAULT = '#FBBF24';
+const DEFAULT = '#AC8631';
 
 const SeoPageLayout = ({ data }) => {
   const navigate = useNavigate();

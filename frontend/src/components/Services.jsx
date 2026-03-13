@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Shield, Flame, ShieldCheck, ArrowRight } from 'lucide-react';
 import { services } from '../data/mock';
 
-const DEFAULT_COLOR = '#FBBF24'; // amber-400
+const DEFAULT_COLOR = '#AC8631';
 
 const Services = () => {
   const iconMap = {

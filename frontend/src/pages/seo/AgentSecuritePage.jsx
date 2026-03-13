@@ -3,7 +3,7 @@ import SeoPageLayout from './SeoPageLayout';
 
 const data = {
   slug: '/agent-securite-prevention',
-  themeColor: '#1A0BA8',
+  themeColor: '#AC8631',
   metaTitle: 'Agent de Prévention et Sécurité Privée | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée déploie des agents de prévention et de sécurité qualifiés à Toulon, Toulouse et Nice. Surveillance, contrôle d\'accès, rondes et protection 24h/24. Devis gratuit.',
   breadcrumbCurrent: 'Agent de prévention et sécurité',
