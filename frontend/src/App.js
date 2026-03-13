@@ -29,6 +29,7 @@ import SudFrancePage from "./pages/seo/SudFrancePage";
 import SitesIndustrielsPage from "./pages/seo/SitesIndustrielsPage";
 import ResidentielPage from "./pages/seo/ResidentielPage";
 import ErpPage from "./pages/seo/ErpPage";
+import ProtectionRapprocheePage from "./pages/seo/ProtectionRapprocheePage";
 import Dashboard from "./pages/Dashboard";
 
 const HomePage = () => {
@@ -66,6 +67,7 @@ function App() {
           <Route path="/securite-sites-industriels-commerciaux" element={<SitesIndustrielsPage />} />
           <Route path="/securite-residentielle" element={<ResidentielPage />} />
           <Route path="/securite-erp-etablissements-public" element={<ErpPage />} />
+          <Route path="/protection-rapprochee" element={<ProtectionRapprocheePage />} />
           {/* SEO - Localisation */}
           <Route path="/securite-privee-toulon" element={<ToulonPage />} />
           <Route path="/securite-privee-toulouse" element={<ToulousePage />} />

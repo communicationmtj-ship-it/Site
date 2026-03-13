@@ -83,7 +83,8 @@ export const services = [
     icon: "UserShield",
     features: [],
     wide: true,
-    externalCompany: "MTJ SÉCURITÉ RAPPROCHÉE"
+    externalCompany: "MTJ SÉCURITÉ RAPPROCHÉE",
+    link: "/protection-rapprochee"
   }
 ];
 

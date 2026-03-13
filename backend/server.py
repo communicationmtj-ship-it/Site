@@ -135,6 +135,7 @@ async def sitemap():
         {"loc": "/securite-sites-industriels-commerciaux", "priority": "0.9", "changefreq": "monthly"},
         {"loc": "/securite-residentielle", "priority": "0.9", "changefreq": "monthly"},
         {"loc": "/securite-erp-etablissements-public", "priority": "0.9", "changefreq": "monthly"},
+        {"loc": "/protection-rapprochee", "priority": "0.9", "changefreq": "monthly"},
         {"loc": "/securite-privee-toulon", "priority": "0.9", "changefreq": "monthly"},
         {"loc": "/securite-privee-toulouse", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/securite-privee-nice-monaco", "priority": "0.8", "changefreq": "monthly"},
