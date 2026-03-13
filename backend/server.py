@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, UploadFile, File, Form
+from fastapi import FastAPI, APIRouter, UploadFile, File, Form, Request
 from fastapi.responses import Response
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -9,8 +9,10 @@ from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import shutil
+import httpx
+import hashlib
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -283,6 +285,116 @@ async def submit_recruitment(
             "status": "error",
             "message": "Une erreur est survenue lors de l'envoi de votre candidature. Veuillez réessayer."
         }
+
+# ============================================
+# ANALYTICS - Visit Tracking
+# ============================================
+
+class TrackVisitRequest(BaseModel):
+    page: str
+    referrer: Optional[str] = None
+
+async def get_geo_from_ip(ip: str):
+    if ip in ("127.0.0.1", "::1", "localhost"):
+        return {"country": "Local", "city": "Local"}
+    try:
+        async with httpx.AsyncClient(timeout=3) as client_http:
+            resp = await client_http.get(f"http://ip-api.com/json/{ip}?fields=country,city,regionName")
+            if resp.status_code == 200:
+                data = resp.json()
+                return {"country": data.get("country", "Inconnu"), "city": data.get("city", "Inconnu"), "region": data.get("regionName", "")}
+    except Exception:
+        pass
+    return {"country": "Inconnu", "city": "Inconnu"}
+
+@api_router.post("/track")
+async def track_visit(req: TrackVisitRequest, request: Request):
+    ip = request.headers.get("x-forwarded-for", request.headers.get("x-real-ip", request.client.host))
+    if "," in ip:
+        ip = ip.split(",")[0].strip()
+    user_agent = request.headers.get("user-agent", "")
+    visitor_hash = hashlib.sha256(f"{ip}{user_agent}".encode()).hexdigest()[:16]
+    geo = await get_geo_from_ip(ip)
+    now = datetime.now(timezone.utc)
+    doc = {
+        "page": req.page, "referrer": req.referrer, "visitor_id": visitor_hash,
+        "ip": ip, "user_agent": user_agent,
+        "country": geo.get("country", "Inconnu"), "city": geo.get("city", "Inconnu"), "region": geo.get("region", ""),
+        "date": now.strftime("%Y-%m-%d"), "hour": now.hour, "timestamp": now.isoformat(),
+    }
+    await db.visits.insert_one(doc)
+    return {"status": "ok"}
+
+@api_router.get("/stats")
+async def get_stats(days: int = 30):
+    now = datetime.now(timezone.utc)
+    since = (now - timedelta(days=days)).strftime("%Y-%m-%d")
+    today = now.strftime("%Y-%m-%d")
+
+    pipeline_total = [
+        {"$match": {"date": {"$gte": since}}},
+        {"$group": {"_id": None, "total": {"$sum": 1}, "unique": {"$addToSet": "$visitor_id"}}},
+        {"$project": {"_id": 0, "total": 1, "unique": {"$size": "$unique"}}}
+    ]
+    total_result = await db.visits.aggregate(pipeline_total).to_list(1)
+    total_stats = total_result[0] if total_result else {"total": 0, "unique": 0}
+
+    pipeline_today = [
+        {"$match": {"date": today}},
+        {"$group": {"_id": None, "total": {"$sum": 1}, "unique": {"$addToSet": "$visitor_id"}}},
+        {"$project": {"_id": 0, "total": 1, "unique": {"$size": "$unique"}}}
+    ]
+    today_result = await db.visits.aggregate(pipeline_today).to_list(1)
+    today_stats = today_result[0] if today_result else {"total": 0, "unique": 0}
+
+    pipeline_daily = [
+        {"$match": {"date": {"$gte": since}}},
+        {"$group": {"_id": "$date", "visits": {"$sum": 1}, "unique": {"$addToSet": "$visitor_id"}}},
+        {"$project": {"_id": 0, "date": "$_id", "visits": 1, "unique": {"$size": "$unique"}}},
+        {"$sort": {"date": 1}}
+    ]
+    daily = await db.visits.aggregate(pipeline_daily).to_list(100)
+
+    pipeline_pages = [
+        {"$match": {"date": {"$gte": since}}},
+        {"$group": {"_id": "$page", "visits": {"$sum": 1}}},
+        {"$project": {"_id": 0, "page": "$_id", "visits": 1}},
+        {"$sort": {"visits": -1}}, {"$limit": 20}
+    ]
+    pages = await db.visits.aggregate(pipeline_pages).to_list(20)
+
+    pipeline_countries = [
+        {"$match": {"date": {"$gte": since}}},
+        {"$group": {"_id": "$country", "visits": {"$sum": 1}}},
+        {"$project": {"_id": 0, "country": "$_id", "visits": 1}},
+        {"$sort": {"visits": -1}}, {"$limit": 15}
+    ]
+    countries = await db.visits.aggregate(pipeline_countries).to_list(15)
+
+    pipeline_cities = [
+        {"$match": {"date": {"$gte": since}}},
+        {"$group": {"_id": "$city", "visits": {"$sum": 1}}},
+        {"$project": {"_id": 0, "city": "$_id", "visits": 1}},
+        {"$sort": {"visits": -1}}, {"$limit": 15}
+    ]
+    cities = await db.visits.aggregate(pipeline_cities).to_list(15)
+
+    pipeline_hours = [
+        {"$match": {"date": today}},
+        {"$group": {"_id": "$hour", "visits": {"$sum": 1}}},
+        {"$project": {"_id": 0, "hour": "$_id", "visits": 1}},
+        {"$sort": {"hour": 1}}
+    ]
+    hours = await db.visits.aggregate(pipeline_hours).to_list(24)
+
+    recent_raw = await db.visits.find({}, {"_id": 0}).sort("timestamp", -1).limit(20).to_list(20)
+
+    return {
+        "period": {"days": days, "since": since},
+        "total": total_stats, "today": today_stats,
+        "daily": daily, "pages": pages, "countries": countries,
+        "cities": cities, "hours_today": hours, "recent": recent_raw,
+    }
 
 # Include the router in the main app
 app.include_router(api_router)

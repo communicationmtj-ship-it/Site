@@ -9,6 +9,7 @@ import Quote from "./components/Quote";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Recrutement from "./components/Recrutement";
+import TrackVisit from "./components/TrackVisit";
 import { Toaster } from "./components/ui/sonner";
 import "./App.css";
 
@@ -23,6 +24,7 @@ import ToulonPage from "./pages/seo/ToulonPage";
 import ToulousePage from "./pages/seo/ToulousePage";
 import NiceMonacoPage from "./pages/seo/NiceMonacoPage";
 import SudFrancePage from "./pages/seo/SudFrancePage";
+import Dashboard from "./pages/Dashboard";
 
 const HomePage = () => {
   return (
@@ -43,9 +45,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <TrackVisit />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/recrutement" element={<Recrutement />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           {/* SEO - Métiers */}
           <Route path="/agent-securite-prevention" element={<AgentSecuritePage />} />
           <Route path="/securite-cynophile-maitre-chien" element={<CynophilePage />} />
