@@ -64,36 +64,20 @@ def send_quote_email(name: str, company: Optional[str], email: str, phone: str, 
         subject = f"Nouvelle demande de devis - {service_type}"
         attachment_info = f"\nPièce jointe : Oui" if attachment_path else "\nPas de pièce jointe"
 
-        body = f"""
-Nouvelle demande de devis reçue :
-
-===========================================
-INFORMATIONS CLIENT
-===========================================
+        body = f"""Nouvelle demande de devis
 
 Nom : {name}
 Entreprise : {company if company else 'Non renseigné'}
 Email : {email}
 Téléphone : {phone}
 
-===========================================
-SERVICE DEMANDÉ
-===========================================
+Service demandé : {service_type}
 
-Type de service : {service_type}
-
-===========================================
-MESSAGE
-===========================================
-
+Message :
 {message}
-
-===========================================
-{attachment_info}
-===========================================
-
-Cette demande a été envoyée depuis le formulaire de devis du site MTJ SÉCURITÉ PRIVÉE.
-        """
+{"" if not attachment_path else chr(10) + "Une pièce jointe est incluse dans cet email."}
+--
+MTJ Sécurité Privée"""
 
         attachments = [attachment_path] if attachment_path else None
 
@@ -123,35 +107,19 @@ def send_contact_email(name: str, email: str, phone: Optional[str], subject: str
         email_subject = f"Nouveau message de contact - {subject}"
         attachment_info = f"\nPièce jointe : Oui" if attachment_path else "\nPas de pièce jointe"
 
-        body = f"""
-Nouveau message de contact reçu :
-
-===========================================
-INFORMATIONS CONTACT
-===========================================
+        body = f"""Nouveau message de contact
 
 Nom : {name}
 Email : {email}
 Téléphone : {phone if phone else 'Non renseigné'}
 
-===========================================
-OBJET
-===========================================
+Objet : {subject}
 
-{subject}
-
-===========================================
-MESSAGE
-===========================================
-
+Message :
 {message}
-
-===========================================
-{attachment_info}
-===========================================
-
-Ce message a été envoyé depuis le formulaire de contact du site MTJ SÉCURITÉ PRIVÉE.
-        """
+{"" if not attachment_path else chr(10) + "Une pièce jointe est incluse dans cet email."}
+--
+MTJ Sécurité Privée"""
 
         attachments = [attachment_path] if attachment_path else None
 
@@ -181,34 +149,20 @@ def send_recruitment_email(first_name: str, last_name: str, email: str, phone: s
         subject = f"Nouvelle candidature - {first_name} {last_name}"
         attachments_info = "\n".join([f"- {os.path.basename(path)}" for path in attachment_paths]) if attachment_paths else "Aucune pièce jointe"
 
-        body = f"""
-Nouvelle candidature reçue :
-
-===========================================
-INFORMATIONS CANDIDAT
-===========================================
+        body = f"""Nouvelle candidature
 
 Prénom : {first_name}
 Nom : {last_name}
 Email : {email}
-Téléphone portable : {phone}
+Téléphone : {phone}
 
-===========================================
-MESSAGE DE MOTIVATION
-===========================================
-
+Message :
 {message}
 
-===========================================
-PIÈCES JOINTES
-===========================================
+Pièces jointes : {len(attachment_paths) if attachment_paths else 0} fichier(s)
 
-{attachments_info}
-
-===========================================
-
-Cette candidature a été envoyée depuis le formulaire de recrutement du site MTJ SÉCURITÉ PRIVÉE.
-        """
+--
+MTJ Sécurité Privée"""
 
         success = send_email_smtp(
             to_email=RECRUITMENT_EMAIL,
