@@ -6,9 +6,9 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Domains from "./components/Domains";
 import Quote from "./components/Quote";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Recrutement from "./components/Recrutement";
+import ContactPage from "./components/ContactPage";
 import TrackVisit from "./components/TrackVisit";
 import CookieBanner from "./components/CookieBanner";
 import { Toaster } from "./components/ui/sonner";
@@ -39,7 +39,6 @@ const HomePage = () => {
       <Services />
       <Domains />
       <Quote />
-      <Contact />
       <Footer />
     </>
   );
@@ -53,6 +52,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/recrutement" element={<Recrutement />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           {/* SEO - Métiers */}
           <Route path="/agent-securite-prevention" element={<AgentSecuritePage />} />

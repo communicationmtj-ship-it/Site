@@ -27,8 +27,8 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   const scrollToSection = (sectionId) => {
-    // If we're on recrutement page and trying to go to home sections
-    if (location.pathname === '/recrutement' && sectionId !== 'recrutement') {
+    // If we're on a subpage and trying to go to home sections
+    if (location.pathname !== '/' && !navLinks.find(l => l.id === sectionId)?.route) {
       navigate('/');
       setTimeout(() => {
         const element = document.getElementById(sectionId);
@@ -46,8 +46,8 @@ const Navbar = () => {
   };
 
   const handleNavClick = (link) => {
-    if (link.isRoute) {
-      navigate('/recrutement');
+    if (link.route) {
+      navigate(link.route);
       setIsMobileMenuOpen(false);
     } else {
       scrollToSection(link.id);
@@ -59,8 +59,8 @@ const Navbar = () => {
     { label: 'Nos métiers', id: 'services' },
     { label: 'Interventions', id: 'domains' },
     { label: 'Devis', id: 'quote' },
-    { label: 'Recrutement', id: 'recrutement', isRoute: true },
-    { label: 'Contact', id: 'contact' },
+    { label: 'Recrutement', id: 'recrutement', route: '/recrutement' },
+    { label: 'Contact', id: 'contact', route: '/contact' },
   ];
 
   return (
