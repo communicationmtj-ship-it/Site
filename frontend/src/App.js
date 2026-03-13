@@ -6,6 +6,7 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Domains from "./components/Domains";
 import Quote from "./components/Quote";
+import Engagement from "./components/Engagement";
 import Footer from "./components/Footer";
 import Recrutement from "./components/Recrutement";
 import ContactPage from "./components/ContactPage";
@@ -39,6 +40,7 @@ const HomePage = () => {
       <Services />
       <Domains />
       <Quote />
+      <Engagement />
       <Footer />
     </>
   );
