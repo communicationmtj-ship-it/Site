@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Eye, Users, Globe, MapPin, Clock, FileText, ArrowLeft, RefreshCw, Send } from 'lucide-react';
+import { Eye, Users, Globe, MapPin, Clock, FileText, ArrowLeft, RefreshCw, Send, Lock, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
@@ -29,16 +29,60 @@ const BarRow = ({ label, value, max }) => (
 );
 
 export default function Dashboard() {
+  const [token, setToken] = useState(() => sessionStorage.getItem('dashboard_token') || '');
+  const [authed, setAuthed] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [days, setDays] = useState(30);
   const [lastUpdate, setLastUpdate] = useState(null);
   const [sending, setSending] = useState(false);
 
-  const fetchStats = useCallback(async () => {
+  useEffect(() => {
+    if (!token) { setAuthLoading(false); return; }
+    fetch(`${API_URL}/api/dashboard/verify?token=${token}`)
+      .then(r => r.json())
+      .then(d => { if (d.status === 'ok') setAuthed(true); else { sessionStorage.removeItem('dashboard_token'); setToken(''); } })
+      .catch(() => { sessionStorage.removeItem('dashboard_token'); setToken(''); })
+      .finally(() => setAuthLoading(false));
+  }, [token]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setAuthError('');
     try {
-      const res = await fetch(`${API_URL}/api/stats?days=${days}`);
+      const res = await fetch(`${API_URL}/api/dashboard/login`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
       const data = await res.json();
+      if (data.status === 'success') {
+        sessionStorage.setItem('dashboard_token', data.token);
+        setToken(data.token);
+        setAuthed(true);
+      } else {
+        setAuthError(data.message || 'Mot de passe incorrect.');
+      }
+    } catch { setAuthError('Erreur de connexion.'); }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('dashboard_token');
+    setToken('');
+    setAuthed(false);
+    setStats(null);
+  };
+
+  const authHeaders = { 'X-Dashboard-Token': token };
+
+  const fetchStats = useCallback(async () => {
+    if (!authed) return;
+    try {
+      const res = await fetch(`${API_URL}/api/stats?days=${days}`, { headers: authHeaders });
+      const data = await res.json();
+      if (data.status === 'error') { handleLogout(); return; }
       setStats(data);
       setLastUpdate(new Date());
     } catch (e) {
@@ -46,18 +90,19 @@ export default function Dashboard() {
     } finally {
       setLoading(false);
     }
-  }, [days]);
+  }, [days, authed, token]);
 
   useEffect(() => {
+    if (!authed) return;
     fetchStats();
     const interval = setInterval(fetchStats, 15000);
     return () => clearInterval(interval);
-  }, [fetchStats]);
+  }, [fetchStats, authed]);
 
   const sendReport = async () => {
     setSending(true);
     try {
-      const res = await fetch(`${API_URL}/api/send-monthly-report`, { method: 'POST' });
+      const res = await fetch(`${API_URL}/api/send-monthly-report`, { method: 'POST', headers: authHeaders });
       const data = await res.json();
       alert(data.status === 'success' ? 'Rapport envoyé par email !' : 'Erreur lors de l\'envoi');
     } catch (e) {
@@ -66,6 +111,53 @@ export default function Dashboard() {
       setSending(false);
     }
   };
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <RefreshCw size={32} className="text-amber-400 animate-spin" />
+      </div>
+    );
+  }
+
+  if (!authed) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center" data-testid="dashboard-login">
+        <div className="w-full max-w-sm">
+          <div className="bg-neutral-900 border border-amber-400/20 p-8">
+            <div className="flex items-center justify-center mb-6">
+              <div className="p-3 bg-amber-400/10 border border-amber-400/30 rounded-full">
+                <Lock size={28} className="text-amber-400" />
+              </div>
+            </div>
+            <h1 className="text-xl font-bold text-amber-400 text-center uppercase tracking-wider mb-6">Dashboard Admin</h1>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <input
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Mot de passe"
+                required
+                className="w-full bg-black border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
+                data-testid="dashboard-password-input"
+              />
+              {authError && <p className="text-red-400 text-sm" data-testid="dashboard-auth-error">{authError}</p>}
+              <button
+                type="submit"
+                className="w-full bg-amber-400 text-black font-bold py-3 uppercase tracking-wider hover:bg-amber-300 transition-colors"
+                data-testid="dashboard-login-btn"
+              >
+                Connexion
+              </button>
+            </form>
+            <Link to="/" className="block text-center text-gray-500 hover:text-amber-400 text-sm mt-4 transition-colors">
+              Retour au site
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -117,6 +209,13 @@ export default function Dashboard() {
           >
             <Send size={14} />
             {sending ? 'Envoi...' : 'Envoyer rapport'}
+          </button>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-3 py-1.5 text-sm border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors"
+            data-testid="dashboard-logout-btn"
+          >
+            <LogOut size={14} />
           </button>
           {lastUpdate && (
             <span className="text-gray-600 text-xs">

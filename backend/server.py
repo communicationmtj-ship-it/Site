@@ -34,6 +34,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# ── Security Middlewares (order matters: last added = first executed) ──
+from middleware import SecurityHeadersMiddleware, RateLimitMiddleware, SuspiciousRequestLogger
+app.add_middleware(SuspiciousRequestLogger)
+app.add_middleware(RateLimitMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)
+
 
 # Base models
 class StatusCheck(BaseModel):
@@ -75,6 +81,28 @@ from routers.analytics import router as analytics_router
 api_router.include_router(forms_router)
 api_router.include_router(analytics_router)
 
+
+# ── Dashboard Auth Endpoints ──────────────────────────────────────
+from pydantic import BaseModel as PydanticBaseModel
+from security import dashboard_login, verify_dashboard_token
+
+class DashboardLoginRequest(PydanticBaseModel):
+    password: str
+
+@api_router.post("/dashboard/login")
+async def login_dashboard(req: DashboardLoginRequest):
+    token = dashboard_login(req.password)
+    if not token:
+        return {"status": "error", "message": "Mot de passe incorrect."}
+    return {"status": "success", "token": token}
+
+@api_router.get("/dashboard/verify")
+async def verify_dashboard(token: str = ""):
+    if verify_dashboard_token(token):
+        return {"status": "ok"}
+    return {"status": "error", "message": "Session expirée."}
+
+
 # Include the api router in the main app
 app.include_router(api_router)
 
@@ -85,8 +113,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
     allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization", "X-Dashboard-Token"],
 )
 
 

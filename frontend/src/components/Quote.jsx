@@ -17,6 +17,7 @@ const Quote = () => {
   });
   const [attachment, setAttachment] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [formLoadedAt] = useState(() => String(Date.now() / 1000));
 
   const handleChange = (e) => {
     setFormData({
@@ -53,6 +54,7 @@ const Quote = () => {
     submitData.append('phone', formData.phone);
     submitData.append('serviceType', formData.serviceType);
     submitData.append('message', formData.message);
+    submitData.append('ts', formLoadedAt);
     if (attachment) {
       submitData.append('attachment', attachment);
     }
@@ -255,6 +257,11 @@ const Quote = () => {
                 {fileName && (
                   <p className="text-sm text-amber-400 mt-2">Fichier sélectionné : {fileName}</p>
                 )}
+              </div>
+
+              {/* Honeypot - invisible to humans */}
+              <div className="absolute opacity-0 -z-10" aria-hidden="true" tabIndex={-1}>
+                <input type="text" name="hp" tabIndex={-1} autoComplete="off" />
               </div>
 
               {/* Submit Button */}

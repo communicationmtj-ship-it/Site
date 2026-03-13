@@ -19,6 +19,7 @@ const ContactPage = () => {
   });
   const [attachment, setAttachment] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [formLoadedAt] = useState(() => String(Date.now() / 1000));
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,6 +45,7 @@ const ContactPage = () => {
     submitData.append('phone', formData.phone || '');
     submitData.append('subject', formData.subject);
     submitData.append('message', formData.message);
+    submitData.append('ts', formLoadedAt);
     if (attachment) submitData.append('attachment', attachment);
 
     axios.post(`${BACKEND_URL}/api/contact`, submitData, {
@@ -193,6 +195,9 @@ const ContactPage = () => {
                     <Send size={20} className="mr-3 group-hover:translate-x-1 transition-transform" />
                     Envoyer le message
                   </button>
+                  <div className="absolute opacity-0 -z-10" aria-hidden="true" tabIndex={-1}>
+                    <input type="text" name="hp" tabIndex={-1} autoComplete="off" />
+                  </div>
                 </form>
               </div>
             </div>

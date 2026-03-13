@@ -18,6 +18,7 @@ const Recrutement = () => {
   });
   const [attachments, setAttachments] = useState([]);
   const [fileNames, setFileNames] = useState([]);
+  const [formLoadedAt] = useState(() => String(Date.now() / 1000));
 
   const handleChange = (e) => {
     setFormData({
@@ -52,6 +53,7 @@ const Recrutement = () => {
     submitData.append('email', formData.email);
     submitData.append('phone', formData.phone);
     submitData.append('message', formData.message);
+    submitData.append('ts', formLoadedAt);
     
     // Append all attachments
     attachments.forEach((file, index) => {
@@ -279,6 +281,9 @@ const Recrutement = () => {
                     <Send size={20} className="mr-3 group-hover:translate-x-1 transition-transform" />
                     Envoyer ma candidature
                   </button>
+                </div>
+                <div className="absolute opacity-0 -z-10" aria-hidden="true" tabIndex={-1}>
+                  <input type="text" name="hp" tabIndex={-1} autoComplete="off" />
                 </div>
               </form>
             </div>

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Header
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime, timezone, timedelta
@@ -7,6 +7,7 @@ import httpx
 import logging
 
 from email_service import send_email_smtp, CONTACT_EMAIL, CONTACT_EMAIL_PASSWORD
+from security import verify_dashboard_token
 
 logger = logging.getLogger(__name__)
 
@@ -69,7 +70,11 @@ async def track_visit(req: TrackVisitRequest, request: Request):
 
 
 @router.get("/stats")
-async def get_stats(days: int = 30):
+async def get_stats(days: int = 30, x_dashboard_token: Optional[str] = Header(None)):
+    if not verify_dashboard_token(x_dashboard_token or ""):
+        return {"status": "error", "message": "Authentification requise."}
+
+    days = max(1, min(days, 365))
     db = _get_db()
     now = datetime.now(timezone.utc)
     since = (now - timedelta(days=days)).strftime("%Y-%m-%d")
@@ -363,7 +368,9 @@ async def generate_monthly_report():
 
 
 @router.post("/send-monthly-report")
-async def send_monthly_report_now():
+async def send_monthly_report_now(x_dashboard_token: Optional[str] = Header(None)):
+    if not verify_dashboard_token(x_dashboard_token or ""):
+        return {"status": "error", "message": "Authentification requise."}
     success = await generate_monthly_report()
     if success:
         return {"status": "success", "message": "Rapport envoye"}
