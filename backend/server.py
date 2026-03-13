@@ -122,7 +122,7 @@ async def start_scheduler():
 
 @app.get("/api/sitemap.xml")
 async def sitemap():
-    base_url = "https://mtj-securite-privee.fr"
+    base_url = os.environ.get('APP_URL', 'https://mtj-securite-privee.fr')
     pages = [
         {"loc": "/", "priority": "1.0", "changefreq": "weekly"},
         {"loc": "/recrutement", "priority": "0.8", "changefreq": "monthly"},
