@@ -137,11 +137,12 @@ const Footer = () => {
           </a>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
             {[
-              { img: "https://images.unsplash.com/photo-1582510810295-bf11cd55dd6a?w=300&h=300&fit=crop", alt: "Maître-chien en patrouille" },
-              { img: "https://images.unsplash.com/photo-1669822308470-09f3f3e8d4a2?w=300&h=300&fit=crop", alt: "Chien de sécurité" },
-              { img: "https://images.unsplash.com/photo-1689969599825-40b9a4e6cecc?w=300&h=300&fit=crop", alt: "Caméra de surveillance" },
-              { img: "https://images.unsplash.com/photo-1515432085503-cabf2fbcd690?w=300&h=300&fit=crop", alt: "Vidéosurveillance" },
-              { img: "https://images.unsplash.com/photo-1663380690572-2e9fbb857807?w=300&h=300&fit=crop", alt: "Patrouille de nuit" },
+              { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post1.jpg`, alt: "Sécurité privée - Protection" },
+              { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post2.jpg`, alt: "Devise MTJ - Force et Honneur" },
+              { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post3.jpg`, alt: "Charte qualité MTJ Sécurité" },
+              { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post4.jpg`, alt: "Mission Marché de Noël Annecy" },
+              { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post5.jpg`, alt: "Mission Stade Allianz Riviera Nice" },
+              { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post6.jpg`, alt: "Événement Ecausystème Gignac" },
             ].map((item, i) => (
               <a
                 key={i}
@@ -154,33 +155,14 @@ const Footer = () => {
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-300"></div>
               </a>
             ))}
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative aspect-square bg-neutral-900 border border-amber-400/10 overflow-hidden hover:border-amber-400/40 transition-all hidden md:flex items-center justify-center"
-            >
-              <div className="flex flex-col items-center justify-center h-full w-full">
-                <Instagram size={28} className="text-amber-400 mb-2" />
-                <p className="text-[10px] text-amber-400 font-semibold">Voir plus</p>
-              </div>
-            </a>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
-            <p className="text-gray-500 text-xs text-center md:text-left">
-              © {currentYear} MTJ Sécurité Privée. Tous droits réservés.
-            </p>
-            <div className="flex items-center space-x-2">
-              <Shield size={14} className="text-amber-400" />
-              <span className="text-gray-500 text-xs">
-                Agrément CNAPS • Licence professionnelle
-              </span>
-            </div>
-          </div>
+          <p className="text-gray-500 text-xs text-center">
+            © {currentYear} MTJ Sécurité Privée. Tous droits réservés.
+          </p>
         </div>
       </div>
     </footer>

@@ -1,5 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.responses import Response
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -76,6 +77,9 @@ api_router.include_router(analytics_router)
 
 # Include the api router in the main app
 app.include_router(api_router)
+
+# Serve instagram images as static files
+app.mount("/api/instagram", StaticFiles(directory=str(ROOT_DIR / "uploads" / "instagram")), name="instagram")
 
 app.add_middleware(
     CORSMiddleware,
