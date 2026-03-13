@@ -140,6 +140,7 @@ async def sitemap():
         {"loc": "/securite-privee-toulouse", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/securite-privee-nice-monaco", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/securite-privee-sud-france", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/grand-deplacement-securite-france", "priority": "0.8", "changefreq": "monthly"},
     ]
     urls = "\n".join([
         f'  <url><loc>{base_url}{p["loc"]}</loc><changefreq>{p["changefreq"]}</changefreq><priority>{p["priority"]}</priority></url>'

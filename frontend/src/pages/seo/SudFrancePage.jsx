@@ -38,10 +38,6 @@ const data = {
           list: ['Haute-Garonne (31) : Toulouse, Blagnac, Colomiers', 'Hérault (34) : Montpellier, Béziers', 'Gard (30) et Aude (11)', 'Tarn (81) et Tarn-et-Garonne (82)']
         },
         {
-          h3: 'Grand déplacement sur l\'ensemble du territoire',
-          content: 'Pour nos clients disposant de sites sur tout le territoire ou pour des événements ponctuels hors de notre zone principale, MTJ Sécurité Privée mobilise ses équipes en grand déplacement. Paris, Lyon, Bordeaux, Nantes : nous avons la capacité logistique de déployer nos agents partout en France métropolitaine.'
-        },
-        {
           h3: 'Occitanie : Toulouse, Montpellier, Perpignan',
           content: 'La région Occitanie fait partie intégrante de notre zone d\'intervention. Nous intervenons régulièrement à Toulouse, Montpellier, Nîmes, Perpignan, Béziers et Carcassonne pour des missions de gardiennage, de sécurité événementielle et de sécurité cynophile.'
         }
@@ -84,8 +80,8 @@ const data = {
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
     { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
+    { href: '/grand-deplacement-securite-france', label: 'Grand déplacement national' },
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
-    { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
   ]
 };

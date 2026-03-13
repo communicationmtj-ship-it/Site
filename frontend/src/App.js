@@ -30,6 +30,7 @@ import SitesIndustrielsPage from "./pages/seo/SitesIndustrielsPage";
 import ResidentielPage from "./pages/seo/ResidentielPage";
 import ErpPage from "./pages/seo/ErpPage";
 import ProtectionRapprocheePage from "./pages/seo/ProtectionRapprocheePage";
+import GrandDeplacementPage from "./pages/seo/GrandDeplacementPage";
 import Dashboard from "./pages/Dashboard";
 
 const HomePage = () => {
@@ -68,6 +69,7 @@ function App() {
           <Route path="/securite-residentielle" element={<ResidentielPage />} />
           <Route path="/securite-erp-etablissements-public" element={<ErpPage />} />
           <Route path="/protection-rapprochee" element={<ProtectionRapprocheePage />} />
+          <Route path="/grand-deplacement-securite-france" element={<GrandDeplacementPage />} />
           {/* SEO - Localisation */}
           <Route path="/securite-privee-toulon" element={<ToulonPage />} />
           <Route path="/securite-privee-toulouse" element={<ToulousePage />} />
