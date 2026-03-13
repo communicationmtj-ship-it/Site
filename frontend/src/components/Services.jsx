@@ -1,5 +1,6 @@
 import React from 'react';
-import { Shield, Flame, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Shield, Flame, ShieldCheck, ArrowRight } from 'lucide-react';
 import { services } from '../data/mock';
 
 const Services = () => {
@@ -106,6 +107,22 @@ const Services = () => {
                     ? 'border-violet-500/30 group-hover:border-violet-400'
                     : 'border-amber-400/30 group-hover:border-amber-400'
                 }`}></div>
+
+                {/* Link to SEO page */}
+                {service.link && (
+                  <Link
+                    to={service.link}
+                    data-testid={`service-link-${service.id}`}
+                    className={`inline-flex items-center gap-2 mt-6 text-sm font-semibold uppercase tracking-wider transition-all duration-300 ${
+                      isExternal
+                        ? 'text-violet-400 hover:text-violet-300'
+                        : 'text-amber-400 hover:text-amber-300'
+                    }`}
+                  >
+                    En savoir plus
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                )}
               </div>
             );
           })}

@@ -1,5 +1,6 @@
 import React from 'react';
-import { MapPin, Building2, HardHat, Home, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Building2, HardHat, Home, Users, ArrowRight } from 'lucide-react';
 import { interventionDomains } from '../data/mock';
 import FranceMap from './FranceMap';
 
@@ -30,11 +31,15 @@ const Domains = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {interventionDomains.domains.map((domain, index) => {
             const IconComponent = iconMap[index] || MapPin;
+            const Wrapper = domain.link ? Link : 'div';
+            const wrapperProps = domain.link ? { to: domain.link } : {};
             
             return (
-              <div
+              <Wrapper
                 key={domain.id}
-                className="group relative bg-neutral-900 border border-amber-400/10 p-6 hover:border-amber-400/40 transition-all duration-300 hover:bg-neutral-800"
+                {...wrapperProps}
+                data-testid={`domain-card-${domain.id}`}
+                className={`group relative bg-neutral-900 border border-amber-400/10 p-6 hover:border-amber-400/40 transition-all duration-300 hover:bg-neutral-800 block ${domain.link ? 'cursor-pointer' : ''}`}
               >
                 {/* Icon */}
                 <div className="mb-4">
@@ -51,9 +56,17 @@ const Domains = () => {
                   {domain.description}
                 </p>
 
+                {/* Link indicator */}
+                {domain.link && (
+                  <span className="inline-flex items-center gap-2 mt-4 text-amber-400 text-xs font-semibold uppercase tracking-wider group-hover:text-amber-300 transition-colors duration-300">
+                    En savoir plus
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                )}
+
                 {/* Hover line effect */}
                 <div className="absolute bottom-0 left-0 w-0 h-1 bg-amber-400 group-hover:w-full transition-all duration-500"></div>
-              </div>
+              </Wrapper>
             );
           })}
         </div>

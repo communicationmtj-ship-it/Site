@@ -26,6 +26,7 @@ export const services = [
     title: "AGENTS DE PRÉVENTION ET SÉCURITÉ",
     description: "Nos agents de prévention et de sécurité assurent la surveillance et la protection de vos sites. Formés aux dernières techniques de sécurité, ils garantissent un environnement sûr pour vos activités professionnelles et personnelles.",
     icon: "Shield",
+    link: "/agent-securite-prevention",
     features: [
       "Surveillance de sites",
       "Contrôle d'accès",
@@ -38,6 +39,7 @@ export const services = [
     title: "CYNO D'INTERVENTION",
     description: "Notre équipe cyno d'intervention est spécialisée dans la sécurité avec chiens d'intervention. Nos binômes maître-chien sont formés pour intervenir rapidement et efficacement dans toutes les situations nécessitant une sécurité renforcée.",
     icon: "Dog",
+    link: "/securite-cynophile-maitre-chien",
     features: [
       "Surveillance avec chiens d'intervention",
       "Intervention rapide",
@@ -51,6 +53,7 @@ export const services = [
     subtitle: "Détection d'Explosifs",
     description: "Notre unité CYNODEX est spécialisée dans la détection d'explosifs avec des chiens hautement entraînés. Nos équipes certifiées garantissent la sécurité de vos événements et installations.",
     icon: "Dog",
+    link: "/detection-explosifs-cynodex",
     features: [
       "Détection d'explosifs",
       "Sécurisation d'événements",
@@ -64,6 +67,7 @@ export const services = [
     subtitle: "Service de Sécurité Incendie et d'Assistance à Personnes",
     description: "Nos agents SSIAP certifiés assurent la sécurité incendie de vos établissements recevant du public. Ils garantissent le respect des normes de sécurité et la protection des personnes.",
     icon: "Flame",
+    link: "/ssiap-securite-incendie",
     features: [
       "Prévention incendie",
       "Évacuation d'urgence",
@@ -90,7 +94,8 @@ export const interventionDomains = {
     {
       id: 1,
       name: "Événementiel",
-      description: "Sécurisation de concerts, festivals, événements sportifs et manifestations culturelles"
+      description: "Sécurisation de concerts, festivals, événements sportifs et manifestations culturelles",
+      link: "/securite-evenementielle"
     },
     {
       id: 2,
@@ -100,7 +105,8 @@ export const interventionDomains = {
     {
       id: 3,
       name: "Chantiers",
-      description: "Surveillance de chantiers, prévention du vol de matériel et sécurisation des zones de construction"
+      description: "Surveillance de chantiers, prévention du vol de matériel et sécurisation des zones de construction",
+      link: "/surveillance-chantier-site"
     },
     {
       id: 4,
