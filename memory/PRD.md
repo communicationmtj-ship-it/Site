@@ -120,7 +120,12 @@ Construire un site vitrine pour MTJ SÉCURITÉ PRIVÉE avec les sections suivant
 
 ---
 
-## Prochaines Étapes
+### Phase 4 - SEO (6 Mars 2026)
+
+- 10 pages SEO créées (6 métiers + 4 localisations) avec structure H1/H2/H3, FAQ, Schema.org JSON-LD
+- Sitemap XML dynamique (/api/sitemap.xml)
+- Maillage interne : liens croisés entre pages + liens dans le footer
+- Données structurées LocalBusiness et FAQPage sur chaque page
 
 1. **Obtenir le mot de passe d'application Gmail** pour `mtj.securiteprivee@gmail.com` (activer envoi emails devis/contact)
 2. **Refactoring** : Extraire les sections de Home.js en composants séparés (déjà fait partiellement)

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Shield, Mail, Phone, MapPin, Instagram } from 'lucide-react';
 import { companyInfo } from '../data/mock';
 
@@ -63,19 +64,27 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services - SEO Links */}
           <div>
             <h4 className="text-amber-400 font-bold uppercase tracking-wide mb-4 text-sm">
               Nos Services
             </h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>Agent de sécurité</li>
-              <li>Cyno d'intervention</li>
-              <li>CYNODEX - Détection d'explosifs</li>
-              <li>SSIAP</li>
-              <li>Sécurité événementielle</li>
-              <li>Gardiennage</li>
-              <li>Surveillance</li>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/agent-securite-prevention" className="text-gray-400 hover:text-amber-400 transition-colors">Agent de sécurité</Link></li>
+              <li><Link to="/securite-cynophile-maitre-chien" className="text-gray-400 hover:text-amber-400 transition-colors">Cyno d'intervention</Link></li>
+              <li><Link to="/detection-explosifs-cynodex" className="text-gray-400 hover:text-amber-400 transition-colors">CYNODEX - Détection d'explosifs</Link></li>
+              <li><Link to="/ssiap-securite-incendie" className="text-gray-400 hover:text-amber-400 transition-colors">SSIAP</Link></li>
+              <li><Link to="/securite-evenementielle" className="text-gray-400 hover:text-amber-400 transition-colors">Sécurité événementielle</Link></li>
+              <li><Link to="/surveillance-chantier-site" className="text-gray-400 hover:text-amber-400 transition-colors">Surveillance de chantiers</Link></li>
+            </ul>
+            <h4 className="text-amber-400 font-bold uppercase tracking-wide mb-3 mt-5 text-sm">
+              Zones d'intervention
+            </h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/securite-privee-toulon" className="text-gray-400 hover:text-amber-400 transition-colors">Toulon (83)</Link></li>
+              <li><Link to="/securite-privee-bordeaux" className="text-gray-400 hover:text-amber-400 transition-colors">Bordeaux (33)</Link></li>
+              <li><Link to="/securite-privee-nice-monaco" className="text-gray-400 hover:text-amber-400 transition-colors">Nice & Monaco (06)</Link></li>
+              <li><Link to="/securite-privee-sud-france" className="text-gray-400 hover:text-amber-400 transition-colors">Sud de la France</Link></li>
             </ul>
           </div>
 

@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter, UploadFile, File, Form
+from fastapi.responses import Response
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -304,3 +305,27 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+@app.get("/api/sitemap.xml")
+async def sitemap():
+    base_url = "https://mtj-securite-privee.fr"
+    pages = [
+        {"loc": "/", "priority": "1.0", "changefreq": "weekly"},
+        {"loc": "/recrutement", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/agent-securite-prevention", "priority": "0.9", "changefreq": "monthly"},
+        {"loc": "/securite-cynophile-maitre-chien", "priority": "0.9", "changefreq": "monthly"},
+        {"loc": "/detection-explosifs-cynodex", "priority": "0.9", "changefreq": "monthly"},
+        {"loc": "/ssiap-securite-incendie", "priority": "0.9", "changefreq": "monthly"},
+        {"loc": "/securite-evenementielle", "priority": "0.9", "changefreq": "monthly"},
+        {"loc": "/surveillance-chantier-site", "priority": "0.9", "changefreq": "monthly"},
+        {"loc": "/securite-privee-toulon", "priority": "0.9", "changefreq": "monthly"},
+        {"loc": "/securite-privee-bordeaux", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-nice-monaco", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-sud-france", "priority": "0.8", "changefreq": "monthly"},
+    ]
+    urls = "\n".join([
+        f'  <url><loc>{base_url}{p["loc"]}</loc><changefreq>{p["changefreq"]}</changefreq><priority>{p["priority"]}</priority></url>'
+        for p in pages
+    ])
+    xml = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>'
+    return Response(content=xml, media_type="application/xml")
