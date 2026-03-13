@@ -74,11 +74,12 @@ export const services = [
     id: 5,
     title: "PROTECTION PHYSIQUE DES PERSONNES",
     subtitle: "Sécurité Rapprochée",
-    description: "MTJ Sécurité Privée assure la protection rapprochée de personnalités, dirigeants d'entreprise, célébrités et particuliers exposés. Nos agents de protection rapprochée, formés aux techniques d'évaluation des menaces, d'escorte et de sécurisation de déplacements, garantissent votre intégrité physique en toute discrétion.",
+    description: "La protection rapprochée de personnalités, dirigeants d'entreprise, célébrités et particuliers exposés. Des agents de protection rapprochée, formés aux techniques d'évaluation des menaces, d'escorte et de sécurisation de déplacements, garantissent votre intégrité physique en toute discrétion.",
     legalNotice: "AUT-006-2123-10-21-20240955994\nEn application des articles L612-16 et L612-17 du code de la sécurité intérieure, la présente autorisation d'exercer peut être retirée ou suspendue à tout moment si les conditions initiales de sa délivrance ne sont plus remplies.",
     icon: "UserShield",
     features: [],
-    wide: true
+    wide: true,
+    externalCompany: "MTJ SÉCURITÉ RAPPROCHÉE"
   }
 ];
 

@@ -56,17 +56,14 @@ Construire un site vitrine pour MTJ SECURITE PRIVEE avec les sections suivantes 
 - Banniere de consentement aux cookies (RGPD)
 
 ### Phase 6 - Rapport mensuel HTML & Refactoring (13 Mars 2026)
-- Rapport mensuel envoye par email en format HTML structure et professionnel
-  - En-tete avec logo MTJ et periode
-  - Cartes de synthese (visites totales, visiteurs uniques)
-  - Compteurs formulaires (devis, contacts, candidatures)
-  - Tableaux detailles : pages, pays, villes, IPs, devis, contacts, candidatures
-  - Footer avec coordonnees
-- Refactoring backend : decomposition du monolithe server.py en modules :
-  - `server.py` : point d'entree slim (middleware, scheduler, sitemap)
-  - `routers/forms.py` : endpoints formulaires (quote, contact, recrutement)
-  - `routers/analytics.py` : endpoints analytics (track, stats, send-monthly-report)
-  - `email_service.py` : service email avec support HTML
+- Rapport mensuel en HTML professionnel et structure
+- Refactoring backend : server.py decompose en modules (routers/forms.py, routers/analytics.py)
+- Support HTML dans email_service.py
+
+### Phase 7 - Distinction societe partenaire (13 Mars 2026)
+- Carte "Protection Physique des Personnes" distinguee visuellement avec style violet
+- Bandeau "MTJ SECURITE RAPPROCHEE - Societe partenaire" 
+- Description mise a jour pour ne plus mentionner MTJ Securite Privee
 
 ---
 
@@ -74,7 +71,7 @@ Construire un site vitrine pour MTJ SECURITE PRIVEE avec les sections suivantes 
 
 **Stack:**
 - Frontend: React 19 + Tailwind CSS + Shadcn UI + Recharts
-- Backend: FastAPI + Motor + Pydantic + smtplib + APScheduler
+- Backend: FastAPI + Motor + Pydantic + smtplib
 - Database: MongoDB
 - Icons: Lucide React
 - Toast: Sonner
@@ -110,6 +107,7 @@ backend/
 - [x] Tous les formulaires fonctionnels avec envoi email
 - [x] Rapport mensuel HTML structure
 - [x] Refactoring backend en modules
+- [x] Distinction visuelle MTJ Securite Rapprochee
 
 ### P1 - Important
 - [ ] Validation des formulaires cote serveur
