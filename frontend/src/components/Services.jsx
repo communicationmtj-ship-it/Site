@@ -5,10 +5,29 @@ import { services } from '../data/mock';
 
 const DEFAULT_COLOR = '#AC8631';
 
+const DogSniffIcon = ({ size = 40, style = {}, strokeWidth = 1.5 }) => {
+  const color = style.color || '#AC8631';
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+      {/* Paw pad main */}
+      <ellipse cx="12" cy="15.5" rx="3.5" ry="3" />
+      {/* Toe pads */}
+      <ellipse cx="7.5" cy="10.5" rx="1.5" ry="1.8" />
+      <ellipse cx="11" cy="8.5" rx="1.3" ry="1.6" />
+      <ellipse cx="16.5" cy="10.5" rx="1.5" ry="1.8" />
+      {/* Scent / flair lines */}
+      <path d="M19 5.5c0.8-0.5 1.5-1.2 2-2" opacity="0.7" />
+      <path d="M20 8c0.7 0 1.5-0.2 2-0.5" opacity="0.5" />
+      <path d="M19.5 10.5c0.6 0.3 1.3 0.3 2 0.1" opacity="0.35" />
+    </svg>
+  );
+};
+
 const Services = () => {
   const iconMap = {
     Shield: Shield,
     Dog: PawPrint,
+    DogSniff: DogSniffIcon,
     Flame: Flame,
     UserShield: ShieldCheck,
   };
