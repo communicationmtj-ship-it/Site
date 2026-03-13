@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Flame, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Shield, Flame, ShieldCheck, ArrowRight, PawPrint } from 'lucide-react';
 import { services } from '../data/mock';
 
 const DEFAULT_COLOR = '#AC8631';
@@ -8,7 +8,7 @@ const DEFAULT_COLOR = '#AC8631';
 const Services = () => {
   const iconMap = {
     Shield: Shield,
-    Dog: Shield,
+    Dog: PawPrint,
     Flame: Flame,
     UserShield: ShieldCheck,
   };
