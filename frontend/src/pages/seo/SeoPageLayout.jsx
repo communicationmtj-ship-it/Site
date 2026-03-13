@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, Phone, Mail, MapPin } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
 const SeoPageLayout = ({ data }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = data.metaTitle;
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -120,9 +122,19 @@ const SeoPageLayout = ({ data }) => {
               Contactez MTJ Sécurité Privée pour obtenir un devis personnalisé adapté à vos besoins en sécurité.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/#quote" className="bg-amber-400 text-black font-bold px-8 py-3 uppercase tracking-wider hover:bg-amber-300 transition-colors" data-testid="seo-cta-devis">
+              <button
+                onClick={() => {
+                  navigate('/');
+                  setTimeout(() => {
+                    const el = document.getElementById('quote');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 300);
+                }}
+                className="bg-amber-400 text-black font-bold px-8 py-3 uppercase tracking-wider hover:bg-amber-300 transition-colors"
+                data-testid="seo-cta-devis"
+              >
                 Demander un devis
-              </Link>
+              </button>
               <a href="tel:0760738206" className="flex items-center gap-2 text-amber-400 font-semibold hover:text-amber-300 transition-colors">
                 <Phone size={18} /> 07 60 73 82 06
               </a>
