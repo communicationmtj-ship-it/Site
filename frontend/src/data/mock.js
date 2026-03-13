@@ -69,6 +69,14 @@ export const services = [
       "Évacuation d'urgence",
       "Gestion des équipements de sécurité"
     ]
+  },
+  {
+    id: 5,
+    title: "PROTECTION PHYSIQUE DES PERSONNES",
+    subtitle: "Sécurité Rapprochée",
+    description: "AUT-006-2123-10-21-20240955994\n\nEn application des articles L612-16 et L612-17 du code de la sécurité intérieure, la présente autorisation d'exercer peut être retirée ou suspendue à tout moment si les conditions initiales de sa délivrance ne sont plus remplies.",
+    icon: "UserShield",
+    features: []
   }
 ];
 

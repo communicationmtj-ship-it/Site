@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Flame } from 'lucide-react';
+import { Shield, Flame, ShieldCheck } from 'lucide-react';
 import { services } from '../data/mock';
 
 const Services = () => {
@@ -7,6 +7,7 @@ const Services = () => {
     Shield: Shield,
     Dog: Shield,
     Flame: Flame,
+    UserShield: ShieldCheck,
   };
 
   return (
@@ -54,7 +55,7 @@ const Services = () => {
                 )}
 
                 {/* Description */}
-                <p className="text-gray-400 leading-relaxed mb-6">
+                <p className="text-gray-400 leading-relaxed mb-6 whitespace-pre-line">
                   {service.description}
                 </p>
 
