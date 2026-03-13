@@ -54,7 +54,7 @@ export const services = [
     title: "CYNODEX",
     subtitle: "Détection d'Explosifs",
     description: "Notre unité CYNODEX est spécialisée dans la détection d'explosifs avec des chiens hautement entraînés. Nos équipes certifiées garantissent la sécurité de vos événements et installations.",
-    icon: "DogSniff",
+    icon: "Dog",
     link: "/detection-explosifs-cynodex",
     color: "#AC8631",
     features: [
