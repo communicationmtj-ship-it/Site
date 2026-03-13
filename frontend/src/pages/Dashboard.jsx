@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Eye, Users, Globe, MapPin, Clock, FileText, ArrowLeft, RefreshCw } from 'lucide-react';
+import { Eye, Users, Globe, MapPin, Clock, FileText, ArrowLeft, RefreshCw, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
@@ -33,6 +33,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [days, setDays] = useState(30);
   const [lastUpdate, setLastUpdate] = useState(null);
+  const [sending, setSending] = useState(false);
 
   const fetchStats = useCallback(async () => {
     try {
@@ -52,6 +53,19 @@ export default function Dashboard() {
     const interval = setInterval(fetchStats, 15000);
     return () => clearInterval(interval);
   }, [fetchStats]);
+
+  const sendReport = async () => {
+    setSending(true);
+    try {
+      const res = await fetch(`${API_URL}/api/send-monthly-report`, { method: 'POST' });
+      const data = await res.json();
+      alert(data.status === 'success' ? 'Rapport envoyé par email !' : 'Erreur lors de l\'envoi');
+    } catch (e) {
+      alert('Erreur réseau');
+    } finally {
+      setSending(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -94,6 +108,15 @@ export default function Dashboard() {
           </select>
           <button onClick={fetchStats} className="text-gray-500 hover:text-amber-400 transition-colors" data-testid="refresh-btn">
             <RefreshCw size={18} />
+          </button>
+          <button
+            onClick={sendReport}
+            disabled={sending}
+            className="flex items-center gap-2 px-3 py-1.5 text-sm bg-amber-400 text-black font-semibold hover:bg-amber-300 transition-colors disabled:opacity-50"
+            data-testid="send-report-btn"
+          >
+            <Send size={14} />
+            {sending ? 'Envoi...' : 'Envoyer rapport'}
           </button>
           {lastUpdate && (
             <span className="text-gray-600 text-xs">

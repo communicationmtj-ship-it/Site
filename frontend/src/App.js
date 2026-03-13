@@ -10,6 +10,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Recrutement from "./components/Recrutement";
 import TrackVisit from "./components/TrackVisit";
+import CookieBanner from "./components/CookieBanner";
 import { Toaster } from "./components/ui/sonner";
 import "./App.css";
 
@@ -63,6 +64,7 @@ function App() {
           <Route path="/securite-privee-nice-monaco" element={<NiceMonacoPage />} />
           <Route path="/securite-privee-sud-france" element={<SudFrancePage />} />
         </Routes>
+        <CookieBanner />
         <Toaster />
       </BrowserRouter>
     </div>

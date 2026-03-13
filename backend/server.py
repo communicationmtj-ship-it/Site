@@ -13,6 +13,7 @@ from datetime import datetime, timezone, timedelta
 import shutil
 import httpx
 import hashlib
+import asyncio
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -396,6 +397,113 @@ async def get_stats(days: int = 30):
         "cities": cities, "hours_today": hours, "recent": recent_raw,
     }
 
+from email_service import send_email_smtp, CONTACT_EMAIL, CONTACT_EMAIL_PASSWORD
+
+async def generate_monthly_report():
+    now = datetime.now(timezone.utc)
+    last_month_end = now.replace(day=1) - timedelta(days=1)
+    last_month_start = last_month_end.replace(day=1)
+    month_name = last_month_start.strftime("%B %Y")
+    since = last_month_start.strftime("%Y-%m-%d")
+    until = last_month_end.strftime("%Y-%m-%d")
+
+    total = await db.visits.aggregate([
+        {"$match": {"date": {"$gte": since, "$lte": until}}},
+        {"$group": {"_id": None, "total": {"$sum": 1}, "unique": {"$addToSet": "$visitor_id"}}},
+        {"$project": {"_id": 0, "total": 1, "unique": {"$size": "$unique"}}}
+    ]).to_list(1)
+    total = total[0] if total else {"total": 0, "unique": 0}
+
+    pages = await db.visits.aggregate([
+        {"$match": {"date": {"$gte": since, "$lte": until}}},
+        {"$group": {"_id": "$page", "visits": {"$sum": 1}}},
+        {"$sort": {"visits": -1}}, {"$limit": 10}
+    ]).to_list(10)
+
+    countries = await db.visits.aggregate([
+        {"$match": {"date": {"$gte": since, "$lte": until}}},
+        {"$group": {"_id": "$country", "visits": {"$sum": 1}}},
+        {"$sort": {"visits": -1}}, {"$limit": 10}
+    ]).to_list(10)
+
+    cities = await db.visits.aggregate([
+        {"$match": {"date": {"$gte": since, "$lte": until}}},
+        {"$group": {"_id": "$city", "visits": {"$sum": 1}}},
+        {"$sort": {"visits": -1}}, {"$limit": 10}
+    ]).to_list(10)
+
+    ips = await db.visits.aggregate([
+        {"$match": {"date": {"$gte": since, "$lte": until}}},
+        {"$group": {"_id": "$ip", "visits": {"$sum": 1}, "city": {"$first": "$city"}, "country": {"$first": "$country"}}},
+        {"$sort": {"visits": -1}}, {"$limit": 50}
+    ]).to_list(50)
+
+    quotes_emails = await db.quotes.find(
+        {"timestamp": {"$gte": last_month_start.isoformat(), "$lte": now.isoformat()}},
+        {"_id": 0, "name": 1, "email": 1, "phone": 1, "service_type": 1}
+    ).to_list(100)
+    contacts_emails = await db.contacts.find(
+        {"timestamp": {"$gte": last_month_start.isoformat(), "$lte": now.isoformat()}},
+        {"_id": 0, "name": 1, "email": 1, "phone": 1, "subject": 1}
+    ).to_list(100)
+    recruits_emails = await db.recruitments.find(
+        {"timestamp": {"$gte": last_month_start.isoformat(), "$lte": now.isoformat()}},
+        {"_id": 0, "firstName": 1, "lastName": 1, "email": 1, "phone": 1}
+    ).to_list(100)
+
+    pages_text = "\n".join([f"  {p['_id']} : {p['visits']} visites" for p in pages]) or "  Aucune donnee"
+    countries_text = "\n".join([f"  {c['_id']} : {c['visits']} visites" for c in countries]) or "  Aucune donnee"
+    cities_text = "\n".join([f"  {c['_id']} : {c['visits']} visites" for c in cities]) or "  Aucune donnee"
+    ips_text = "\n".join([f"  {ip['_id']} ({ip['country']}, {ip['city']}) - {ip['visits']} visites" for ip in ips]) or "  Aucune donnee"
+    quotes_text = "\n".join([f"  {q.get('name','')} - {q.get('email','')} - {q.get('phone','')} ({q.get('service_type','')})" for q in quotes_emails]) or "  Aucun"
+    contacts_text = "\n".join([f"  {c.get('name','')} - {c.get('email','')} - {c.get('phone','')}" for c in contacts_emails]) or "  Aucun"
+    recruits_text = "\n".join([f"  {r.get('firstName','')} {r.get('lastName','')} - {r.get('email','')} - {r.get('phone','')}" for r in recruits_emails]) or "  Aucun"
+
+    body = f"""Rapport mensuel MTJ Securite Privee - {month_name}
+
+Visites totales : {total['total']}
+Visiteurs uniques : {total['unique']}
+
+Pages les plus visitees :
+{pages_text}
+
+Pays :
+{countries_text}
+
+Villes :
+{cities_text}
+
+Adresses IP des visiteurs :
+{ips_text}
+
+Emails collectes via formulaire DEVIS :
+{quotes_text}
+
+Emails collectes via formulaire CONTACT :
+{contacts_text}
+
+Candidatures RECRUTEMENT :
+{recruits_text}
+
+--
+MTJ Securite Privee - Rapport automatique"""
+
+    success = send_email_smtp(
+        to_email=CONTACT_EMAIL,
+        subject=f"Rapport mensuel du site - {month_name}",
+        body=body,
+        from_email=CONTACT_EMAIL,
+        password=CONTACT_EMAIL_PASSWORD,
+    )
+    return success
+
+@api_router.post("/send-monthly-report")
+async def send_monthly_report_now():
+    success = await generate_monthly_report()
+    if success:
+        return {"status": "success", "message": "Rapport envoyé"}
+    return {"status": "error", "message": "Erreur lors de l'envoi"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
@@ -417,6 +525,28 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+async def monthly_report_scheduler():
+    while True:
+        now = datetime.now(timezone.utc)
+        if now.day == 1 and now.hour == 8:
+            try:
+                already_sent = await db.report_logs.find_one({"month": now.strftime("%Y-%m")})
+                if not already_sent:
+                    success = await generate_monthly_report()
+                    await db.report_logs.insert_one({
+                        "month": now.strftime("%Y-%m"),
+                        "sent_at": now.isoformat(),
+                        "success": success
+                    })
+                    logger.info(f"Monthly report sent: {success}")
+            except Exception as e:
+                logger.error(f"Monthly report error: {e}")
+        await asyncio.sleep(3600)
+
+@app.on_event("startup")
+async def start_scheduler():
+    asyncio.create_task(monthly_report_scheduler())
 
 @app.get("/api/sitemap.xml")
 async def sitemap():
