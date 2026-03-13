@@ -76,6 +76,9 @@ const Footer = () => {
               <li><Link to="/ssiap-securite-incendie" className="text-gray-400 hover:text-amber-400 transition-colors">SSIAP</Link></li>
               <li><Link to="/securite-evenementielle" className="text-gray-400 hover:text-amber-400 transition-colors">Sécurité événementielle</Link></li>
               <li><Link to="/surveillance-chantier-site" className="text-gray-400 hover:text-amber-400 transition-colors">Surveillance de chantiers</Link></li>
+              <li><Link to="/securite-sites-industriels-commerciaux" className="text-gray-400 hover:text-amber-400 transition-colors">Sites industriels et commerciaux</Link></li>
+              <li><Link to="/securite-residentielle" className="text-gray-400 hover:text-amber-400 transition-colors">Sécurité résidentielle</Link></li>
+              <li><Link to="/securite-erp-etablissements-public" className="text-gray-400 hover:text-amber-400 transition-colors">Sécurité ERP</Link></li>
             </ul>
             <h4 className="text-amber-400 font-bold uppercase tracking-wide mb-3 mt-5 text-sm">
               Zones d'intervention

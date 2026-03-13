@@ -25,6 +25,9 @@ import ToulonPage from "./pages/seo/ToulonPage";
 import ToulousePage from "./pages/seo/ToulousePage";
 import NiceMonacoPage from "./pages/seo/NiceMonacoPage";
 import SudFrancePage from "./pages/seo/SudFrancePage";
+import SitesIndustrielsPage from "./pages/seo/SitesIndustrielsPage";
+import ResidentielPage from "./pages/seo/ResidentielPage";
+import ErpPage from "./pages/seo/ErpPage";
 import Dashboard from "./pages/Dashboard";
 
 const HomePage = () => {
@@ -58,6 +61,9 @@ function App() {
           <Route path="/ssiap-securite-incendie" element={<SsiapPage />} />
           <Route path="/securite-evenementielle" element={<EvenementielPage />} />
           <Route path="/surveillance-chantier-site" element={<SurveillanceChantierPage />} />
+          <Route path="/securite-sites-industriels-commerciaux" element={<SitesIndustrielsPage />} />
+          <Route path="/securite-residentielle" element={<ResidentielPage />} />
+          <Route path="/securite-erp-etablissements-public" element={<ErpPage />} />
           {/* SEO - Localisation */}
           <Route path="/securite-privee-toulon" element={<ToulonPage />} />
           <Route path="/securite-privee-toulouse" element={<ToulousePage />} />

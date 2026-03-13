@@ -100,7 +100,8 @@ export const interventionDomains = {
     {
       id: 2,
       name: "Sites industriels et commerciaux",
-      description: "Protection des zones industrielles, entrepôts, centres commerciaux et espaces professionnels"
+      description: "Protection des zones industrielles, entrepôts, centres commerciaux et espaces professionnels",
+      link: "/securite-sites-industriels-commerciaux"
     },
     {
       id: 3,
@@ -111,12 +112,14 @@ export const interventionDomains = {
     {
       id: 4,
       name: "Résidentiel",
-      description: "Sécurité des résidences privées, copropriétés et domaines"
+      description: "Sécurité des résidences privées, copropriétés et domaines",
+      link: "/securite-residentielle"
     },
     {
       id: 5,
       name: "Établissements recevant du public",
-      description: "Protection des ERP, contrôle d'accès et gestion des flux"
+      description: "Protection des ERP, contrôle d'accès et gestion des flux",
+      link: "/securite-erp-etablissements-public"
     }
   ]
 };
