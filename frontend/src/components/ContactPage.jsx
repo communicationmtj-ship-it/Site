@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import SeoHead from './SeoHead';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -67,6 +68,11 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-black">
+      <SeoHead
+        title="Contactez MTJ Sécurité Privée | Devis Gratuit | Toulon"
+        description="Contactez MTJ Sécurité Privée pour toute demande de sécurité privée à Toulon, Nice, Toulouse. Devis gratuit, réponse sous 24h. Tél : 07 60 73 82 06."
+        path="/contact"
+      />
       <Navbar />
 
       {/* Hero Section */}
@@ -194,6 +200,27 @@ const ContactPage = () => {
         </div>
       </section>
 
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact MTJ Sécurité Privée",
+        "description": "Contactez MTJ Sécurité Privée pour toute demande de sécurité privée.",
+        "url": "https://mtj-securite-privee.fr/contact",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "MTJ Sécurité Privée",
+          "telephone": "+33760738206",
+          "email": "contactsmtjsecuriteprivee@gmail.com",
+          "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83200", "addressCountry": "FR" },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+33760738206",
+            "contactType": "customer service",
+            "areaServed": "FR",
+            "availableLanguage": "French"
+          }
+        }
+      })}} />
       <Footer />
     </div>
   );

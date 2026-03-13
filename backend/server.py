@@ -125,6 +125,7 @@ async def sitemap():
     base_url = os.environ.get('APP_URL', 'https://mtj-securite-privee.fr')
     pages = [
         {"loc": "/", "priority": "1.0", "changefreq": "weekly"},
+        {"loc": "/contact", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/recrutement", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/agent-securite-prevention", "priority": "0.9", "changefreq": "monthly"},
         {"loc": "/securite-cynophile-maitre-chien", "priority": "0.9", "changefreq": "monthly"},

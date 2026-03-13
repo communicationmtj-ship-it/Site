@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import SeoHead from './SeoHead';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -95,6 +96,11 @@ const Recrutement = () => {
 
   return (
     <div className="min-h-screen bg-black">
+      <SeoHead
+        title="Recrutement | Rejoignez MTJ Sécurité Privée | Postulez"
+        description="MTJ Sécurité Privée recrute des agents de sécurité, maîtres-chiens, SSIAP et agents de protection rapprochée. Postulez en ligne dès maintenant."
+        path="/recrutement"
+      />
       <Navbar />
       
       {/* Hero Section */}
@@ -292,6 +298,18 @@ const Recrutement = () => {
         </div>
       </section>
 
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Recrutement MTJ Sécurité Privée",
+        "description": "MTJ Sécurité Privée recrute des agents de sécurité, maîtres-chiens, SSIAP et agents de protection rapprochée.",
+        "url": "https://mtj-securite-privee.fr/recrutement",
+        "publisher": {
+          "@type": "Organization",
+          "name": "MTJ Sécurité Privée",
+          "url": "https://mtj-securite-privee.fr"
+        }
+      })}} />
       <Footer />
     </div>
   );

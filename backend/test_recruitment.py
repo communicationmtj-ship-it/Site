@@ -2,7 +2,7 @@ import requests
 import sys
 
 # Test recruitment email
-url = "https://mtj-demo-site.preview.emergentagent.com/api/recrutement"
+url = "https://mtj-preview-deploy.preview.emergentagent.com/api/recrutement"
 
 # Create test data
 data = {

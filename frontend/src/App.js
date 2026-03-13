@@ -32,10 +32,67 @@ import ErpPage from "./pages/seo/ErpPage";
 import ProtectionRapprocheePage from "./pages/seo/ProtectionRapprocheePage";
 import GrandDeplacementPage from "./pages/seo/GrandDeplacementPage";
 import Dashboard from "./pages/Dashboard";
+import SeoHead from "./components/SeoHead";
+
+const homeSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MTJ Sécurité Privée",
+    "url": "https://mtj-securite-privee.fr",
+    "logo": "https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png",
+    "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX, SSIAP et protection rapprochée dans le sud de la France.",
+    "telephone": "+33760738206",
+    "email": "contactsmtjsecuriteprivee@gmail.com",
+    "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83200", "addressRegion": "Provence-Alpes-Côte d'Azur", "addressCountry": "FR" },
+    "areaServed": [
+      { "@type": "City", "name": "Toulon" },
+      { "@type": "City", "name": "Nice" },
+      { "@type": "City", "name": "Monaco" },
+      { "@type": "City", "name": "Toulouse" },
+      { "@type": "AdministrativeArea", "name": "Provence-Alpes-Côte d'Azur" },
+      { "@type": "AdministrativeArea", "name": "Occitanie" },
+      { "@type": "Country", "name": "France" }
+    ],
+    "sameAs": ["https://www.instagram.com/mtj.securite.privee"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Services de sécurité privée",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Agent de prévention et sécurité", "url": "https://mtj-securite-privee.fr/agent-securite-prevention" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sécurité cynophile et maître-chien", "url": "https://mtj-securite-privee.fr/securite-cynophile-maitre-chien" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CYNODEX - Détection d'explosifs", "url": "https://mtj-securite-privee.fr/detection-explosifs-cynodex" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SSIAP - Sécurité incendie", "url": "https://mtj-securite-privee.fr/ssiap-securite-incendie" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Protection rapprochée", "url": "https://mtj-securite-privee.fr/protection-rapprochee" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sécurité événementielle", "url": "https://mtj-securite-privee.fr/securite-evenementielle" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Surveillance de chantiers", "url": "https://mtj-securite-privee.fr/surveillance-chantier-site" }}
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://mtj-securite-privee.fr/#localbusiness",
+    "name": "MTJ Sécurité Privée",
+    "image": "https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png",
+    "telephone": "+33760738206",
+    "email": "contactsmtjsecuriteprivee@gmail.com",
+    "url": "https://mtj-securite-privee.fr",
+    "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83200", "addressRegion": "PACA", "addressCountry": "FR" },
+    "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 },
+    "priceRange": "$$",
+    "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" }
+  }
+];
 
 const HomePage = () => {
   return (
     <>
+      <SeoHead
+        title="MTJ Sécurité Privée | Sécurité, Gardiennage, Cynophile | Toulon, Nice, Toulouse"
+        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP, protection rapprochée. Interventions à Toulon, Nice, Monaco, Toulouse et sur tout le territoire national. Devis gratuit."
+        path="/"
+      />
       <Navbar />
       <Hero />
       <About />
@@ -44,6 +101,9 @@ const HomePage = () => {
       <Quote />
       <Engagement />
       <Footer />
+      {homeSchema.map((schema, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      ))}
     </>
   );
 };

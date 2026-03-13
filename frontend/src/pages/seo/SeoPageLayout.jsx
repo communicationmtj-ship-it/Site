@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, Phone, Mail, MapPin } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import SeoHead from '../../components/SeoHead';
 
 const DEFAULT = '#AC8631';
 
@@ -11,20 +12,12 @@ const SeoPageLayout = ({ data }) => {
   const c = data.themeColor || DEFAULT;
 
   useEffect(() => {
-    document.title = data.metaTitle;
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', data.metaDescription);
-    else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = data.metaDescription;
-      document.head.appendChild(meta);
-    }
     window.scrollTo(0, 0);
   }, [data]);
 
   return (
     <>
+      <SeoHead title={data.metaTitle} description={data.metaDescription} path={data.slug} />
       <Navbar />
       <main className="bg-black min-h-screen pt-20">
         {/* Breadcrumb */}
@@ -166,6 +159,16 @@ const SeoPageLayout = ({ data }) => {
           )}
         </div>
 
+        {/* BreadcrumbList Schema */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://mtj-securite-privee.fr/" },
+            ...(data.breadcrumbParent ? [{ "@type": "ListItem", "position": 2, "name": data.breadcrumbParent.label, "item": `https://mtj-securite-privee.fr${data.breadcrumbParent.href}` }] : []),
+            { "@type": "ListItem", "position": data.breadcrumbParent ? 3 : 2, "name": data.breadcrumbCurrent, "item": `https://mtj-securite-privee.fr${data.slug}` }
+          ]
+        })}} />
         {/* LocalBusiness Schema.org */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
@@ -176,8 +179,20 @@ const SeoPageLayout = ({ data }) => {
           "telephone": "+33760738206",
           "email": "contactsmtjsecuriteprivee@gmail.com",
           "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83200", "addressCountry": "FR" },
+          "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 },
           "areaServed": data.areaServed || "Sud de la France",
-          "priceRange": "$$"
+          "priceRange": "$$",
+          "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" }
+        })}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": data.h1,
+          "description": data.metaDescription,
+          "url": `https://mtj-securite-privee.fr${data.slug}`,
+          "provider": { "@type": "Organization", "name": "MTJ Sécurité Privée", "url": "https://mtj-securite-privee.fr", "telephone": "+33760738206" },
+          "areaServed": data.areaServed || "Sud de la France",
+          "serviceType": data.breadcrumbCurrent
         })}} />
       </main>
       <Footer />
