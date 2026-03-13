@@ -1,76 +1,63 @@
-# PRD - MTJ SECURITE PRIVEE - Site Vitrine
+# MTJ Sécurité Privée - Site Vitrine
 
-**Date de creation:** 4 Mars 2026
-**Derniere mise a jour:** 13 Mars 2026
+## Problem Statement
+Création d'un site vitrine pour l'entreprise de sécurité privée "MTJ SECURITE PRIVEE", basée à Toulon (83200).
 
----
-
-## Probleme Statement Original
-
-Construire un site vitrine pour MTJ SECURITE PRIVEE avec les sections suivantes :
-- A propos de nous, Nos metiers, Domaine d'intervention, Devis, Contact
-
-**Design requis:** Palette beige/noir/dore, style professionnel securite
-
----
-
-## Fonctionnalites Implementees
-
-### Phase 1-5 (4-13 Mars 2026)
-- Site complet : Hero, A propos, Nos Metiers, Domaines, Devis, Contact, Footer, Recrutement
-- Backend FastAPI avec 3 formulaires fonctionnels + envoi emails Gmail SMTP
-- Carte de France SVG, 10 pages SEO, Sitemap XML, Schema.org JSON-LD
-- Analytics temps reel (/dashboard), banniere RGPD, rapport mensuel HTML
-- Refactoring backend en modules (routers/forms.py, routers/analytics.py)
-
-### Phase 6 - Distinction societe partenaire (13 Mars 2026)
-- Carte "Protection Physique des Personnes" en style violet distinct
-- Bandeau "MTJ SECURITE RAPPROCHEE - Societe partenaire"
-
-### Phase 7 - Liens SEO interactifs (13 Mars 2026)
-- Chaque carte "Nos Metiers" a un lien "En savoir plus" vers sa page SEO
-- Chaque carte "Domaine d'intervention" est cliquable vers sa page SEO
-
-### Phase 8 - 3 nouvelles pages SEO domaines (13 Mars 2026)
-- `/securite-sites-industriels-commerciaux` - Sites industriels, entrepots, centres commerciaux
-- `/securite-residentielle` - Residences privees, coproprietes, domaines
-- `/securite-erp-etablissements-public` - ERP, hopitaux, ecoles, musees
-- Total : 13 pages SEO (6 metiers + 3 domaines + 4 localisations)
-- Sitemap XML mis a jour, Footer mis a jour avec liens vers les 3 nouvelles pages
-
----
+## Core Requirements
+- Sections: À propos, Nos métiers, Domaine d'intervention, Devis, Contact
+- Page de recrutement avec formulaire + upload pièces jointes
+- Page de contact dédiée
+- Envoi d'emails via SMTP Gmail pour devis, contact, recrutement
+- Infos contact: 0760738206, contactsmtjsecuriteprivee@gmail.com, 31 rue Chevalier Paul, 83200 Toulon
+- Footer: lien Instagram, mentions légales, feed Instagram dynamique
+- Carte de France pour les zones d'intervention
+- 15 pages SEO (services + zones géographiques)
+- Section Engagements (politique qualité)
+- Dashboard d'analyse des visites + rapport mensuel HTML
+- SEO optimal: meta tags, JSON-LD, sitemap, robots.txt
 
 ## Architecture
+- **Frontend**: React + TailwindCSS + Shadcn UI + react-router-dom
+- **Backend**: FastAPI + Motor (MongoDB) + smtplib + APScheduler
+- **Database**: MongoDB (visits, unique_visitors, report_logs)
 
-**Frontend:** React 19 + Tailwind CSS + Shadcn UI + Recharts
-**Backend:** FastAPI + Motor + smtplib (routers/forms.py, routers/analytics.py)
-**Database:** MongoDB
+## What's Been Implemented
 
-## 13 Pages SEO
-- /agent-securite-prevention
-- /securite-cynophile-maitre-chien
-- /detection-explosifs-cynodex
-- /ssiap-securite-incendie
-- /securite-evenementielle
-- /surveillance-chantier-site
-- /securite-sites-industriels-commerciaux (NEW)
-- /securite-residentielle (NEW)
-- /securite-erp-etablissements-public (NEW)
-- /securite-privee-toulon
-- /securite-privee-toulouse
-- /securite-privee-nice-monaco
-- /securite-privee-sud-france
+### Pages
+- Homepage avec Hero, About, Services, Domains, Quote, Engagement
+- Page Contact (/contact)
+- Page Recrutement (/recrutement)
+- Dashboard analytique (/dashboard)
+- 15 pages SEO (services + zones géographiques)
 
----
+### Backend
+- Architecture modulaire (routers/forms.py, routers/analytics.py, email_service.py)
+- 3 formulaires avec envoi email (devis, contact, recrutement)
+- Suivi des visites (tracking)
+- Sitemap XML dynamique (18 URLs)
+- Feed Instagram (téléchargement + service statique)
+- Rapport mensuel HTML automatique
 
-## Backlog Priorise
+### SEO (Complété le 13/03/2026)
+- Composant SeoHead.jsx: title, meta description, canonical, OG tags, Twitter cards
+- Schémas JSON-LD:
+  - Homepage: Organization + LocalBusiness
+  - Pages SEO: Service + LocalBusiness + BreadcrumbList + FAQPage
+  - Contact: ContactPage + Organization
+  - Recrutement: WebPage + Organization
+- robots.txt (Disallow /dashboard, Sitemap directive)
+- Sitemap XML avec 18 pages
 
-### P1 - Important
-- [ ] Validation formulaires cote serveur
-- [ ] Rate limiting
+### Autres
+- Color-coding par service
+- Bannière cookies RGPD
+- Feed Instagram dynamique dans le footer
 
-### P2 - Nice to have
-- [ ] Temoignages clients
-- [ ] Galerie photo
-- [ ] Blog / Actualites
-- [ ] Dashboard admin
+## Prioritized Backlog
+- Aucune tâche P0/P1 en attente
+- Le projet est en phase de finalisation
+
+## Credentials
+- Email Recrutement: rex.mtjsecuriteprivee@gmail.com
+- Email Commercial: commercialmtj.securiteprivee@gmail.com
+- Email Contact: contactsmtjsecuriteprivee@gmail.com
