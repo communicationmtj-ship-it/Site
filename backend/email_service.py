@@ -9,10 +9,11 @@ import os
 
 logger = logging.getLogger(__name__)
 
-COMPANY_EMAIL = "mtj.securiteprivee@gmail.com"
+COMPANY_EMAIL = "contactsmtjsecuriteprivee@gmail.com"
 RECRUITMENT_EMAIL = os.environ.get("RECRUITMENT_EMAIL", "rex.mtjsecuriteprivee@gmail.com")
 RECRUITMENT_EMAIL_PASSWORD = os.environ.get("RECRUITMENT_EMAIL_PASSWORD")
-COMMERCIAL_EMAIL = os.environ.get("COMMERCIAL_EMAIL", "commercialmtj.securiteprivee@gmail.com")
+CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "contactsmtjsecuriteprivee@gmail.com")
+CONTACT_EMAIL_PASSWORD = os.environ.get("CONTACT_EMAIL_PASSWORD")
 COMMERCIAL_EMAIL_PASSWORD = os.environ.get("COMMERCIAL_EMAIL_PASSWORD")
 
 
@@ -116,17 +117,59 @@ Cette demande a été envoyée depuis le formulaire de devis du site MTJ SÉCURI
 
 def send_contact_email(name: str, email: str, phone: Optional[str], subject: str, message: str, attachment_path: Optional[str] = None):
     """
-    Send contact form email to company (logged only - SMTP not configured for this address yet)
+    Send contact form email via SMTP
     """
     try:
-        logger.info(f"Contact email prepared for {COMPANY_EMAIL}")
-        logger.info(f"From: {name} ({email}), Subject: {subject}")
-        if attachment_path:
-            logger.info(f"Attachment: {attachment_path}")
-        return True
+        email_subject = f"Nouveau message de contact - {subject}"
+        attachment_info = f"\nPièce jointe : Oui" if attachment_path else "\nPas de pièce jointe"
+
+        body = f"""
+Nouveau message de contact reçu :
+
+===========================================
+INFORMATIONS CONTACT
+===========================================
+
+Nom : {name}
+Email : {email}
+Téléphone : {phone if phone else 'Non renseigné'}
+
+===========================================
+OBJET
+===========================================
+
+{subject}
+
+===========================================
+MESSAGE
+===========================================
+
+{message}
+
+===========================================
+{attachment_info}
+===========================================
+
+Ce message a été envoyé depuis le formulaire de contact du site MTJ SÉCURITÉ PRIVÉE.
+        """
+
+        attachments = [attachment_path] if attachment_path else None
+
+        success = send_email_smtp(
+            to_email=CONTACT_EMAIL,
+            subject=email_subject,
+            body=body,
+            from_email=CONTACT_EMAIL,
+            password=CONTACT_EMAIL_PASSWORD,
+            attachment_paths=attachments
+        )
+
+        if success:
+            logger.info(f"Contact email sent to {CONTACT_EMAIL} from {name} ({email})")
+        return success
 
     except Exception as e:
-        logger.error(f"Error preparing contact email: {str(e)}")
+        logger.error(f"Error sending contact email: {str(e)}")
         return False
 
 
