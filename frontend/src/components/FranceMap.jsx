@@ -11,7 +11,7 @@ const SOUTH_DEPARTMENTS = new Set([
 const CORSICA_DEPARTMENTS = new Set(['2A', '2B']);
 
 const CITIES = [
-  { name: 'Bordeaux', x: 188, y: 400 },
+  { name: 'Toulouse', x: 255, y: 475 },
   { name: 'Toulon', x: 458, y: 485 },
   { name: 'Nice', x: 520, y: 442 },
 ];

@@ -4,9 +4,9 @@ import SeoPageLayout from './SeoPageLayout';
 const data = {
   slug: '/surveillance-chantier-site',
   metaTitle: 'Surveillance de Chantiers et Sites | Gardiennage 24h/24 | MTJ Sécurité Privée',
-  metaDescription: 'Gardiennage et surveillance de chantiers à Toulon, Nice, Bordeaux. Protection contre le vol, l\'intrusion et le vandalisme. MTJ Sécurité Privée — rondes 24h/24, devis gratuit.',
+  metaDescription: 'Gardiennage et surveillance de chantiers à Toulon, Nice, Toulouse. Protection contre le vol, l\'intrusion et le vandalisme. MTJ Sécurité Privée — rondes 24h/24, devis gratuit.',
   breadcrumbCurrent: 'Surveillance de chantiers',
-  areaServed: 'Toulon, Bordeaux, Nice, Sud de la France',
+  areaServed: 'Toulon, Toulouse, Nice, Sud de la France',
 
   h1: 'Surveillance de Chantiers et Gardiennage de Sites',
   introduction: `Les chantiers de construction et les sites industriels sont des cibles privilégiées pour le vol de matériaux, de matériel et d'engins de chantier. MTJ Sécurité Privée assure la surveillance et le gardiennage de vos chantiers et de vos sites dans le sud de la France pour prévenir les intrusions, le vandalisme et le vol.\n\nNos agents sont spécifiquement formés aux risques propres aux environnements de chantier et travaillent en coordination étroite avec les chefs de projet et les maîtres d'œuvre.`,
@@ -82,7 +82,7 @@ const data = {
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile — surveillance renforcée' },
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
-    { href: '/securite-privee-bordeaux', label: 'Sécurité privée à Bordeaux' },
+    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
   ]

@@ -82,7 +82,7 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/securite-privee-toulon" className="text-gray-400 hover:text-amber-400 transition-colors">Toulon (83)</Link></li>
-              <li><Link to="/securite-privee-bordeaux" className="text-gray-400 hover:text-amber-400 transition-colors">Bordeaux (33)</Link></li>
+              <li><Link to="/securite-privee-toulouse" className="text-gray-400 hover:text-amber-400 transition-colors">Toulouse (31)</Link></li>
               <li><Link to="/securite-privee-nice-monaco" className="text-gray-400 hover:text-amber-400 transition-colors">Nice & Monaco (06)</Link></li>
               <li><Link to="/securite-privee-sud-france" className="text-gray-400 hover:text-amber-400 transition-colors">Sud de la France</Link></li>
             </ul>

@@ -319,7 +319,7 @@ async def sitemap():
         {"loc": "/securite-evenementielle", "priority": "0.9", "changefreq": "monthly"},
         {"loc": "/surveillance-chantier-site", "priority": "0.9", "changefreq": "monthly"},
         {"loc": "/securite-privee-toulon", "priority": "0.9", "changefreq": "monthly"},
-        {"loc": "/securite-privee-bordeaux", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-toulouse", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/securite-privee-nice-monaco", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/securite-privee-sud-france", "priority": "0.8", "changefreq": "monthly"},
     ]

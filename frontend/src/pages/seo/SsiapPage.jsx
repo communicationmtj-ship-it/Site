@@ -4,9 +4,9 @@ import SeoPageLayout from './SeoPageLayout';
 const data = {
   slug: '/ssiap-securite-incendie',
   metaTitle: 'SSIAP Sécurité Incendie | Agent SSIAP 1 2 3 | MTJ Sécurité Privée',
-  metaDescription: 'Agents SSIAP certifiés pour la sécurité incendie de vos ERP et IGH à Toulon, Nice et Bordeaux. Prévention, évacuation, assistance à personnes. MTJ Sécurité Privée — devis gratuit.',
+  metaDescription: 'Agents SSIAP certifiés pour la sécurité incendie de vos ERP et IGH à Toulon, Nice et Toulouse. Prévention, évacuation, assistance à personnes. MTJ Sécurité Privée — devis gratuit.',
   breadcrumbCurrent: 'SSIAP — Sécurité incendie',
-  areaServed: 'Toulon, Bordeaux, Nice, Sud de la France',
+  areaServed: 'Toulon, Toulouse, Nice, Sud de la France',
 
   h1: 'SSIAP — Sécurité Incendie et Assistance à Personnes',
   introduction: `MTJ Sécurité Privée met à votre disposition des agents SSIAP (Service de Sécurité Incendie et d'Assistance à Personnes) qualifiés pour assurer la sécurité incendie de vos établissements. Nos agents interviennent dans les ERP (Établissements Recevant du Public) et les IGH (Immeubles de Grande Hauteur) en conformité avec la réglementation en vigueur.\n\nLa prévention et la gestion du risque incendie sont des obligations légales pour de nombreux établissements. MTJ Sécurité Privée vous garantit une conformité totale et une protection optimale de vos occupants et de vos biens.`,
@@ -84,7 +84,7 @@ const data = {
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
-    { href: '/securite-privee-bordeaux', label: 'Sécurité privée à Bordeaux' },
+    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
   ]
 };
 

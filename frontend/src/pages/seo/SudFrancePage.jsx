@@ -9,7 +9,7 @@ const data = {
   areaServed: 'PACA, Occitanie, Nouvelle-Aquitaine, France',
 
   h1: 'Sécurité Privée dans le Sud de la France',
-  introduction: `MTJ Sécurité Privée est implantée dans le sud de la France avec trois pôles opérationnels à Toulon, Nice et Bordeaux. Cette couverture géographique nous permet d'intervenir rapidement sur l'ensemble des régions Provence-Alpes-Côte d'Azur (PACA), Occitanie et Nouvelle-Aquitaine.\n\nAu-delà de cette zone principale, nous proposons des missions en grand déplacement sur l'ensemble du territoire national, pour répondre aux besoins de nos clients multi-sites ou pour des événements ponctuels.`,
+  introduction: `MTJ Sécurité Privée est implantée dans le sud de la France avec trois pôles opérationnels à Toulon, Nice et Toulouse. Cette couverture géographique nous permet d'intervenir rapidement sur l'ensemble des régions Provence-Alpes-Côte d'Azur (PACA) et Occitanie.\n\nAu-delà de cette zone principale, nous proposons des missions en grand déplacement sur l'ensemble du territoire national, pour répondre aux besoins de nos clients multi-sites ou pour des événements ponctuels.`,
 
   sections: [
     {
@@ -29,21 +29,21 @@ const data = {
       ]
     },
     {
-      h2: 'Pôle Bordeaux et grand déplacement national',
-      intro: 'Notre implantation bordelaise et notre capacité de déploiement national assurent une couverture complète.',
+      h2: 'Pôle Toulouse et grand déplacement national',
+      intro: 'Notre implantation toulousaine et notre capacité de déploiement national assurent une couverture complète.',
       subsections: [
         {
-          h3: 'Pôle Bordeaux — Nouvelle-Aquitaine',
-          content: 'Notre antenne bordelaise couvre la Gironde et les départements limitrophes de Nouvelle-Aquitaine : Bordeaux Métropole, Bassin d\'Arcachon, Libournais, vignobles médocains. Ce pôle répond aux besoins croissants en sécurité privée de la sixième agglomération française.',
-          list: ['Gironde (33) : Bordeaux, Mérignac, Arcachon', 'Landes (40) et Lot-et-Garonne (47)', 'Dordogne (24) et Charentes']
+          h3: 'Pôle Toulouse — Occitanie',
+          content: 'Notre antenne toulousaine couvre la Haute-Garonne et les départements limitrophes d\'Occitanie : Toulouse Métropole, zones aéronautiques de Blagnac et Colomiers, Montpellier, Nîmes, Perpignan. Ce pôle répond aux besoins croissants en sécurité privée de la quatrième agglomération française.',
+          list: ['Haute-Garonne (31) : Toulouse, Blagnac, Colomiers', 'Hérault (34) : Montpellier, Béziers', 'Gard (30) et Aude (11)', 'Tarn (81) et Tarn-et-Garonne (82)']
         },
         {
           h3: 'Grand déplacement sur l\'ensemble du territoire',
-          content: 'Pour nos clients disposant de sites sur tout le territoire ou pour des événements ponctuels hors de notre zone principale, MTJ Sécurité Privée mobilise ses équipes en grand déplacement. Paris, Lyon, Marseille, Toulouse, Nantes : nous avons la capacité logistique de déployer nos agents partout en France métropolitaine.'
+          content: 'Pour nos clients disposant de sites sur tout le territoire ou pour des événements ponctuels hors de notre zone principale, MTJ Sécurité Privée mobilise ses équipes en grand déplacement. Paris, Lyon, Bordeaux, Nantes : nous avons la capacité logistique de déployer nos agents partout en France métropolitaine.'
         },
         {
           h3: 'Occitanie : Toulouse, Montpellier, Perpignan',
-          content: 'La région Occitanie, entre nos pôles de Bordeaux et de Toulon, fait partie intégrante de notre zone d\'intervention. Nous intervenons régulièrement à Toulouse, Montpellier, Nîmes, Perpignan, Béziers et Carcassonne pour des missions de gardiennage, de sécurité événementielle et de sécurité cynophile.'
+          content: 'La région Occitanie fait partie intégrante de notre zone d\'intervention. Nous intervenons régulièrement à Toulouse, Montpellier, Nîmes, Perpignan, Béziers et Carcassonne pour des missions de gardiennage, de sécurité événementielle et de sécurité cynophile.'
         }
       ]
     },
@@ -57,7 +57,7 @@ const data = {
         },
         {
           h3: 'Un interlocuteur unique pour tous vos sites',
-          content: 'Pour les entreprises multi-sites implantées dans le sud de la France, MTJ Sécurité Privée offre l\'avantage d\'un prestataire unique : un seul contrat, un seul interlocuteur, une qualité de service homogène de Bordeaux à Nice. Cette centralisation simplifie votre gestion et garantit une cohérence opérationnelle sur l\'ensemble de vos implantations.'
+          content: 'Pour les entreprises multi-sites implantées dans le sud de la France, MTJ Sécurité Privée offre l\'avantage d\'un prestataire unique : un seul contrat, un seul interlocuteur, une qualité de service homogène de Toulouse à Nice. Cette centralisation simplifie votre gestion et garantit une cohérence opérationnelle sur l\'ensemble de vos implantations.'
         }
       ]
     }
@@ -66,7 +66,7 @@ const data = {
   faq: [
     {
       question: 'Quelle est votre zone d\'intervention principale ?',
-      answer: 'Notre zone d\'intervention principale couvre le sud de la France : PACA (Toulon, Marseille, Nice, Monaco), Occitanie (Toulouse, Montpellier) et Nouvelle-Aquitaine (Bordeaux). Nous intervenons également en grand déplacement partout en France métropolitaine.'
+      answer: 'Notre zone d\'intervention principale couvre le sud de la France : PACA (Toulon, Marseille, Nice, Monaco) et Occitanie (Toulouse, Montpellier). Nous intervenons également en grand déplacement partout en France métropolitaine.'
     },
     {
       question: 'Pouvez-vous intervenir à Paris ou Lyon ?',
@@ -74,16 +74,16 @@ const data = {
     },
     {
       question: 'Proposez-vous des contrats multi-sites ?',
-      answer: 'Absolument. C\'est l\'un de nos atouts majeurs. Nous gérons des contrats multi-sites avec un interlocuteur unique et une qualité de service uniforme, de Bordeaux à Nice en passant par Toulon. Idéal pour les enseignes, les groupes immobiliers et les entreprises ayant plusieurs implantations dans le sud de la France.'
+      answer: 'Absolument. C\'est l\'un de nos atouts majeurs. Nous gérons des contrats multi-sites avec un interlocuteur unique et une qualité de service uniforme, de Toulouse à Nice en passant par Toulon. Idéal pour les enseignes, les groupes immobiliers et les entreprises ayant plusieurs implantations dans le sud de la France.'
     }
   ],
 
-  conclusion: `De Bordeaux à Nice, de Toulon à Montpellier, MTJ Sécurité Privée est votre partenaire de sécurité dans tout le sud de la France. Notre maillage territorial, nos équipes qualifiées et notre capacité de déploiement national font de nous un acteur de référence de la sécurité privée dans le sud.\n\nContactez-nous pour un devis gratuit adapté à votre localisation et à vos besoins spécifiques.`,
+  conclusion: `De Toulouse à Nice, de Toulon à Montpellier, MTJ Sécurité Privée est votre partenaire de sécurité dans tout le sud de la France. Notre maillage territorial, nos équipes qualifiées et notre capacité de déploiement national font de nous un acteur de référence de la sécurité privée dans le sud.\n\nContactez-nous pour un devis gratuit adapté à votre localisation et à vos besoins spécifiques.`,
 
   relatedLinks: [
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
-    { href: '/securite-privee-bordeaux', label: 'Sécurité privée à Bordeaux' },
+    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },

@@ -4,12 +4,12 @@ import SeoPageLayout from './SeoPageLayout';
 const data = {
   slug: '/agent-securite-prevention',
   metaTitle: 'Agent de Prévention et Sécurité Privée | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée déploie des agents de prévention et de sécurité qualifiés à Toulon, Bordeaux et Nice. Surveillance, contrôle d\'accès, rondes et protection 24h/24. Devis gratuit.',
+  metaDescription: 'MTJ Sécurité Privée déploie des agents de prévention et de sécurité qualifiés à Toulon, Toulouse et Nice. Surveillance, contrôle d\'accès, rondes et protection 24h/24. Devis gratuit.',
   breadcrumbCurrent: 'Agent de prévention et sécurité',
-  areaServed: 'Toulon, Bordeaux, Nice, Sud de la France',
+  areaServed: 'Toulon, Toulouse, Nice, Sud de la France',
 
   h1: 'Agent de Prévention et de Sécurité Privée',
-  introduction: `MTJ Sécurité Privée met à votre disposition des agents de prévention et de sécurité (APS) formés, certifiés et expérimentés. Nos professionnels assurent la protection de vos biens, de vos locaux et de vos collaborateurs dans le sud de la France, avec une présence opérationnelle à Toulon, Bordeaux et Nice.\n\nTitulaires de la carte professionnelle délivrée par le CNAPS (Conseil National des Activités Privées de Sécurité), nos agents garantissent des prestations conformes aux exigences réglementaires les plus strictes du secteur.`,
+  introduction: `MTJ Sécurité Privée met à votre disposition des agents de prévention et de sécurité (APS) formés, certifiés et expérimentés. Nos professionnels assurent la protection de vos biens, de vos locaux et de vos collaborateurs dans le sud de la France, avec une présence opérationnelle à Toulon, Toulouse et Nice.\n\nTitulaires de la carte professionnelle délivrée par le CNAPS (Conseil National des Activités Privées de Sécurité), nos agents garantissent des prestations conformes aux exigences réglementaires les plus strictes du secteur.`,
 
   sections: [
     {
@@ -74,7 +74,7 @@ const data = {
     },
     {
       question: 'Dans quelles villes MTJ Sécurité Privée intervient-elle ?',
-      answer: 'Notre siège est basé à Toulon (83). Nous intervenons principalement dans le sud de la France : Toulon, Marseille, Nice, Monaco, Bordeaux et leurs agglomérations. Nous proposons également des missions en grand déplacement sur demande, couvrant l\'ensemble du territoire national.'
+      answer: 'Notre siège est basé à Toulon (83). Nous intervenons principalement dans le sud de la France : Toulon, Marseille, Nice, Monaco, Toulouse et leurs agglomérations. Nous proposons également des missions en grand déplacement sur demande, couvrant l\'ensemble du territoire national.'
     }
   ],
 
@@ -86,7 +86,7 @@ const data = {
     { href: '/ssiap-securite-incendie', label: 'SSIAP — Sécurité incendie' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
-    { href: '/securite-privee-bordeaux', label: 'Sécurité privée à Bordeaux' },
+    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
   ]
 };
 

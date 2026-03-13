@@ -75,10 +75,10 @@ const Domains = () => {
               <div className="space-y-8">
                 <div className="bg-neutral-900 p-6 border-l-4 border-amber-400">
                   <h4 className="text-2xl font-bold text-amber-400 mb-3 uppercase">
-                    🎯 Notre Secteur Principal
+                    Notre Secteur Principal
                   </h4>
                   <p className="text-gray-300 mb-4 leading-relaxed">
-                    <strong className="text-white">De Bordeaux à Nice</strong> - Zone d'intervention prioritaire avec nos équipes dédiées disponibles 24/7. Siège basé à Toulon.
+                    <strong className="text-white">De Toulouse à Nice</strong> - Zone d'intervention prioritaire avec nos équipes dédiées disponibles 24/7. Siège basé à Toulon.
                   </p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex items-start">
@@ -95,14 +95,14 @@ const Domains = () => {
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Couverture : Bordeaux, Toulon, Nice et toute la côte sud</span>
+                      <span>Couverture : Toulouse, Toulon, Nice et toute la côte sud</span>
                     </li>
                   </ul>
                 </div>
                 
                 <div className="bg-neutral-900 p-6 border-l-4 border-amber-400/50">
                   <h4 className="text-2xl font-bold text-white mb-3 uppercase">
-                    🚀 Grand Déplacement
+                    Grand Déplacement
                   </h4>
                   <p className="text-gray-300 mb-4 leading-relaxed">
                     <strong className="text-white">Reste de la France</strong> - Nous intervenons sur l'ensemble du territoire français pour vos besoins spécifiques et événements.

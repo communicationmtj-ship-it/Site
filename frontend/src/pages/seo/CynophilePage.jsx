@@ -4,9 +4,9 @@ import SeoPageLayout from './SeoPageLayout';
 const data = {
   slug: '/securite-cynophile-maitre-chien',
   metaTitle: 'Sécurité Cynophile & Maître-Chien | MTJ Sécurité Privée Toulon',
-  metaDescription: 'MTJ Sécurité Privée propose des équipes cynophiles (maître-chien) d\'intervention à Toulon, Nice et Bordeaux. Patrouilles, surveillance renforcée et sécurisation de sites. Devis gratuit.',
+  metaDescription: 'MTJ Sécurité Privée propose des équipes cynophiles (maître-chien) d\'intervention à Toulon, Nice et Toulouse. Patrouilles, surveillance renforcée et sécurisation de sites. Devis gratuit.',
   breadcrumbCurrent: 'Sécurité cynophile',
-  areaServed: 'Toulon, Bordeaux, Nice, PACA',
+  areaServed: 'Toulon, Toulouse, Nice, PACA',
 
   h1: 'Sécurité Cynophile et Maître-Chien d\'Intervention',
   introduction: `MTJ Sécurité Privée dispose d'une unité cynophile d'élite spécialisée dans la surveillance renforcée et l'intervention rapide. Nos binômes maître-chien sont formés aux techniques les plus avancées de détection, de dissuasion et d'intervention.\n\nLa présence d'un chien de sécurité multiplie par cinq l'efficacité dissuasive d'un agent seul. C'est une solution de sécurité éprouvée, particulièrement adaptée aux sites étendus, aux rondes de nuit et aux environnements à haut risque.`,
@@ -71,7 +71,7 @@ const data = {
     },
     {
       question: 'Quelle zone géographique couvrez-vous pour les prestations cynophiles ?',
-      answer: 'Notre unité cynophile est basée à Toulon et intervient dans tout le sud de la France : PACA (Marseille, Nice, Monaco, Cannes), Occitanie et Nouvelle-Aquitaine (Bordeaux). Nous proposons également des missions en grand déplacement sur demande partout en France.'
+      answer: 'Notre unité cynophile est basée à Toulon et intervient dans tout le sud de la France : PACA (Marseille, Nice, Monaco, Cannes), Occitanie (Toulouse) et le grand sud. Nous proposons également des missions en grand déplacement sur demande partout en France.'
     }
   ],
 

@@ -20,7 +20,7 @@ import SsiapPage from "./pages/seo/SsiapPage";
 import EvenementielPage from "./pages/seo/EvenementielPage";
 import SurveillanceChantierPage from "./pages/seo/SurveillanceChantierPage";
 import ToulonPage from "./pages/seo/ToulonPage";
-import BordeauxPage from "./pages/seo/BordeauxPage";
+import ToulousePage from "./pages/seo/ToulousePage";
 import NiceMonacoPage from "./pages/seo/NiceMonacoPage";
 import SudFrancePage from "./pages/seo/SudFrancePage";
 
@@ -55,7 +55,7 @@ function App() {
           <Route path="/surveillance-chantier-site" element={<SurveillanceChantierPage />} />
           {/* SEO - Localisation */}
           <Route path="/securite-privee-toulon" element={<ToulonPage />} />
-          <Route path="/securite-privee-bordeaux" element={<BordeauxPage />} />
+          <Route path="/securite-privee-toulouse" element={<ToulousePage />} />
           <Route path="/securite-privee-nice-monaco" element={<NiceMonacoPage />} />
           <Route path="/securite-privee-sud-france" element={<SudFrancePage />} />
         </Routes>

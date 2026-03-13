@@ -80,7 +80,7 @@ const data = {
 
   relatedLinks: [
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
-    { href: '/securite-privee-bordeaux', label: 'Sécurité privée à Bordeaux' },
+    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/detection-explosifs-cynodex', label: 'Détection d\'explosifs CYNODEX' },
