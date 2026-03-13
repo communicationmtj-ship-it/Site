@@ -37,7 +37,7 @@ export const services = [
   },
   {
     id: 2,
-    title: "AGENT CYNOPHILE D'INTERVENTION",
+    title: "AGENTS CYNOPHILE D'INTERVENTION",
     description: "Notre équipe cyno d'intervention est spécialisée dans la sécurité avec chiens d'intervention. Nos binômes maître-chien sont formés pour intervenir rapidement et efficacement dans toutes les situations nécessitant une sécurité renforcée.",
     icon: "Dog",
     link: "/securite-cynophile-maitre-chien",
