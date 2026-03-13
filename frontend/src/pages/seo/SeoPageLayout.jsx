@@ -154,11 +154,11 @@ const SeoPageLayout = ({ data }) => {
               <h2 className="text-lg font-bold text-white mb-4">Pages associées</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {data.relatedLinks.map((link, i) => (
-                  <Link key={i} to={link.href} className="bg-neutral-900 border p-4 transition-all group" style={{ borderColor: `${c}1a` }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${c}66`; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${c}1a`; }}
+                  <Link key={i} to={link.href} className="bg-neutral-900 border p-4 transition-all group" style={{ borderColor: '#AC86311a' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#AC863166'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#AC86311a'; }}
                   >
-                    <span className="font-semibold text-sm" style={{ color: c }}>{link.label}</span>
+                    <span className="font-semibold text-sm" style={{ color: '#AC8631' }}>{link.label}</span>
                   </Link>
                 ))}
               </div>
