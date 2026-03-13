@@ -86,10 +86,6 @@ const data = {
       answer: 'Non. Toute personne confrontée à une situation de risque peut bénéficier d\'une protection rapprochée : dirigeants d\'entreprise, particuliers menacés, témoins dans des affaires sensibles, personnes en situation de séparation conflictuelle. Le dispositif est adapté au niveau de risque et au budget.'
     },
     {
-      question: 'Vos agents interviennent-ils à l\'international ?',
-      answer: 'Oui, MTJ Sécurité Rapprochée peut organiser des missions de protection à l\'international, en coordination avec les partenaires de sécurité locaux et dans le respect de la législation du pays concerné. Nous intervenons régulièrement en Europe, en Afrique du Nord et au Moyen-Orient.'
-    },
-    {
       question: 'Comment se déroule la mise en place d\'une mission ?',
       answer: 'Après un premier échange confidentiel pour comprendre votre situation, nous réalisons une analyse de risques. Nous vous proposons ensuite un dispositif de protection adapté avec un devis détaillé. La mise en place peut être très rapide (quelques heures) en cas d\'urgence, ou planifiée sur plusieurs jours pour les missions récurrentes.'
     }
