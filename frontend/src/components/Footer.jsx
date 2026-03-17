@@ -171,7 +171,7 @@ const Footer = () => {
             </svg>
             <span className="text-white font-bold text-sm uppercase tracking-wider">Avis Google</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               {
                 name: "MTJ Sécurité Privée — Toulon",
@@ -184,6 +184,12 @@ const Footer = () => {
                 rating: 5,
                 reviews: 6,
                 url: "https://www.google.com/search?client=safari&hl=fr-fr&kgmid=%2Fg%2F11wbyvpprw&q=MTJ+Sécurité+privée&source=sh/x/loc/act/m4/3",
+              },
+              {
+                name: "MTJ Sécurité Rapprochée",
+                rating: 5,
+                reviews: 0,
+                url: "https://www.google.com/search?client=safari&hl=fr-fr&kgmid=%2Fg%2F11mk__hkfx&q=MTJ+SECURITÉ+RAPPROCHÉE&source=sh/x/loc/uni/m1/3",
               },
             ].map((place, i) => (
               <a
@@ -203,7 +209,7 @@ const Footer = () => {
                       ))}
                     </div>
                     <span className="text-amber-400 text-xs font-bold">{place.rating.toFixed(1)}</span>
-                    <span className="text-gray-500 text-xs">({place.reviews} avis)</span>
+                    <span className="text-gray-500 text-xs">{place.reviews > 0 ? `(${place.reviews} avis)` : 'Donnez votre avis'}</span>
                   </div>
                 </div>
                 <span className="text-gray-600 text-xs group-hover:text-amber-400 transition-colors whitespace-nowrap">Voir &rarr;</span>
