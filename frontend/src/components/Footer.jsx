@@ -180,7 +180,7 @@ const Footer = () => {
                 url: "https://www.google.com/search?client=safari&hl=fr-fr&kgmid=%2Fg%2F11wbyvpprw&q=MTJ+Sécurité+privée&source=sh/x/loc/act/m4/3",
               },
               {
-                name: "MTJ Sécurité Privée — Clarensac",
+                name: "MTJ Sécurité Privée — Nîmes",
                 rating: 5,
                 reviews: 6,
                 url: "https://www.google.com/search?client=safari&hl=fr-fr&kgmid=%2Fg%2F11x18fs_43&q=MTJ+SÉCURITÉ+PRIVÉE&source=sh/x/loc/act/m4/3",
