@@ -7,7 +7,7 @@ import SeoHead from '../../components/SeoHead';
 
 const DEFAULT = '#AC8631';
 
-import { safeJsonLd } from '../utils/safeJsonLd';
+import { safeJsonLd } from '../../utils/safeJsonLd';
 
 const SeoPageLayout = ({ data }) => {
   const navigate = useNavigate();
