@@ -229,7 +229,7 @@ const Quote = () => {
                   required
                   rows="6"
                   className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors resize-none"
-                  placeholder="Décrivez vos besoins en matière de sécurité..."
+                  placeholder="Précisez-nous les informations suivantes :&#10;- Type d'événement ou de site à sécuriser&#10;- Dates et horaires souhaités&#10;- Adresse / lieu de la prestation&#10;- Nombre d'agents nécessaires (si connu)&#10;- Toute autre information utile (accès, contraintes...)"
                 />
               </div>
 

@@ -51,11 +51,10 @@ const Services = () => {
             const isExt = !!service.externalCompany;
             const c = service.color || DEFAULT_COLOR;
 
-            return (
+            const cardContent = (
               <div
-                key={service.id}
                 data-testid={`service-card-${service.id}`}
-                className={`group relative bg-black p-8 border transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${service.wide ? 'md:col-span-2' : ''}`}
+                className={`group relative bg-black p-8 border transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${service.wide ? 'md:col-span-2' : ''} ${service.link ? 'cursor-pointer' : ''}`}
                 style={{
                   animationDelay: `${index * 100}ms`,
                   borderColor: `${c}44`,
@@ -119,19 +118,27 @@ const Services = () => {
                 {/* Decorative corner */}
                 <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 transition-colors duration-300" style={{ borderColor: `${c}44` }}></div>
 
-                {/* Link */}
+                {/* Link indicator */}
                 {service.link && (
-                  <Link
-                    to={service.link}
-                    data-testid={`service-link-${service.id}`}
-                    className="inline-flex items-center gap-2 mt-6 text-sm font-semibold uppercase tracking-wider transition-all duration-300 hover:opacity-80"
+                  <div
+                    className="inline-flex items-center gap-2 mt-6 text-sm font-semibold uppercase tracking-wider"
                     style={{ color: c }}
                   >
                     En savoir plus
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-                  </Link>
+                  </div>
                 )}
               </div>
+            );
+
+            return service.link ? (
+              <Link key={service.id} to={service.link} className={`block no-underline ${service.wide ? 'md:col-span-2' : ''}`}>
+                {cardContent}
+              </Link>
+            ) : (
+              <React.Fragment key={service.id}>
+                {cardContent}
+              </React.Fragment>
             );
           })}
         </div>
