@@ -62,8 +62,6 @@ const Contact = () => {
       },
     })
       .then(response => {
-        console.log('Contact submitted:', response.data);
-        
         toast.success("Message envoyé !", {
           description: response.data.message || "Nous vous répondrons dans les plus brefs délais.",
         });
@@ -83,8 +81,6 @@ const Contact = () => {
         if (fileInput) fileInput.value = '';
       })
       .catch(error => {
-        console.error('Error submitting contact:', error);
-        
         toast.error("Erreur", {
           description: error.response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
         });

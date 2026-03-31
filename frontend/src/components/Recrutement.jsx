@@ -261,8 +261,8 @@ const Recrutement = () => {
                   </div>
                   {fileNames.length > 0 && (
                     <div className="mt-3 space-y-1">
-                      {fileNames.map((name, index) => (
-                        <p key={index} className="text-sm text-amber-400">
+                      {fileNames.map((name) => (
+                        <p key={`file-${name}`} className="text-sm text-amber-400">
                           ✓ {name}
                         </p>
                       ))}

@@ -1,7 +1,8 @@
 # MTJ Sécurité Privée - Site Vitrine
 
 ## Problem Statement
-Création d'un site vitrine pour l'entreprise de sécurité privée "MTJ SECURITE PRIVEE", basée à Toulon (83200).
+Site vitrine pour "MTJ SECURITE PRIVEE", entreprise de sécurité privée basée à Toulon (83200).
+Domaine : https://mtj-securite-privee.fr
 
 ## Architecture
 - **Frontend**: React + TailwindCSS + Shadcn UI + react-router-dom
@@ -16,35 +17,37 @@ Création d'un site vitrine pour l'entreprise de sécurité privée "MTJ SECURIT
 - Dashboard analytique (/dashboard) — protégé par mot de passe
 - 15 pages SEO (services + zones géographiques)
 
-### SEO (13/03/2026)
-- SeoHead.jsx, JSON-LD schemas, robots.txt, Sitemap XML (18 pages)
+### SEO
+- SeoHead.jsx, JSON-LD dans HTML statique (Organization, LocalBusiness, AggregateRating, GeoCoordinates)
+- JSON-LD dynamiques (Service, BreadcrumbList, FAQPage, ContactPage, WebPage)
+- robots.txt, Sitemap XML (18 pages)
+- Bouton CTA "Devis Gratuit" dans la navbar
 
-### Sécurité (13/03/2026)
+### Sécurité
 - Rate limiting, validation entrées, protection uploads, headers HTTP, CORS
 - Anti-spam honeypot, dashboard auth, protection NoSQL, masquage erreurs, logging suspect
 
-### Revue de Code (31/03/2026)
-- Import circulaire corrigé (database.py module partagé)
-- XSS protection (safeJsonLd helper sur 7 instances)
-- Secret hardcodé supprimé des tests
-- Hook dependencies corrigées
+### Revues de Code (2x)
+- Import circulaire corrigé (database.py)
+- XSS protection (safeJsonLd)
+- 12 array-index-as-key corrigés
 - Console statements production supprimés
-- Empty catch blocks corrigés
+- Form handlers backend refactorisés (helpers extraits)
+- Secrets env-only
 
-### UI/UX Récents
-- Bouton "DEVIS GRATUIT" CTA dans la navbar
+### UI/UX
+- Bouton CTA "Devis Gratuit" navbar
 - Cartes Nos Métiers entièrement cliquables
-- Placeholder guidé dans le formulaire devis
-- Barre Avis Google dans le footer (Toulon, Nîmes, Sécurité Rapprochée)
-- Pictogramme patte de chien pour les services cynophiles
-- CQP APS renommé en TFP APS
+- Placeholder guidé formulaire devis
+- Barre Avis Google footer (Toulon, Nîmes, Sécurité Rapprochée)
+- Pictogramme patte de chien services cynophiles
+- TFP APS (remplacé CQP APS)
 
 ## Credentials
-- Dashboard Admin: mtj-admin-2024
+- Dashboard: mtj-admin-2024
 - Email Recrutement: rex.mtjsecuriteprivee@gmail.com
 - Email Commercial: commercialmtj.securiteprivee@gmail.com
 - Email Contact: contactsmtjsecuriteprivee@gmail.com
 
 ## Prioritized Backlog
-- P2: Refactoring composants volumineux (Dashboard, Recrutement, Quote)
-- P2: Extraction fonctions analytics backend
+- Aucune tâche P0/P1 en attente

@@ -145,13 +145,13 @@ const Footer = () => {
               { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post4.jpg`, alt: "Mission Marché de Noël Annecy" },
               { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post5.jpg`, alt: "Mission Stade Allianz Riviera Nice" },
               { img: `${process.env.REACT_APP_BACKEND_URL}/api/instagram/post6.jpg`, alt: "Événement Ecausystème Gignac" },
-            ].map((item, i) => (
+            ].map((item) => (
               <a
-                key={i}
+                key={item.alt}
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`relative aspect-square overflow-hidden group border border-amber-400/10 hover:border-amber-400/40 transition-all ${i >= 3 ? (i >= 4 ? 'hidden md:block' : 'hidden sm:block') : ''}`}
+                className={`relative aspect-square overflow-hidden group border border-amber-400/10 hover:border-amber-400/40 transition-all`}
               >
                 <img src={item.img} alt={item.alt} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-75 group-hover:brightness-100" loading="lazy" />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-300"></div>
@@ -191,9 +191,9 @@ const Footer = () => {
                 reviews: 0,
                 url: "https://www.google.com/search?client=safari&hl=fr-fr&kgmid=%2Fg%2F11mk__hkfx&q=MTJ+SECURITÉ+RAPPROCHÉE&source=sh/x/loc/uni/m1/3",
               },
-            ].map((place, i) => (
+            ].map((place) => (
               <a
-                key={i}
+                key={place.name}
                 href={place.url}
                 target="_blank"
                 rel="noopener noreferrer"

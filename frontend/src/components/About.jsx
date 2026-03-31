@@ -16,8 +16,8 @@ const About = () => {
             </div>
 
             <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
-              {aboutUs.description.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="opacity-90">
+              {aboutUs.description.split('\n\n').map((paragraph) => (
+                <p key={`p-${paragraph.substring(0, 20)}`} className="opacity-90">
                   {paragraph}
                 </p>
               ))}

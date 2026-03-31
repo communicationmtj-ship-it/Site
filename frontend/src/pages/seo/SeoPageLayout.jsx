@@ -51,7 +51,7 @@ const SeoPageLayout = ({ data }) => {
         {/* Content Sections */}
         <div className="container mx-auto px-4 lg:px-8 space-y-12 pb-8">
           {data.sections.map((section, i) => (
-            <section key={i} className="bg-neutral-900 border p-6 lg:p-10" style={{ borderColor: `${c}1a` }}>
+            <section key={`section-${section.h2.substring(0, 20)}`} className="bg-neutral-900 border p-6 lg:p-10" style={{ borderColor: `${c}1a` }}>
               <h2 className="text-xl md:text-2xl font-bold uppercase tracking-wide mb-6" style={{ color: c }} data-testid={`seo-h2-${i}`}>
                 {section.h2}
               </h2>
@@ -87,7 +87,7 @@ const SeoPageLayout = ({ data }) => {
               </h2>
               <div className="space-y-6">
                 {data.faq.map((item, i) => (
-                  <div key={i} className="pl-4 border-l-2" style={{ borderColor: `${c}44` }}>
+                  <div key={`faq-${item.question.substring(0, 20)}`} className="pl-4 border-l-2" style={{ borderColor: `${c}44` }}>
                     <h3 className="text-lg font-semibold text-white mb-2">{item.question}</h3>
                     <p className="text-gray-400 leading-relaxed">{item.answer}</p>
                   </div>
@@ -148,8 +148,8 @@ const SeoPageLayout = ({ data }) => {
             <nav className="py-6" aria-label="Pages associées">
               <h2 className="text-lg font-bold text-white mb-4">Pages associées</h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {data.relatedLinks.map((link, i) => (
-                  <Link key={i} to={link.href} className="bg-neutral-900 border p-4 transition-all group" style={{ borderColor: '#AC86311a' }}
+                {data.relatedLinks.map((link) => (
+                  <Link key={`rel-${link.href}`} to={link.href} className="bg-neutral-900 border p-4 transition-all group" style={{ borderColor: '#AC86311a' }}
                     onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#AC863166'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#AC86311a'; }}
                   >

@@ -44,8 +44,8 @@ const Engagement = () => {
               </h3>
             </div>
             <ul className="space-y-5">
-              {engagements.map((item, i) => (
-                <li key={i} className="flex items-start gap-4">
+              {engagements.map((item) => (
+                <li key={`eng-${item.substring(0, 20)}`} className="flex items-start gap-4">
                   <CheckCircle size={22} className="text-amber-400 flex-shrink-0 mt-0.5" />
                   <p className="text-gray-300 leading-relaxed">{item}</p>
                 </li>

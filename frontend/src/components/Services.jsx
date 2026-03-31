@@ -107,7 +107,7 @@ const Services = () => {
                 {service.features.length > 0 && (
                   <ul className="space-y-2 mt-2">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start text-gray-300 text-sm">
+                      <li key={`feat-${feature.substring(0, 15)}`} className="flex items-start text-gray-300 text-sm">
                         <span className="mr-2 mt-1" style={{ color: c }}>▸</span>
                         <span>{feature}</span>
                       </li>
