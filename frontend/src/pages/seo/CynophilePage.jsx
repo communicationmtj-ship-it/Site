@@ -34,7 +34,7 @@ const data = {
       subsections: [
         {
           h3: 'Certification agent cynophile et carte professionnelle',
-          content: 'Nos maîtres-chiens sont titulaires du CQP Agent de Sécurité Cynophile et de la carte professionnelle délivrée par le CNAPS. Cette certification garantit leur compétence dans le dressage, le maniement du chien en mission de sécurité, les techniques de contention et les premiers secours. Chaque binôme homme-chien est évalué régulièrement pour maintenir un niveau opérationnel optimal.'
+          content: 'Nos maîtres-chiens sont titulaires du TFP Agent de Sécurité Cynophile et de la carte professionnelle délivrée par le CNAPS. Cette certification garantit leur compétence dans le dressage, le maniement du chien en mission de sécurité, les techniques de contention et les premiers secours. Chaque binôme homme-chien est évalué régulièrement pour maintenir un niveau opérationnel optimal.'
         },
         {
           h3: 'Sélection et entraînement des chiens',

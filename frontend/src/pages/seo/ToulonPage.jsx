@@ -71,7 +71,7 @@ const data = {
     },
     {
       question: 'Quelles certifications possèdent vos agents ?',
-      answer: 'Tous nos agents sont titulaires de la carte professionnelle délivrée par le CNAPS. Selon les missions, ils possèdent également les certifications CQP APS, CQP Agent Cynophile, SSIAP 1/2/3 et SST (Sauveteur Secouriste du Travail). MTJ Sécurité Privée est elle-même autorisée par le CNAPS à exercer ses activités de sécurité privée.'
+      answer: 'Tous nos agents sont titulaires de la carte professionnelle délivrée par le CNAPS. Selon les missions, ils possèdent également les certifications TFP APS, TFP Agent Cynophile, SSIAP 1/2/3 et SST (Sauveteur Secouriste du Travail). MTJ Sécurité Privée est elle-même autorisée par le CNAPS à exercer ses activités de sécurité privée.'
     }
   ],
 

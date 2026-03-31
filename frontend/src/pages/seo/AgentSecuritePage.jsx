@@ -34,8 +34,8 @@ const data = {
       intro: 'La qualité de nos prestations repose sur le recrutement rigoureux et la formation continue de nos agents.',
       subsections: [
         {
-          h3: 'Certification CQP APS et carte professionnelle',
-          content: 'Tous nos agents sont titulaires du Certificat de Qualification Professionnelle Agent de Prévention et de Sécurité (CQP APS). Ils possèdent leur carte professionnelle délivrée par le CNAPS, garantissant le respect des normes légales imposées par le Code de la Sécurité Intérieure. Cette certification assure la maîtrise des gestes de premiers secours, des techniques de médiation et de la réglementation applicable.'
+          h3: 'Certification TFP APS et carte professionnelle',
+          content: 'Tous nos agents sont titulaires du Titre à Finalité Professionnelle Agent de Prévention et de Sécurité (TFP APS). Ils possèdent leur carte professionnelle délivrée par le CNAPS, garantissant le respect des normes légales imposées par le Code de la Sécurité Intérieure. Cette certification assure la maîtrise des gestes de premiers secours, des techniques de médiation et de la réglementation applicable.'
         },
         {
           h3: 'Formation continue et spécialisations',
@@ -67,7 +67,7 @@ const data = {
   faq: [
     {
       question: 'Quelle est la différence entre un agent de sécurité et un vigile ?',
-      answer: 'Le terme "vigile" est couramment utilisé dans le langage courant, mais la dénomination officielle est "agent de prévention et de sécurité" (APS). Ce professionnel est obligatoirement titulaire d\'une carte professionnelle délivrée par le CNAPS et a suivi une formation certifiante (CQP APS). Il exerce dans le cadre strict du Code de la Sécurité Intérieure.'
+      answer: 'Le terme "vigile" est couramment utilisé dans le langage courant, mais la dénomination officielle est "agent de prévention et de sécurité" (APS). Ce professionnel est obligatoirement titulaire d\'une carte professionnelle délivrée par le CNAPS et a suivi une formation certifiante (TFP APS). Il exerce dans le cadre strict du Code de la Sécurité Intérieure.'
     },
     {
       question: 'Combien coûte un agent de sécurité privée ?',
