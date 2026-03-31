@@ -14,6 +14,7 @@ import TrackVisit from "./components/TrackVisit";
 import CookieBanner from "./components/CookieBanner";
 import { Toaster } from "./components/ui/sonner";
 import "./App.css";
+import { safeJsonLd } from "./utils/safeJsonLd";
 
 // SEO Pages
 import AgentSecuritePage from "./pages/seo/AgentSecuritePage";
@@ -102,7 +103,7 @@ const HomePage = () => {
       <Engagement />
       <Footer />
       {homeSchema.map((schema, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        <script key={`schema-${schema['@type']}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }} />
       ))}
     </>
   );

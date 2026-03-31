@@ -25,7 +25,7 @@ GENERIC_ERROR = "Une erreur est survenue. Veuillez reessayer."
 
 
 def _get_db():
-    from server import db
+    from database import db
     return db
 
 

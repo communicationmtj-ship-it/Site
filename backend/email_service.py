@@ -65,7 +65,7 @@ def send_quote_email(name: str, company: Optional[str], email: str, phone: str, 
     """
     try:
         subject = f"Nouvelle demande de devis - {service_type}"
-        attachment_info = f"\nPièce jointe : Oui" if attachment_path else "\nPas de pièce jointe"
+        attachment_info = "\nPièce jointe : Oui" if attachment_path else "\nPas de pièce jointe"
 
         body = f"""Nouvelle demande de devis
 
@@ -108,7 +108,7 @@ def send_contact_email(name: str, email: str, phone: Optional[str], subject: str
     """
     try:
         email_subject = f"Nouveau message de contact - {subject}"
-        attachment_info = f"\nPièce jointe : Oui" if attachment_path else "\nPas de pièce jointe"
+        attachment_info = "\nPièce jointe : Oui" if attachment_path else "\nPas de pièce jointe"
 
         body = f"""Nouveau message de contact
 

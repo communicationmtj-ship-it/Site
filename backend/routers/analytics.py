@@ -15,7 +15,7 @@ router = APIRouter()
 
 
 def _get_db():
-    from server import db
+    from database import db
     return db
 
 

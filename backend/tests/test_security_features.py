@@ -10,7 +10,7 @@ import os
 import time
 
 BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', '').rstrip('/')
-DASHBOARD_PASSWORD = "mtj-admin-2024"
+DASHBOARD_PASSWORD = os.environ.get("DASHBOARD_PASSWORD", "")
 
 # ─── Fixtures ───────────────────────────────────────────────────────────
 

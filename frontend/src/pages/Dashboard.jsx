@@ -79,18 +79,16 @@ export default function Dashboard() {
     setStats(null);
   };
 
-  const authHeaders = { 'X-Dashboard-Token': token };
-
   const fetchStats = useCallback(async () => {
     if (!authed) return;
     try {
-      const res = await fetch(`${API_URL}/api/stats?days=${days}`, { headers: authHeaders });
+      const res = await fetch(`${API_URL}/api/stats?days=${days}`, { headers: { 'X-Dashboard-Token': token } });
       const data = await res.json();
       if (data.status === 'error') { handleLogout(); return; }
       setStats(data);
       setLastUpdate(new Date());
-    } catch (e) {
-      console.error('Failed to fetch stats');
+    } catch {
+      // Network error - silently handled by loading state
     } finally {
       setLoading(false);
     }
@@ -106,7 +104,7 @@ export default function Dashboard() {
   const sendReport = async () => {
     setSending(true);
     try {
-      const res = await fetch(`${API_URL}/api/send-monthly-report`, { method: 'POST', headers: authHeaders });
+      const res = await fetch(`${API_URL}/api/send-monthly-report`, { method: 'POST', headers: { 'X-Dashboard-Token': token } });
       const data = await res.json();
       alert(data.status === 'success' ? 'Rapport envoyé par email !' : 'Erreur lors de l\'envoi');
     } catch (e) {

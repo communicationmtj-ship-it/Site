@@ -8,6 +8,8 @@ import SeoHead from './SeoHead';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
+import { safeJsonLd } from '../utils/safeJsonLd';
+
 const Recrutement = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -67,8 +69,6 @@ const Recrutement = () => {
       },
     })
       .then(response => {
-        console.log('Application submitted:', response.data);
-        
         toast.success("Candidature envoyée !", {
           description: response.data.message || "Nous examinerons votre candidature et vous contacterons rapidement.",
         });
@@ -88,8 +88,6 @@ const Recrutement = () => {
         if (fileInput) fileInput.value = '';
       })
       .catch(error => {
-        console.error('Error submitting application:', error);
-        
         toast.error("Erreur", {
           description: error.response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
         });
@@ -303,7 +301,7 @@ const Recrutement = () => {
         </div>
       </section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Recrutement MTJ Sécurité Privée",

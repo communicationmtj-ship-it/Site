@@ -66,8 +66,6 @@ const Quote = () => {
       },
     })
       .then(response => {
-        console.log('Quote submitted:', response.data);
-        
         toast.success("Demande envoyée !", {
           description: response.data.message || "Nous vous contacterons dans les plus brefs délais.",
         });
@@ -88,8 +86,6 @@ const Quote = () => {
         if (fileInput) fileInput.value = '';
       })
       .catch(error => {
-        console.error('Error submitting quote:', error);
-        
         toast.error("Erreur", {
           description: error.response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
         });

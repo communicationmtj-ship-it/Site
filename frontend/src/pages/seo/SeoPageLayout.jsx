@@ -7,6 +7,8 @@ import SeoHead from '../../components/SeoHead';
 
 const DEFAULT = '#AC8631';
 
+import { safeJsonLd } from '../utils/safeJsonLd';
+
 const SeoPageLayout = ({ data }) => {
   const navigate = useNavigate();
   const c = data.themeColor || DEFAULT;
@@ -91,7 +93,7 @@ const SeoPageLayout = ({ data }) => {
                   </div>
                 ))}
               </div>
-              <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({
                 "@context": "https://schema.org",
                 "@type": "FAQPage",
                 "mainEntity": data.faq.map(item => ({
@@ -160,7 +162,7 @@ const SeoPageLayout = ({ data }) => {
         </div>
 
         {/* BreadcrumbList Schema */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
@@ -170,7 +172,7 @@ const SeoPageLayout = ({ data }) => {
           ]
         })}} />
         {/* LocalBusiness Schema.org */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           "name": "MTJ Sécurité Privée",
@@ -184,7 +186,7 @@ const SeoPageLayout = ({ data }) => {
           "priceRange": "$$",
           "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" }
         })}} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({
           "@context": "https://schema.org",
           "@type": "Service",
           "name": data.h1,

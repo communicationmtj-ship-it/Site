@@ -17,8 +17,8 @@ const TrackVisit = () => {
             referrer: document.referrer || null,
           }),
         });
-      } catch (e) {
-        // silent fail
+      } catch {
+        // Tracking failure is non-critical, silently ignore
       }
     };
     track();

@@ -9,6 +9,8 @@ import SeoHead from './SeoHead';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
+import { safeJsonLd } from '../utils/safeJsonLd';
+
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -205,7 +207,7 @@ const ContactPage = () => {
         </div>
       </section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "name": "Contact MTJ Sécurité Privée",
