@@ -198,7 +198,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 px-4 py-3 border border-amber-400/10 hover:border-amber-400/30 bg-amber-400/[0.03] hover:bg-amber-400/[0.06] transition-all group"
-                data-testid={`google-review-${i}`}
+                data-testid={`google-review-${place.name}`}
               >
                 <div className="flex-1 min-w-0">
                   <p className="text-white text-xs font-semibold truncate group-hover:text-amber-400 transition-colors">{place.name}</p>
