@@ -58,7 +58,6 @@ const Navbar = () => {
     { label: 'À propos', id: 'about' },
     { label: 'Nos métiers', id: 'services' },
     { label: 'Interventions', id: 'domains' },
-    { label: 'Devis', id: 'quote' },
     { label: 'Recrutement', id: 'recrutement', route: '/recrutement' },
     { label: 'Contact', id: 'contact', route: '/contact' },
   ];
@@ -94,6 +93,13 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
+            <button
+              onClick={() => handleNavClick({ id: 'quote' })}
+              className="bg-amber-400 hover:bg-amber-300 text-black font-bold px-5 py-2.5 text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105"
+              data-testid="navbar-devis-cta"
+            >
+              Devis gratuit
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -120,6 +126,13 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
+            <button
+              onClick={() => handleNavClick({ id: 'quote' })}
+              className="block w-full bg-amber-400 hover:bg-amber-300 text-black font-bold py-4 text-base uppercase tracking-wider transition-all duration-300 text-center mt-4"
+              data-testid="navbar-devis-cta-mobile"
+            >
+              Devis gratuit
+            </button>
           </div>
         </div>
       )}
