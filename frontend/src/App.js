@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -109,13 +109,38 @@ const HomePage = () => {
   );
 };
 
+// Le site se construit après le chargement : un lien vers /devis ou vers une ancre
+// (#quote…) doit attendre que la section existe avant d'y descendre.
+const ScrollToHash = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    const target = pathname === "/devis" ? "quote" : decodeURIComponent(hash.replace("#", ""));
+    if (!target) return undefined;
+    let tries = 0;
+    const timer = setInterval(() => {
+      const el = document.getElementById(target);
+      tries += 1;
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        clearInterval(timer);
+      } else if (tries >= 50) {
+        clearInterval(timer);
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, [pathname, hash]);
+  return null;
+};
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <TrackVisit />
+        <ScrollToHash />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/devis" element={<HomePage />} />
           <Route path="/recrutement" element={<Recrutement />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/dashboard" element={<Dashboard />} />

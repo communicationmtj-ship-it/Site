@@ -120,13 +120,7 @@ const SeoPageLayout = ({ data }) => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onClick={() => {
-                  navigate('/');
-                  setTimeout(() => {
-                    const el = document.getElementById('quote');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }, 300);
-                }}
+                onClick={() => navigate('/devis')}
                 className="text-black font-bold px-8 py-3 uppercase tracking-wider transition-opacity hover:opacity-90"
                 style={{ backgroundColor: c }}
                 data-testid="seo-cta-devis"
