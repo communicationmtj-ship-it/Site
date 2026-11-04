@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FloatingCTA from './FloatingCTA';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import { contactInfo, companyInfo } from '../data/mock';
 import { toast } from 'sonner';
@@ -104,7 +105,7 @@ const ContactPage = () => {
             <div className="space-y-8">
               <div className="relative h-[400px] overflow-hidden shadow-2xl">
                 <img
-                  src="https://customer-assets.emergentagent.com/job_24fc2e4e-22c8-49ad-ae48-a4221e89d53a/artifacts/39logzjd_IMG_2317.jpeg"
+                  src="/images/contact-bg.jpeg"
                   alt="Contact MTJ Securite"
                   className="w-full h-full object-cover"
                 />

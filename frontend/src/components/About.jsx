@@ -39,7 +39,7 @@ const About = () => {
           <div className="relative">
             <div className="relative overflow-hidden shadow-2xl">
               <img
-                src="https://customer-assets.emergentagent.com/job_24fc2e4e-22c8-49ad-ae48-a4221e89d53a/artifacts/53ebt42n_IMG_2315.jpeg"
+                src="/images/about-team.jpeg"
                 alt="Équipe MTJ Sécurité"
                 className="w-full h-[500px] object-cover"
               />

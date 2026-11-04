@@ -17,7 +17,7 @@ const Hero = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-[3px] scale-105"
           style={{
-            backgroundImage: `url('https://customer-assets.emergentagent.com/job_24fc2e4e-22c8-49ad-ae48-a4221e89d53a/artifacts/lg7sy4pk_IMG_2314.jpeg')`,
+            backgroundImage: `url('/images/hero-bg.jpeg')`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />

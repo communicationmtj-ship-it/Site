@@ -8,6 +8,8 @@ import Domains from "./components/Domains";
 import Quote from "./components/Quote";
 import Engagement from "./components/Engagement";
 import Footer from "./components/Footer";
+import HomeFaq from "./components/HomeFaq";
+import FloatingCTA from "./components/FloatingCTA";
 import Recrutement from "./components/Recrutement";
 import ContactPage from "./components/ContactPage";
 import TrackVisit from "./components/TrackVisit";
@@ -32,6 +34,7 @@ import ResidentielPage from "./pages/seo/ResidentielPage";
 import ErpPage from "./pages/seo/ErpPage";
 import ProtectionRapprocheePage from "./pages/seo/ProtectionRapprocheePage";
 import GrandDeplacementPage from "./pages/seo/GrandDeplacementPage";
+import BordeauxPage from "./pages/seo/BordeauxPage";
 import Dashboard from "./pages/Dashboard";
 import SeoHead from "./components/SeoHead";
 
@@ -41,7 +44,7 @@ const homeSchema = [
     "@type": "Organization",
     "name": "MTJ Sécurité Privée",
     "url": "https://mtj-securite-privee.fr",
-    "logo": "https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png",
+    "logo": "https://mtj-securite-privee.fr/images/logo-mtj.png",
     "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX, SSIAP et protection rapprochée dans le sud de la France.",
     "telephone": "+33760738206",
     "email": "contactsmtjsecuriteprivee@gmail.com",
@@ -75,7 +78,7 @@ const homeSchema = [
     "@type": "LocalBusiness",
     "@id": "https://mtj-securite-privee.fr/#localbusiness",
     "name": "MTJ Sécurité Privée",
-    "image": "https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png",
+    "image": "https://mtj-securite-privee.fr/images/logo-mtj.png",
     "telephone": "+33760738206",
     "email": "contactsmtjsecuriteprivee@gmail.com",
     "url": "https://mtj-securite-privee.fr",
@@ -101,7 +104,9 @@ const HomePage = () => {
       <Domains />
       <Quote />
       <Engagement />
+      <HomeFaq />
       <Footer />
+      <FloatingCTA />
       {homeSchema.map((schema, i) => (
         <script key={`schema-${schema['@type']}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }} />
       ))}
@@ -131,6 +136,7 @@ function App() {
           <Route path="/securite-erp-etablissements-public" element={<ErpPage />} />
           <Route path="/protection-rapprochee" element={<ProtectionRapprocheePage />} />
           <Route path="/grand-deplacement-securite-france" element={<GrandDeplacementPage />} />
+          <Route path="/securite-privee-bordeaux" element={<BordeauxPage />} />
           {/* SEO - Localisation */}
           <Route path="/securite-privee-toulon" element={<ToulonPage />} />
           <Route path="/securite-privee-toulouse" element={<ToulousePage />} />

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /dashboard
 
-Sitemap: https://mtj-securite-privee.fr/api/sitemap.xml
+Sitemap: https://mtj-securite-privee.fr/sitemap.xml

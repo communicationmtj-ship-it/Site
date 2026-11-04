@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 const BASE_URL = 'https://mtj-securite-privee.fr';
-const DEFAULT_IMAGE = 'https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png';
+const DEFAULT_IMAGE = 'https://mtj-securite-privee.fr/images/logo-mtj.png';
 
 const SeoHead = ({ title, description, path = '/', image }) => {
   useEffect(() => {

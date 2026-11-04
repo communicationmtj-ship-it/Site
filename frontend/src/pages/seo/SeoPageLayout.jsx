@@ -4,6 +4,7 @@ import { ChevronRight, Phone, Mail, MapPin } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import SeoHead from '../../components/SeoHead';
+import FloatingCTA from '../../components/FloatingCTA';
 
 const DEFAULT = '#AC8631';
 
@@ -198,6 +199,7 @@ const SeoPageLayout = ({ data }) => {
         })}} />
       </main>
       <Footer />
+      <FloatingCTA />
     </>
   );
 };

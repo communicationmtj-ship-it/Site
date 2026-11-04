@@ -21,7 +21,7 @@ const Footer = () => {
         {/* Company header */}
         <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-800">
           <img
-            src="https://customer-assets.emergentagent.com/job_business-profile-21/artifacts/bk499w0o_IMG_0028-removebg-preview.png"
+            src="/images/logo-mtj.png"
             alt="MTJ Sécurité Privée"
             className="h-14 w-auto object-contain"
           />
