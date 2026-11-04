@@ -1,5 +1,7 @@
 # Stage 1 : build du frontend CRA
 FROM node:20-alpine AS builder
+ARG REACT_APP_BACKEND_URL=""
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
 WORKDIR /app
 COPY frontend/package.json ./
 RUN corepack enable && corepack prepare yarn@1.22.22 --activate && yarn install

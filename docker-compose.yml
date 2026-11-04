@@ -1,0 +1,35 @@
+services:
+  site-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: site-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./backend/uploads:/app/uploads
+    ports:
+      - "127.0.0.1:8002:8001"
+    networks:
+      - deploy_default
+
+  site-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_BACKEND_URL: ""
+    image: mtj-securite-site:latest
+    container_name: site
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3001:80"
+    depends_on:
+      - site-backend
+    networks:
+      - deploy_default
+
+networks:
+  deploy_default:
+    external: true
