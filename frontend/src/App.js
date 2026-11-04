@@ -48,7 +48,7 @@ const homeSchema = [
     "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX, SSIAP et protection rapprochée dans le sud de la France.",
     "telephone": "+33760738206",
     "email": "contactsmtjsecuriteprivee@gmail.com",
-    "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83200", "addressRegion": "Provence-Alpes-Côte d'Azur", "addressCountry": "FR" },
+    "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressRegion": "Provence-Alpes-Côte d'Azur", "addressCountry": "FR" },
     "areaServed": [
       { "@type": "City", "name": "Toulon" },
       { "@type": "City", "name": "Nice" },
@@ -82,7 +82,7 @@ const homeSchema = [
     "telephone": "+33760738206",
     "email": "contactsmtjsecuriteprivee@gmail.com",
     "url": "https://mtj-securite-privee.fr",
-    "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83200", "addressRegion": "PACA", "addressCountry": "FR" },
+    "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressRegion": "PACA", "addressCountry": "FR" },
     "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 },
     "priceRange": "$$",
     "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" }
