@@ -63,7 +63,7 @@ const data = {
   faq: [
     {
       question: 'Où se situe MTJ Sécurité Privée à Toulon ?',
-      answer: 'Notre siège social est situé au 31 rue Chevalier Paul, 83200 Toulon, à proximité du centre-ville et de la rade de Toulon. Vous pouvez nous joindre par téléphone au 07 60 73 82 06 ou par email à contactsmtjsecuriteprivee@gmail.com.'
+      answer: 'Notre siège social est situé au 31 rue Chevalier Paul, 83000 Toulon, à proximité du centre-ville et de la rade de Toulon. Vous pouvez nous joindre par téléphone au 07 60 73 82 06 ou par email à contactsmtjsecuriteprivee@gmail.com.'
     },
     {
       question: 'Intervenez-vous en urgence sur Toulon ?',

@@ -218,7 +218,7 @@ const ContactPage = () => {
           "name": "MTJ Sécurité Privée",
           "telephone": "+33760738206",
           "email": "contactsmtjsecuriteprivee@gmail.com",
-          "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83200", "addressCountry": "FR" },
+          "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressCountry": "FR" },
           "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+33760738206",

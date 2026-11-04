@@ -133,7 +133,7 @@ const SeoPageLayout = ({ data }) => {
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 text-gray-500 text-sm">
               <span className="flex items-center gap-1"><Mail size={14} /> contactsmtjsecuriteprivee@gmail.com</span>
-              <span className="flex items-center gap-1"><MapPin size={14} /> 31 rue Chevalier Paul, 83200 Toulon</span>
+              <span className="flex items-center gap-1"><MapPin size={14} /> 31 rue Chevalier Paul, 83000 Toulon</span>
             </div>
           </div>
 
@@ -174,7 +174,7 @@ const SeoPageLayout = ({ data }) => {
           "url": `https://mtj-securite-privee.fr${data.slug}`,
           "telephone": "+33760738206",
           "email": "contactsmtjsecuriteprivee@gmail.com",
-          "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83200", "addressCountry": "FR" },
+          "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressCountry": "FR" },
           "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 },
           "areaServed": data.areaServed || "Sud de la France",
           "priceRange": "$$",

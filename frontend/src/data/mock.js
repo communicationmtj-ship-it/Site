@@ -6,7 +6,7 @@ export const companyInfo = {
   motto: "Avec Force et Honneur Toujours servir",
   phone: "07 60 73 82 06",
   email: "contactsmtjsecuriteprivee@gmail.com",
-  address: "31 rue Chevalier Paul, 83200 Toulon",
+  address: "31 rue Chevalier Paul, 83000 Toulon",
 };
 
 export const aboutUs = {
