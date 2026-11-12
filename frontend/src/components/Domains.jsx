@@ -14,7 +14,7 @@ const Domains = () => {
   };
 
   return (
-    <section id="domains" className="relative py-20 bg-black">
+    <section id="domains" className="relative scroll-mt-20 py-20 bg-black">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">

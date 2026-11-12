@@ -7,7 +7,7 @@ import httpx
 import logging
 
 from email_service import send_email_smtp, CONTACT_EMAIL, CONTACT_EMAIL_PASSWORD
-from security import verify_dashboard_token
+from security import verify_dashboard_token, token_from_authorization
 
 logger = logging.getLogger(__name__)
 
@@ -70,8 +70,8 @@ async def track_visit(req: TrackVisitRequest, request: Request):
 
 
 @router.get("/stats")
-async def get_stats(days: int = 30, x_dashboard_token: Optional[str] = Header(None)):
-    if not verify_dashboard_token(x_dashboard_token or ""):
+async def get_stats(days: int = 30, authorization: Optional[str] = Header(None)):
+    if not verify_dashboard_token(token_from_authorization(authorization)):
         return {"status": "error", "message": "Authentification requise."}
 
     days = max(1, min(days, 365))
@@ -348,7 +348,7 @@ async def generate_monthly_report():
     <!-- Footer -->
     <tr><td style="background:#1a1a1a;padding:24px 40px;text-align:center;">
         <p style="margin:0;color:#888;font-size:12px;">Ce rapport est genere automatiquement par le site MTJ Securite Privee.</p>
-        <p style="margin:6px 0 0;color:#AC8631;font-size:12px;">31 rue Chevalier Paul, 83200 Toulon | 07 60 73 82 06</p>
+        <p style="margin:6px 0 0;color:#AC8631;font-size:12px;">31 rue Chevalier Paul, 83000 Toulon | 07 60 73 82 06</p>
     </td></tr>
 
 </table>
@@ -368,8 +368,8 @@ async def generate_monthly_report():
 
 
 @router.post("/send-monthly-report")
-async def send_monthly_report_now(x_dashboard_token: Optional[str] = Header(None)):
-    if not verify_dashboard_token(x_dashboard_token or ""):
+async def send_monthly_report_now(authorization: Optional[str] = Header(None)):
+    if not verify_dashboard_token(token_from_authorization(authorization)):
         return {"status": "error", "message": "Authentification requise."}
     success = await generate_monthly_report()
     if success:

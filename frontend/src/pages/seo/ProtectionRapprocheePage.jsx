@@ -3,14 +3,14 @@ import SeoPageLayout from './SeoPageLayout';
 
 const data = {
   slug: '/protection-rapprochee',
-  themeColor: '#68187B',
+  societe: { nom: 'MTJ Sécurité Rapprochée', mention: 'société du groupe MTJ', autorisation: 'AUT-006-2123-10-21-20240955994', activite: 'protection physique des personnes', ville: 'Nice', adresse: null },
   metaTitle: 'Protection Rapprochée — Sécurité des Personnes | MTJ Sécurité Rapprochée',
   metaDescription: 'MTJ Sécurité Rapprochée assure la protection physique des personnalités, dirigeants, célébrités et particuliers exposés. Agents de protection rapprochée formés et certifiés à Toulon, Nice, Toulouse et dans toute la France.',
   breadcrumbCurrent: 'Protection rapprochée',
   areaServed: 'Toulon, Toulouse, Nice, Monaco, PACA, Occitanie, France',
 
   h1: 'Protection Rapprochée — Sécurité Physique des Personnes',
-  introduction: `MTJ Sécurité Rapprochée, société du groupe MTJ, est spécialisée dans la protection physique des personnes. Nous assurons la sécurité rapprochée de personnalités, dirigeants d'entreprise, célébrités, diplomates et particuliers exposés, partout en France et à l'international.\n\nNos agents de protection rapprochée (APR), rigoureusement sélectionnés et formés aux techniques les plus avancées, garantissent votre intégrité physique en toute discrétion. Chaque mission fait l'objet d'une analyse de risques préalable et d'un dispositif de protection sur mesure.\n\nAUT-006-2123-10-21-20240955994\nL612-14 du CSI : L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics.`,
+  introduction: `MTJ Sécurité Rapprochée, société du groupe MTJ, est spécialisée dans la protection physique des personnes. Nous assurons la sécurité rapprochée de personnalités, dirigeants d'entreprise, célébrités, diplomates et particuliers exposés, partout en France et à l'international.\n\nNos agents de protection rapprochée (APR), rigoureusement sélectionnés et formés aux techniques les plus avancées, garantissent votre intégrité physique en toute discrétion. Chaque mission fait l'objet d'une analyse de risques préalable et d'un dispositif de protection sur mesure.\n\nAutorisation d'exercer du CNAPS n° AUT-006-2123-10-21-20240955994 (protection physique des personnes).\nArticle L612-14 du code de la sécurité intérieure : « L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics. »`,
 
   sections: [
     {
@@ -52,7 +52,7 @@ const data = {
         },
         {
           h3: 'Discrétion et professionnalisme',
-          content: 'La discrétion est au coeur de notre approche. Nos agents de protection rapprochée sont sélectionnés pour leur capacité à assurer une sécurité invisible : tenue adaptée au contexte (costume, tenue décontractée), comportement discret, communication non intrusive. Votre sécurité est assurée sans altérer votre image ou votre confort.'
+          content: 'La discrétion est au cœur de notre approche. Nos agents de protection rapprochée sont sélectionnés pour leur capacité à assurer une sécurité invisible : tenue adaptée au contexte (costume, tenue décontractée), comportement discret, communication non intrusive. Votre sécurité est assurée sans altérer votre image ou votre confort.'
         }
       ]
     },

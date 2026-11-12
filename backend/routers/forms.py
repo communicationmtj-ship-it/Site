@@ -20,7 +20,7 @@ router = APIRouter()
 UPLOAD_DIR = Path(__file__).parent.parent / "uploads"
 UPLOAD_DIR.mkdir(exist_ok=True)
 
-GENERIC_ERROR = "Une erreur est survenue. Veuillez reessayer."
+GENERIC_ERROR = "Une erreur est survenue. Veuillez réessayer."
 
 
 def _get_db():
@@ -55,6 +55,22 @@ def _save_single_upload(file: UploadFile) -> tuple[str, str]:
     return str(path), file.filename
 
 
+CONSENT_REQUIRED_MESSAGE = "Veuillez accepter le traitement de vos données (case de consentement) pour envoyer ce formulaire."
+
+
+def _consent_given(consent: Optional[str]) -> bool:
+    return str(consent or "").strip().lower() in ("true", "1", "on", "yes", "oui")
+
+
+def _consent_record(consent: Optional[str]) -> dict:
+    """Preuve de consentement enregistree avec la demande (booleen + date)."""
+    given = _consent_given(consent)
+    return {
+        "consent": given,
+        "consent_at": datetime.now(timezone.utc).isoformat() if given else None,
+    }
+
+
 def _validate_base_contact(name: str, email: str, message: str, phone: str | None = None) -> dict:
     return {
         "name": validate_field("name", name),
@@ -75,12 +91,19 @@ async def submit_quote(
     message: str = Form(...),
     company: Optional[str] = Form(None),
     attachment: Optional[UploadFile] = File(None),
+    consent: Optional[str] = Form(None),
+    startDate: Optional[str] = Form(None),
+    urgency: Optional[str] = Form(None),
     hp: Optional[str] = Form(None),
     ts: Optional[str] = Form(None),
 ):
     spam = _check_spam(hp, ts, "Merci pour votre demande.")
     if spam:
         return spam
+    # 12/11/2026 (audit du site de Mathilde, site-006) : le formulaire de devis envoie la case
+    # de consentement ; comme le contact et le recrutement, il ne part pas sans elle.
+    if not _consent_given(consent):
+        return {"status": "error", "message": CONSENT_REQUIRED_MESSAGE}
 
     try:
         fields = _validate_base_contact(name, email, message, phone)
@@ -97,6 +120,10 @@ async def submit_quote(
             **fields,
             "attachment_filename": att_name,
             "attachment_path": att_path,
+            # Date de début et urgence (site-104), facultatives, texte court gardé tel quel.
+            "start_date": (startDate or "").strip()[:40] or None,
+            "urgency": (urgency or "").strip()[:40] or None,
+            **_consent_record(consent),
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": "pending",
         })
@@ -107,7 +134,7 @@ async def submit_quote(
             message=fields["message"], attachment_path=att_path,
         )
 
-        return {"status": "success", "message": "Votre demande de devis a ete envoyee avec succes. Nous vous contacterons dans les plus brefs delais."}
+        return {"status": "success", "message": "Votre demande de devis a été envoyée. Nous vous recontactons dans les plus brefs délais."}
 
     except ValueError as e:
         logger.warning(f"Validation error (quote): {e}")
@@ -127,12 +154,16 @@ async def submit_contact(
     message: str = Form(...),
     phone: Optional[str] = Form(None),
     attachment: Optional[UploadFile] = File(None),
+    consent: Optional[str] = Form(None),
     hp: Optional[str] = Form(None),
     ts: Optional[str] = Form(None),
 ):
     spam = _check_spam(hp, ts, "Merci pour votre message.")
     if spam:
         return spam
+
+    if not _consent_given(consent):
+        return {"status": "error", "message": CONSENT_REQUIRED_MESSAGE}
 
     try:
         fields = _validate_base_contact(name, email, message, phone)
@@ -149,6 +180,7 @@ async def submit_contact(
             "subject": fields["subject"],
             "attachment_filename": att_name,
             "attachment_path": att_path,
+            **_consent_record(consent),
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": "pending",
         })
@@ -158,7 +190,7 @@ async def submit_contact(
             subject=fields["subject"], message=fields["message"], attachment_path=att_path,
         )
 
-        return {"status": "success", "message": "Votre message a ete envoye avec succes. Nous vous repondrons dans les plus brefs delais."}
+        return {"status": "success", "message": "Votre message a été envoyé. Nous vous répondons dans les plus brefs délais."}
 
     except ValueError as e:
         logger.warning(f"Validation error (contact): {e}")
@@ -203,12 +235,16 @@ async def submit_recruitment(
     phone: str = Form(...),
     message: str = Form(...),
     attachments: List[UploadFile] = File(...),
+    consent: Optional[str] = Form(None),
     hp: Optional[str] = Form(None),
     ts: Optional[str] = Form(None),
 ):
     spam = _check_spam(hp, ts, "Merci pour votre candidature.")
     if spam:
         return spam
+
+    if not _consent_given(consent):
+        return {"status": "error", "message": CONSENT_REQUIRED_MESSAGE}
 
     try:
         firstName = validate_field("firstName", firstName)
@@ -226,6 +262,7 @@ async def submit_recruitment(
             "email": email, "phone": phone, "message": message,
             "attachment_filenames": att_names,
             "attachment_paths": att_paths,
+            **_consent_record(consent),
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": "pending",
         })
@@ -235,7 +272,7 @@ async def submit_recruitment(
             phone=phone, message=message, attachment_paths=att_paths,
         )
 
-        return {"status": "success", "message": "Votre candidature a ete envoyee avec succes. Nous examinerons votre profil et vous contacterons rapidement."}
+        return {"status": "success", "message": "Votre candidature a été envoyée. Nous étudions votre profil et vous recontactons rapidement."}
 
     except ValueError as e:
         logger.warning(f"Validation error (recruitment): {e}")

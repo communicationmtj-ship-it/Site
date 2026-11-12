@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -10,33 +10,37 @@ import Engagement from "./components/Engagement";
 import Footer from "./components/Footer";
 import HomeFaq from "./components/HomeFaq";
 import FloatingCTA from "./components/FloatingCTA";
-import Recrutement from "./components/Recrutement";
-import ContactPage from "./components/ContactPage";
 import TrackVisit from "./components/TrackVisit";
 import CookieBanner from "./components/CookieBanner";
 import { Toaster } from "./components/ui/sonner";
 import "./App.css";
 import { safeJsonLd } from "./utils/safeJsonLd";
-
-// SEO Pages
-import AgentSecuritePage from "./pages/seo/AgentSecuritePage";
-import CynophilePage from "./pages/seo/CynophilePage";
-import CynodexPage from "./pages/seo/CynodexPage";
-import SsiapPage from "./pages/seo/SsiapPage";
-import EvenementielPage from "./pages/seo/EvenementielPage";
-import SurveillanceChantierPage from "./pages/seo/SurveillanceChantierPage";
-import ToulonPage from "./pages/seo/ToulonPage";
-import ToulousePage from "./pages/seo/ToulousePage";
-import NiceMonacoPage from "./pages/seo/NiceMonacoPage";
-import SudFrancePage from "./pages/seo/SudFrancePage";
-import SitesIndustrielsPage from "./pages/seo/SitesIndustrielsPage";
-import ResidentielPage from "./pages/seo/ResidentielPage";
-import ErpPage from "./pages/seo/ErpPage";
-import ProtectionRapprocheePage from "./pages/seo/ProtectionRapprocheePage";
-import GrandDeplacementPage from "./pages/seo/GrandDeplacementPage";
-import BordeauxPage from "./pages/seo/BordeauxPage";
-import Dashboard from "./pages/Dashboard";
 import SeoHead from "./components/SeoHead";
+
+// Pages chargées à la demande : le code de chaque page (et celui du tableau
+// d'administration) n'est plus dans le JavaScript de l'accueil.
+const Recrutement = lazy(() => import("./components/Recrutement"));
+const ContactPage = lazy(() => import("./components/ContactPage"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const MentionsLegalesPage = lazy(() => import("./pages/MentionsLegalesPage"));
+const ConfidentialitePage = lazy(() => import("./pages/ConfidentialitePage"));
+const AgentSecuritePage = lazy(() => import("./pages/seo/AgentSecuritePage"));
+const CynophilePage = lazy(() => import("./pages/seo/CynophilePage"));
+const CynodexPage = lazy(() => import("./pages/seo/CynodexPage"));
+const SsiapPage = lazy(() => import("./pages/seo/SsiapPage"));
+const EvenementielPage = lazy(() => import("./pages/seo/EvenementielPage"));
+const SurveillanceChantierPage = lazy(() => import("./pages/seo/SurveillanceChantierPage"));
+const ToulonPage = lazy(() => import("./pages/seo/ToulonPage"));
+const ToulousePage = lazy(() => import("./pages/seo/ToulousePage"));
+const NiceMonacoPage = lazy(() => import("./pages/seo/NiceMonacoPage"));
+const SudFrancePage = lazy(() => import("./pages/seo/SudFrancePage"));
+const SitesIndustrielsPage = lazy(() => import("./pages/seo/SitesIndustrielsPage"));
+const ResidentielPage = lazy(() => import("./pages/seo/ResidentielPage"));
+const ErpPage = lazy(() => import("./pages/seo/ErpPage"));
+const ProtectionRapprocheePage = lazy(() => import("./pages/seo/ProtectionRapprocheePage"));
+const GrandDeplacementPage = lazy(() => import("./pages/seo/GrandDeplacementPage"));
+const BordeauxPage = lazy(() => import("./pages/seo/BordeauxPage"));
 
 const homeSchema = [
   {
@@ -98,13 +102,15 @@ const HomePage = () => {
         path="/"
       />
       <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Domains />
-      <Quote />
-      <Engagement />
-      <HomeFaq />
+      <main id="contenu" tabIndex={-1}>
+        <Hero />
+        <About />
+        <Services />
+        <Domains />
+        <Quote />
+        <Engagement />
+        <HomeFaq />
+      </main>
       <Footer />
       <FloatingCTA />
       {homeSchema.map((schema, i) => (
@@ -137,17 +143,46 @@ const ScrollToHash = () => {
   return null;
 };
 
+// Lien d'évitement : premier élément atteint au clavier, il mène au contenu principal.
+const SkipLink = () => {
+  const goToContent = (e) => {
+    const main = document.querySelector("main");
+    if (!main) return;
+    e.preventDefault();
+    if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+    main.focus();
+    main.scrollIntoView({ block: "start" });
+  };
+  return (
+    <a
+      href="#contenu"
+      onClick={goToContent}
+      className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-amber-400 focus:text-black focus:font-bold focus:px-4 focus:py-2"
+    >
+      Aller au contenu
+    </a>
+  );
+};
+
+const PageLoading = () => (
+  <div className="min-h-screen bg-black" role="status" aria-label="Chargement de la page" />
+);
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <SkipLink />
         <TrackVisit />
         <ScrollToHash />
+        <Suspense fallback={<PageLoading />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/devis" element={<HomePage />} />
           <Route path="/recrutement" element={<Recrutement />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
+          <Route path="/politique-de-confidentialite" element={<ConfidentialitePage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           {/* SEO - Métiers */}
           <Route path="/agent-securite-prevention" element={<AgentSecuritePage />} />
@@ -167,7 +202,9 @@ function App() {
           <Route path="/securite-privee-toulouse" element={<ToulousePage />} />
           <Route path="/securite-privee-nice-monaco" element={<NiceMonacoPage />} />
           <Route path="/securite-privee-sud-france" element={<SudFrancePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        </Suspense>
         <CookieBanner />
         <Toaster />
       </BrowserRouter>

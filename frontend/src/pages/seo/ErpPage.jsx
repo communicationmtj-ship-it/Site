@@ -42,7 +42,7 @@ const data = {
         },
         {
           h3: 'Musées, centres culturels et lieux de culte',
-          content: 'La protection des lieux culturels et de culte requiert une surveillance attentive des visiteurs, la prévention des dégradations et du vol d\'oeuvres, et la gestion des flux. Nous assurons une présence discrète qui préserve l\'atmosphère du lieu tout en garantissant la sécurité de tous.'
+          content: 'La protection des lieux culturels et de culte requiert une surveillance attentive des visiteurs, la prévention des dégradations et du vol d\'œuvres, et la gestion des flux. Nous assurons une présence discrète qui préserve l\'atmosphère du lieu tout en garantissant la sécurité de tous.'
         },
         {
           h3: 'Centres sportifs et complexes aquatiques',

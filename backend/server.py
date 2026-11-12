@@ -80,22 +80,38 @@ api_router.include_router(analytics_router)
 
 
 # ── Dashboard Auth Endpoints ──────────────────────────────────────
+from typing import Optional
+from fastapi import Header, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel as PydanticBaseModel
-from security import dashboard_login, verify_dashboard_token
+from security import dashboard_login, verify_dashboard_token, token_from_authorization, LoginLocked
+from middleware import _get_client_ip
 
 class DashboardLoginRequest(PydanticBaseModel):
     password: str
+    username: Optional[str] = ""
 
 @api_router.post("/dashboard/login")
-async def login_dashboard(req: DashboardLoginRequest):
-    token = dashboard_login(req.password)
+async def login_dashboard(req: DashboardLoginRequest, request: Request):
+    try:
+        token = dashboard_login(req.password, _get_client_ip(request), req.username or "")
+    except LoginLocked as locked:
+        return JSONResponse(
+            status_code=429,
+            headers={"Retry-After": str(locked.retry_after)},
+            content={"status": "error", "message": "Trop d'essais. Réessayez dans quelques minutes."},
+        )
     if not token:
-        return {"status": "error", "message": "Mot de passe incorrect."}
+        return {"status": "error", "message": "Identifiants incorrects."}
     return {"status": "success", "token": token}
 
 @api_router.get("/dashboard/verify")
-async def verify_dashboard(token: str = ""):
-    if verify_dashboard_token(token):
+async def verify_dashboard(request: Request, authorization: Optional[str] = Header(None)):
+    # Le jeton ne passe plus par l'adresse (?token=) : elle finit dans les journaux
+    # et l'historique. Cet ancien mode est refusé.
+    if "token" in request.query_params:
+        return JSONResponse(status_code=400, content={"status": "error", "message": "Jeton dans l'URL refusé : utilisez l'en-tête Authorization."})
+    if verify_dashboard_token(token_from_authorization(authorization)):
         return {"status": "ok"}
     return {"status": "error", "message": "Session expirée."}
 
@@ -111,7 +127,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["Content-Type", "Authorization", "X-Dashboard-Token"],
+    allow_headers=["Content-Type", "Authorization"],
 )
 
 
@@ -146,12 +162,21 @@ async def start_scheduler():
     asyncio.create_task(monthly_report_scheduler())
 
 
+# Date de modification du plan du site : variable d'environnement SITEMAP_LASTMOD
+# (AAAA-MM-JJ) si elle est posée, sinon date du fichier serveur déployé.
+SITEMAP_LASTMOD = os.environ.get("SITEMAP_LASTMOD") or datetime.fromtimestamp(
+    Path(__file__).stat().st_mtime, tz=timezone.utc
+).strftime("%Y-%m-%d")
+
+
 @app.get("/api/sitemap.xml")
 async def sitemap():
     base_url = os.environ.get('APP_URL', 'https://mtj-securite-privee.fr')
     pages = [
         {"loc": "/", "priority": "1.0", "changefreq": "weekly"},
         {"loc": "/contact", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/mentions-legales", "priority": "0.3", "changefreq": "yearly"},
+        {"loc": "/politique-de-confidentialite", "priority": "0.3", "changefreq": "yearly"},
         {"loc": "/recrutement", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/agent-securite-prevention", "priority": "0.9", "changefreq": "monthly"},
         {"loc": "/securite-cynophile-maitre-chien", "priority": "0.9", "changefreq": "monthly"},
@@ -170,7 +195,7 @@ async def sitemap():
         {"loc": "/grand-deplacement-securite-france", "priority": "0.8", "changefreq": "monthly"},
     ]
     urls = "\n".join([
-        f'  <url><loc>{base_url}{p["loc"]}</loc><changefreq>{p["changefreq"]}</changefreq><priority>{p["priority"]}</priority></url>'
+        f'  <url><loc>{base_url}{p["loc"]}</loc><lastmod>{lastmod}</lastmod><changefreq>{p["changefreq"]}</changefreq><priority>{p["priority"]}</priority></url>'
         for p in pages
     ])
     xml = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>'

@@ -52,7 +52,7 @@ const data = {
         },
         {
           h3: 'Sécurité cynophile résidentielle',
-          content: 'Pour une protection renforcée de votre propriété, nos équipes cynophiles offrent un niveau de dissuasion supérieur. Le binôme maître-chien assure des rondes périmètriques et une détection optimale de toute tentative d\'intrusion, y compris sur les terrains étendus.'
+          content: 'Pour une protection renforcée de votre propriété, nos équipes cynophiles offrent un niveau de dissuasion supérieur. Le binôme maître-chien assure des rondes périmétriques et une détection optimale de toute tentative d\'intrusion, y compris sur les terrains étendus.'
         }
       ]
     }

@@ -64,11 +64,11 @@ const data = {
   faq: [
     {
       question: 'Combien d\'agents faut-il pour sécuriser un événement ?',
-      answer: 'Le nombre d\'agents dépend de la jauge de l\'événement, de la configuration du site, du niveau de risque et des exigences réglementaires. En règle générale, on prévoit 1 agent pour 100 à 300 spectateurs pour le filtrage, plus des agents de surveillance en zone. MTJ Sécurité Privée dimensionne précisément le dispositif après l\'étude préalable.'
+      answer: 'Le nombre d\'agents dépend de la jauge de l\'événement, de la configuration du site, du niveau de risque et des exigences réglementaires. Il comprend le filtrage aux accès et la surveillance en zone. MTJ Sécurité Privée dimensionne précisément le dispositif après l\'étude préalable.'
     },
     {
       question: 'Faut-il déclarer la sécurité privée de mon événement en préfecture ?',
-      answer: 'Oui, les organisateurs d\'événements accueillant du public doivent déclarer leur dispositif de sécurité privée auprès du CNAPS et des autorités compétentes. MTJ Sécurité Privée peut vous accompagner dans ces démarches administratives pour garantir la conformité de votre événement.'
+      answer: 'Selon l\'ampleur de la manifestation, l\'organisateur doit la déclarer auprès de la mairie ou de la préfecture, qui examinent le dispositif de sécurité prévu. L\'entreprise de sécurité privée, elle, doit être titulaire d\'une autorisation d\'exercer délivrée par le CNAPS. MTJ Sécurité Privée peut vous aider à préparer le plan de sécurité à présenter aux autorités compétentes.'
     },
     {
       question: 'Intervenez-vous pour des événements privés (mariages, réceptions) ?',

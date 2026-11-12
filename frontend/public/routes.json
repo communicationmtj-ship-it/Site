@@ -1,0 +1,28 @@
+{
+  "generated": "2026-11-11",
+  "routes": [
+    "/",
+    "/contact",
+    "/recrutement",
+    "/mentions-legales",
+    "/politique-de-confidentialite",
+    "/agent-securite-prevention",
+    "/securite-cynophile-maitre-chien",
+    "/detection-explosifs-cynodex",
+    "/ssiap-securite-incendie",
+    "/securite-evenementielle",
+    "/surveillance-chantier-site",
+    "/securite-sites-industriels-commerciaux",
+    "/securite-residentielle",
+    "/securite-erp-etablissements-public",
+    "/protection-rapprochee",
+    "/grand-deplacement-securite-france",
+    "/securite-privee-toulon",
+    "/securite-privee-toulouse",
+    "/securite-privee-nice-monaco",
+    "/securite-privee-sud-france",
+    "/securite-privee-bordeaux",
+    "/devis",
+    "/dashboard"
+  ]
+}

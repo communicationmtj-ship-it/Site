@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Send, FileText, Briefcase, Mail, Phone, User } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import SeoHead from './SeoHead';
@@ -20,6 +21,7 @@ const Recrutement = () => {
   });
   const [attachments, setAttachments] = useState([]);
   const [fileNames, setFileNames] = useState([]);
+  const [consent, setConsent] = useState(false);
   const [formLoadedAt] = useState(() => String(Date.now() / 1000));
 
   const handleChange = (e) => {
@@ -47,7 +49,13 @@ const Recrutement = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    if (!consent) {
+      toast.error("Consentement requis", {
+        description: "Veuillez cocher la case de consentement pour envoyer votre candidature.",
+      });
+      return;
+    }
+
     // Create FormData for file upload
     const submitData = new FormData();
     submitData.append('firstName', formData.firstName);
@@ -56,6 +64,7 @@ const Recrutement = () => {
     submitData.append('phone', formData.phone);
     submitData.append('message', formData.message);
     submitData.append('ts', formLoadedAt);
+    submitData.append('consent', 'true');
     
     // Append all attachments
     attachments.forEach((file, index) => {
@@ -69,6 +78,14 @@ const Recrutement = () => {
       },
     })
       .then(response => {
+        // 12/11/2026 — le serveur répond 200 avec status « error » quand il refuse
+        // (consentement, champ invalide) : jamais « envoyé » dans ce cas.
+        if (response?.data?.status !== 'success') {
+          toast.error("Envoi refusé", {
+            description: response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
+          });
+          return;
+        }
         toast.success("Candidature envoyée !", {
           description: response.data.message || "Nous examinerons votre candidature et vous contacterons rapidement.",
         });
@@ -83,6 +100,7 @@ const Recrutement = () => {
         });
         setAttachments([]);
         setFileNames([]);
+        setConsent(false);
         // Reset file input
         const fileInput = document.getElementById('recruitment-attachments');
         if (fileInput) fileInput.value = '';
@@ -102,6 +120,7 @@ const Recrutement = () => {
         path="/recrutement"
       />
       <Navbar />
+      <main id="contenu" tabIndex={-1}>
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 bg-gradient-to-b from-black via-neutral-900 to-black">
@@ -138,6 +157,17 @@ const Recrutement = () => {
               <p className="text-gray-700 text-lg">
                 Remplissez le formulaire ci-dessous et joignez votre CV et lettre de motivation
               </p>
+            </div>
+
+            {/* Profils recherchés (repris de la description de la page) */}
+            <div className="mt-10 mb-12 bg-black border border-amber-400/30 p-6 text-left">
+              <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Profils recherchés</h2>
+              <ul className="text-gray-300 space-y-1 text-sm">
+                <li>Agents de sécurité</li>
+                <li>Maîtres-chiens</li>
+                <li>Agents SSIAP</li>
+                <li>Agents de protection rapprochée</li>
+              </ul>
             </div>
 
             <div className="bg-black border-4 border-amber-400/30 p-8 lg:p-12">
@@ -209,7 +239,7 @@ const Recrutement = () => {
                       onChange={handleChange}
                       required
                       className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
-                      placeholder="06 XX XX XX XX"
+                      placeholder="06 12 34 56 78"
                     />
                   </div>
                 </div>
@@ -270,6 +300,29 @@ const Recrutement = () => {
                   )}
                 </div>
 
+                {/* Consentement RGPD */}
+                <div>
+                  <label htmlFor="recruitment-consent" className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed cursor-pointer">
+                    <input
+                      type="checkbox"
+                      id="recruitment-consent"
+                      checked={consent}
+                      onChange={(e) => setConsent(e.target.checked)}
+                      required
+                      className="mt-1 h-4 w-4 accent-amber-400 shrink-0"
+                      data-testid="recruitment-consent"
+                    />
+                    <span>
+                      J'accepte que MTJ Sécurité Privée traite les informations et documents transmis (CV, lettre de motivation, diplômes) pour étudier ma candidature.
+                      Mes données sont conservées 2 ans après notre dernier échange, puis supprimées. Je peux exercer mon droit d'accès, de rectification et de suppression en écrivant à l'adresse indiquée dans la{' '}
+                      <Link to="/politique-de-confidentialite" className="underline text-amber-400 hover:text-amber-300">politique de confidentialité</Link>. *
+                    </span>
+                  </label>
+                  <p className="text-gray-500 text-xs mt-2 ml-7">
+                    Merci de ne pas joindre de pièce inutile à l'étude de votre candidature (numéro de sécurité sociale, RIB, informations de santé).
+                  </p>
+                </div>
+
                 {/* Submit Button */}
                 <div className="text-center pt-4">
                   <button
@@ -313,6 +366,7 @@ const Recrutement = () => {
           "url": "https://mtj-securite-privee.fr"
         }
       })}} />
+      </main>
       <Footer />
     </div>
   );

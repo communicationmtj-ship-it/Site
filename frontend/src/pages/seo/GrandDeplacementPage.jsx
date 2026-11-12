@@ -19,7 +19,7 @@ const data = {
         {
           h3: 'Mobilisation rapide des équipes',
           content: 'Grâce à nos trois pôles opérationnels (Toulon, Nice, Toulouse), nous sommes en mesure de projeter nos agents sur l\'ensemble du territoire en moins de 48 heures. Pour les urgences, un dispositif de déploiement accéléré permet une intervention sous 24 heures. Nos équipes voyagent avec leur équipement complet et sont immédiatement opérationnelles à leur arrivée.',
-          list: ['Déploiement sous 24 à 48 heures', 'Équipes autonomes et équipées', 'Coordination logistique centralisée', 'Hébergement et transport pris en charge']
+          list: ['Déploiement sous 24 à 48 heures', 'Équipes autonomes et équipées', 'Coordination logistique centralisée', 'Frais de déplacement et d\'hébergement précisés dans chaque devis']
         },
         {
           h3: 'Villes et régions d\'intervention',
@@ -69,7 +69,7 @@ const data = {
         },
         {
           h3: 'Tarification transparente',
-          content: 'Les missions en grand déplacement incluent les frais de déplacement, d\'hébergement et de restauration des agents. Tous ces coûts sont détaillés dans notre devis, sans surprise. Nous optimisons la logistique pour proposer des tarifs compétitifs même pour des interventions loin de nos bases.'
+          content: 'Les frais de déplacement, d\'hébergement et de restauration des agents sont précisés dans chaque devis, poste par poste. Nous optimisons la logistique pour proposer des tarifs adaptés même pour des interventions loin de nos bases.'
         }
       ]
     }
@@ -82,7 +82,7 @@ const data = {
     },
     {
       question: 'Les frais de déplacement sont-ils inclus dans le devis ?',
-      answer: 'Oui, notre devis pour les missions en grand déplacement est tout compris : prestation de sécurité, transport des agents, hébergement, restauration et équipement. Aucun frais caché. Le tarif est fixé à l\'avance et détaillé poste par poste.'
+      answer: 'Les frais de déplacement (transport des agents, hébergement, restauration) et l\'équipement sont précisés dans chaque devis, en plus de la prestation de sécurité elle-même, poste par poste. Le devis vous est remis avant le début de la mission.'
     },
     {
       question: 'Pouvez-vous intervenir pour un seul jour ?',

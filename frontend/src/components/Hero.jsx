@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Phone } from 'lucide-react';
 import { companyInfo } from '../data/mock';
 
 const Hero = () => {
@@ -26,6 +26,15 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center">
         <div className="max-w-5xl mx-auto space-y-8">
+          {/* Bandeau urgence */}
+          <a
+            href="tel:+33760738206"
+            className="inline-flex items-center gap-2 border border-amber-400 bg-black/60 px-5 py-2 text-sm md:text-base font-semibold text-amber-400 hover:bg-amber-400 hover:text-black transition-colors"
+          >
+            <Phone size={18} />
+            Besoin urgent ? 07 60 73 82 06, 24h/24
+          </a>
+
           {/* Main Heading */}
           <div className="space-y-4 animate-fade-in-up">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-wider leading-tight">
@@ -41,8 +50,19 @@ const Hero = () => {
             {companyInfo.motto}
           </p>
 
+          <p className="text-base md:text-lg text-white/90 font-medium">
+            Intervention 24/7 · Sécurité cynophile avec maître-chien
+          </p>
+
           {/* CTA Button */}
-          <div className="pt-8 animate-fade-in-up animation-delay-400">
+          <div className="pt-8 animate-fade-in-up animation-delay-400 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="tel:+33760738206"
+              className="px-10 py-4 border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black font-bold text-lg uppercase tracking-wider transition-colors inline-flex items-center"
+            >
+              <Phone size={22} className="mr-2" />
+              07 60 73 82 06
+            </a>
             <button
               onClick={scrollToAbout}
               className="group px-10 py-4 bg-amber-400 hover:bg-amber-500 text-black font-bold text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-amber-400/50"

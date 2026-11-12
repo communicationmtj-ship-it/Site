@@ -8,11 +8,24 @@ import FloatingCTA from '../../components/FloatingCTA';
 
 const DEFAULT = '#AC8631';
 
+// Société qui signe la page : par défaut MTJ Sécurité Privée (siège à Toulon).
+// Une page peut fournir data.societe pour une autre société du groupe.
+const SOCIETE_DEFAUT = {
+  nom: 'MTJ Sécurité Privée',
+  mention: null,
+  autorisation: 'AUT-083-2123-05-23-20240933884',
+  activite: 'surveillance ou gardiennage',
+  ville: 'Toulon',
+  adresse: '31 rue Chevalier Paul, 83000 Toulon',
+};
+
 import { safeJsonLd } from '../../utils/safeJsonLd';
 
 const SeoPageLayout = ({ data }) => {
   const navigate = useNavigate();
   const c = data.themeColor || DEFAULT;
+  const societe = { ...SOCIETE_DEFAUT, ...(data.societe || {}) };
+  const estSocieteDefaut = !data.societe;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -117,7 +130,7 @@ const SeoPageLayout = ({ data }) => {
               Demandez votre devis gratuit
             </h2>
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-              Contactez MTJ Sécurité Privée pour obtenir un devis personnalisé adapté à vos besoins en sécurité.
+              Contactez {societe.nom}{societe.mention ? `, ${societe.mention},` : ''} pour obtenir un devis personnalisé adapté à vos besoins en sécurité.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
@@ -128,14 +141,17 @@ const SeoPageLayout = ({ data }) => {
               >
                 Demander un devis
               </button>
-              <a href="tel:0760738206" className="flex items-center gap-2 font-semibold transition-opacity hover:opacity-80" style={{ color: c }}>
+              <a href="tel:+33760738206" className="flex items-center gap-2 font-semibold transition-opacity hover:opacity-80" style={{ color: c }}>
                 <Phone size={18} /> 07 60 73 82 06
               </a>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 text-gray-500 text-sm">
-              <span className="flex items-center gap-1"><Mail size={14} /> contactsmtjsecuriteprivee@gmail.com</span>
-              <span className="flex items-center gap-1"><MapPin size={14} /> 31 rue Chevalier Paul, 83000 Toulon</span>
+              <a href="mailto:contactsmtjsecuriteprivee@gmail.com" className="flex items-center gap-1 hover:text-amber-400 transition-colors"><Mail size={14} /> contactsmtjsecuriteprivee@gmail.com</a>
+              <span className="flex items-center gap-1"><MapPin size={14} /> {societe.adresse || societe.ville}</span>
             </div>
+            <p className="mt-3 text-gray-500 text-xs" data-testid="seo-autorisation-cnaps">
+              {societe.nom}{societe.mention ? `, ${societe.mention}` : ''} — autorisation d'exercer du CNAPS n° {societe.autorisation} ({societe.activite}).
+            </p>
           </div>
 
           {/* Internal Links */}
@@ -170,13 +186,15 @@ const SeoPageLayout = ({ data }) => {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          "name": "MTJ Sécurité Privée",
+          "name": societe.nom,
           "description": data.metaDescription,
           "url": `https://mtj-securite-privee.fr${data.slug}`,
           "telephone": "+33760738206",
           "email": "contactsmtjsecuriteprivee@gmail.com",
-          "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressCountry": "FR" },
-          "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 },
+          "address": estSocieteDefaut
+            ? { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressCountry": "FR" }
+            : { "@type": "PostalAddress", "addressLocality": societe.ville, "addressCountry": "FR" },
+          ...(estSocieteDefaut ? { "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 } } : {}),
           "areaServed": data.areaServed || "Sud de la France",
           "priceRange": "$$",
           "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" }
@@ -187,7 +205,7 @@ const SeoPageLayout = ({ data }) => {
           "name": data.h1,
           "description": data.metaDescription,
           "url": `https://mtj-securite-privee.fr${data.slug}`,
-          "provider": { "@type": "Organization", "name": "MTJ Sécurité Privée", "url": "https://mtj-securite-privee.fr", "telephone": "+33760738206" },
+          "provider": { "@type": "Organization", "name": societe.nom, "url": "https://mtj-securite-privee.fr", "telephone": "+33760738206" },
           "areaServed": data.areaServed || "Sud de la France",
           "serviceType": data.breadcrumbCurrent
         })}} />

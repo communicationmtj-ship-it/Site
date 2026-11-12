@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { contactInfo, companyInfo } from '../data/mock';
 import { toast } from '../components/ui/sonner';
@@ -16,6 +17,7 @@ const Contact = () => {
   });
   const [attachment, setAttachment] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [consent, setConsent] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -43,6 +45,10 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!consent) {
+      toast.error("Consentement requis", { description: "Veuillez cocher la case de consentement pour envoyer votre message." });
+      return;
+    }
     
     // Create FormData for file upload
     const submitData = new FormData();
@@ -51,6 +57,7 @@ const Contact = () => {
     submitData.append('phone', formData.phone || '');
     submitData.append('subject', formData.subject);
     submitData.append('message', formData.message);
+    submitData.append('consent', 'true');
     if (attachment) {
       submitData.append('attachment', attachment);
     }
@@ -62,6 +69,14 @@ const Contact = () => {
       },
     })
       .then(response => {
+        // 12/11/2026 — le serveur répond 200 avec status « error » quand il refuse
+        // (consentement, champ invalide) : jamais « envoyé » dans ce cas.
+        if (response?.data?.status !== 'success') {
+          toast.error("Envoi refusé", {
+            description: response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
+          });
+          return;
+        }
         toast.success("Message envoyé !", {
           description: response.data.message || "Nous vous répondrons dans les plus brefs délais.",
         });
@@ -76,6 +91,7 @@ const Contact = () => {
         });
         setAttachment(null);
         setFileName('');
+        setConsent(false);
         // Reset file input
         const fileInput = document.getElementById('contact-attachment');
         if (fileInput) fileInput.value = '';
@@ -88,7 +104,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative py-20 bg-stone-200">
+    <section id="contact" className="relative py-20 bg-stone-200 scroll-mt-20">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -132,7 +148,7 @@ const Contact = () => {
                   <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">
                     Téléphone
                   </h4>
-                  <p className="text-white text-lg">{companyInfo.phone}</p>
+                  <p className="text-white text-lg"><a href={companyInfo.phoneHref} className="hover:text-amber-400 transition-colors">{companyInfo.phone}</a></p>
                   <p className="text-gray-400 text-sm mt-1">Disponible 24/7</p>
                 </div>
               </div>
@@ -145,8 +161,8 @@ const Contact = () => {
                   <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">
                     Email
                   </h4>
-                  <p className="text-white text-lg">{companyInfo.email}</p>
-                  <p className="text-gray-400 text-sm mt-1">Réponse sous 24h</p>
+                  <p className="text-white text-lg break-all"><a href={companyInfo.emailHref} className="hover:text-amber-400 transition-colors">{companyInfo.email}</a></p>
+                  <p className="text-gray-400 text-sm mt-1">Réponse sous 24 h</p>
                 </div>
               </div>
 
@@ -219,7 +235,7 @@ const Contact = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
-                    placeholder="+33 6 XX XX XX XX"
+                    placeholder="06 12 34 56 78"
                   />
                 </div>
 
@@ -281,6 +297,27 @@ const Contact = () => {
                   {fileName && (
                     <p className="text-sm text-amber-400 mt-2">Fichier sélectionné : {fileName}</p>
                   )}
+                </div>
+
+
+                {/* Consentement RGPD */}
+                <div>
+                  <label htmlFor="contact-consent" className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed cursor-pointer">
+                    <input
+                      type="checkbox"
+                      id="contact-consent"
+                      checked={consent}
+                      onChange={(e) => setConsent(e.target.checked)}
+                      required
+                      className="mt-1 h-4 w-4 accent-amber-400 shrink-0"
+                      data-testid="contact-consent"
+                    />
+                    <span>
+                      J'accepte que MTJ Sécurité Privée utilise les informations saisies pour répondre à ma demande.
+                      Elles sont conservées 3 ans après notre dernier échange. Vous pouvez accéder à vos données, les rectifier ou les faire supprimer en nous écrivant (voir notre{' '}
+                      <Link to="/politique-de-confidentialite" className="underline text-amber-400 hover:text-amber-300">politique de confidentialité</Link>). *
+                    </span>
+                  </label>
                 </div>
 
                 {/* Submit Button */}

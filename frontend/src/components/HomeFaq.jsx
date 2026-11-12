@@ -33,7 +33,7 @@ const HomeFaq = () => {
   const [open, setOpen] = useState(null);
 
   return (
-    <section id="faq" className="py-20 bg-black">
+    <section id="faq" className="py-20 bg-black scroll-mt-20">
       <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-black text-white tracking-wider uppercase mb-4">

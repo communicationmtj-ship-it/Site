@@ -23,7 +23,7 @@ const data = {
         },
         {
           h3: 'Sécurité privée à Monaco',
-          content: 'La Principauté de Monaco exige un niveau de sécurité d\'exception. MTJ Sécurité Privée intervient pour la protection de résidences privées, d\'hôtels de luxe, de boutiques de haute joaillerie et d\'événements exclusifs à Monaco. Nos agents, rompus aux exigences de discrétion et de professionnalisme de la clientèle monégasque, assurent des prestations haut de gamme dans le respect de la législation du Principauté.'
+          content: 'La Principauté de Monaco exige un niveau de sécurité d\'exception. MTJ Sécurité Privée intervient pour la protection de résidences privées, d\'hôtels de luxe, de boutiques de haute joaillerie et d\'événements exclusifs à Monaco. Nos agents, rompus aux exigences de discrétion et de professionnalisme de la clientèle monégasque, assurent des prestations haut de gamme dans le respect de la législation de la Principauté.'
         }
       ]
     },

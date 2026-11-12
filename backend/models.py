@@ -8,6 +8,8 @@ class QuoteRequest(BaseModel):
     phone: str
     serviceType: str
     message: str
+    consent: bool = False
+    consent_at: Optional[str] = None
 
 class ContactRequest(BaseModel):
     name: str
@@ -15,3 +17,5 @@ class ContactRequest(BaseModel):
     phone: Optional[str] = None
     subject: str
     message: str
+    consent: bool = False
+    consent_at: Optional[str] = None

@@ -33,7 +33,7 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="relative py-20 bg-neutral-900">
+    <section id="services" className="relative scroll-mt-20 py-20 bg-neutral-900">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-black text-white tracking-wider mb-4 uppercase">

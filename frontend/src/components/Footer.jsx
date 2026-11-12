@@ -1,34 +1,64 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Shield, Mail, Phone, MapPin, Instagram, Star } from 'lucide-react';
-import { companyInfo } from '../data/mock';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Mail, Phone, MapPin, Instagram, Star } from 'lucide-react';
+import { companyInfo, cnapsCompanies, L612_14 } from '../data/mock';
 
-const INSTAGRAM_URL = "https://www.instagram.com/mtj.securite.privee?igsh=MXVyc2ZhbTg1bTV0OQ%3D%3D&utm_source=qr";
+const INSTAGRAM_URL = "https://www.instagram.com/mtj.securite.privee/";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  // Sur la page Protection rapprochée, la société qui contracte est MTJ Sécurité Rapprochée.
+  const onRapprochee = location.pathname.startsWith('/protection-rapprochee');
+  const cnapsOrder = onRapprochee
+    ? [cnapsCompanies.rapprochee, cnapsCompanies.privee]
+    : [cnapsCompanies.privee, cnapsCompanies.rapprochee];
+
+  // Fonctionne sur l'accueil comme sur les sous-pages.
+  const goToSection = (event, sectionId) => {
+    event.preventDefault();
+    const scroll = () => {
+      const element = document.getElementById(sectionId);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    };
+    if (location.pathname === '/') {
+      scroll();
+    } else {
+      navigate('/');
+      setTimeout(scroll, 150);
     }
+  };
+
+  const openCookieChoice = () => {
+    window.dispatchEvent(new CustomEvent('mtj-open-cookie-banner'));
   };
 
   return (
     <footer className="bg-black border-t border-amber-400/20">
       <div className="container mx-auto px-4 lg:px-8 py-10">
         {/* Company header */}
-        <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-800">
+        <div className="flex items-center justify-between mb-6">
           <img
             src="/images/logo-mtj.png"
             alt="MTJ Sécurité Privée"
             className="h-14 w-auto object-contain"
           />
-          <div className="text-gray-500 text-[10px] max-w-xs text-right leading-relaxed hidden md:block">
-            <p className="font-semibold text-amber-400 text-xs mb-1">AUT -083-2024-05-22-2024084324</p>
-            <p>L612-14 du CSI L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient.</p>
+        </div>
+
+        {/* Bloc CNAPS unique : quelle autorisation pour quelle société */}
+        <div className="mb-8 pb-6 border-b border-gray-800 text-gray-500 text-[11px] leading-relaxed" data-testid="cnaps-block">
+          <div className="grid sm:grid-cols-2 gap-4 mb-3">
+            {cnapsOrder.map((co) => (
+              <p key={co.authorization}>
+                <span className="block font-semibold text-amber-400 text-xs">{co.name}</span>
+                SIRET {co.siret}<br />
+                Autorisation d'exercer CNAPS ({co.activity}) : {co.authorization}
+              </p>
+            ))}
           </div>
+          <p>{L612_14}</p>
         </div>
 
         {/* 4 columns on same line */}
@@ -39,23 +69,28 @@ const Footer = () => {
               Navigation
             </h4>
             <ul className="space-y-1.5">
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-amber-400 transition-colors text-xs">Accueil</Link>
+              </li>
               {[
-                { label: 'Accueil', id: 'hero' },
                 { label: 'À propos', id: 'about' },
                 { label: 'Nos métiers', id: 'services' },
                 { label: 'Interventions', id: 'domains' },
                 { label: 'Devis', id: 'quote' },
-                { label: 'Contact', id: 'contact' },
               ].map((link) => (
                 <li key={link.id}>
-                  <button
-                    onClick={() => scrollToSection(link.id)}
+                  <a
+                    href={`/#${link.id}`}
+                    onClick={(e) => goToSection(e, link.id)}
                     className="text-gray-400 hover:text-amber-400 transition-colors text-xs"
                   >
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
+              <li>
+                <Link to="/contact" className="text-gray-400 hover:text-amber-400 transition-colors text-xs">Contact</Link>
+              </li>
             </ul>
           </div>
 
@@ -88,7 +123,7 @@ const Footer = () => {
               <li><Link to="/securite-privee-toulouse" className="text-gray-400 hover:text-amber-400 transition-colors">Toulouse (31)</Link></li>
               <li><Link to="/securite-privee-nice-monaco" className="text-gray-400 hover:text-amber-400 transition-colors">Nice & Monaco (06)</Link></li>
               <li><Link to="/securite-privee-sud-france" className="text-gray-400 hover:text-amber-400 transition-colors">Sud de la France</Link></li>
-              <li><Link to="/grand-deplacement-securite-france" className="text-gray-400 hover:text-amber-400 transition-colors">Grand deplacement national</Link></li>
+              <li><Link to="/grand-deplacement-securite-france" className="text-gray-400 hover:text-amber-400 transition-colors">Grand déplacement national</Link></li>
             </ul>
           </div>
 
@@ -100,11 +135,11 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-start space-x-2">
                 <Phone size={14} className="text-amber-400 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-400 text-xs">{companyInfo.phone}</span>
+                <a href={companyInfo.phoneHref} className="text-gray-400 text-xs hover:text-amber-400 transition-colors">{companyInfo.phone}</a>
               </li>
               <li className="flex items-start space-x-2">
                 <Mail size={14} className="text-amber-400 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-400 text-xs break-all">{companyInfo.email}</span>
+                <a href={companyInfo.emailHref} className="text-gray-400 text-xs break-all hover:text-amber-400 transition-colors">{companyInfo.email}</a>
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin size={14} className="text-amber-400 mt-0.5 flex-shrink-0" />
@@ -219,7 +254,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-6">
+        <div className="border-t border-gray-800 pt-6 space-y-3">
+          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs">
+            <li><Link to="/mentions-legales" className="text-gray-400 hover:text-amber-400 transition-colors">Mentions légales</Link></li>
+            <li><Link to="/politique-de-confidentialite" className="text-gray-400 hover:text-amber-400 transition-colors">Politique de confidentialité</Link></li>
+            <li>
+              <button type="button" onClick={openCookieChoice} className="text-gray-400 hover:text-amber-400 transition-colors" data-testid="cookie-manage">
+                Gérer mes choix de mesure d'audience
+              </button>
+            </li>
+          </ul>
           <p className="text-gray-500 text-xs text-center">
             © {currentYear} MTJ Sécurité Privée. Tous droits réservés.
           </p>

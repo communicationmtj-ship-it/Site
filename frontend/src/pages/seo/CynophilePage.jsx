@@ -10,7 +10,7 @@ const data = {
   areaServed: 'Toulon, Toulouse, Nice, PACA',
 
   h1: 'Sécurité Cynophile et Maître-Chien d\'Intervention',
-  introduction: `MTJ Sécurité Privée dispose d'une unité cynophile d'élite spécialisée dans la surveillance renforcée et l'intervention rapide. Nos binômes maître-chien sont formés aux techniques les plus avancées de détection, de dissuasion et d'intervention.\n\nLa présence d'un chien de sécurité multiplie par cinq l'efficacité dissuasive d'un agent seul. C'est une solution de sécurité éprouvée, particulièrement adaptée aux sites étendus, aux rondes de nuit et aux environnements à haut risque.`,
+  introduction: `MTJ Sécurité Privée dispose d'une unité cynophile d'élite spécialisée dans la surveillance renforcée et l'intervention rapide. Nos binômes maître-chien sont formés aux techniques les plus avancées de détection, de dissuasion et d'intervention.\n\nLa présence d'un chien de sécurité renforce nettement l'effet dissuasif d'un agent seul. C'est une solution de sécurité éprouvée, particulièrement adaptée aux sites étendus, aux rondes de nuit et aux environnements à haut risque.`,
 
   sections: [
     {
@@ -51,11 +51,11 @@ const data = {
       subsections: [
         {
           h3: 'Dissuasion maximale et détection précoce',
-          content: 'La présence d\'un chien d\'intervention constitue le niveau de dissuasion le plus élevé en sécurité privée. Un intrus qui repère un binôme cynophile renonce dans plus de 90% des cas. De plus, l\'odorat du chien détecte une présence humaine à plusieurs centaines de mètres, même dans l\'obscurité totale, offrant une capacité de détection inégalée.'
+          content: 'La présence d\'un chien d\'intervention constitue le niveau de dissuasion le plus élevé en sécurité privée. Un intrus qui repère un binôme cynophile est beaucoup plus enclin à renoncer. De plus, l\'odorat du chien détecte une présence humaine à plusieurs centaines de mètres, même dans l\'obscurité totale, offrant une capacité de détection inégalée.'
         },
         {
           h3: 'Rapport coût-efficacité optimal',
-          content: 'Un binôme maître-chien couvre une zone de surveillance équivalente à celle de trois agents de sécurité classiques. Cette productivité accrue se traduit par un meilleur rapport coût-efficacité pour nos clients, tout en offrant un niveau de sécurité supérieur. C\'est une solution particulièrement adaptée aux sites étendus ou aux missions nocturnes.'
+          content: 'Un binôme maître-chien peut couvrir une zone de surveillance plus étendue qu\'un agent seul. Cette productivité accrue se traduit par un meilleur rapport coût-efficacité pour nos clients, tout en offrant un niveau de sécurité supérieur. C\'est une solution particulièrement adaptée aux sites étendus ou aux missions nocturnes.'
         }
       ]
     }

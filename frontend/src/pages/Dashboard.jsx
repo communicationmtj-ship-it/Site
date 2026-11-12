@@ -32,6 +32,7 @@ export default function Dashboard() {
   const [token, setToken] = useState(() => sessionStorage.getItem('dashboard_token') || '');
   const [authed, setAuthed] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [stats, setStats] = useState(null);
@@ -42,7 +43,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!token) { setAuthLoading(false); return; }
-    fetch(`${API_URL}/api/dashboard/verify?token=${token}`)
+    fetch(`${API_URL}/api/dashboard/verify`, { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(d => { if (d.status === 'ok') setAuthed(true); else { sessionStorage.removeItem('dashboard_token'); setToken(''); } })
       .catch(() => { sessionStorage.removeItem('dashboard_token'); setToken(''); })
@@ -55,10 +56,10 @@ export default function Dashboard() {
     try {
       const res = await fetch(`${API_URL}/api/dashboard/login`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ username, password }),
       });
       if (res.status === 429) {
-        setAuthError('Trop de tentatives. Veuillez patienter quelques minutes.');
+        setAuthError('Trop d\'essais. Veuillez patienter 15 minutes avant de réessayer.');
         return;
       }
       const data = await res.json();
@@ -67,7 +68,7 @@ export default function Dashboard() {
         setToken(data.token);
         setAuthed(true);
       } else {
-        setAuthError(data.message || 'Mot de passe incorrect.');
+        setAuthError(data.message || 'Identifiants incorrects.');
       }
     } catch { setAuthError('Erreur de connexion.'); }
   };
@@ -82,7 +83,7 @@ export default function Dashboard() {
   const fetchStats = useCallback(async () => {
     if (!authed) return;
     try {
-      const res = await fetch(`${API_URL}/api/stats?days=${days}`, { headers: { 'X-Dashboard-Token': token } });
+      const res = await fetch(`${API_URL}/api/stats?days=${days}`, { headers: { Authorization: `Bearer ${token}` } });
       const data = await res.json();
       if (data.status === 'error') { handleLogout(); return; }
       setStats(data);
@@ -104,7 +105,7 @@ export default function Dashboard() {
   const sendReport = async () => {
     setSending(true);
     try {
-      const res = await fetch(`${API_URL}/api/send-monthly-report`, { method: 'POST', headers: { 'X-Dashboard-Token': token } });
+      const res = await fetch(`${API_URL}/api/send-monthly-report`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
       const data = await res.json();
       alert(data.status === 'success' ? 'Rapport envoyé par email !' : 'Erreur lors de l\'envoi');
     } catch (e) {
@@ -135,7 +136,19 @@ export default function Dashboard() {
             <h1 className="text-xl font-bold text-amber-400 text-center uppercase tracking-wider mb-6">Dashboard Admin</h1>
             <form onSubmit={handleLogin} className="space-y-4">
               <input
+                type="text"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                placeholder="Identifiant"
+                aria-label="Identifiant"
+                autoComplete="username"
+                className="w-full bg-black border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
+                data-testid="dashboard-username-input"
+              />
+              <input
                 type="password"
+                aria-label="Mot de passe"
+                autoComplete="current-password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Mot de passe"

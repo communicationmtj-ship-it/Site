@@ -3,7 +3,7 @@ import { aboutUs } from '../data/mock';
 
 const About = () => {
   return (
-    <section id="about" className="relative py-20 bg-black">
+    <section id="about" className="relative scroll-mt-20 py-20 bg-black">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
@@ -26,11 +26,13 @@ const About = () => {
             <div className="pt-6 flex flex-wrap gap-8">
               <div className="text-center">
                 <p className="text-4xl font-bold text-amber-400">24/7</p>
-                <p className="text-sm text-gray-400 uppercase tracking-wide mt-1">Disponibilité</p>
+                <p className="text-sm text-gray-400 uppercase tracking-wide mt-1">Permanence téléphonique</p>
               </div>
+              {/* 12/11/2026 (audit du site, site-074) : « 100 % Engagement » ne disait rien de
+                  vérifiable ; remplacé par un fait : l'autorisation d'exercer du CNAPS. */}
               <div className="text-center">
-                <p className="text-4xl font-bold text-amber-400">100%</p>
-                <p className="text-sm text-gray-400 uppercase tracking-wide mt-1">Engagement</p>
+                <p className="text-4xl font-bold text-amber-400">CNAPS</p>
+                <p className="text-sm text-gray-400 uppercase tracking-wide mt-1">Entreprise autorisée</p>
               </div>
             </div>
           </div>

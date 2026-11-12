@@ -77,9 +77,24 @@ def validate_upload(file) -> None:
             raise ValueError(f"Type MIME non autorise ({content_type}).")
 
 
+# Signatures (premiers octets) des formats acceptés : on vérifie le contenu réel,
+# pas seulement l'extension ni le type annoncé par le navigateur.
+_MAGIC_SIGNATURES = (
+    b"%PDF-",                      # PDF
+    b"\xff\xd8\xff",                # JPEG
+    b"\x89PNG\r\n\x1a\n",           # PNG
+    b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1",  # DOC (ancien format Word)
+    b"PK\x03\x04",                # DOCX (archive zip)
+)
+
+
 def validate_upload_size(file_bytes: bytes) -> None:
+    if len(file_bytes) == 0:
+        raise ValueError("Le fichier est vide.")
     if len(file_bytes) > MAX_UPLOAD_SIZE:
         raise ValueError(f"Fichier trop volumineux. Taille maximale : {MAX_UPLOAD_SIZE // (1024*1024)} Mo.")
+    if not file_bytes.startswith(_MAGIC_SIGNATURES):
+        raise ValueError("Le contenu du fichier ne correspond pas à un format accepté (PDF, DOC, DOCX, JPG, PNG).")
 
 
 # ─── Honeypot + Timestamp Anti-Spam ─────────────────────────────
@@ -87,36 +102,103 @@ def validate_upload_size(file_bytes: bytes) -> None:
 MIN_SUBMIT_TIME_SECONDS = 3
 
 
+MAX_FORM_AGE_SECONDS = 24 * 3600
+
+
 def check_honeypot(honeypot_value: Optional[str], form_loaded_at: Optional[str]) -> None:
+    """Champ piège + horodatage du chargement du formulaire.
+
+    Les trois formulaires du site (devis, contact, recrutement) envoient toujours
+    le champ « ts » : son absence, une valeur illisible, un envoi en moins de
+    3 secondes ou plus de 24 h après le chargement sont traités comme du spam.
+    """
     if honeypot_value:
-        logger.warning(f"Honeypot triggered: value='{honeypot_value}'")
+        logger.warning("Honeypot triggered")
         raise ValueError("SPAM_DETECTED")
 
-    if form_loaded_at:
-        try:
-            loaded = float(form_loaded_at)
-            elapsed = datetime.now(timezone.utc).timestamp() - loaded
-            if elapsed < MIN_SUBMIT_TIME_SECONDS:
-                logger.warning(f"Form submitted too fast: {elapsed:.1f}s")
-                raise ValueError("SPAM_DETECTED")
-        except (ValueError, TypeError):
-            pass
+    try:
+        loaded = float(form_loaded_at)
+    except (ValueError, TypeError):
+        logger.warning("Form submitted without a valid timestamp")
+        raise ValueError("SPAM_DETECTED")
+    elapsed = datetime.now(timezone.utc).timestamp() - loaded
+    if elapsed < MIN_SUBMIT_TIME_SECONDS or elapsed > MAX_FORM_AGE_SECONDS:
+        logger.warning(f"Form timing out of range: {elapsed:.1f}s")
+        raise ValueError("SPAM_DETECTED")
 
 
 # ─── Dashboard Auth ──────────────────────────────────────────────
 
 DASHBOARD_PASSWORD = os.environ.get("DASHBOARD_PASSWORD", "mtj-admin-2024")
+# Identifiant facultatif : s'il est défini dans l'environnement (DASHBOARD_USER),
+# il est exigé en plus du mot de passe.
+DASHBOARD_USER = os.environ.get("DASHBOARD_USER", "")
 _active_tokens: dict[str, float] = {}
 TOKEN_EXPIRY = 3600  # 1 hour
 
+# Limitation des essais : 5 échecs, puis blocage de 15 minutes (par adresse).
+LOGIN_MAX_FAILURES = 5
+LOGIN_LOCK_SECONDS = 15 * 60
+_login_failures: dict[str, dict] = {}
 
-def dashboard_login(password: str) -> Optional[str]:
-    if not secrets.compare_digest(password, DASHBOARD_PASSWORD):
+
+class LoginLocked(Exception):
+    def __init__(self, retry_after: int):
+        super().__init__("LOGIN_LOCKED")
+        self.retry_after = retry_after
+
+
+def _same(a: str, b: str) -> bool:
+    return secrets.compare_digest((a or "").encode("utf-8"), (b or "").encode("utf-8"))
+
+
+def _now() -> float:
+    return datetime.now(timezone.utc).timestamp()
+
+
+def login_lock_remaining(ip: str) -> int:
+    entry = _login_failures.get(ip)
+    if not entry:
+        return 0
+    remaining = int(entry.get("locked_until", 0) - _now())
+    if remaining <= 0 and entry.get("locked_until"):
+        del _login_failures[ip]
+        return 0
+    return max(remaining, 0)
+
+
+def dashboard_login(password: str, ip: str = "unknown", username: str = "") -> Optional[str]:
+    remaining = login_lock_remaining(ip)
+    if remaining > 0:
+        raise LoginLocked(remaining)
+
+    ok = _same(password, DASHBOARD_PASSWORD)
+    if DASHBOARD_USER:
+        ok = _same(username, DASHBOARD_USER) and ok
+    if not ok:
+        entry = _login_failures.setdefault(ip, {"count": 0, "locked_until": 0})
+        entry["count"] += 1
+        if entry["count"] >= LOGIN_MAX_FAILURES:
+            entry["locked_until"] = _now() + LOGIN_LOCK_SECONDS
+            entry["count"] = 0
+            logger.warning(f"Dashboard login locked for {ip} ({LOGIN_LOCK_SECONDS}s)")
         return None
+
+    _login_failures.pop(ip, None)
     token = secrets.token_hex(32)
-    _active_tokens[token] = datetime.now(timezone.utc).timestamp() + TOKEN_EXPIRY
+    _active_tokens[token] = _now() + TOKEN_EXPIRY
     _cleanup_expired_tokens()
     return token
+
+
+def token_from_authorization(authorization: Optional[str]) -> str:
+    """Extrait le jeton d'un en-tête « Authorization: Bearer <jeton> »."""
+    if not authorization:
+        return ""
+    parts = authorization.strip().split(None, 1)
+    if len(parts) == 2 and parts[0].lower() == "bearer":
+        return parts[1].strip()
+    return ""
 
 
 def verify_dashboard_token(token: str) -> bool:
@@ -125,14 +207,14 @@ def verify_dashboard_token(token: str) -> bool:
     expiry = _active_tokens.get(token)
     if not expiry:
         return False
-    if datetime.now(timezone.utc).timestamp() > expiry:
+    if _now() > expiry:
         del _active_tokens[token]
         return False
     return True
 
 
 def _cleanup_expired_tokens():
-    now = datetime.now(timezone.utc).timestamp()
+    now = _now()
     expired = [t for t, exp in _active_tokens.items() if now > exp]
     for t in expired:
         del _active_tokens[t]

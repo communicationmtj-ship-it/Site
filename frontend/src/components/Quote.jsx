@@ -13,8 +13,11 @@ const Quote = () => {
     email: '',
     phone: '',
     serviceType: '',
+    startDate: '',
+    urgency: '',
     message: '',
   });
+  const [consent, setConsent] = useState(false);
   const [attachment, setAttachment] = useState(null);
   const [fileName, setFileName] = useState('');
   const [formLoadedAt] = useState(() => String(Date.now() / 1000));
@@ -53,7 +56,14 @@ const Quote = () => {
     submitData.append('email', formData.email);
     submitData.append('phone', formData.phone);
     submitData.append('serviceType', formData.serviceType);
-    submitData.append('message', formData.message);
+    // Le serveur ne stocke pas encore ces deux champs : on les ajoute aussi au message pour ne rien perdre.
+    const extras = [];
+    if (formData.startDate) extras.push(`Date de début souhaitée : ${formData.startDate}`);
+    if (formData.urgency) extras.push(`Urgence : ${formData.urgency}`);
+    submitData.append('message', extras.length ? `${formData.message}\n\n${extras.join('\n')}` : formData.message);
+    submitData.append('startDate', formData.startDate);
+    submitData.append('urgency', formData.urgency);
+    submitData.append('consent', consent ? 'true' : 'false');
     submitData.append('ts', formLoadedAt);
     if (attachment) {
       submitData.append('attachment', attachment);
@@ -66,6 +76,14 @@ const Quote = () => {
       },
     })
       .then(response => {
+        // 12/11/2026 — le serveur répond 200 avec status « error » quand il refuse
+        // (consentement, champ invalide) : jamais « envoyé » dans ce cas.
+        if (response?.data?.status !== 'success') {
+          toast.error("Envoi refusé", {
+            description: response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
+          });
+          return;
+        }
         toast.success("Demande envoyée !", {
           description: response.data.message || "Nous vous contacterons dans les plus brefs délais.",
         });
@@ -77,8 +95,11 @@ const Quote = () => {
           email: '',
           phone: '',
           serviceType: '',
+          startDate: '',
+          urgency: '',
           message: '',
         });
+        setConsent(false);
         setAttachment(null);
         setFileName('');
         // Reset file input
@@ -95,14 +116,15 @@ const Quote = () => {
   const serviceTypes = [
     'Agent de prévention et sécurité',
     'Sécurité cynophile (Maître-chien)',
+    'CYNODEX',
     'SSIAP',
     'Événementiel',
-    'Gardiennage',
+    'Protection rapprochée',
     'Autre'
   ];
 
   return (
-    <section id="quote" className="relative py-20 bg-stone-200">
+    <section id="quote" className="relative scroll-mt-20 py-20 bg-stone-200">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -117,6 +139,12 @@ const Quote = () => {
 
         {/* Quote Form */}
         <div className="max-w-4xl mx-auto">
+          <p className="text-center text-black font-semibold mb-4">
+            Besoin urgent ?{' '}
+            <a href="tel:+33760738206" className="underline hover:text-amber-700">
+              Appelez le 07 60 73 82 06
+            </a>
+          </p>
           <div className="bg-black border-4 border-amber-400/30 p-8 lg:p-12">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -185,7 +213,7 @@ const Quote = () => {
                     onChange={handleChange}
                     required
                     className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
-                    placeholder="+33 6 XX XX XX XX"
+                    placeholder="06 12 34 56 78"
                   />
                 </div>
               </div>
@@ -210,6 +238,43 @@ const Quote = () => {
                     </option>
                   ))}
                 </select>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Start date */}
+                <div>
+                  <label htmlFor="startDate" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">
+                    Date de début souhaitée (optionnel)
+                  </label>
+                  <input
+                    type="date"
+                    id="startDate"
+                    name="startDate"
+                    value={formData.startDate}
+                    onChange={handleChange}
+                    className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
+                  />
+                </div>
+
+                {/* Urgency */}
+                <div>
+                  <label htmlFor="urgency" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">
+                    Urgence (optionnel)
+                  </label>
+                  <select
+                    id="urgency"
+                    name="urgency"
+                    value={formData.urgency}
+                    onChange={handleChange}
+                    className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
+                  >
+                    <option value="">Non précisée</option>
+                    <option value="Urgent (sous 24 h)">Urgent (sous 24 h)</option>
+                    <option value="Cette semaine">Cette semaine</option>
+                    <option value="Ce mois-ci">Ce mois-ci</option>
+                    <option value="Pas pressé">Pas pressé</option>
+                  </select>
+                </div>
               </div>
 
               {/* Message */}
@@ -260,8 +325,36 @@ const Quote = () => {
                 <input type="text" name="hp" tabIndex={-1} autoComplete="off" />
               </div>
 
+              {/* Consentement RGPD */}
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  required
+                  className="mt-1 h-5 w-5 accent-amber-400 flex-shrink-0"
+                />
+                <label htmlFor="consent" className="text-sm text-gray-300 leading-relaxed">
+                  J'accepte que MTJ Sécurité Privée utilise les informations saisies pour répondre à ma demande de devis. Elles ne sont pas transmises à des tiers. Pour en savoir plus et exercer vos droits, consultez notre{' '}
+                  <a href="/politique-de-confidentialite" className="text-amber-400 underline hover:text-amber-300">
+                    politique de confidentialité
+                  </a>
+                  . *
+                </label>
+              </div>
+
+              {/* Urgence téléphone */}
+              <p className="text-center text-gray-300 pt-2">
+                Besoin urgent ?{' '}
+                <a href="tel:+33760738206" className="text-amber-400 font-semibold underline">
+                  Appelez le 07 60 73 82 06
+                </a>
+              </p>
+
               {/* Submit Button */}
-              <div className="text-center pt-4">
+              <div className="text-center pt-2">
                 <button
                   type="submit"
                   className="group px-10 py-4 bg-amber-400 hover:bg-amber-500 text-black font-bold text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 inline-flex items-center"

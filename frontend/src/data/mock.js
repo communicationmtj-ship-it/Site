@@ -1,12 +1,34 @@
 // Mock data for MTJ SECURITE PRIVÉE
 
 export const companyInfo = {
-  name: "MTJ SECURITE PRIVÉE",
+  name: "MTJ SÉCURITÉ PRIVÉE",
   slogan: "VOTRE SÉCURITÉ, NOTRE MISSION.",
   motto: "Avec Force et Honneur Toujours servir",
   phone: "07 60 73 82 06",
+  phoneHref: "tel:+33760738206",
   email: "contactsmtjsecuriteprivee@gmail.com",
+  emailHref: "mailto:contactsmtjsecuriteprivee@gmail.com",
   address: "31 rue Chevalier Paul, 83000 Toulon",
+};
+
+// Bloc légal unique (CNAPS) : un numéro d'autorisation pour chaque société.
+// Source : identité des sociétés du logiciel MTJ.
+// À faire confirmer par la direction : numéro d'autorisation de MTJ Sécurité Privée (voir rapport).
+export const L612_14 = "Article L612-14 du code de la sécurité intérieure : « L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics. »";
+
+export const cnapsCompanies = {
+  privee: {
+    name: "MTJ SÉCURITÉ PRIVÉE",
+    siret: "922 208 202 00015",
+    authorization: "AUT-083-2123-05-23-20240933884",
+    activity: "surveillance ou gardiennage",
+  },
+  rapprochee: {
+    name: "MTJ SÉCURITÉ RAPPROCHÉE",
+    siret: "933 244 303 00014",
+    authorization: "AUT-006-2123-10-21-20240955994",
+    activity: "protection physique des personnes",
+  },
 };
 
 export const aboutUs = {
@@ -37,7 +59,7 @@ export const services = [
   },
   {
     id: 2,
-    title: "AGENTS CYNOPHILE D'INTERVENTION",
+    title: "AGENTS CYNOPHILES D'INTERVENTION",
     description: "Notre équipe cyno d'intervention est spécialisée dans la sécurité avec chiens d'intervention. Nos binômes maître-chien sont formés pour intervenir rapidement et efficacement dans toutes les situations nécessitant une sécurité renforcée.",
     icon: "Dog",
     link: "/securite-cynophile-maitre-chien",
@@ -83,7 +105,7 @@ export const services = [
     title: "PROTECTION PHYSIQUE DES PERSONNES",
     subtitle: "Sécurité Rapprochée",
     description: "La protection rapprochée de personnalités, dirigeants d'entreprise, célébrités et particuliers exposés. Des agents de protection rapprochée, formés aux techniques d'évaluation des menaces, d'escorte et de sécurisation de déplacements, garantissent votre intégrité physique en toute discrétion.",
-    legalNotice: "AUT-006-2123-10-21-20240955994\nL612-14 du CSI L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics.",
+    legalNotice: "MTJ SÉCURITÉ RAPPROCHÉE — SIRET 933 244 303 00014\nAutorisation CNAPS AUT-006-2123-10-21-20240955994\nArticle L612-14 du code de la sécurité intérieure : « L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics. »",
     icon: "UserShield",
     features: [],
     wide: true,
