@@ -14,7 +14,7 @@ Domaine : https://mtj-securite-privee.fr
 ### Pages
 - Homepage (Hero, About, Services, Domains, Quote, Engagement)
 - Contact (/contact), Recrutement (/recrutement)
-- Dashboard analytique (/dashboard) — protégé par mot de passe
+- Dashboard analytique (/dashboard) — ouvert avec le compte fondateur du logiciel MTJ (depuis le 13/11/2026)
 - 15 pages SEO (services + zones géographiques)
 
 ### SEO
@@ -44,7 +44,7 @@ Domaine : https://mtj-securite-privee.fr
 - TFP APS (remplacé CQP APS)
 
 ## Credentials
-- Dashboard: mtj-admin-2024
+- Dashboard : compte fondateur du logiciel MTJ (adresse e-mail et mot de passe du logiciel, vérifiés par sa route de connexion ; décision de Théo du 13/11/2026). Aucun mot de passe propre au site : l'ancien mot de passe par défaut est supprimé du code, DASHBOARD_PASSWORD et DASHBOARD_USER ne sont plus lus. Variable facultative du serveur du site : LOGICIEL_URL (par défaut https://app.mtj-securite-privee.fr, https exigé).
 - Email Recrutement: rex.mtjsecuriteprivee@gmail.com
 - Email Commercial: commercialmtj.securiteprivee@gmail.com
 - Email Contact: contactsmtjsecuriteprivee@gmail.com

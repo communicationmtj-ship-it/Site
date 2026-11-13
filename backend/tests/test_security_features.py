@@ -46,6 +46,11 @@ class TestDashboardAuth:
         assert "message" in data
         print(f"✓ Wrong password returns error: {data['message']}")
 
+    @pytest.mark.skip(
+        reason="13/11/2026 : plus de mot de passe propre au site (DASHBOARD_PASSWORD n'est plus lu) ; "
+        "le tableau s'ouvre avec le compte fondateur du logiciel MTJ, essayé hors ligne avec le "
+        "logiciel simulé dans tests/test_site_connexion_logiciel_13_11.py"
+    )
     def test_login_correct_password(self, api_session):
         """POST /api/dashboard/login with correct password should return success and token"""
         res = api_session.post(f"{BASE_URL}/api/dashboard/login", json={"password": DASHBOARD_PASSWORD})

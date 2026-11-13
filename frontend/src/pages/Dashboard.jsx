@@ -54,23 +54,32 @@ export default function Dashboard() {
     e.preventDefault();
     setAuthError('');
     try {
+      // 13/11/2026 (décision de Théo) : adresse e-mail et mot de passe du compte fondateur
+      // du logiciel MTJ, vérifiés par le logiciel ; le serveur du site ne les garde pas.
       const res = await fetch(`${API_URL}/api/dashboard/login`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username: username.trim(), password }),
       });
+      let data = {};
+      try { data = (await res.json()) || {}; } catch { /* corps illisible : page d'erreur du serveur */ }
       if (res.status === 429) {
-        setAuthError('Trop d\'essais. Veuillez patienter 15 minutes avant de réessayer.');
+        setAuthError(data.message || data.detail || 'Trop d\'essais. Veuillez patienter 15 minutes avant de réessayer.');
         return;
       }
-      const data = await res.json();
       if (data.status === 'success') {
+        setPassword('');
         sessionStorage.setItem('dashboard_token', data.token);
         setToken(data.token);
         setAuthed(true);
+      } else if (data.message) {
+        // Refus du logiciel, logiciel injoignable ou réponse inattendue : le message du serveur.
+        setAuthError(data.message);
+      } else if (res.status >= 500) {
+        setAuthError('Connexion impossible : le serveur du site ne répond pas. Réessayez dans quelques minutes.');
       } else {
-        setAuthError(data.message || 'Identifiants incorrects.');
+        setAuthError('Identifiants refusés.');
       }
-    } catch { setAuthError('Erreur de connexion.'); }
+    } catch { setAuthError('Connexion impossible : le serveur du site ne répond pas. Réessayez dans quelques minutes.'); }
   };
 
   const handleLogout = () => {
@@ -133,15 +142,19 @@ export default function Dashboard() {
                 <Lock size={28} className="text-amber-400" />
               </div>
             </div>
-            <h1 className="text-xl font-bold text-amber-400 text-center uppercase tracking-wider mb-6">Dashboard Admin</h1>
+            <h1 className="text-xl font-bold text-amber-400 text-center uppercase tracking-wider mb-2">Dashboard Admin</h1>
+            <p className="text-gray-400 text-sm text-center mb-6" data-testid="dashboard-login-aide">
+              Connectez-vous avec votre compte fondateur du logiciel MTJ : même adresse e-mail, même mot de passe.
+            </p>
             <form onSubmit={handleLogin} className="space-y-4">
               <input
-                type="text"
+                type="email"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
-                placeholder="Identifiant"
-                aria-label="Identifiant"
+                placeholder="Adresse e-mail du logiciel"
+                aria-label="Adresse e-mail du compte fondateur du logiciel"
                 autoComplete="username"
+                required
                 className="w-full bg-black border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
                 data-testid="dashboard-username-input"
               />

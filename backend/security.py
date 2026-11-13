@@ -1,11 +1,14 @@
 import re
 import os
 import math
+import asyncio
 import hashlib
 import secrets
 import logging
 from datetime import datetime, timezone
 from typing import Optional
+
+import httpx
 
 logger = logging.getLogger(__name__)
 
@@ -146,11 +149,56 @@ def check_honeypot(honeypot_value: Optional[str], form_loaded_at: Optional[str])
 
 
 # ─── Dashboard Auth ──────────────────────────────────────────────
+#
+# 13/11/2026 — décision de Théo (point du 13/11/2026 avant la mise en ligne, mot de passe
+# du tableau d'administration du site) : « les mêmes que le compte admin du logiciel ».
+# Le site ne connaît plus AUCUN mot de passe : l'ancien mot de passe par défaut écrit dans
+# le code est supprimé, DASHBOARD_PASSWORD et DASHBOARD_USER ne sont plus lus. L'adresse
+# e-mail et le mot de passe saisis sont transmis, par HTTPS, à la route de connexion du
+# logiciel MTJ (POST <LOGICIEL_URL>/api/auth/login), qui seule les vérifie ; seul un compte
+# FONDATEUR du logiciel (rôle « admin » en base, libellé « Fondateur ») ouvre le tableau.
+# Rien n'est gardé : ni le mot de passe (jamais écrit au journal), ni les jetons de session
+# que le logiciel renvoie (cookies jetés avec le client HTTP, jamais transmis au visiteur).
+# Logiciel injoignable, adresse mal réglée ou réponse inattendue : connexion REFUSÉE avec
+# un message clair, jamais ouverte par défaut.
 
-DASHBOARD_PASSWORD = os.environ.get("DASHBOARD_PASSWORD", "mtj-admin-2024")
-# Identifiant facultatif : s'il est défini dans l'environnement (DASHBOARD_USER),
-# il est exigé en plus du mot de passe.
-DASHBOARD_USER = os.environ.get("DASHBOARD_USER", "")
+LOGICIEL_URL_PAR_DEFAUT = "https://app.mtj-securite-privee.fr"
+LOGICIEL_ROUTE_CONNEXION = "/api/auth/login"
+LOGICIEL_DELAI_SECONDES = 10.0
+# Rôle fondateur tel que le logiciel l'écrit en base (backend/utils/permissions.py du
+# logiciel : ROLE_LABELS["admin"] = "Fondateur" ; les autres rôles sont refusés ici).
+ROLE_FONDATEUR_LOGICIEL = "admin"
+
+# Même message pour un mauvais mot de passe et pour un compte qui n'est pas fondateur :
+# comme le logiciel, le site ne dit pas si un compte existe ni quel est son rôle.
+MESSAGE_IDENTIFIANTS_REFUSES = (
+    "Identifiants refusés. Utilisez l'adresse e-mail et le mot de passe de votre compte "
+    "fondateur du logiciel MTJ."
+)
+MESSAGE_LOGICIEL_INJOIGNABLE = (
+    "Le logiciel MTJ ne répond pas : vos identifiants n'ont pas pu être vérifiés et le "
+    "tableau d'administration reste fermé. Réessayez dans quelques minutes."
+)
+MESSAGE_LOGICIEL_REPONSE_INATTENDUE = (
+    "Le logiciel MTJ a fait une réponse inattendue : par prudence, le tableau "
+    "d'administration reste fermé. Réessayez dans quelques minutes ; si cela continue, "
+    "le réglage du serveur du site est à vérifier."
+)
+MESSAGE_LOGICIEL_MAL_REGLE = (
+    "L'adresse du logiciel MTJ est mal réglée sur le serveur du site (une adresse https "
+    "est exigée) : le tableau d'administration reste fermé."
+)
+
+# Anciennes variables du mot de passe propre au site : plus lues. Leur présence est
+# signalée au démarrage (le nom seul, jamais la valeur) pour qu'elles soient retirées.
+for _ancienne_variable in ("DASHBOARD_PASSWORD", "DASHBOARD_USER"):
+    if _ancienne_variable in os.environ:
+        logger.warning(
+            "%s n'est plus lu depuis le 13/11/2026 (connexion par le compte fondateur du "
+            "logiciel MTJ) : à retirer du fichier d'environnement du site",
+            _ancienne_variable,
+        )
+
 _active_tokens: dict[str, float] = {}
 TOKEN_EXPIRY = 3600  # 1 hour
 
@@ -159,6 +207,10 @@ LOGIN_MAX_FAILURES = 5
 LOGIN_LOCK_SECONDS = 15 * 60
 _login_failures: dict[str, dict] = {}
 
+# Essais d'une même adresse passés un par un (voir dashboard_login).
+_verrous_par_adresse: dict[str, asyncio.Lock] = {}
+_essais_en_attente: dict[str, int] = {}
+
 
 class LoginLocked(Exception):
     def __init__(self, retry_after: int):
@@ -166,8 +218,41 @@ class LoginLocked(Exception):
         self.retry_after = retry_after
 
 
-def _same(a: str, b: str) -> bool:
-    return secrets.compare_digest((a or "").encode("utf-8"), (b or "").encode("utf-8"))
+def _en_minutes(secondes: int) -> str:
+    n = max(1, math.ceil(secondes / 60))
+    return f"{n} minute{'s' if n > 1 else ''}"
+
+
+def message_trop_d_essais(secondes: int) -> str:
+    """Blocage du site après 5 essais refusés depuis la même adresse."""
+    return f"Trop d'essais : la connexion est suspendue. Réessayez dans {_en_minutes(secondes)}."
+
+
+class LogicielBloque(Exception):
+    """Le logiciel a suspendu la connexion de ce compte (trop d'essais) : refus.
+
+    Pas compté comme un échec du site : le logiciel n'a rien vérifié, il compte déjà
+    lui-même ses échecs et prévient les fondateurs."""
+
+    def __init__(self, retry_after: int):
+        super().__init__("LOGICIEL_BLOQUE")
+        self.retry_after = retry_after
+        self.message = (
+            "Trop d'essais sur ce compte : le logiciel MTJ a suspendu sa connexion. "
+            f"Réessayez dans {_en_minutes(retry_after)}."
+        )
+
+
+class LogicielIndisponible(Exception):
+    """Le logiciel n'a pas pu vérifier les identifiants : refus, jamais d'ouverture.
+
+    Pas compté comme un échec : rien n'a été vérifié, et une panne du logiciel ne doit pas
+    bloquer un fondateur pendant 15 minutes."""
+
+    def __init__(self, cause: str, message: str = MESSAGE_LOGICIEL_INJOIGNABLE):
+        super().__init__(cause)
+        self.cause = cause
+        self.message = message
 
 
 def _now() -> float:
@@ -185,27 +270,147 @@ def login_lock_remaining(ip: str) -> int:
     return max(remaining, 0)
 
 
-def dashboard_login(password: str, ip: str = "unknown", username: str = "") -> Optional[str]:
+def _noter_echec(ip: str) -> None:
+    entry = _login_failures.setdefault(ip, {"count": 0, "locked_until": 0})
+    entry["count"] += 1
+    if entry["count"] >= LOGIN_MAX_FAILURES:
+        entry["locked_until"] = _now() + LOGIN_LOCK_SECONDS
+        entry["count"] = 0
+        logger.warning(f"Dashboard login locked for {ip} ({LOGIN_LOCK_SECONDS}s)")
+
+
+def adresse_logiciel() -> str:
+    """Adresse du logiciel MTJ : variable LOGICIEL_URL, sinon l'adresse en ligne."""
+    return (os.environ.get("LOGICIEL_URL") or LOGICIEL_URL_PAR_DEFAUT).strip().rstrip("/")
+
+
+def _transport_logiciel():
+    """Transport HTTP vers le logiciel : None = le réseau réel.
+
+    Les essais le remplacent par une route de connexion simulée (httpx.MockTransport) ;
+    aucun essai ne joint le vrai logiciel (voir tests/conftest.py)."""
+    return None
+
+
+def _url_connexion_logiciel() -> str:
+    base = adresse_logiciel()
+    try:
+        url = httpx.URL(base + LOGICIEL_ROUTE_CONNEXION)
+    except Exception:
+        url = None
+    if url is None or url.scheme != "https" or not url.host:
+        # Le mot de passe ne part jamais en clair (http) ni vers une adresse illisible.
+        logger.error("Connexion au tableau refusée : LOGICIEL_URL n'est pas une adresse https lisible")
+        raise LogicielIndisponible("adresse du logiciel mal réglée", MESSAGE_LOGICIEL_MAL_REGLE)
+    return str(url)
+
+
+def _attente_demandee(reponse) -> int:
+    try:
+        secondes = int(str(reponse.headers.get("Retry-After", "")).strip())
+    except ValueError:
+        secondes = 0
+    return secondes if 0 < secondes <= 24 * 3600 else LOGIN_LOCK_SECONDS
+
+
+async def verifier_compte_fondateur(email: str, mot_de_passe: str) -> bool:
+    """Demande au logiciel MTJ si ces identifiants ouvrent un compte FONDATEUR.
+
+    True : le logiciel accepte les identifiants et le compte est fondateur.
+    False : le logiciel refuse les identifiants (401 : mauvais mot de passe, compte coupé
+    ou sans accès au logiciel) ou le compte n'est pas fondateur.
+    LogicielBloque : le logiciel a suspendu la connexion de ce compte (429).
+    LogicielIndisponible : logiciel injoignable, délai dépassé, panne (5xx), adresse mal
+    réglée ou réponse inattendue. Dans aucun de ces cas le tableau n'est ouvert.
+
+    Le mot de passe ne sert qu'à cette requête : jamais gardé, jamais écrit au journal.
+    Les jetons de session que le logiciel renvoie (cookies) restent dans le client HTTP,
+    fermé et jeté à la fin de la requête ; ils ne sont jamais transmis au visiteur.
+    """
+    url = _url_connexion_logiciel()
+    try:
+        async with httpx.AsyncClient(
+            timeout=LOGICIEL_DELAI_SECONDES,
+            follow_redirects=False,  # une redirection n'emporte jamais le mot de passe ailleurs
+            transport=_transport_logiciel(),
+        ) as client:
+            reponse = await client.post(
+                url,
+                json={"email": email, "password": mot_de_passe},
+                headers={"Accept": "application/json"},
+            )
+    except httpx.HTTPError as exc:  # réseau, délai, certificat, protocole
+        logger.error("Connexion au tableau refusée : logiciel injoignable (%s)", type(exc).__name__)
+        raise LogicielIndisponible(type(exc).__name__) from None
+
+    statut = reponse.status_code
+    if statut == 401:
+        return False
+    if statut == 429:
+        logger.warning("Connexion au tableau refusée : le logiciel a suspendu la connexion de ce compte")
+        raise LogicielBloque(_attente_demandee(reponse))
+    if statut >= 500:
+        logger.error("Connexion au tableau refusée : le logiciel répond %s", statut)
+        raise LogicielIndisponible(f"statut {statut}")
+    if statut != 200:
+        logger.error("Connexion au tableau refusée : réponse inattendue du logiciel (statut %s)", statut)
+        raise LogicielIndisponible(f"statut {statut}", MESSAGE_LOGICIEL_REPONSE_INATTENDUE)
+    try:
+        donnees = reponse.json()
+    except ValueError:
+        donnees = None
+    role = donnees.get("role") if isinstance(donnees, dict) else None
+    if not isinstance(role, str):
+        logger.error("Connexion au tableau refusée : réponse du logiciel sans rôle lisible")
+        raise LogicielIndisponible("réponse sans rôle", MESSAGE_LOGICIEL_REPONSE_INATTENDUE)
+    if role.strip().lower() != ROLE_FONDATEUR_LOGICIEL:
+        logger.warning("Connexion au tableau refusée : compte du logiciel qui n'est pas fondateur")
+        return False
+    return True
+
+
+async def dashboard_login(password: str, ip: str = "unknown", username: str = "") -> Optional[str]:
+    """Un essai de connexion au tableau d'administration depuis l'adresse `ip`.
+
+    Rend un jeton de session du site (1 h) ou None (identifiants refusés, échec compté).
+    LoginLocked : 5 essais refusés depuis cette adresse, blocage de 15 minutes.
+    LogicielBloque, LogicielIndisponible : refus sans échec compté (voir plus haut).
+
+    Les essais d'une même adresse passent un par un : la vérification attend la réponse
+    du logiciel, et des essais envoyés en même temps ne doivent pas dépasser 5 avant le
+    blocage (contrôle du blocage et compte des échecs restent d'un seul tenant).
+    """
+    verrou = _verrous_par_adresse.setdefault(ip, asyncio.Lock())
+    _essais_en_attente[ip] = _essais_en_attente.get(ip, 0) + 1
+    try:
+        async with verrou:
+            return await _un_essai(password, ip, username)
+    finally:
+        _essais_en_attente[ip] -= 1
+        if _essais_en_attente[ip] <= 0:
+            _essais_en_attente.pop(ip, None)
+            _verrous_par_adresse.pop(ip, None)
+
+
+async def _un_essai(password: str, ip: str, username: str) -> Optional[str]:
     remaining = login_lock_remaining(ip)
     if remaining > 0:
         raise LoginLocked(remaining)
 
-    ok = _same(password, DASHBOARD_PASSWORD)
-    if DASHBOARD_USER:
-        ok = _same(username, DASHBOARD_USER) and ok
+    email = (username or "").strip()
+    if email and password:
+        ok = await verifier_compte_fondateur(email, password)
+    else:
+        ok = False  # adresse ou mot de passe vide : refusé sans interroger le logiciel
     if not ok:
-        entry = _login_failures.setdefault(ip, {"count": 0, "locked_until": 0})
-        entry["count"] += 1
-        if entry["count"] >= LOGIN_MAX_FAILURES:
-            entry["locked_until"] = _now() + LOGIN_LOCK_SECONDS
-            entry["count"] = 0
-            logger.warning(f"Dashboard login locked for {ip} ({LOGIN_LOCK_SECONDS}s)")
+        _noter_echec(ip)
         return None
 
     _login_failures.pop(ip, None)
     token = secrets.token_hex(32)
     _active_tokens[token] = _now() + TOKEN_EXPIRY
     _cleanup_expired_tokens()
+    logger.info("Tableau d'administration ouvert avec un compte fondateur du logiciel")
     return token
 
 
