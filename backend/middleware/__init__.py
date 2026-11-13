@@ -22,12 +22,18 @@ RATE_LIMITS = {
 
 
 def _get_client_ip(request: Request) -> str:
+    # 13/11/2026 (relecture du site) : X-Real-IP d'abord. Il est posé par le nginx du serveur
+    # (proxy_set_header X-Real-IP $remote_addr, bloc /api/ du site) et le visiteur ne peut pas
+    # le choisir. Le premier X-Forwarded-For, lui, est écrit par le visiteur s'il le veut :
+    # s'y fier laissait contourner le blocage après 5 essais du tableau d'administration et
+    # la limite d'envois des formulaires en changeant d'adresse à chaque essai.
+    # X-Forwarded-For ne sert plus que sans X-Real-IP (essais hors ligne, poste local).
+    real_ip = request.headers.get("x-real-ip", "").strip()
+    if real_ip:
+        return real_ip
     forwarded = request.headers.get("x-forwarded-for", "")
     if forwarded:
         return forwarded.split(",")[0].strip()
-    real_ip = request.headers.get("x-real-ip", "")
-    if real_ip:
-        return real_ip
     return request.client.host if request.client else "unknown"
 
 

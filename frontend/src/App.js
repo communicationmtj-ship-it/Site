@@ -100,7 +100,7 @@ const HomePage = () => {
     <>
       <SeoHead
         title="MTJ Sécurité Privée | Sécurité, Gardiennage, Cynophile | Toulon, Nice, Toulouse"
-        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP, protection rapprochée. Interventions à Toulon, Nice, Monaco, Toulouse et sur tout le territoire national. Devis gratuit."
+        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe. Interventions à Toulon, Nice, Monaco, Toulouse et sur tout le territoire national. Devis gratuit."
         path="/"
       />
       <Navbar />

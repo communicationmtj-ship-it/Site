@@ -187,6 +187,14 @@ export default function Dashboard() {
   const maxCountry = Math.max(...(stats?.countries?.map(c => c.visits) || [1]));
   const maxCity = Math.max(...(stats?.cities?.map(c => c.visits) || [1]));
 
+  // Échec visible (13/11/2026, relecture) : un comptage que le serveur n'a pas pu faire
+  // (valeur null) s'affiche « non compté » et déclenche l'alerte ; il ne devient jamais 0.
+  const mailsNonPartis = stats?.mails_non_partis || null;
+  const mailsValeurs = mailsNonPartis ? Object.values(mailsNonPartis) : [];
+  const mailsComptageImpossible = mailsValeurs.some((n) => typeof n !== 'number');
+  const mailsEnEchec = mailsValeurs.some((n) => typeof n === 'number' && n > 0);
+  const nbMails = (n) => (typeof n === 'number' ? n : 'non compté');
+
   return (
     <div className="min-h-screen bg-black text-white" data-testid="analytics-dashboard">
       {/* Header */}
@@ -242,12 +250,12 @@ export default function Dashboard() {
 
       <div className="p-6 space-y-6 max-w-7xl mx-auto">
         {/* Échec visible : demandes enregistrées dont le mail d'alerte n'est pas parti (13/11/2026). */}
-        {stats?.mails_non_partis && Object.values(stats.mails_non_partis).some((n) => n > 0) && (
+        {(mailsEnEchec || mailsComptageImpossible) && (
           <div className="border border-red-500/40 bg-red-500/10 text-red-300 px-4 py-3 text-sm" role="alert" data-testid="dashboard-mails-non-partis">
-            Mails non partis sur les {days} derniers jours : {stats.mails_non_partis.devis || 0} demande(s) de devis,
-            {' '}{stats.mails_non_partis.contact || 0} message(s) de contact, {stats.mails_non_partis.recrutement || 0} candidature(s).
-            Ces demandes sont enregistrées sur le serveur du site mais l'équipe n'a pas été prévenue : vérifiez les identifiants
-            des boîtes mail du serveur.
+            Mails non partis sur les {days} derniers jours : {nbMails(mailsNonPartis.devis)} demande(s) de devis,
+            {' '}{nbMails(mailsNonPartis.contact)} message(s) de contact, {nbMails(mailsNonPartis.recrutement)} candidature(s).
+            {mailsEnEchec && " Ces demandes sont enregistrées sur le serveur du site mais l'équipe n'a pas été prévenue : vérifiez les identifiants des boîtes mail du serveur."}
+            {mailsComptageImpossible && " Le comptage a échoué pour au moins une catégorie : l'état des mails n'est pas connu, voir le journal du serveur du site."}
           </div>
         )}
         {/* KPI Cards */}

@@ -64,7 +64,7 @@ Forte d'une équipe d'experts qualifiés et expérimentés, nous mettons notre s
 
 Notre engagement se traduit par des interventions professionnelles, un respect strict des réglementations en vigueur et une disponibilité 24h/24 et 7j/7.
 
-Nous sommes fiers de notre expertise en sécurité cynophile, avec des maîtres-chiens formés aux techniques les plus avancées de surveillance et de détection.`,
+Nous sommes fiers de notre expertise en sécurité cynophile, avec des maîtres-chiens formés à la surveillance et à la détection.`,
 };
 
 export const services = [
@@ -129,7 +129,7 @@ export const services = [
     id: 5,
     title: "PROTECTION PHYSIQUE DES PERSONNES",
     subtitle: "Sécurité Rapprochée",
-    description: "La protection rapprochée de personnalités, dirigeants d'entreprise, célébrités et particuliers exposés. Des agents de protection rapprochée, formés aux techniques d'évaluation des menaces, d'escorte et de sécurisation de déplacements, garantissent votre intégrité physique en toute discrétion.",
+    description: "La protection rapprochée de personnalités, dirigeants d'entreprise, célébrités et particuliers exposés. Des agents de protection rapprochée, formés aux techniques d'évaluation des menaces, d'escorte et de sécurisation de déplacements, assurent votre protection en toute discrétion.",
     legalNotice: "MTJ SÉCURITÉ RAPPROCHÉE — SIRET 933 244 303 00014\nAutorisation CNAPS AUT-006-2123-10-21-20240955994\nArticle L612-14 du code de la sécurité intérieure : « L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics. »",
     icon: "UserShield",
     features: [],

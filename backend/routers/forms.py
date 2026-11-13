@@ -9,7 +9,7 @@ from email_service import send_quote_email, send_contact_email, send_recruitment
 from security import (
     validate_field, validate_email, validate_phone,
     validate_upload, validate_upload_size,
-    check_honeypot,
+    check_honeypot, FORM_EXPIRED, FORM_EXPIRED_MESSAGE,
     ALLOWED_UPLOAD_EXTENSIONS, MAX_TOTAL_UPLOAD_SIZE,
 )
 
@@ -36,6 +36,9 @@ def _check_spam(hp: Optional[str], ts: Optional[str], fake_msg: str) -> dict | N
     except ValueError as e:
         if str(e) == "SPAM_DETECTED":
             return {"status": "success", "message": fake_msg}
+        if str(e) == FORM_EXPIRED:
+            # Onglet resté ouvert plus de 24 h : le visiteur doit le savoir (13/11/2026).
+            return {"status": "error", "message": FORM_EXPIRED_MESSAGE}
         raise
     return None
 

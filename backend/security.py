@@ -1,5 +1,6 @@
 import re
 import os
+import math
 import hashlib
 import secrets
 import logging
@@ -104,13 +105,23 @@ MIN_SUBMIT_TIME_SECONDS = 3
 
 MAX_FORM_AGE_SECONDS = 24 * 3600
 
+# Formulaire chargé depuis plus de 24 h : refus visible, pas réponse silencieuse.
+FORM_EXPIRED = "FORM_EXPIRED"
+FORM_EXPIRED_MESSAGE = (
+    "Ce formulaire est ouvert depuis plus de 24 heures et votre demande n'a pas été transmise : "
+    "rechargez la page, puis renvoyez-la."
+)
+
 
 def check_honeypot(honeypot_value: Optional[str], form_loaded_at: Optional[str]) -> None:
     """Champ piège + horodatage du chargement du formulaire.
 
     Les trois formulaires du site (devis, contact, recrutement) envoient toujours
-    le champ « ts » : son absence, une valeur illisible, un envoi en moins de
-    3 secondes ou plus de 24 h après le chargement sont traités comme du spam.
+    le champ « ts » : son absence, une valeur illisible ou non finie, ou un envoi en
+    moins de 3 secondes sont traités comme du spam (réponse silencieuse).
+    Un envoi plus de 24 h après le chargement n'est pas un robot mais un onglet resté
+    ouvert (relecture du 13/11/2026) : refus VISIBLE (FORM_EXPIRED), pour que le
+    visiteur recharge la page au lieu de croire partie une demande ni gardée ni envoyée.
     """
     if honeypot_value:
         logger.warning("Honeypot triggered")
@@ -121,10 +132,17 @@ def check_honeypot(honeypot_value: Optional[str], form_loaded_at: Optional[str])
     except (ValueError, TypeError):
         logger.warning("Form submitted without a valid timestamp")
         raise ValueError("SPAM_DETECTED")
-    elapsed = datetime.now(timezone.utc).timestamp() - loaded
-    if elapsed < MIN_SUBMIT_TIME_SECONDS or elapsed > MAX_FORM_AGE_SECONDS:
-        logger.warning(f"Form timing out of range: {elapsed:.1f}s")
+    if not math.isfinite(loaded):
+        # « nan » passait toutes les comparaisons de durée.
+        logger.warning("Form submitted without a valid timestamp")
         raise ValueError("SPAM_DETECTED")
+    elapsed = datetime.now(timezone.utc).timestamp() - loaded
+    if elapsed < MIN_SUBMIT_TIME_SECONDS:
+        logger.warning(f"Form submitted too fast: {elapsed:.1f}s")
+        raise ValueError("SPAM_DETECTED")
+    if elapsed > MAX_FORM_AGE_SECONDS:
+        logger.warning(f"Form older than 24 h: {elapsed:.0f}s")
+        raise ValueError(FORM_EXPIRED)
 
 
 # ─── Dashboard Auth ──────────────────────────────────────────────
