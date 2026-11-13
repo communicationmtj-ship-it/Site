@@ -1,14 +1,39 @@
 // Mock data for MTJ SECURITE PRIVÉE
 
+// Coordonnées : UNE seule source pour tout le site (pages, pied de page, données
+// structurées). Changer l'adresse e-mail affichée = changer EMAIL ici, et la même
+// adresse dans frontend/public/index.html (un essai du dépôt vérifie qu'elles sont égales).
+const EMAIL = "contactsmtjsecuriteprivee@gmail.com";
+const STREET = "31 rue Chevalier Paul";
+const POSTAL_CODE = "83000";
+const CITY = "Toulon";
+
 export const companyInfo = {
   name: "MTJ SÉCURITÉ PRIVÉE",
   slogan: "VOTRE SÉCURITÉ, NOTRE MISSION.",
   motto: "Avec Force et Honneur Toujours servir",
   phone: "07 60 73 82 06",
+  phoneIntl: "+33760738206",
   phoneHref: "tel:+33760738206",
-  email: "contactsmtjsecuriteprivee@gmail.com",
-  emailHref: "mailto:contactsmtjsecuriteprivee@gmail.com",
-  address: "31 rue Chevalier Paul, 83000 Toulon",
+  email: EMAIL,
+  emailHref: `mailto:${EMAIL}`,
+  street: STREET,
+  postalCode: POSTAL_CODE,
+  city: CITY,
+  address: `${STREET}, ${POSTAL_CODE} ${CITY}`,
+  // Lien simple vers la carte (aucun contenu Google chargé avant le clic : pas de cookie tiers).
+  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${STREET}, ${POSTAL_CODE} ${CITY}`)}`,
+  instagramUrl: "https://www.instagram.com/mtj.securite.privee/",
+};
+
+// Adresse postale au format des données structurées (schema.org).
+export const postalAddressSchema = {
+  "@type": "PostalAddress",
+  "streetAddress": STREET,
+  "addressLocality": CITY,
+  "postalCode": POSTAL_CODE,
+  "addressRegion": "Provence-Alpes-Côte d'Azur",
+  "addressCountry": "FR",
 };
 
 // Bloc légal unique (CNAPS) : un numéro d'autorisation pour chaque société.
@@ -75,7 +100,7 @@ export const services = [
     id: 3,
     title: "CYNODEX",
     subtitle: "Détection d'Explosifs",
-    description: "Notre unité CYNODEX est spécialisée dans la détection d'explosifs avec des chiens hautement entraînés. Nos équipes certifiées garantissent la sécurité de vos événements et installations.",
+    description: "Notre unité CYNODEX est spécialisée dans la détection d'explosifs avec des chiens entraînés à cette mission. Nos binômes maître-chien interviennent pour sécuriser vos événements et vos installations, selon la certification de chaque binôme.",
     icon: "Dog",
     link: "/detection-explosifs-cynodex",
     color: "#AC8631",
@@ -90,10 +115,10 @@ export const services = [
     id: 4,
     title: "SSIAP",
     subtitle: "Service de Sécurité Incendie et d'Assistance à Personnes",
-    description: "Nos agents SSIAP certifiés assurent la sécurité incendie de vos établissements recevant du public. Ils garantissent le respect des normes de sécurité et la protection des personnes.",
+    description: "Nos agents SSIAP diplômés assurent la sécurité incendie de vos établissements recevant du public. Ils veillent au respect des consignes de sécurité incendie et à la protection des personnes.",
     icon: "Flame",
     link: "/ssiap-securite-incendie",
-    color: "#B00B0B",
+    color: "#AC8631",
     features: [
       "Prévention incendie",
       "Évacuation d'urgence",
@@ -111,7 +136,9 @@ export const services = [
     wide: true,
     externalCompany: "MTJ SÉCURITÉ RAPPROCHÉE",
     link: "/protection-rapprochee",
-    color: "#68187B"
+    // Charte noir et doré pour toutes les cartes (audit du 30/10/2026, site-035 à 037) :
+    // la société du groupe se distingue par son bandeau nominatif, pas par une couleur.
+    color: "#AC8631"
   }
 ];
 

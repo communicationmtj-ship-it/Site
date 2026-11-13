@@ -9,26 +9,24 @@ const data = {
   areaServed: 'France métropolitaine',
 
   h1: 'Grand Déplacement — Sécurité sur l\'Ensemble du Territoire National',
-  introduction: `Au-delà de notre zone d'implantation principale dans le sud de la France (Toulon, Nice, Toulouse), MTJ Sécurité Privée dispose de la capacité logistique et opérationnelle pour déployer ses équipes en grand déplacement sur l'ensemble du territoire français.\n\nParis, Lyon, Bordeaux, Nantes, Strasbourg, Lille : où que se trouvent vos besoins en sécurité, nous mobilisons nos agents qualifiés pour des missions ponctuelles ou récurrentes. Cette flexibilité fait de MTJ Sécurité Privée un partenaire unique capable de vous accompagner sur tous vos sites en France.`,
+  // 13/11/2026 (audit du site de Mathilde, site-061, 064, 083 à 086) : pas de « pôles », pas
+  // d'outre-mer ni d'international, aucun délai promis sans devis, suivi décrit sans outil non ouvert.
+  introduction: `Au-delà de notre zone d'intervention principale dans le sud de la France, MTJ Sécurité Privée peut déployer ses équipes en grand déplacement sur l'ensemble du territoire métropolitain.\n\nParis, Lyon, Bordeaux, Nantes, Strasbourg, Lille : où que se trouvent vos besoins en sécurité, nous mobilisons nos agents qualifiés pour des missions ponctuelles ou récurrentes, et vous accompagnons sur tous vos sites en France.`,
 
   sections: [
     {
       h2: 'Notre capacité de déploiement national',
-      intro: 'MTJ Sécurité Privée a développé une organisation logistique permettant d\'intervenir rapidement partout en France métropolitaine.',
+      intro: 'MTJ Sécurité Privée organise le déplacement de ses équipes partout en France métropolitaine.',
       subsections: [
         {
-          h3: 'Mobilisation rapide des équipes',
-          content: 'Grâce à nos trois pôles opérationnels (Toulon, Nice, Toulouse), nous sommes en mesure de projeter nos agents sur l\'ensemble du territoire en moins de 48 heures. Pour les urgences, un dispositif de déploiement accéléré permet une intervention sous 24 heures. Nos équipes voyagent avec leur équipement complet et sont immédiatement opérationnelles à leur arrivée.',
-          list: ['Déploiement sous 24 à 48 heures', 'Équipes autonomes et équipées', 'Coordination logistique centralisée', 'Frais de déplacement et d\'hébergement précisés dans chaque devis']
+          h3: 'Mobilisation des équipes',
+          content: 'Depuis notre siège de Toulon et grâce à notre réseau d\'agents, nous organisons le déplacement de nos équipes sur l\'ensemble du territoire. Le délai de mise en place est annoncé dans chaque devis ; en cas d\'urgence, appelez-nous pour connaître le délai possible. Nos équipes voyagent avec leur équipement.',
+          list: ['Délai de mise en place annoncé au devis', 'Équipes autonomes et équipées', 'Coordination logistique centralisée', 'Frais de déplacement et d\'hébergement précisés dans chaque devis']
         },
         {
           h3: 'Villes et régions d\'intervention',
-          content: 'Nous intervenons régulièrement hors de notre zone principale pour des missions de sécurité événementielle, de gardiennage temporaire, de sécurité cynophile ou de détection d\'explosifs. Paris et Île-de-France, Lyon et région Auvergne-Rhône-Alpes, Bordeaux et Nouvelle-Aquitaine, Nantes et Pays de la Loire, Strasbourg et Grand Est : nos équipes connaissent les spécificités de chaque territoire.',
+          content: 'Nous pouvons intervenir hors de notre zone principale pour des missions de sécurité événementielle, de gardiennage temporaire, de sécurité cynophile ou de détection d\'explosifs : Paris et Île-de-France, Lyon et région Auvergne-Rhône-Alpes, Bordeaux et Nouvelle-Aquitaine, Nantes et Pays de la Loire, Strasbourg et Grand Est.',
           list: ['Paris et Île-de-France', 'Lyon, Grenoble, Saint-Étienne', 'Bordeaux, La Rochelle, Bayonne', 'Nantes, Rennes, Brest', 'Strasbourg, Metz, Nancy', 'Lille, Rouen, Reims']
-        },
-        {
-          h3: 'DOM-TOM et international',
-          content: 'Sur demande spécifique, MTJ Sécurité Privée peut étudier la faisabilité de missions dans les départements et territoires d\'outre-mer ainsi qu\'à l\'international. Chaque demande fait l\'objet d\'une étude personnalisée prenant en compte les contraintes réglementaires locales.'
         }
       ]
     },
@@ -46,12 +44,12 @@ const data = {
           content: 'Chantiers de grande envergure, sites industriels en maintenance, locaux vacants en attente de reconversion : le gardiennage temporaire en grand déplacement permet de sécuriser vos actifs partout en France pendant une période définie. Nos agents assurent rondes, contrôle d\'accès et surveillance 24/7.'
         },
         {
-          h3: 'Renfort d\'effectifs pour partenaires',
-          content: 'MTJ Sécurité Privée peut également intervenir en renfort d\'effectifs pour des entreprises de sécurité partenaires lors de pics d\'activité. Cette prestation de sous-traitance qualifiée garantit à nos partenaires des agents formés, équipés et immédiatement opérationnels.'
+          h3: 'Renfort d\'effectifs pour d\'autres entreprises de sécurité',
+          content: 'MTJ Sécurité Privée peut également intervenir en renfort d\'effectifs pour d\'autres entreprises de sécurité lors de pics d\'activité, dans le cadre légal de la sous-traitance prévu par le code de la sécurité intérieure. Nos agents sont titulaires de leur carte professionnelle et équipés pour la mission.'
         },
         {
           h3: 'Sécurité cynophile et CYNODEX en déplacement',
-          content: 'Nos binômes maître-chien d\'intervention et nos équipes CYNODEX de détection d\'explosifs sont particulièrement sollicités en grand déplacement pour des missions spécifiques : sécurisation d\'événements sensibles, levées de doute, inspections de sites avant des manifestations publiques. Ces compétences rares sont un atout décisif pour les organisateurs d\'événements nationaux.'
+          content: 'Nos binômes maître-chien d\'intervention et nos binômes CYNODEX de détection d\'explosifs peuvent être déployés en grand déplacement pour des missions spécifiques : sécurisation d\'événements sensibles, levées de doute, inspections de sites avant des manifestations publiques. Ces compétences rares sont un atout pour les organisateurs d\'événements.'
         }
       ]
     },
@@ -64,12 +62,12 @@ const data = {
           list: ['Étude de site et analyse de risques', 'Coordination avec les autorités locales', 'Planification des rotations d\'équipes', 'Chef de mission dédié']
         },
         {
-          h3: 'Suivi et reporting',
-          content: 'Pendant toute la durée de la mission, un suivi en temps réel est assuré depuis notre centre opérationnel. Rapports quotidiens, main courante dématérialisée, photos géolocalisées : vous disposez d\'une visibilité complète sur la prestation, même à distance.'
+          h3: 'Suivi et compte rendu',
+          content: 'Pendant la mission, un responsable suit la prestation et reste votre interlocuteur. Un compte rendu vous est transmis selon les modalités prévues au devis.'
         },
         {
           h3: 'Tarification transparente',
-          content: 'Les frais de déplacement, d\'hébergement et de restauration des agents sont précisés dans chaque devis, poste par poste. Nous optimisons la logistique pour proposer des tarifs adaptés même pour des interventions loin de nos bases.'
+          content: 'Les frais de déplacement, d\'hébergement et de restauration des agents sont précisés dans chaque devis, poste par poste. Nous optimisons la logistique pour proposer des tarifs adaptés, même loin de notre siège.'
         }
       ]
     }
@@ -78,7 +76,7 @@ const data = {
   faq: [
     {
       question: 'Quel est le délai pour organiser une mission en grand déplacement ?',
-      answer: 'Le délai standard est de 48 à 72 heures pour une mission classique. En cas d\'urgence, nous pouvons mobiliser des équipes sous 24 heures. Pour les événements planifiés, nous recommandons de nous contacter au moins 2 semaines à l\'avance pour une préparation optimale.'
+      answer: 'Le délai dépend du lieu, du nombre d\'agents et des qualifications demandées : il est annoncé dans le devis. En cas d\'urgence, appelez-nous au 07 60 73 82 06 pour connaître le délai possible. Pour les événements planifiés, nous recommandons de nous contacter au moins 2 semaines à l\'avance.'
     },
     {
       question: 'Les frais de déplacement sont-ils inclus dans le devis ?',
@@ -90,11 +88,11 @@ const data = {
     },
     {
       question: 'Quels types d\'agents pouvez-vous déployer en grand déplacement ?',
-      answer: 'L\'ensemble de nos compétences est disponible en grand déplacement : agents de prévention et de sécurité (APS), maîtres-chiens d\'intervention, équipes CYNODEX de détection d\'explosifs, agents SSIAP de sécurité incendie et agents de protection rapprochée. Nous composons l\'équipe en fonction de vos besoins spécifiques.'
+      answer: 'L\'ensemble de nos compétences est disponible en grand déplacement : agents de prévention et de sécurité (APS), maîtres-chiens d\'intervention, binômes CYNODEX de détection d\'explosifs et agents SSIAP de sécurité incendie ; la protection rapprochée est assurée par MTJ Sécurité Rapprochée, société du groupe. Nous composons l\'équipe en fonction de vos besoins.'
     }
   ],
 
-  conclusion: `MTJ Sécurité Privée ne se limite pas au sud de la France. Notre capacité de déploiement en grand déplacement vous permet de bénéficier de notre expertise et de notre savoir-faire sur l'ensemble du territoire national. Un seul interlocuteur, une qualité de service constante, où que vous soyez en France.\n\nContactez-nous pour étudier votre projet et recevoir un devis personnalisé incluant tous les frais de déplacement.`,
+  conclusion: `MTJ Sécurité Privée ne se limite pas au sud de la France. Notre capacité de déploiement en grand déplacement vous permet de bénéficier de notre expertise et de notre savoir-faire sur l'ensemble du territoire national, avec un seul interlocuteur.\n\nContactez-nous pour étudier votre projet et recevoir un devis personnalisé qui détaille les frais de déplacement.`,
 
   relatedLinks: [
     { href: '/securite-privee-sud-france', label: 'Sécurité privée dans le sud de la France' },

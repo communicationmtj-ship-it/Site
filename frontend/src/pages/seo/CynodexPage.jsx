@@ -10,21 +10,24 @@ const data = {
   areaServed: 'France entière',
 
   h1: 'CYNODEX — Détection d\'Explosifs par Équipe Cynophile',
-  introduction: `L'unité CYNODEX de MTJ Sécurité Privée est spécialisée dans la détection d'explosifs à l'aide de chiens hautement entraînés. Face à la menace terroriste et aux risques liés aux engins explosifs improvisés, nos équipes certifiées apportent une capacité de détection inégalée par les technologies conventionnelles.\n\nCertifiée et habilitée, notre unité CYNODEX intervient pour sécuriser les événements de grande envergure, les sites sensibles et les lieux accueillant du public sur l'ensemble du territoire national.`,
+  // 13/11/2026 (audit du site de Mathilde, site-075 à 077) : sans liste ni nombre de familles
+  // d'explosifs, sans sites militaires, nucléaires ni gouvernementaux, sans « partenaire des
+  // autorités » ; tout se dit « selon la certification du binôme ».
+  introduction: `L'unité CYNODEX de MTJ Sécurité Privée est spécialisée dans la détection d'explosifs à l'aide de chiens entraînés à cette mission. Face à la menace terroriste et aux risques liés aux engins explosifs improvisés, la détection canine apporte une capacité complémentaire aux moyens technologiques.\n\nNos binômes CYNODEX interviennent, selon la certification de chaque binôme, pour sécuriser des événements, des sites sensibles et des lieux accueillant du public.`,
 
   sections: [
     {
       h2: 'Missions de l\'unité CYNODEX',
-      intro: 'L\'expertise CYNODEX de MTJ Sécurité Privée couvre l\'ensemble des besoins en détection d\'explosifs, de la prévention à l\'intervention d\'urgence.',
+      intro: 'L\'expertise CYNODEX de MTJ Sécurité Privée couvre la prévention et la levée de doute.',
       subsections: [
         {
           h3: 'Levée de doute et inspection de sites',
-          content: 'Nos équipes CYNODEX effectuent des levées de doute sur les colis ou objets suspects identifiés dans vos locaux ou sur vos sites. Le chien de détection d\'explosifs, grâce à son flair exceptionnel, est capable d\'identifier des traces infimes de matières explosives, même dissimulées. Cette prestation est essentielle pour les sièges d\'entreprises, les administrations, les ambassades et les lieux de pouvoir.',
+          content: 'Nos binômes CYNODEX effectuent des levées de doute sur les colis ou objets suspects identifiés dans vos locaux ou sur vos sites. Le chien de détection d\'explosifs, grâce à son flair, peut identifier des traces de matières explosives, même dissimulées. Cette prestation s\'adresse notamment aux sièges d\'entreprises et aux lieux accueillant du public.',
           list: ['Levée de doute sur colis suspects', 'Inspection de véhicules', 'Vérification de locaux avant occupation', 'Recherche de matières explosives']
         },
         {
           h3: 'Sécurisation pré-événementielle',
-          content: 'Avant chaque événement majeur (concert, match sportif, congrès, sommet diplomatique), nos équipes CYNODEX procèdent à une inspection complète des lieux. Le chien détecteur balaye l\'ensemble de l\'enceinte, des coulisses, des zones techniques et des parkings pour garantir l\'absence de toute menace explosive. Cette prestation s\'inscrit dans une démarche globale de sûreté événementielle.'
+          content: 'Avant un événement (concert, match sportif, congrès), nos binômes CYNODEX procèdent à une inspection des lieux. Le chien détecteur passe l\'enceinte, les coulisses, les zones techniques et les parkings afin de détecter une éventuelle menace explosive. Cette prestation s\'inscrit dans une démarche globale de sûreté événementielle.'
         }
       ]
     },
@@ -34,15 +37,15 @@ const data = {
       subsections: [
         {
           h3: 'Certification spécialisée détection d\'explosifs',
-          content: 'Nos maîtres-chiens CYNODEX sont titulaires de certifications spécifiques en détection d\'explosifs, en complément de leur carte professionnelle CNAPS. Cette qualification atteste de leur capacité à identifier l\'ensemble des familles d\'explosifs (militaires, commerciaux, artisanaux) et à opérer selon des protocoles stricts de sécurité.'
+          content: 'Nos maîtres-chiens CYNODEX sont titulaires d\'une certification en détection d\'explosifs, en complément de leur carte professionnelle délivrée par le CNAPS. Ils opèrent selon des protocoles stricts de sécurité.'
         },
         {
           h3: 'Chiens détecteurs : entraînement spécialisé',
-          content: 'Les chiens de notre unité CYNODEX suivent un programme d\'entraînement intensif et continu à la détection de matières explosives. Ils sont capables de détecter plus de 20 familles d\'explosifs différentes. Leur entraînement est supervisé par des spécialistes et fait l\'objet d\'évaluations régulières pour garantir un taux de détection optimal.'
+          content: 'Les chiens de notre unité CYNODEX suivent un entraînement continu à la détection de matières explosives. Ils sont entraînés à la détection de plusieurs familles de matières explosives, selon la certification du binôme, et font l\'objet d\'évaluations régulières.'
         },
         {
           h3: 'Coordination avec les forces de l\'ordre',
-          content: 'En cas de détection positive, nos équipes CYNODEX appliquent des protocoles d\'alerte stricts et assurent la liaison avec les forces de sécurité intérieure (police, gendarmerie, démineurs). Notre professionnalisme et notre rigueur en font un partenaire de confiance des autorités dans la chaîne de sécurité nationale.'
+          content: 'En cas de détection positive, nos binômes CYNODEX appliquent des protocoles d\'alerte stricts et alertent les forces de sécurité intérieure (police, gendarmerie, services de déminage), seules compétentes pour intervenir sur un engin suspect.'
         }
       ]
     },
@@ -50,13 +53,13 @@ const data = {
       h2: 'Applications et secteurs d\'intervention',
       subsections: [
         {
-          h3: 'Événements de grande envergure',
-          content: 'Festivals, concerts, compétitions internationales, sommets politiques : notre unité CYNODEX sécurise les événements accueillant des milliers de personnes. Nous intervenons en amont de l\'événement pour l\'inspection des lieux et pendant la manifestation pour assurer une veille permanente.',
-          list: ['Festivals et concerts', 'Événements sportifs internationaux', 'Congrès et salons professionnels', 'Cérémonies officielles']
+          h3: 'Événements accueillant un large public',
+          content: 'Festivals, concerts, compétitions sportives, congrès : nos binômes CYNODEX peuvent intervenir en amont de l\'événement pour l\'inspection des lieux et pendant la manifestation pour une veille sur site.',
+          list: ['Festivals et concerts', 'Événements sportifs', 'Congrès et salons professionnels', 'Lieux accueillant du public']
         },
         {
-          h3: 'Sites sensibles et infrastructures critiques',
-          content: 'Nos équipes CYNODEX protègent les infrastructures critiques : centres commerciaux, gares, aéroports, sites militaires, installations nucléaires et bâtiments gouvernementaux. La détection canine offre une couche de sécurité complémentaire aux dispositifs technologiques existants (portiques, scanners, caméras).'
+          h3: 'Sites sensibles et lieux accueillant du public',
+          content: 'Selon leur habilitation, nos binômes CYNODEX peuvent intervenir dans des centres commerciaux, des gares, des aéroports et des lieux accueillant du public. La détection canine offre une couche de sécurité complémentaire aux dispositifs technologiques existants (portiques, scanners, caméras).'
         }
       ]
     }
@@ -69,15 +72,15 @@ const data = {
     },
     {
       question: 'Le chien peut-il détecter tous les types d\'explosifs ?',
-      answer: 'Nos chiens CYNODEX sont entraînés à détecter plus de 20 familles d\'explosifs, incluant les explosifs militaires (C4, TNT, Semtex), commerciaux (dynamite, détonateurs) et artisanaux (TATP, peroxydes). Leur entraînement est continuellement mis à jour pour intégrer les nouvelles menaces identifiées.'
+      answer: 'Aucun moyen de détection n\'est infaillible. Nos chiens CYNODEX sont entraînés à la détection de plusieurs familles de matières explosives, selon la certification du binôme, et leur entraînement est entretenu régulièrement. Le détail vous est précisé lors de l\'étude de votre besoin.'
     },
     {
       question: 'Dans quels délais pouvez-vous intervenir ?',
-      answer: 'MTJ Sécurité Privée peut mobiliser son unité CYNODEX sous 24 à 48 heures pour les missions planifiées. En cas d\'urgence ou de levée de doute immédiate, nous disposons d\'une capacité d\'intervention rapide dans la zone PACA et le sud de la France. Contactez-nous au 07 60 73 82 06 pour évaluer votre besoin.'
+      answer: 'Le délai dépend de la disponibilité des binômes et du lieu de la mission : il vous est annoncé lors de votre demande. Contactez-nous au 07 60 73 82 06 pour évaluer votre besoin.'
     }
   ],
 
-  conclusion: `La détection d'explosifs par unité cynophile représente l'un des moyens les plus fiables et les plus efficaces pour sécuriser vos sites et vos événements face à la menace terroriste. L'unité CYNODEX de MTJ Sécurité Privée vous offre cette expertise de pointe, soutenue par des équipes certifiées et des chiens entraînés aux standards les plus élevés.\n\nProtégez vos collaborateurs, vos clients et votre public avec une solution de détection éprouvée. Contactez MTJ Sécurité Privée pour un devis adapté à votre situation.`,
+  conclusion: `La détection d'explosifs par équipe cynophile est un moyen reconnu pour renforcer la sécurité de vos sites et de vos événements face à la menace terroriste. L'unité CYNODEX de MTJ Sécurité Privée vous apporte cette expertise, assurée par des binômes certifiés.\n\nProtégez vos collaborateurs, vos clients et votre public avec une solution de détection reconnue. Contactez MTJ Sécurité Privée pour un devis adapté à votre situation.`,
 
   relatedLinks: [
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },

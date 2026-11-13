@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Phone } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { companyInfo } from "../data/mock";
 
 // Page affichée pour toute adresse inconnue. Elle demande aux moteurs de recherche
-// de ne pas l'indexer (le vrai code HTTP 404 se règle côté serveur web).
+// de ne pas l'indexer ; le vrai code HTTP 404 est rendu par le serveur web du site
+// (nginx-site.conf, à la racine du dépôt).
 const NotFoundPage = () => {
   useEffect(() => {
     const previousTitle = document.title;
@@ -50,10 +52,10 @@ const NotFoundPage = () => {
               <ArrowLeft size={18} aria-hidden="true" /> Retour à l&apos;accueil
             </Link>
             <a
-              href="tel:+33760738206"
+              href={companyInfo.phoneHref}
               className="inline-flex items-center gap-2 border border-amber-400/40 text-amber-400 px-6 py-3 hover:bg-amber-400/10 transition-colors"
             >
-              <Phone size={18} aria-hidden="true" /> 07 60 73 82 06
+              <Phone size={18} aria-hidden="true" /> {companyInfo.phone}
             </a>
           </div>
         </div>

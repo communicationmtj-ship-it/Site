@@ -241,6 +241,15 @@ export default function Dashboard() {
       </div>
 
       <div className="p-6 space-y-6 max-w-7xl mx-auto">
+        {/* Échec visible : demandes enregistrées dont le mail d'alerte n'est pas parti (13/11/2026). */}
+        {stats?.mails_non_partis && Object.values(stats.mails_non_partis).some((n) => n > 0) && (
+          <div className="border border-red-500/40 bg-red-500/10 text-red-300 px-4 py-3 text-sm" role="alert" data-testid="dashboard-mails-non-partis">
+            Mails non partis sur les {days} derniers jours : {stats.mails_non_partis.devis || 0} demande(s) de devis,
+            {' '}{stats.mails_non_partis.contact || 0} message(s) de contact, {stats.mails_non_partis.recrutement || 0} candidature(s).
+            Ces demandes sont enregistrées sur le serveur du site mais l'équipe n'a pas été prévenue : vérifiez les identifiants
+            des boîtes mail du serveur.
+          </div>
+        )}
         {/* KPI Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard icon={Eye} label="Visites totales" value={stats?.total?.total || 0} sub={`${days} derniers jours`} />

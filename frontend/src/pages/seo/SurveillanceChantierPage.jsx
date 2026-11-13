@@ -18,8 +18,8 @@ const data = {
       subsections: [
         {
           h3: 'Gardiennage permanent et rondes de surveillance',
-          content: 'Nos agents assurent une présence continue sur votre chantier, 24 heures sur 24 et 7 jours sur 7, y compris les nuits, les week-ends et les jours fériés — moments où les chantiers sont les plus vulnérables. Les rondes sont effectuées selon un circuit défini couvrant l\'ensemble du périmètre, avec des points de contrôle vérifiables (rondes avec pointeaux ou application mobile).',
-          list: ['Gardiennage de jour et de nuit', 'Rondes avec traçabilité (pointeaux/app)', 'Week-ends et jours fériés couverts', 'Rapports d\'activité quotidiens']
+          content: 'Nos agents assurent une présence continue sur votre chantier, 24 heures sur 24 et 7 jours sur 7, y compris les nuits, les week-ends et les jours fériés — moments où les chantiers sont les plus vulnérables. Les rondes sont effectuées selon un circuit défini couvrant l\'ensemble du périmètre, avec des points de contrôle consignés à chaque passage.',
+          list: ['Gardiennage de jour et de nuit', 'Rondes avec points de contrôle consignés', 'Week-ends et jours fériés couverts', 'Comptes rendus selon les modalités du devis']
         },
         {
           h3: 'Contrôle d\'accès et gestion des entrées/sorties',
@@ -55,7 +55,7 @@ const data = {
         },
         {
           h3: 'Surveillance cynophile de chantiers',
-          content: 'Pour les chantiers étendus ou les zones à haut risque, nous déployons des binômes maître-chien. La sécurité cynophile multiplie la capacité de surveillance et l\'effet dissuasif, particulièrement efficace lors des rondes nocturnes sur de vastes périmètres.'
+          content: 'Pour les chantiers étendus ou les zones à haut risque, nous déployons des binômes maître-chien. La sécurité cynophile renforce la capacité de surveillance et l\'effet dissuasif, particulièrement lors des rondes nocturnes sur de vastes périmètres.'
         }
       ]
     }

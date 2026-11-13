@@ -5,21 +5,22 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import SeoHead from '../../components/SeoHead';
 import FloatingCTA from '../../components/FloatingCTA';
+import { safeJsonLd } from '../../utils/safeJsonLd';
+import { companyInfo, cnapsCompanies, postalAddressSchema } from '../../data/mock';
 
 const DEFAULT = '#AC8631';
 
 // Société qui signe la page : par défaut MTJ Sécurité Privée (siège à Toulon).
 // Une page peut fournir data.societe pour une autre société du groupe.
+// Coordonnées et numéro d'autorisation lus dans data/mock.js (une seule source).
 const SOCIETE_DEFAUT = {
   nom: 'MTJ Sécurité Privée',
   mention: null,
-  autorisation: 'AUT-083-2123-05-23-20240933884',
-  activite: 'surveillance ou gardiennage',
-  ville: 'Toulon',
-  adresse: '31 rue Chevalier Paul, 83000 Toulon',
+  autorisation: cnapsCompanies.privee.authorization,
+  activite: cnapsCompanies.privee.activity,
+  ville: companyInfo.city,
+  adresse: companyInfo.address,
 };
-
-import { safeJsonLd } from '../../utils/safeJsonLd';
 
 const SeoPageLayout = ({ data }) => {
   const navigate = useNavigate();
@@ -35,10 +36,10 @@ const SeoPageLayout = ({ data }) => {
     <>
       <SeoHead title={data.metaTitle} description={data.metaDescription} path={data.slug} />
       <Navbar />
-      <main className="bg-black min-h-screen pt-20">
+      <main id="contenu" tabIndex={-1} className="bg-black min-h-screen pt-20">
         {/* Breadcrumb */}
-        <nav className="container mx-auto px-4 lg:px-8 py-4" aria-label="Breadcrumb" data-testid="seo-breadcrumb">
-          <ol className="flex items-center text-sm text-gray-500 flex-wrap gap-1">
+        <nav className="container mx-auto px-4 lg:px-8 py-4" aria-label="Fil d'Ariane" data-testid="seo-breadcrumb">
+          <ol className="flex items-center text-sm text-gray-400 flex-wrap gap-1">
             <li><Link to="/" className="hover:text-amber-400 transition-colors">Accueil</Link></li>
             <li><ChevronRight size={14} /></li>
             {data.breadcrumbParent && (
@@ -134,22 +135,28 @@ const SeoPageLayout = ({ data }) => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onClick={() => navigate('/devis')}
+                onClick={() => navigate(data.serviceDevis ? `/devis?service=${encodeURIComponent(data.serviceDevis)}` : '/devis')}
                 className="text-black font-bold px-8 py-3 uppercase tracking-wider transition-opacity hover:opacity-90"
                 style={{ backgroundColor: c }}
                 data-testid="seo-cta-devis"
               >
                 Demander un devis
               </button>
-              <a href="tel:+33760738206" className="flex items-center gap-2 font-semibold transition-opacity hover:opacity-80" style={{ color: c }}>
-                <Phone size={18} /> 07 60 73 82 06
+              <a href={companyInfo.phoneHref} className="flex items-center gap-2 font-semibold transition-opacity hover:opacity-80" style={{ color: c }}>
+                <Phone size={18} /> {companyInfo.phone}
               </a>
             </div>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 text-gray-500 text-sm">
-              <a href="mailto:contactsmtjsecuriteprivee@gmail.com" className="flex items-center gap-1 hover:text-amber-400 transition-colors"><Mail size={14} /> contactsmtjsecuriteprivee@gmail.com</a>
-              <span className="flex items-center gap-1"><MapPin size={14} /> {societe.adresse || societe.ville}</span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 text-gray-400 text-sm">
+              <a href={companyInfo.emailHref} className="flex items-center gap-1 hover:text-amber-400 transition-colors"><Mail size={14} /> {companyInfo.email}</a>
+              {estSocieteDefaut ? (
+                <a href={companyInfo.mapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-amber-400 transition-colors">
+                  <MapPin size={14} /> {societe.adresse}
+                </a>
+              ) : (
+                <span className="flex items-center gap-1"><MapPin size={14} /> {societe.adresse || societe.ville}</span>
+              )}
             </div>
-            <p className="mt-3 text-gray-500 text-xs" data-testid="seo-autorisation-cnaps">
+            <p className="mt-3 text-gray-400 text-xs" data-testid="seo-autorisation-cnaps">
               {societe.nom}{societe.mention ? `, ${societe.mention}` : ''} — autorisation d'exercer du CNAPS n° {societe.autorisation} ({societe.activite}).
             </p>
           </div>
@@ -189,10 +196,10 @@ const SeoPageLayout = ({ data }) => {
           "name": societe.nom,
           "description": data.metaDescription,
           "url": `https://mtj-securite-privee.fr${data.slug}`,
-          "telephone": "+33760738206",
-          "email": "contactsmtjsecuriteprivee@gmail.com",
+          "telephone": companyInfo.phoneIntl,
+          "email": companyInfo.email,
           "address": estSocieteDefaut
-            ? { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressCountry": "FR" }
+            ? postalAddressSchema
             : { "@type": "PostalAddress", "addressLocality": societe.ville, "addressCountry": "FR" },
           ...(estSocieteDefaut ? { "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 } } : {}),
           "areaServed": data.areaServed || "Sud de la France",
@@ -205,7 +212,7 @@ const SeoPageLayout = ({ data }) => {
           "name": data.h1,
           "description": data.metaDescription,
           "url": `https://mtj-securite-privee.fr${data.slug}`,
-          "provider": { "@type": "Organization", "name": societe.nom, "url": "https://mtj-securite-privee.fr", "telephone": "+33760738206" },
+          "provider": { "@type": "Organization", "name": societe.nom, "url": "https://mtj-securite-privee.fr", "telephone": companyInfo.phoneIntl },
           "areaServed": data.areaServed || "Sud de la France",
           "serviceType": data.breadcrumbCurrent
         })}} />

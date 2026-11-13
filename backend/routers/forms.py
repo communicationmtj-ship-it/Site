@@ -80,6 +80,19 @@ def _validate_base_contact(name: str, email: str, message: str, phone: str | Non
     }
 
 
+async def _mark_email_sent(collection, record_id: str, sent: bool, kind: str) -> None:
+    """Le mail est le seul moyen de prévenir l'équipe (13/11/2026, règle « échec visible ») :
+    l'état d'envoi est gardé avec la demande (email_sent), compté par le tableau
+    d'administration, et un mail qui ne part pas laisse une erreur au journal, sans donnée
+    personnelle du visiteur."""
+    try:
+        await collection.update_one({"id": record_id}, {"$set": {"email_sent": bool(sent)}})
+    except Exception as e:
+        logger.error(f"État d'envoi du mail non enregistré ({kind}, id {record_id}) : {e}")
+    if not sent:
+        logger.error(f"Mail NON envoyé pour une demande de {kind} (id {record_id}) : demande gardée en base, à traiter à la main.")
+
+
 # ─── Quote ────────────────────────────────────────────────────────
 
 @router.post("/quote")
@@ -115,24 +128,29 @@ async def submit_quote(
             att_path, att_name = _save_single_upload(attachment)
 
         db = _get_db()
+        record_id = str(uuid.uuid4())
+        # Date de début et urgence (site-104), facultatives, texte court gardé tel quel.
+        start_date = (startDate or "").strip()[:40] or None
+        urgency_value = (urgency or "").strip()[:40] or None
         await db.quotes.insert_one({
-            "id": str(uuid.uuid4()),
+            "id": record_id,
             **fields,
             "attachment_filename": att_name,
             "attachment_path": att_path,
-            # Date de début et urgence (site-104), facultatives, texte court gardé tel quel.
-            "start_date": (startDate or "").strip()[:40] or None,
-            "urgency": (urgency or "").strip()[:40] or None,
+            "start_date": start_date,
+            "urgency": urgency_value,
             **_consent_record(consent),
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": "pending",
         })
 
-        send_quote_email(
+        sent = send_quote_email(
             name=fields["name"], company=fields["company"], email=fields["email"],
             phone=fields["phone"], service_type=fields["serviceType"],
             message=fields["message"], attachment_path=att_path,
+            start_date=start_date, urgency=urgency_value,
         )
+        await _mark_email_sent(db.quotes, record_id, sent, "devis")
 
         return {"status": "success", "message": "Votre demande de devis a été envoyée. Nous vous recontactons dans les plus brefs délais."}
 
@@ -174,8 +192,9 @@ async def submit_contact(
             att_path, att_name = _save_single_upload(attachment)
 
         db = _get_db()
+        record_id = str(uuid.uuid4())
         await db.contacts.insert_one({
-            "id": str(uuid.uuid4()),
+            "id": record_id,
             **fields,
             "subject": fields["subject"],
             "attachment_filename": att_name,
@@ -185,10 +204,11 @@ async def submit_contact(
             "status": "pending",
         })
 
-        send_contact_email(
+        sent = send_contact_email(
             name=fields["name"], email=fields["email"], phone=fields["phone"],
             subject=fields["subject"], message=fields["message"], attachment_path=att_path,
         )
+        await _mark_email_sent(db.contacts, record_id, sent, "contact")
 
         return {"status": "success", "message": "Votre message a été envoyé. Nous vous répondons dans les plus brefs délais."}
 
@@ -256,8 +276,9 @@ async def submit_recruitment(
         att_paths, att_names = _save_multiple_uploads(attachments)
 
         db = _get_db()
+        record_id = str(uuid.uuid4())
         await db.recruitments.insert_one({
-            "id": str(uuid.uuid4()),
+            "id": record_id,
             "firstName": firstName, "lastName": lastName,
             "email": email, "phone": phone, "message": message,
             "attachment_filenames": att_names,
@@ -267,10 +288,11 @@ async def submit_recruitment(
             "status": "pending",
         })
 
-        send_recruitment_email(
+        sent = send_recruitment_email(
             first_name=firstName, last_name=lastName, email=email,
             phone=phone, message=message, attachment_paths=att_paths,
         )
+        await _mark_email_sent(db.recruitments, record_id, sent, "recrutement")
 
         return {"status": "success", "message": "Votre candidature a été envoyée. Nous étudions votre profil et vous recontactons rapidement."}
 

@@ -9,37 +9,40 @@ const data = {
   areaServed: 'PACA, Occitanie, Nouvelle-Aquitaine, France',
 
   h1: 'Sécurité Privée dans le Sud de la France',
-  introduction: `MTJ Sécurité Privée est implantée dans le sud de la France avec trois pôles opérationnels à Toulon, Nice et Toulouse. Cette couverture géographique nous permet d'intervenir rapidement sur l'ensemble des régions Provence-Alpes-Côte d'Azur (PACA) et Occitanie.\n\nAu-delà de cette zone principale, nous proposons des missions en grand déplacement sur l'ensemble du territoire national, pour répondre aux besoins de nos clients multi-sites ou pour des événements ponctuels.`,
+  // 13/11/2026 (audit du site de Mathilde, site-061, 062, 068, 069, 079) : un siège à Toulon,
+  // aucune « antenne » ni « pôle » non prouvé ; le texte suit la carte de l'accueil.
+  introduction: `Implantée à Toulon, MTJ Sécurité Privée intervient dans tout le sud de la France : Provence-Alpes-Côte d'Azur (PACA), Occitanie et Nouvelle-Aquitaine.\n\nAu-delà de cette zone principale, nous proposons des missions en grand déplacement sur l'ensemble du territoire national, pour répondre aux besoins de nos clients multi-sites ou pour des événements ponctuels.`,
 
   sections: [
     {
       h2: 'Notre couverture géographique',
-      intro: 'Trois implantations stratégiques pour couvrir efficacement le sud de la France.',
+      intro: 'Un siège à Toulon et des interventions dans tout le sud de la France.',
       subsections: [
         {
-          h3: 'Pôle Toulon — PACA Est et Var',
-          content: 'Notre siège à Toulon couvre le département du Var et la partie orientale de la région PACA : Toulon, Hyères, Fréjus, Saint-Raphaël, Draguignan, Brignoles et leurs environs. Ce pôle est également la base de notre unité cynophile principale et de notre cellule CYNODEX.',
+          h3: 'Toulon, le Var et la Provence',
+          content: 'Depuis notre siège de Toulon, nous intervenons dans le Var et dans le reste de la région PACA : Toulon, Hyères, Fréjus, Saint-Raphaël, Draguignan, Brignoles, Marseille, Aix-en-Provence, Avignon et leurs environs.',
           list: ['Var (83) : Toulon, Hyères, Fréjus, Saint-Tropez', 'Bouches-du-Rhône (13) : Marseille, Aix-en-Provence', 'Alpes-de-Haute-Provence (04) et Hautes-Alpes (05)', 'Vaucluse (84) : Avignon, Orange, Carpentras']
         },
         {
-          h3: 'Pôle Nice — Côte d\'Azur et Monaco',
-          content: 'Notre présence à Nice et sur la Côte d\'Azur nous positionne au cœur du marché azuréen : Nice, Monaco, Cannes, Antibes, Grasse, Menton. Ce pôle est spécialisé dans la sécurité de prestige, la sécurité événementielle haut de gamme et la protection de propriétés de luxe.',
+          h3: 'Nice, la Côte d\'Azur et Monaco',
+          content: 'Nous intervenons à Nice et sur toute la Côte d\'Azur (Cannes, Antibes, Grasse, Menton), ainsi qu\'à Monaco dans le cadre de la réglementation monégasque : sécurité de prestige, sécurité événementielle et protection de propriétés.',
           list: ['Alpes-Maritimes (06) : Nice, Cannes, Antibes, Grasse', 'Principauté de Monaco', 'Arrière-pays niçois et montagne']
         }
       ]
     },
     {
-      h2: 'Pôle Toulouse et grand déplacement national',
-      intro: 'Notre implantation toulousaine et notre capacité de déploiement national assurent une couverture complète.',
+      h2: 'Occitanie, Nouvelle-Aquitaine et grand déplacement national',
+      intro: 'Au-delà de la Provence et de la Côte d\'Azur, nous intervenons en Occitanie, en Nouvelle-Aquitaine et, en grand déplacement, dans toute la France métropolitaine.',
       subsections: [
         {
-          h3: 'Pôle Toulouse — Occitanie',
-          content: 'Notre antenne toulousaine couvre la Haute-Garonne et les départements limitrophes d\'Occitanie : Toulouse Métropole, zones aéronautiques de Blagnac et Colomiers, Montpellier, Nîmes, Perpignan. Ce pôle répond aux besoins croissants en sécurité privée de la quatrième agglomération française.',
+          h3: 'Occitanie — Toulouse, Montpellier, Nîmes, Perpignan',
+          content: 'La région Occitanie fait partie de notre zone d\'intervention : Toulouse et la Haute-Garonne, Montpellier et l\'Hérault, Nîmes et le Gard, Perpignan, Béziers et Carcassonne, pour des missions de gardiennage, de sécurité événementielle et de sécurité cynophile.',
           list: ['Haute-Garonne (31) : Toulouse, Blagnac, Colomiers', 'Hérault (34) : Montpellier, Béziers', 'Gard (30) et Aude (11)', 'Tarn (81) et Tarn-et-Garonne (82)']
         },
         {
-          h3: 'Occitanie : Toulouse, Montpellier, Perpignan',
-          content: 'La région Occitanie fait partie intégrante de notre zone d\'intervention. Nous intervenons régulièrement à Toulouse, Montpellier, Nîmes, Perpignan, Béziers et Carcassonne pour des missions de gardiennage, de sécurité événementielle et de sécurité cynophile.'
+          h3: 'Nouvelle-Aquitaine — Bordeaux et le Sud-Ouest',
+          content: 'Notre zone d\'intervention s\'étend aussi au sud de la Nouvelle-Aquitaine : Bordeaux et la Gironde, la Dordogne, les Landes, le Lot-et-Garonne et les Pyrénées-Atlantiques, pour des missions de gardiennage, de surveillance de chantiers et de sécurité événementielle.',
+          list: ['Gironde (33) : Bordeaux, Mérignac, Libourne', 'Dordogne (24) et Lot-et-Garonne (47)', 'Landes (40) et Pyrénées-Atlantiques (64)']
         }
       ]
     },
@@ -48,12 +51,12 @@ const data = {
       subsections: [
         {
           h3: 'Agents de sécurité, cynophile, SSIAP et CYNODEX',
-          content: 'Quel que soit votre lieu d\'implantation dans le sud de la France, vous avez accès à l\'intégralité de notre offre de services : agents de prévention et de sécurité (APS), binômes maître-chien d\'intervention, unité CYNODEX de détection d\'explosifs et agents SSIAP pour la sécurité incendie. Cette polyvalence est un atout unique sur le marché régional.',
-          list: ['Agents APS certifiés CNAPS', 'Sécurité cynophile et CYNODEX', 'SSIAP 1, 2 et 3', 'Sécurité événementielle complète']
+          content: 'Quel que soit votre lieu d\'implantation dans le sud de la France, vous avez accès à l\'ensemble de notre offre de services : agents de prévention et de sécurité (APS), binômes maître-chien d\'intervention, détection d\'explosifs (CYNODEX) et agents SSIAP pour la sécurité incendie. Cette polyvalence est un atout sur le marché régional.',
+          list: ['Agents APS titulaires de la carte professionnelle du CNAPS', 'Sécurité cynophile et CYNODEX', 'Agents SSIAP (niveau étudié selon le poste)', 'Sécurité événementielle complète']
         },
         {
           h3: 'Un interlocuteur unique pour tous vos sites',
-          content: 'Pour les entreprises multi-sites implantées dans le sud de la France, MTJ Sécurité Privée offre l\'avantage d\'un prestataire unique : un seul contrat, un seul interlocuteur, une qualité de service homogène de Toulouse à Nice. Cette centralisation simplifie votre gestion et garantit une cohérence opérationnelle sur l\'ensemble de vos implantations.'
+          content: 'Pour les entreprises multi-sites implantées dans le sud de la France, MTJ Sécurité Privée offre l\'avantage d\'un prestataire unique : un seul contrat, un seul interlocuteur et le même niveau de service sur tous vos sites. Cette centralisation simplifie votre gestion.'
         }
       ]
     }
@@ -62,7 +65,7 @@ const data = {
   faq: [
     {
       question: 'Quelle est votre zone d\'intervention principale ?',
-      answer: 'Notre zone d\'intervention principale couvre le sud de la France : PACA (Toulon, Marseille, Nice, Monaco) et Occitanie (Toulouse, Montpellier). Nous intervenons également en grand déplacement partout en France métropolitaine.'
+      answer: 'Notre zone d\'intervention principale couvre le sud de la France : PACA (Toulon, Marseille, Nice, Monaco), Occitanie (Toulouse, Montpellier) et Nouvelle-Aquitaine (Bordeaux). Nous intervenons également en grand déplacement partout en France métropolitaine.'
     },
     {
       question: 'Pouvez-vous intervenir à Paris ou Lyon ?',
@@ -70,11 +73,11 @@ const data = {
     },
     {
       question: 'Proposez-vous des contrats multi-sites ?',
-      answer: 'Absolument. C\'est l\'un de nos atouts majeurs. Nous gérons des contrats multi-sites avec un interlocuteur unique et une qualité de service uniforme, de Toulouse à Nice en passant par Toulon. Idéal pour les enseignes, les groupes immobiliers et les entreprises ayant plusieurs implantations dans le sud de la France.'
+      answer: 'Oui. Nous pouvons regrouper plusieurs sites dans un même contrat, avec un interlocuteur unique et le même niveau de service, dans tout le sud de la France. Idéal pour les enseignes, les groupes immobiliers et les entreprises ayant plusieurs implantations.'
     }
   ],
 
-  conclusion: `De Toulouse à Nice, de Toulon à Montpellier, MTJ Sécurité Privée est votre partenaire de sécurité dans tout le sud de la France. Notre maillage territorial, nos équipes qualifiées et notre capacité de déploiement national font de nous un acteur de référence de la sécurité privée dans le sud.\n\nContactez-nous pour un devis gratuit adapté à votre localisation et à vos besoins spécifiques.`,
+  conclusion: `De Toulon à Nice, de Montpellier à Toulouse et jusqu'à Bordeaux, MTJ Sécurité Privée est votre partenaire de sécurité dans tout le sud de la France. Nos équipes qualifiées et notre capacité de déploiement national sont à votre service.\n\nContactez-nous pour un devis gratuit adapté à votre localisation et à vos besoins spécifiques.`,
 
   relatedLinks: [
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },

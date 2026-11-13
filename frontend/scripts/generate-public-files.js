@@ -1,6 +1,8 @@
 // Génère frontend/public/sitemap.xml (avec <lastmod>) et frontend/public/routes.json
 // à partir d'UNE liste de chemins. Lancé automatiquement avant « yarn build » (script prebuild).
-// routes.json sert au serveur web (règle nginx : 404 pour tout chemin absent de cette liste).
+// routes.json est la liste de contrôle des chemins : la règle nginx (nginx-site.conf, 404 pour
+// tout chemin inconnu) garde sa propre liste, comparée à celle-ci et à App.js par l'essai
+// backend/tests/test_site_retours_13_11.py.
 const fs = require("fs");
 const path = require("path");
 

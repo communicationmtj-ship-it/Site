@@ -47,8 +47,9 @@ const data = {
       subsections: [
         {
           h3: 'Surveillance saisonnière et vacances',
-          content: 'Pendant vos périodes d\'absence (vacances, déplacements professionnels), MTJ Sécurité Privée assure la surveillance de votre domicile. Rondes régulières, relevé du courrier, vérification des accès et simulation de présence : nous veillons sur votre bien comme si vous y étiez.',
-          list: ['Rondes de vérification planifiées', 'Simulation de présence', 'Relevé du courrier et des colis', 'Rapport d\'intervention quotidien']
+          // 13/11/2026 (audit, site-082) : la gestion du courrier et des colis n'est pas une prestation de sécurité privée.
+          content: 'Pendant vos périodes d\'absence (vacances, déplacements professionnels), MTJ Sécurité Privée assure la surveillance de votre domicile. Rondes régulières, vérification des accès et simulation de présence : nous veillons sur votre bien comme si vous y étiez.',
+          list: ['Rondes de vérification planifiées', 'Simulation de présence', 'Vérification des accès', 'Rapport d\'intervention quotidien']
         },
         {
           h3: 'Sécurité cynophile résidentielle',

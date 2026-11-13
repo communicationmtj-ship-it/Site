@@ -10,7 +10,9 @@ const data = {
   areaServed: 'Toulon, Toulouse, Nice, PACA',
 
   h1: 'Sécurité Cynophile et Maître-Chien d\'Intervention',
-  introduction: `MTJ Sécurité Privée dispose d'une unité cynophile d'élite spécialisée dans la surveillance renforcée et l'intervention rapide. Nos binômes maître-chien sont formés aux techniques les plus avancées de détection, de dissuasion et d'intervention.\n\nLa présence d'un chien de sécurité renforce nettement l'effet dissuasif d'un agent seul. C'est une solution de sécurité éprouvée, particulièrement adaptée aux sites étendus, aux rondes de nuit et aux environnements à haut risque.`,
+  // 13/11/2026 (audit du site, suite de site-070 à 072) : aucun superlatif absolu, aucune
+  // distance chiffrée, aucun titre de formation affirmé pour tous les agents.
+  introduction: `MTJ Sécurité Privée dispose d'une unité cynophile spécialisée dans la surveillance renforcée et l'intervention rapide. Nos binômes maître-chien sont formés à la détection, à la dissuasion et à l'intervention.\n\nLa présence d'un chien de sécurité renforce nettement l'effet dissuasif d'un agent seul. C'est une solution de sécurité éprouvée, particulièrement adaptée aux sites étendus, aux rondes de nuit et aux environnements à haut risque.`,
 
   sections: [
     {
@@ -33,8 +35,8 @@ const data = {
       intro: 'La qualité de notre unité cynophile repose sur une formation rigoureuse des maîtres-chiens et de leurs partenaires canins.',
       subsections: [
         {
-          h3: 'Certification agent cynophile et carte professionnelle',
-          content: 'Nos maîtres-chiens sont titulaires du TFP Agent de Sécurité Cynophile et de la carte professionnelle délivrée par le CNAPS. Cette certification garantit leur compétence dans le dressage, le maniement du chien en mission de sécurité, les techniques de contention et les premiers secours. Chaque binôme homme-chien est évalué régulièrement pour maintenir un niveau opérationnel optimal.'
+          h3: 'Carte professionnelle et formation cynophile',
+          content: 'Nos maîtres-chiens sont titulaires de la carte professionnelle délivrée par le CNAPS et formés au maniement du chien en mission de sécurité, aux techniques de contention et aux premiers secours. Chaque binôme homme-chien est évalué régulièrement.'
         },
         {
           h3: 'Sélection et entraînement des chiens',
@@ -51,7 +53,7 @@ const data = {
       subsections: [
         {
           h3: 'Dissuasion maximale et détection précoce',
-          content: 'La présence d\'un chien d\'intervention constitue le niveau de dissuasion le plus élevé en sécurité privée. Un intrus qui repère un binôme cynophile est beaucoup plus enclin à renoncer. De plus, l\'odorat du chien détecte une présence humaine à plusieurs centaines de mètres, même dans l\'obscurité totale, offrant une capacité de détection inégalée.'
+          content: 'La présence d\'un chien d\'intervention constitue un moyen de dissuasion particulièrement fort. Un intrus qui repère un binôme cynophile est beaucoup plus enclin à renoncer. De plus, l\'odorat du chien peut détecter une présence humaine à distance, même dans l\'obscurité, ce qui renforce nettement la détection.'
         },
         {
           h3: 'Rapport coût-efficacité optimal',
@@ -72,11 +74,11 @@ const data = {
     },
     {
       question: 'Quelle zone géographique couvrez-vous pour les prestations cynophiles ?',
-      answer: 'Notre unité cynophile est basée à Toulon et intervient dans tout le sud de la France : PACA (Marseille, Nice, Monaco, Cannes), Occitanie (Toulouse) et le grand sud. Nous proposons également des missions en grand déplacement sur demande partout en France.'
+      answer: 'Notre unité cynophile intervient dans tout le sud de la France : PACA (Toulon, Marseille, Nice, Monaco, Cannes), Occitanie (Toulouse) et Nouvelle-Aquitaine. Nous proposons également des missions en grand déplacement sur demande partout en France.'
     }
   ],
 
-  conclusion: `La sécurité cynophile est une solution de protection à haute valeur ajoutée. Les binômes maître-chien de MTJ Sécurité Privée apportent un niveau de dissuasion, de détection et de réactivité inégalé dans le secteur de la sécurité privée.\n\nQue ce soit pour la surveillance de vos sites, la sécurisation de vos événements ou des interventions ponctuelles, notre unité cynophile est à votre service. Demandez votre devis gratuit dès maintenant.`,
+  conclusion: `La sécurité cynophile est une solution de protection à haute valeur ajoutée. Les binômes maître-chien de MTJ Sécurité Privée apportent un niveau élevé de dissuasion, de détection et de réactivité.\n\nQue ce soit pour la surveillance de vos sites, la sécurisation de vos événements ou des interventions ponctuelles, notre unité cynophile est à votre service. Demandez votre devis gratuit dès maintenant.`,
 
   relatedLinks: [
     { href: '/detection-explosifs-cynodex', label: 'Détection d\'explosifs CYNODEX' },

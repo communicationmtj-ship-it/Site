@@ -141,6 +141,19 @@ async def get_stats(days: int = 30, authorization: Optional[str] = Header(None))
 
     recent_raw = await db.visits.find({}, {"_id": 0}).sort("timestamp", -1).limit(20).to_list(20)
 
+    # Échec visible (13/11/2026) : demandes enregistrées dont le mail d'alerte n'est pas parti
+    # (champ email_sent posé par routers/forms.py), sur la même période.
+    since_iso = (now - timedelta(days=days)).isoformat()
+    mails_non_partis = {}
+    for label, collection in (("devis", db.quotes), ("contact", db.contacts), ("recrutement", db.recruitments)):
+        try:
+            mails_non_partis[label] = await collection.count_documents(
+                {"email_sent": False, "timestamp": {"$gte": since_iso}}
+            )
+        except Exception as e:
+            logger.error(f"Comptage des mails non partis impossible ({label}) : {e}")
+            mails_non_partis[label] = None
+
     return {
         "period": {"days": days, "since": since},
         "total": total_stats,
@@ -151,6 +164,7 @@ async def get_stats(days: int = 30, authorization: Optional[str] = Header(None))
         "cities": cities,
         "hours_today": hours,
         "recent": recent_raw,
+        "mails_non_partis": mails_non_partis,
     }
 
 

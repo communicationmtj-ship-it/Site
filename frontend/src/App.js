@@ -16,6 +16,7 @@ import { Toaster } from "./components/ui/sonner";
 import "./App.css";
 import { safeJsonLd } from "./utils/safeJsonLd";
 import SeoHead from "./components/SeoHead";
+import { companyInfo, postalAddressSchema } from "./data/mock";
 
 // Pages chargées à la demande : le code de chaque page (et celui du tableau
 // d'administration) n'est plus dans le JavaScript de l'accueil.
@@ -49,10 +50,10 @@ const homeSchema = [
     "name": "MTJ Sécurité Privée",
     "url": "https://mtj-securite-privee.fr",
     "logo": "https://mtj-securite-privee.fr/images/logo-mtj.png",
-    "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX, SSIAP et protection rapprochée dans le sud de la France.",
-    "telephone": "+33760738206",
-    "email": "contactsmtjsecuriteprivee@gmail.com",
-    "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressRegion": "Provence-Alpes-Côte d'Azur", "addressCountry": "FR" },
+    "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX et SSIAP dans le sud de la France ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe.",
+    "telephone": companyInfo.phoneIntl,
+    "email": companyInfo.email,
+    "address": postalAddressSchema,
     "areaServed": [
       { "@type": "City", "name": "Toulon" },
       { "@type": "City", "name": "Nice" },
@@ -60,9 +61,10 @@ const homeSchema = [
       { "@type": "City", "name": "Toulouse" },
       { "@type": "AdministrativeArea", "name": "Provence-Alpes-Côte d'Azur" },
       { "@type": "AdministrativeArea", "name": "Occitanie" },
+      { "@type": "AdministrativeArea", "name": "Nouvelle-Aquitaine" },
       { "@type": "Country", "name": "France" }
     ],
-    "sameAs": ["https://www.instagram.com/mtj.securite.privee"],
+    "sameAs": [companyInfo.instagramUrl],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Services de sécurité privée",
@@ -71,7 +73,7 @@ const homeSchema = [
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sécurité cynophile et maître-chien", "url": "https://mtj-securite-privee.fr/securite-cynophile-maitre-chien" }},
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CYNODEX - Détection d'explosifs", "url": "https://mtj-securite-privee.fr/detection-explosifs-cynodex" }},
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SSIAP - Sécurité incendie", "url": "https://mtj-securite-privee.fr/ssiap-securite-incendie" }},
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Protection rapprochée", "url": "https://mtj-securite-privee.fr/protection-rapprochee" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Protection rapprochée", "url": "https://mtj-securite-privee.fr/protection-rapprochee", "provider": { "@type": "Organization", "name": "MTJ Sécurité Rapprochée" } }},
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sécurité événementielle", "url": "https://mtj-securite-privee.fr/securite-evenementielle" }},
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Surveillance de chantiers", "url": "https://mtj-securite-privee.fr/surveillance-chantier-site" }}
       ]
@@ -83,10 +85,10 @@ const homeSchema = [
     "@id": "https://mtj-securite-privee.fr/#localbusiness",
     "name": "MTJ Sécurité Privée",
     "image": "https://mtj-securite-privee.fr/images/logo-mtj.png",
-    "telephone": "+33760738206",
-    "email": "contactsmtjsecuriteprivee@gmail.com",
+    "telephone": companyInfo.phoneIntl,
+    "email": companyInfo.email,
     "url": "https://mtj-securite-privee.fr",
-    "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressRegion": "PACA", "addressCountry": "FR" },
+    "address": postalAddressSchema,
     "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 },
     "priceRange": "$$",
     "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" }

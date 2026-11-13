@@ -9,7 +9,10 @@ const data = {
   areaServed: 'Bordeaux, Gironde, Nouvelle-Aquitaine',
 
   h1: 'Sécurité Privée à Bordeaux — Gironde (33)',
-  introduction: `MTJ Sécurité Privée étend son expertise en sécurité privée à Bordeaux et sur l'ensemble de la métropole bordelaise. Sixième ville de France, Bordeaux est un pôle économique majeur avec une activité viticole mondialement reconnue, un secteur aéronautique de pointe et un tissu tertiaire en pleine expansion.\n\nCette dynamique génère des besoins croissants en sécurité privée : surveillance de sites viticoles, gardiennage de zones d'activité, sécurisation d'événements culturels et sportifs. MTJ Sécurité Privée répond à ces besoins avec des solutions professionnelles et adaptées au contexte bordelais.`,
+  // 13/11/2026 (audit du site de Mathilde, site-062 et 068) : siège à Toulon, intervention à
+  // Bordeaux sur demande ; aucune équipe locale ni implantation affirmée sans preuve.
+  // La place de la page dans le menu reste à trancher par la direction.
+  introduction: `MTJ Sécurité Privée propose son expertise en sécurité privée à Bordeaux et sur l'ensemble de la métropole bordelaise. Sixième ville de France, Bordeaux est un pôle économique majeur avec une activité viticole mondialement reconnue, un secteur aéronautique de pointe et un tissu tertiaire en pleine expansion.\n\nCette dynamique génère des besoins croissants en sécurité privée : surveillance de sites viticoles, gardiennage de zones d'activité, sécurisation d'événements culturels et sportifs. MTJ Sécurité Privée répond à ces besoins avec des solutions professionnelles et adaptées au contexte bordelais.`,
 
   sections: [
     {
@@ -23,13 +26,13 @@ const data = {
         },
         {
           h3: 'Sécurité événementielle à Bordeaux',
-          content: 'Bordeaux accueille des événements majeurs : Bordeaux Fête le Vin, matchs des Girondins et de l\'UBB (rugby), salons professionnels (Vinexpo), festivals de musique et événements à la Cité du Vin. MTJ Sécurité Privée assure la sécurisation de ces manifestations avec des dispositifs dimensionnés et une coordination avec les autorités locales.'
+          content: 'Bordeaux accueille des événements majeurs : Bordeaux Fête le Vin, matchs des Girondins et de l\'UBB (rugby), salons professionnels, festivals de musique et événements à la Cité du Vin. MTJ Sécurité Privée sécurise ce type de manifestation avec des dispositifs dimensionnés et une coordination avec les autorités locales.'
         }
       ]
     },
     {
       h2: 'Zones d\'intervention en Nouvelle-Aquitaine',
-      intro: 'Depuis Bordeaux, nous intervenons sur l\'ensemble de la Gironde et dans les départements limitrophes de Nouvelle-Aquitaine.',
+      intro: 'Nous intervenons sur l\'ensemble de la Gironde et dans les départements limitrophes de Nouvelle-Aquitaine, selon vos besoins.',
       subsections: [
         {
           h3: 'Métropole bordelaise et rive droite',
@@ -37,11 +40,11 @@ const data = {
         },
         {
           h3: 'Bassin d\'Arcachon et littoral girondin',
-          content: 'Le Bassin d\'Arcachon, Arcachon, La Teste-de-Buch, Gujan-Mestras et le littoral girondin sont des zones touristiques majeures qui nécessitent une sécurité renforcée en saison estivale. Surveillance de campings, sécurité d\'événements nautiques, gardiennage de résidences secondaires : nous répondons aux besoins saisonniers avec des équipes dédiées.'
+          content: 'Le Bassin d\'Arcachon, Arcachon, La Teste-de-Buch, Gujan-Mestras et le littoral girondin sont des zones touristiques majeures qui nécessitent une sécurité renforcée en saison estivale. Surveillance de campings, sécurité d\'événements nautiques, gardiennage de résidences secondaires : nous répondons aux besoins saisonniers.'
         },
         {
           h3: 'Vignobles et domaines viticoles',
-          content: 'La Gironde abrite certains des vignobles les plus prestigieux au monde : Médoc, Saint-Émilion, Pomerol, Graves. La protection de ces domaines contre le vol, l\'intrusion et le vandalisme est un enjeu crucial. MTJ Sécurité Privée assure la surveillance de propriétés viticoles, de chais et d\'exploitations agricoles avec des prestations adaptées au monde viticole.'
+          content: 'La Gironde abrite certains des vignobles les plus prestigieux au monde : Médoc, Saint-Émilion, Pomerol, Graves. La protection de ces domaines contre le vol, l\'intrusion et le vandalisme est un enjeu crucial. MTJ Sécurité Privée propose la surveillance de propriétés viticoles, de chais et d\'exploitations agricoles avec des prestations adaptées au monde viticole.'
         }
       ]
     },
@@ -54,7 +57,7 @@ const data = {
         },
         {
           h3: 'Capacité de montée en charge',
-          content: 'Grâce à notre implantation multi-sites (Toulon, Bordeaux, Nice), nous disposons d\'une capacité de mobilisation rapide d\'agents supplémentaires pour vos pics d\'activité ou vos événements exceptionnels. Cette flexibilité est un atout majeur pour les clients ayant des besoins variables ou saisonniers.'
+          content: 'Grâce à notre réseau d\'agents dans le sud de la France, nous pouvons renforcer le dispositif pour vos pics d\'activité ou vos événements exceptionnels. Cette flexibilité est un atout pour les clients ayant des besoins variables ou saisonniers.'
         }
       ]
     }
@@ -62,12 +65,12 @@ const data = {
 
   faq: [
     {
-      question: 'Depuis quand MTJ Sécurité Privée est-elle présente à Bordeaux ?',
-      answer: 'MTJ Sécurité Privée a étendu son activité à Bordeaux pour répondre à la demande croissante en sécurité privée en Nouvelle-Aquitaine. Notre siège reste à Toulon, mais nous disposons d\'équipes opérationnelles sur Bordeaux et la Gironde pour assurer un service de proximité.'
+      question: 'MTJ Sécurité Privée intervient-elle à Bordeaux ?',
+      answer: 'Oui. Notre siège est à Toulon ; nous intervenons à Bordeaux et en Gironde selon vos besoins, avec un dispositif défini dans chaque devis.'
     },
     {
       question: 'Pouvez-vous intervenir dans le Médoc ou le Libournais ?',
-      answer: 'Oui. Nos équipes couvrent l\'ensemble du département de la Gironde, y compris les zones rurales du Médoc, du Libournais et de l\'Entre-deux-Mers. Nous intervenons régulièrement pour la surveillance de domaines viticoles et de propriétés privées dans ces secteurs.'
+      answer: 'Oui. Nous pouvons intervenir dans l\'ensemble du département de la Gironde, y compris les zones rurales du Médoc, du Libournais et de l\'Entre-deux-Mers, notamment pour la surveillance de domaines viticoles et de propriétés privées.'
     },
     {
       question: 'Proposez-vous des prestations cynophiles à Bordeaux ?',

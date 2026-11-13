@@ -2,7 +2,7 @@ import React from 'react';
 import { ShieldCheck, CheckCircle } from 'lucide-react';
 
 const engagements = [
-  "Entreprise à taille humaine, implantée dans le sud de France, MTJ assure la sécurité des biens et des personnes avec réactivité et flexibilité.",
+  "Entreprise à taille humaine, implantée dans le sud de la France, MTJ assure la sécurité des biens et des personnes avec réactivité et flexibilité.",
   "Nous visons la satisfaction des besoins de nos clients, avec force et honneur, par la loyauté et la transparence, en veillant sur notre responsabilité sociétale.",
   "Nous respectons la conformité réglementaire et toutes les exigences légales de nos activités, et luttons contre toute forme de corruption.",
   "Nous veillons à la protection des droits humains, de l'égalité entre les femmes et les hommes et des données personnelles, et promouvons les achats responsables.",

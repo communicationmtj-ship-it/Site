@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FloatingCTA from './FloatingCTA';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
-import { contactInfo, companyInfo } from '../data/mock';
+import { contactInfo, companyInfo, postalAddressSchema } from '../data/mock';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -56,6 +56,8 @@ const ContactPage = () => {
     submitData.append('message', formData.message);
     submitData.append('consent', 'true');
     submitData.append('ts', formLoadedAt);
+    // Le champ piège doit partir avec la demande, sinon le serveur ne peut pas le contrôler.
+    submitData.append('hp', e.target.elements?.hp?.value || '');
     if (attachment) submitData.append('attachment', attachment);
 
     axios.post(`${BACKEND_URL}/api/contact`, submitData, {
@@ -121,11 +123,14 @@ const ContactPage = () => {
             {/* Contact Information & Image */}
             <div className="space-y-8">
               <div className="relative h-[400px] overflow-hidden shadow-2xl">
-                <img
-                  src="/images/contact-bg.jpeg"
-                  alt="Contact MTJ Sécurité"
-                  className="w-full h-full object-cover"
-                />
+                <picture className="block w-full h-full">
+                  <source srcSet="/images/contact-bg.webp" type="image/webp" />
+                  <img
+                    src="/images/contact-bg.jpeg"
+                    alt="Contact MTJ Sécurité"
+                    className="w-full h-full object-cover"
+                  />
+                </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6">
                   <h3 className="text-2xl font-bold text-white uppercase tracking-wider">
@@ -167,7 +172,16 @@ const ContactPage = () => {
                   <div>
                     <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">Adresse</h4>
                     <p className="text-white text-lg">{companyInfo.address}</p>
-                    <p className="text-gray-400 text-sm mt-1">France</p>
+                    {/* Carte : simple lien (aucun contenu Google chargé dans la page, donc aucun cookie tiers). */}
+                    <a
+                      href={companyInfo.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-amber-400 text-sm mt-1 underline hover:text-amber-300"
+                      data-testid="contact-maps-link"
+                    >
+                      Voir sur une carte
+                    </a>
                   </div>
                 </div>
               </div>
@@ -236,7 +250,8 @@ const ContactPage = () => {
                     Envoyer le message
                   </button>
                   <div className="absolute opacity-0 -z-10" aria-hidden="true" tabIndex={-1}>
-                    <input type="text" name="hp" tabIndex={-1} autoComplete="off" />
+                    <label htmlFor="contact-hp">Laisser ce champ vide</label>
+                    <input type="text" id="contact-hp" name="hp" tabIndex={-1} autoComplete="off" />
                   </div>
                 </form>
               </div>
@@ -254,12 +269,12 @@ const ContactPage = () => {
         "mainEntity": {
           "@type": "Organization",
           "name": "MTJ Sécurité Privée",
-          "telephone": "+33760738206",
-          "email": "contactsmtjsecuriteprivee@gmail.com",
-          "address": { "@type": "PostalAddress", "streetAddress": "31 rue Chevalier Paul", "addressLocality": "Toulon", "postalCode": "83000", "addressCountry": "FR" },
+          "telephone": companyInfo.phoneIntl,
+          "email": companyInfo.email,
+          "address": postalAddressSchema,
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+33760738206",
+            "telephone": companyInfo.phoneIntl,
             "contactType": "customer service",
             "areaServed": "FR",
             "availableLanguage": "French"

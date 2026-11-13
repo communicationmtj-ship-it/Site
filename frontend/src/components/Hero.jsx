@@ -28,11 +28,11 @@ const Hero = () => {
         <div className="max-w-5xl mx-auto space-y-8">
           {/* Bandeau urgence */}
           <a
-            href="tel:+33760738206"
+            href={companyInfo.phoneHref}
             className="inline-flex items-center gap-2 border border-amber-400 bg-black/60 px-5 py-2 text-sm md:text-base font-semibold text-amber-400 hover:bg-amber-400 hover:text-black transition-colors"
           >
             <Phone size={18} />
-            Besoin urgent ? 07 60 73 82 06, 24h/24
+            Besoin urgent ? {companyInfo.phone}, 24h/24
           </a>
 
           {/* Main Heading */}
@@ -57,11 +57,11 @@ const Hero = () => {
           {/* CTA Button */}
           <div className="pt-8 animate-fade-in-up animation-delay-400 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="tel:+33760738206"
+              href={companyInfo.phoneHref}
               className="px-10 py-4 border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black font-bold text-lg uppercase tracking-wider transition-colors inline-flex items-center"
             >
               <Phone size={22} className="mr-2" />
-              07 60 73 82 06
+              {companyInfo.phone}
             </a>
             <button
               onClick={scrollToAbout}

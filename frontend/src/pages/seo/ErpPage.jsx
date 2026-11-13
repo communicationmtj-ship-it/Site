@@ -23,7 +23,7 @@ const data = {
         },
         {
           h3: 'Agents SSIAP pour la sécurité incendie',
-          content: 'Les ERP de catégories 1 et 2 doivent obligatoirement disposer d\'un service de sécurité incendie composé d\'agents SSIAP. MTJ Sécurité Privée met à disposition des agents SSIAP 1, 2 et 3 certifiés, formés à la prévention incendie, à l\'utilisation des moyens de secours et à la gestion des évacuations.'
+          content: 'Les ERP de catégories 1 et 2 doivent obligatoirement disposer d\'un service de sécurité incendie composé d\'agents SSIAP. MTJ Sécurité Privée met à disposition des agents SSIAP 1 diplômés, formés à la prévention incendie, à l\'utilisation des moyens de secours et à la gestion des évacuations ; les demandes de SSIAP 2 ou 3 sont étudiées selon les agents disponibles.'
         }
       ]
     },

@@ -1,5 +1,6 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { companyInfo } from '../../data/mock';
 
 const data = {
   slug: '/securite-privee-toulon',
@@ -23,7 +24,8 @@ const data = {
         },
         {
           h3: 'Sécurité événementielle à Toulon',
-          content: 'Toulon accueille chaque année de nombreux événements : matchs du RCT (Rugby Club Toulonnais) au stade Mayol, le festival de musique Six Fours, les marchés de Noël, les fêtes de la Saint-Jean et les régates nautiques. MTJ Sécurité Privée sécurise ces manifestations avec des dispositifs dimensionnés pour chaque type d\'événement, en coordination avec les autorités municipales et préfectorales.'
+          // 13/11/2026 (audit, site-034) : le nom approximatif du festival de Six-Fours est retiré.
+          content: 'Toulon accueille chaque année de nombreux événements : matchs du RCT (Rugby Club Toulonnais) au stade Mayol, marchés de Noël, fêtes de la Saint-Jean et régates nautiques. MTJ Sécurité Privée sécurise ce type de manifestation avec des dispositifs dimensionnés pour chaque événement, en coordination avec les autorités municipales et préfectorales.'
         }
       ]
     },
@@ -63,7 +65,7 @@ const data = {
   faq: [
     {
       question: 'Où se situe MTJ Sécurité Privée à Toulon ?',
-      answer: 'Notre siège social est situé au 31 rue Chevalier Paul, 83000 Toulon, à proximité du centre-ville et de la rade de Toulon. Vous pouvez nous joindre par téléphone au 07 60 73 82 06 ou par email à contactsmtjsecuriteprivee@gmail.com.'
+      answer: `Notre siège social est situé au ${companyInfo.address}, à proximité du centre-ville et de la rade de Toulon. Vous pouvez nous joindre par téléphone au ${companyInfo.phone} ou par e-mail à ${companyInfo.email}.`
     },
     {
       question: 'Intervenez-vous en urgence sur Toulon ?',
@@ -71,7 +73,7 @@ const data = {
     },
     {
       question: 'Quelles certifications possèdent vos agents ?',
-      answer: 'Tous nos agents sont titulaires de la carte professionnelle délivrée par le CNAPS. Selon les missions, ils possèdent également les certifications TFP APS, TFP Agent Cynophile, SSIAP 1/2/3 et SST (Sauveteur Secouriste du Travail). MTJ Sécurité Privée est elle-même autorisée par le CNAPS à exercer ses activités de sécurité privée.'
+      answer: 'Tous nos agents sont titulaires de la carte professionnelle délivrée par le CNAPS. Selon les missions, ils possèdent également les qualifications requises : diplôme SSIAP pour la sécurité incendie, formation cynophile pour les maîtres-chiens, secourisme (SST). MTJ Sécurité Privée est elle-même autorisée par le CNAPS à exercer ses activités de sécurité privée.'
     }
   ],
 

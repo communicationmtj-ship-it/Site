@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, FileText, X } from 'lucide-react';
+import { companyInfo } from '../data/mock';
 
 const FloatingCTA = () => {
   const [expanded, setExpanded] = useState(false);
@@ -29,12 +30,12 @@ const FloatingCTA = () => {
           </button>
 
           <a
-            href="tel:+33760738206"
+            href={companyInfo.phoneHref}
             className="flex items-center gap-2 bg-white text-black font-bold px-5 py-3 shadow-lg text-sm uppercase tracking-wide"
             style={{ borderRadius: 2 }}
           >
             <Phone size={16} />
-            07 60 73 82 06 · 24h/24
+            {companyInfo.phone} · 24h/24
           </a>
         </div>
       )}

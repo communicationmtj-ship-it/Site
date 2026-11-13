@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { safeJsonLd } from '../utils/safeJsonLd';
+import { companyInfo } from '../data/mock';
 
+// 13/11/2026 (audit du site de Mathilde) : la protection rapprochée est le métier de
+// MTJ Sécurité Rapprochée (société du groupe, autorisation distincte) ; aucune
+// implantation ni « ville principale » non prouvée ; coordonnées lues dans mock.js.
 const faqs = [
   {
     question: "Qu'est-ce que MTJ Sécurité Privée ?",
-    answer: "MTJ Sécurité Privée est une entreprise de sécurité privée basée à Toulon (Var), spécialisée dans la surveillance, le gardiennage, la sécurité cynophile, le SSIAP, la protection rapprochée et la détection d'explosifs (CYNODEX). Nous intervenons sur tout le territoire national avec une présence forte dans le sud de la France (Toulon, Nice, Monaco, Toulouse, Bordeaux)."
+    answer: "MTJ Sécurité Privée est une entreprise de sécurité privée dont le siège est à Toulon (Var), spécialisée dans la surveillance, le gardiennage, la sécurité cynophile, le SSIAP et la détection d'explosifs (CYNODEX). La protection rapprochée est assurée par MTJ Sécurité Rapprochée, société du groupe MTJ. Nous intervenons dans le sud de la France et, en grand déplacement, sur tout le territoire national."
   },
   {
     question: "Vos agents sont-ils certifiés CNAPS ?",
@@ -13,11 +17,11 @@ const faqs = [
   },
   {
     question: "Dans quelles villes MTJ Sécurité Privée intervient-elle ?",
-    answer: "MTJ Sécurité Privée intervient principalement à Toulon, Nice, Monaco, Marseille, Toulouse et Bordeaux. Nous couvrons l'ensemble de la région PACA, l'Occitanie et la Nouvelle-Aquitaine. Pour des missions ponctuelles, nous intervenons sur tout le territoire national."
+    answer: "MTJ Sécurité Privée intervient notamment à Toulon, Nice, Monaco, Marseille, Toulouse et Bordeaux, en région PACA, en Occitanie et en Nouvelle-Aquitaine. Pour des missions ponctuelles, nous intervenons sur tout le territoire national."
   },
   {
     question: "Comment obtenir un devis pour une mission de sécurité ?",
-    answer: "Pour obtenir un devis gratuit et personnalisé, vous pouvez nous contacter par téléphone au 07 60 73 82 06, par email à contactsmtjsecuriteprivee@gmail.com, ou via notre formulaire de devis en ligne. Nous vous répondons sous 24h et établissons une proposition adaptée à vos besoins."
+    answer: `Pour obtenir un devis gratuit et personnalisé, vous pouvez nous contacter par téléphone au ${companyInfo.phone}, par e-mail à ${companyInfo.email}, ou via notre formulaire de devis en ligne. Nous vous répondons sous 24 h et établissons une proposition adaptée à vos besoins.`
   },
   {
     question: "MTJ Sécurité Privée propose-t-elle la sécurité événementielle ?",
@@ -25,7 +29,7 @@ const faqs = [
   },
   {
     question: "Qu'est-ce que le CYNODEX proposé par MTJ Sécurité Privée ?",
-    answer: "Le CYNODEX est une prestation spécialisée de détection d'engins explosifs improvisés par des chiens dressés. Nos binômes maïtre-chien CYNODEX interviennent pour sécuriser des événements sensibles, des sites stratégiques et des infrastructures critiques. C'est une compétence rare dans le secteur de la sécurité privée."
+    answer: "Le CYNODEX est une prestation spécialisée de détection d'explosifs par des chiens dressés à cette mission. Nos binômes maître-chien CYNODEX interviennent pour sécuriser des événements et des lieux accueillant du public, selon la certification de chaque binôme. C'est une compétence rare dans le secteur de la sécurité privée."
   }
 ];
 

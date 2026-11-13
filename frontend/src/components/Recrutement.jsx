@@ -64,6 +64,8 @@ const Recrutement = () => {
     submitData.append('phone', formData.phone);
     submitData.append('message', formData.message);
     submitData.append('ts', formLoadedAt);
+    // Le champ piège doit partir avec la demande, sinon le serveur ne peut pas le contrôler.
+    submitData.append('hp', e.target.elements?.hp?.value || '');
     submitData.append('consent', 'true');
     
     // Append all attachments
@@ -116,7 +118,7 @@ const Recrutement = () => {
     <div className="min-h-screen bg-black">
       <SeoHead
         title="Recrutement | Rejoignez MTJ Sécurité Privée | Postulez"
-        description="MTJ Sécurité Privée recrute des agents de sécurité, maîtres-chiens, SSIAP et agents de protection rapprochée. Postulez en ligne dès maintenant."
+        description="MTJ Sécurité Privée recrute des agents de sécurité, maîtres-chiens et agents SSIAP ; MTJ Sécurité Rapprochée, société du groupe, des agents de protection rapprochée. Postulez en ligne."
         path="/recrutement"
       />
       <Navbar />
@@ -138,7 +140,7 @@ const Recrutement = () => {
               Rejoignez l'équipe MTJ SÉCURITÉ PRIVÉE
             </p>
             
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Nous recherchons des professionnels passionnés et qualifiés pour renforcer notre équipe. 
               Si vous partagez nos valeurs de professionnalisme et d'excellence, postulez dès maintenant !
             </p>
@@ -159,15 +161,26 @@ const Recrutement = () => {
               </p>
             </div>
 
-            {/* Profils recherchés (repris de la description de la page) */}
-            <div className="mt-10 mb-12 bg-black border border-amber-400/30 p-6 text-left">
-              <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Profils recherchés</h2>
-              <ul className="text-gray-300 space-y-1 text-sm">
-                <li>Agents de sécurité</li>
-                <li>Maîtres-chiens</li>
-                <li>Agents SSIAP</li>
-                <li>Agents de protection rapprochée</li>
-              </ul>
+            {/* Profils recherchés (repris de la description de la page) et prérequis.
+                13/11/2026 (audit, site-119 et 120) : seules les obligations légales sont écrites ;
+                zones, avantages, « avec ou sans chien » et contact RH attendent la direction. */}
+            <div className="mt-10 mb-12 bg-black border border-amber-400/30 p-6 text-left grid md:grid-cols-2 gap-6" data-testid="recrutement-profils">
+              <div>
+                <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Profils recherchés</h2>
+                <ul className="text-gray-300 space-y-1 text-sm">
+                  <li>Agents de sécurité</li>
+                  <li>Maîtres-chiens</li>
+                  <li>Agents SSIAP</li>
+                  <li>Agents de protection rapprochée (postes de MTJ Sécurité Rapprochée, société du groupe MTJ)</li>
+                </ul>
+              </div>
+              <div>
+                <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Prérequis</h2>
+                <ul className="text-gray-300 space-y-1 text-sm">
+                  <li>Carte professionnelle délivrée par le CNAPS, en cours de validité : obligatoire pour exercer une activité de sécurité privée (code de la sécurité intérieure).</li>
+                  <li>Agents SSIAP : diplôme SSIAP correspondant au poste, à jour de son recyclage.</li>
+                </ul>
+              </div>
             </div>
 
             <div className="bg-black border-4 border-amber-400/30 p-8 lg:p-12">
@@ -318,7 +331,7 @@ const Recrutement = () => {
                       <Link to="/politique-de-confidentialite" className="underline text-amber-400 hover:text-amber-300">politique de confidentialité</Link>. *
                     </span>
                   </label>
-                  <p className="text-gray-500 text-xs mt-2 ml-7">
+                  <p className="text-gray-400 text-xs mt-2 ml-7">
                     Merci de ne pas joindre de pièce inutile à l'étude de votre candidature (numéro de sécurité sociale, RIB, informations de santé).
                   </p>
                 </div>
@@ -334,7 +347,8 @@ const Recrutement = () => {
                   </button>
                 </div>
                 <div className="absolute opacity-0 -z-10" aria-hidden="true" tabIndex={-1}>
-                  <input type="text" name="hp" tabIndex={-1} autoComplete="off" />
+                  <label htmlFor="recruitment-hp">Laisser ce champ vide</label>
+                  <input type="text" id="recruitment-hp" name="hp" tabIndex={-1} autoComplete="off" />
                 </div>
               </form>
             </div>
@@ -358,7 +372,7 @@ const Recrutement = () => {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Recrutement MTJ Sécurité Privée",
-        "description": "MTJ Sécurité Privée recrute des agents de sécurité, maîtres-chiens, SSIAP et agents de protection rapprochée.",
+        "description": "MTJ Sécurité Privée recrute des agents de sécurité, maîtres-chiens et agents SSIAP ; MTJ Sécurité Rapprochée, société du groupe, des agents de protection rapprochée.",
         "url": "https://mtj-securite-privee.fr/recrutement",
         "publisher": {
           "@type": "Organization",

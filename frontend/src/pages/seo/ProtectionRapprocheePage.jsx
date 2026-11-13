@@ -1,16 +1,23 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { cnapsCompanies, L612_14 } from '../../data/mock';
 
+const RAPPROCHEE = cnapsCompanies.rapprochee;
+
+// 13/11/2026 (audit du site de Mathilde, site-065) : autorisation et mention L612-14 lues dans
+// data/mock.js ; « partout en France » sans l'international ; le bouton devis présélectionne
+// la protection rapprochée.
 const data = {
   slug: '/protection-rapprochee',
-  societe: { nom: 'MTJ Sécurité Rapprochée', mention: 'société du groupe MTJ', autorisation: 'AUT-006-2123-10-21-20240955994', activite: 'protection physique des personnes', ville: 'Nice', adresse: null },
+  societe: { nom: 'MTJ Sécurité Rapprochée', mention: 'société du groupe MTJ', autorisation: RAPPROCHEE.authorization, activite: RAPPROCHEE.activity, ville: 'Nice', adresse: null },
+  serviceDevis: 'Protection rapprochée',
   metaTitle: 'Protection Rapprochée — Sécurité des Personnes | MTJ Sécurité Rapprochée',
   metaDescription: 'MTJ Sécurité Rapprochée assure la protection physique des personnalités, dirigeants, célébrités et particuliers exposés. Agents de protection rapprochée formés et certifiés à Toulon, Nice, Toulouse et dans toute la France.',
   breadcrumbCurrent: 'Protection rapprochée',
   areaServed: 'Toulon, Toulouse, Nice, Monaco, PACA, Occitanie, France',
 
   h1: 'Protection Rapprochée — Sécurité Physique des Personnes',
-  introduction: `MTJ Sécurité Rapprochée, société du groupe MTJ, est spécialisée dans la protection physique des personnes. Nous assurons la sécurité rapprochée de personnalités, dirigeants d'entreprise, célébrités, diplomates et particuliers exposés, partout en France et à l'international.\n\nNos agents de protection rapprochée (APR), rigoureusement sélectionnés et formés aux techniques les plus avancées, garantissent votre intégrité physique en toute discrétion. Chaque mission fait l'objet d'une analyse de risques préalable et d'un dispositif de protection sur mesure.\n\nAutorisation d'exercer du CNAPS n° AUT-006-2123-10-21-20240955994 (protection physique des personnes).\nArticle L612-14 du code de la sécurité intérieure : « L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics. »`,
+  introduction: `MTJ Sécurité Rapprochée, société du groupe MTJ, est spécialisée dans la protection physique des personnes. Nous assurons la sécurité rapprochée de personnalités, dirigeants d'entreprise, célébrités, diplomates et particuliers exposés, partout en France.\n\nNos agents de protection rapprochée (APR), rigoureusement sélectionnés et formés, assurent votre protection en toute discrétion. Chaque mission fait l'objet d'une analyse de risques préalable et d'un dispositif de protection sur mesure.\n\nAutorisation d'exercer du CNAPS n° ${RAPPROCHEE.authorization} (${RAPPROCHEE.activity}).\n${L612_14}`,
 
   sections: [
     {
@@ -61,8 +68,8 @@ const data = {
       subsections: [
         {
           h3: 'Déplacements et voyages',
-          content: 'Que ce soit pour des déplacements nationaux ou internationaux, MTJ Sécurité Rapprochée organise la sécurisation complète de vos voyages : transferts aéroport, escorte motorisée, reconnaissance des hôtels et lieux de rendez-vous, coordination avec les services de sécurité locaux.',
-          list: ['Transferts sécurisés aéroport/gare', 'Escorte motorisée', 'Reconnaissance et sécurisation des hébergements', 'Coordination internationale']
+          content: 'Pour vos déplacements en France, sur étude préalable, MTJ Sécurité Rapprochée organise la sécurisation de vos trajets : transferts aéroport ou gare, escorte motorisée, reconnaissance des hôtels et lieux de rendez-vous, coordination avec les services de sécurité des lieux.',
+          list: ['Transferts sécurisés aéroport/gare', 'Escorte motorisée', 'Reconnaissance et sécurisation des hébergements', 'Coordination avec les services de sécurité des lieux']
         },
         {
           h3: 'Événements et soirées privées',
@@ -91,7 +98,7 @@ const data = {
     }
   ],
 
-  conclusion: `La protection rapprochée est un métier d'excellence qui exige rigueur, discrétion et réactivité. MTJ Sécurité Rapprochée, société du groupe MTJ, met à votre disposition des agents de protection rapprochée d'élite pour garantir votre sécurité en toutes circonstances.\n\nContactez-nous en toute confidentialité pour une évaluation personnalisée de vos besoins de protection.`,
+  conclusion: `La protection rapprochée est un métier d'excellence qui exige rigueur, discrétion et réactivité. MTJ Sécurité Rapprochée, société du groupe MTJ, met à votre disposition des agents de protection rapprochée formés et expérimentés pour assurer votre sécurité.\n\nContactez-nous en toute confidentialité pour une évaluation personnalisée de vos besoins de protection.`,
 
   relatedLinks: [
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },

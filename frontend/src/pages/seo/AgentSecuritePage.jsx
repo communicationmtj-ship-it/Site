@@ -10,7 +10,9 @@ const data = {
   areaServed: 'Toulon, Toulouse, Nice, Sud de la France',
 
   h1: 'Agent de Prévention et de Sécurité Privée',
-  introduction: `MTJ Sécurité Privée met à votre disposition des agents de prévention et de sécurité (APS) formés, certifiés et expérimentés. Nos professionnels assurent la protection de vos biens, de vos locaux et de vos collaborateurs dans le sud de la France, avec une présence opérationnelle à Toulon, Toulouse et Nice.\n\nTitulaires de la carte professionnelle délivrée par le CNAPS (Conseil National des Activités Privées de Sécurité), nos agents garantissent des prestations conformes aux exigences réglementaires les plus strictes du secteur.`,
+  // 13/11/2026 (audit du site de Mathilde, site-066 et 086) : siège à Toulon, Marseille cité
+  // sans « principalement », aucun titre de formation affirmé pour tous les agents.
+  introduction: `MTJ Sécurité Privée met à votre disposition des agents de prévention et de sécurité (APS) formés, certifiés et expérimentés. Nos professionnels assurent la protection de vos biens, de vos locaux et de vos collaborateurs dans le sud de la France, depuis notre siège de Toulon.\n\nTitulaires de la carte professionnelle délivrée par le CNAPS (Conseil National des Activités Privées de Sécurité), nos agents exercent dans le respect des exigences réglementaires du secteur.`,
 
   sections: [
     {
@@ -20,7 +22,7 @@ const data = {
         {
           h3: 'Surveillance et gardiennage de sites',
           content: 'Nos agents assurent une présence dissuasive et opérationnelle sur vos sites 24 heures sur 24 et 7 jours sur 7. Que ce soit pour la surveillance de locaux commerciaux, de sites industriels, de résidences ou d\'entrepôts, nous mettons en place des dispositifs adaptés à la configuration de chaque lieu. La surveillance inclut les rondes régulières, la vérification des accès et la gestion des systèmes d\'alarme.',
-          list: ['Surveillance 24h/24 et 7j/7', 'Rondes planifiées et aléatoires', 'Gestion des systèmes d\'alarme et de vidéosurveillance', 'Rapports d\'activité quotidiens']
+          list: ['Surveillance 24h/24 et 7j/7', 'Rondes planifiées et aléatoires', 'Gestion des systèmes d\'alarme et de vidéosurveillance', 'Comptes rendus selon les modalités du devis']
         },
         {
           h3: 'Contrôle d\'accès et filtrage',
@@ -34,8 +36,8 @@ const data = {
       intro: 'La qualité de nos prestations repose sur le recrutement rigoureux et la formation continue de nos agents.',
       subsections: [
         {
-          h3: 'Certification TFP APS et carte professionnelle',
-          content: 'Tous nos agents sont titulaires du Titre à Finalité Professionnelle Agent de Prévention et de Sécurité (TFP APS). Ils possèdent leur carte professionnelle délivrée par le CNAPS, garantissant le respect des normes légales imposées par le Code de la Sécurité Intérieure. Cette certification assure la maîtrise des gestes de premiers secours, des techniques de médiation et de la réglementation applicable.'
+          h3: 'Carte professionnelle et formation',
+          content: 'Tous nos agents possèdent leur carte professionnelle délivrée par le CNAPS, qui suppose une formation qualifiante (par exemple le Titre à Finalité Professionnelle Agent de Prévention et de Sécurité, TFP APS). Elle atteste le respect des conditions fixées par le code de la sécurité intérieure (moralité, aptitude professionnelle). La formation couvre notamment les gestes de premiers secours, les techniques de médiation et la réglementation applicable.'
         },
         {
           h3: 'Formation continue et spécialisations',
@@ -67,7 +69,7 @@ const data = {
   faq: [
     {
       question: 'Quelle est la différence entre un agent de sécurité et un vigile ?',
-      answer: 'Le terme "vigile" est couramment utilisé dans le langage courant, mais la dénomination officielle est "agent de prévention et de sécurité" (APS). Ce professionnel est obligatoirement titulaire d\'une carte professionnelle délivrée par le CNAPS et a suivi une formation certifiante (TFP APS). Il exerce dans le cadre strict du Code de la Sécurité Intérieure.'
+      answer: 'Le terme "vigile" est couramment utilisé dans le langage courant, mais la dénomination officielle est "agent de prévention et de sécurité" (APS). Ce professionnel est obligatoirement titulaire d\'une carte professionnelle délivrée par le CNAPS et a suivi une formation certifiante (par exemple le TFP APS). Il exerce dans le cadre strict du Code de la Sécurité Intérieure.'
     },
     {
       question: 'Combien coûte un agent de sécurité privée ?',
@@ -75,7 +77,7 @@ const data = {
     },
     {
       question: 'Dans quelles villes MTJ Sécurité Privée intervient-elle ?',
-      answer: 'Notre siège est basé à Toulon (83). Nous intervenons principalement dans le sud de la France : Toulon, Marseille, Nice, Monaco, Toulouse et leurs agglomérations. Nous proposons également des missions en grand déplacement sur demande, couvrant l\'ensemble du territoire national.'
+      answer: 'Notre siège est basé à Toulon (83). Nous intervenons dans le sud de la France, notamment à Toulon, Marseille, Nice, Monaco et Toulouse, ainsi que dans leurs agglomérations. Nous proposons également des missions en grand déplacement sur demande, couvrant l\'ensemble du territoire national.'
     }
   ],
 

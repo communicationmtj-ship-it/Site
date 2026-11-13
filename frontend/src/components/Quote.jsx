@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FileText, Send, CheckCircle } from 'lucide-react';
-import { quoteForm } from '../data/mock';
+import { quoteForm, companyInfo, cnapsCompanies } from '../data/mock';
 import { toast } from '../components/ui/sonner';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
+const SERVICE_TYPES = [
+  'Agent de prévention et sécurité',
+  'Sécurité cynophile (Maître-chien)',
+  'CYNODEX',
+  'SSIAP',
+  'Événementiel',
+  'Protection rapprochée',
+  'Autre'
+];
+const PROTECTION_RAPPROCHEE = 'Protection rapprochée';
+
 const Quote = () => {
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -17,6 +30,15 @@ const Quote = () => {
     urgency: '',
     message: '',
   });
+
+  // Une page métier peut ouvrir le formulaire avec le service déjà choisi
+  // (/devis?service=Protection%20rapproch%C3%A9e) : seulement une valeur de la liste.
+  useEffect(() => {
+    const wanted = new URLSearchParams(location.search).get('service');
+    if (wanted && SERVICE_TYPES.includes(wanted)) {
+      setFormData((current) => (current.serviceType ? current : { ...current, serviceType: wanted }));
+    }
+  }, [location.search]);
   const [consent, setConsent] = useState(false);
   const [attachment, setAttachment] = useState(null);
   const [fileName, setFileName] = useState('');
@@ -34,11 +56,10 @@ const Quote = () => {
     if (file) {
       // Limit file size to 10MB
       if (file.size > 10 * 1024 * 1024) {
-        toast({
-          title: "Fichier trop volumineux",
-          description: "La taille maximale est de 10 Mo.",
-          variant: "destructive",
-        });
+        // Notification au format de la bibliothèque utilisée (sonner) : l'ancien appel
+        // toast({ title, … }) ne s'affichait pas.
+        toast.error("Fichier trop volumineux", { description: "La taille maximale est de 10 Mo." });
+        e.target.value = '';
         return;
       }
       setAttachment(file);
@@ -56,15 +77,15 @@ const Quote = () => {
     submitData.append('email', formData.email);
     submitData.append('phone', formData.phone);
     submitData.append('serviceType', formData.serviceType);
-    // Le serveur ne stocke pas encore ces deux champs : on les ajoute aussi au message pour ne rien perdre.
-    const extras = [];
-    if (formData.startDate) extras.push(`Date de début souhaitée : ${formData.startDate}`);
-    if (formData.urgency) extras.push(`Urgence : ${formData.urgency}`);
-    submitData.append('message', extras.length ? `${formData.message}\n\n${extras.join('\n')}` : formData.message);
+    // Date de début et urgence : enregistrées par le serveur et reprises dans le mail
+    // (date au format JJ/MM/AAAA, « URGENT » dans l'objet si la demande est sous 24 h).
+    submitData.append('message', formData.message);
     submitData.append('startDate', formData.startDate);
     submitData.append('urgency', formData.urgency);
     submitData.append('consent', consent ? 'true' : 'false');
     submitData.append('ts', formLoadedAt);
+    // Le champ piège doit partir avec la demande, sinon le serveur ne peut pas le contrôler.
+    submitData.append('hp', e.target.elements?.hp?.value || '');
     if (attachment) {
       submitData.append('attachment', attachment);
     }
@@ -113,15 +134,7 @@ const Quote = () => {
       });
   };
 
-  const serviceTypes = [
-    'Agent de prévention et sécurité',
-    'Sécurité cynophile (Maître-chien)',
-    'CYNODEX',
-    'SSIAP',
-    'Événementiel',
-    'Protection rapprochée',
-    'Autre'
-  ];
+  const rapprochee = cnapsCompanies.rapprochee;
 
   return (
     <section id="quote" className="relative scroll-mt-20 py-20 bg-stone-200">
@@ -141,8 +154,8 @@ const Quote = () => {
         <div className="max-w-4xl mx-auto">
           <p className="text-center text-black font-semibold mb-4">
             Besoin urgent ?{' '}
-            <a href="tel:+33760738206" className="underline hover:text-amber-700">
-              Appelez le 07 60 73 82 06
+            <a href={companyInfo.phoneHref} className="underline hover:text-amber-700">
+              Appelez le {companyInfo.phone}
             </a>
           </p>
           <div className="bg-black border-4 border-amber-400/30 p-8 lg:p-12">
@@ -232,12 +245,18 @@ const Quote = () => {
                   className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
                 >
                   <option value="">Sélectionnez un service</option>
-                  {serviceTypes.map((type) => (
+                  {SERVICE_TYPES.map((type) => (
                     <option key={type} value={type}>
                       {type}
                     </option>
                   ))}
                 </select>
+                {formData.serviceType === PROTECTION_RAPPROCHEE && (
+                  <p className="text-sm text-gray-300 mt-2" data-testid="quote-rapprochee-note">
+                    La protection rapprochée est assurée par MTJ Sécurité Rapprochée, société du groupe MTJ
+                    (autorisation d'exercer du CNAPS n° {rapprochee.authorization}) : le devis et le contrat sont établis à son nom.
+                  </p>
+                )}
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -320,9 +339,11 @@ const Quote = () => {
                 )}
               </div>
 
-              {/* Honeypot - invisible to humans */}
+              {/* Champ piège anti-robots, invisible et hors du parcours au clavier.
+                  Il porte une étiquette pour les outils d'accessibilité (audit, site-058). */}
               <div className="absolute opacity-0 -z-10" aria-hidden="true" tabIndex={-1}>
-                <input type="text" name="hp" tabIndex={-1} autoComplete="off" />
+                <label htmlFor="quote-hp">Laisser ce champ vide</label>
+                <input type="text" id="quote-hp" name="hp" tabIndex={-1} autoComplete="off" />
               </div>
 
               {/* Consentement RGPD */}
@@ -348,8 +369,8 @@ const Quote = () => {
               {/* Urgence téléphone */}
               <p className="text-center text-gray-300 pt-2">
                 Besoin urgent ?{' '}
-                <a href="tel:+33760738206" className="text-amber-400 font-semibold underline">
-                  Appelez le 07 60 73 82 06
+                <a href={companyInfo.phoneHref} className="text-amber-400 font-semibold underline">
+                  Appelez le {companyInfo.phone}
                 </a>
               </p>
 
@@ -370,7 +391,7 @@ const Quote = () => {
           <div className="mt-8 text-center">
             <p className="text-gray-700 text-sm">
               <CheckCircle className="inline-block mr-2 text-amber-600" size={18} />
-              Réponse sous 24h • Devis gratuit et sans engagement
+              Réponse sous 24 h • Devis gratuit et sans engagement
             </p>
           </div>
         </div>

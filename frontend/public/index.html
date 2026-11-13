@@ -40,10 +40,9 @@
         <meta name="twitter:description" content="Agents de sécurité, cynophile, CYNODEX, SSIAP, protection rapprochée. Toulon, Nice, Toulouse. Devis gratuit." />
         <meta name="twitter:image" content="https://mtj-securite-privee.fr/images/logo-mtj.png" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
+        <!-- Polices : celles du système (index.css). L'ancien chargement de la police Inter chez
+             Google n'était utilisé par aucune page et transmettait l'adresse IP du visiteur à Google
+             avant tout choix dans le bandeau (13/11/2026). -->
         <!--
         manifest.json provides metadata used when your web app is installed on a
         user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -66,7 +65,7 @@
             "name": "MTJ Sécurité Privée",
             "url": "https://mtj-securite-privee.fr",
             "logo": "https://mtj-securite-privee.fr/images/logo-mtj.png",
-            "description": "Entreprise de sécurité privée dans le sud de la France. Agents de sécurité, cynophile, CYNODEX, SSIAP, protection rapprochée.",
+            "description": "Entreprise de sécurité privée dans le sud de la France. Agents de sécurité, cynophile, CYNODEX, SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe.",
             "telephone": "+33760738206",
             "email": "contactsmtjsecuriteprivee@gmail.com",
             "address": {
@@ -78,9 +77,9 @@
                 "addressCountry": "FR"
             },
             "sameAs": [
-                "https://www.instagram.com/mtj_securite_privee/"
+                "https://www.instagram.com/mtj.securite.privee/"
             ],
-            "areaServed": ["Toulon", "Nice", "Monaco", "Toulouse", "Montpellier", "Marseille", "Nîmes", "Bordeaux", "Lyon", "Paris"],
+            "areaServed": ["Toulon", "Nice", "Monaco", "Marseille", "Toulouse", "Bordeaux", "Provence-Alpes-Côte d'Azur", "Occitanie", "Nouvelle-Aquitaine", "France"],
             "knowsAbout": ["Sécurité privée", "Gardiennage", "Agent cynophile", "SSIAP", "Protection rapprochée", "CYNODEX", "Sécurité incendie", "Sécurité événementielle"]
         }
         </script>
@@ -108,11 +107,6 @@
                 "latitude": 43.1242,
                 "longitude": 5.9280
             },
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5.0",
-                "reviewCount": "19"
-            },
             "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+33760738206",
@@ -126,7 +120,11 @@
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
     </head>
     <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <noscript>
+            <p>MTJ Sécurité Privée : pour afficher ce site, activez JavaScript dans votre navigateur.
+            Vous pouvez aussi nous joindre au <a href="tel:+33760738206">07 60 73 82 06</a>
+            ou par e-mail à <a href="mailto:contactsmtjsecuriteprivee@gmail.com">contactsmtjsecuriteprivee@gmail.com</a>.</p>
+        </noscript>
         <div id="root"></div>
         <!--
       This HTML file is a template.

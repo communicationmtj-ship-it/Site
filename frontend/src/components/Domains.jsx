@@ -91,12 +91,14 @@ const Domains = () => {
                     Notre Secteur Principal
                   </h4>
                   <p className="text-gray-300 mb-4 leading-relaxed">
-                    <strong className="text-white">De Toulouse à Nice</strong> - Zone d'intervention prioritaire avec nos équipes dédiées disponibles 24/7. Siège basé à Toulon.
+                    {/* 13/11/2026 (audit du site, site-067 et 069) : le texte suit la carte et la page
+                        Chantiers (PACA, Occitanie, Nouvelle-Aquitaine) au lieu de « De Toulouse à Nice ». */}
+                    <strong className="text-white">Sud de la France</strong> - Zone d'intervention prioritaire, avec une permanence joignable 24/7. Siège basé à Toulon.
                   </p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Intervention rapide - Disponibilité immédiate</span>
+                      <span>Intervention rapide sur demande</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
@@ -108,7 +110,7 @@ const Domains = () => {
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Couverture : Toulouse, Toulon, Nice et toute la côte sud</span>
+                      <span>Couverture : PACA, Occitanie et Nouvelle-Aquitaine</span>
                     </li>
                   </ul>
                 </div>
@@ -135,7 +137,7 @@ const Domains = () => {
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Couverture nationale complète</span>
+                      <span>France métropolitaine, sur étude de votre demande</span>
                     </li>
                   </ul>
                 </div>

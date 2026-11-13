@@ -59,28 +59,69 @@ def send_email_smtp(to_email: str, subject: str, body: str, from_email: str, pas
         return False
 
 
-def send_quote_email(name: str, company: Optional[str], email: str, phone: str, service_type: str, message: str, attachment_path: Optional[str] = None):
-    """
-    Send quote request email to commercial address via SMTP
-    """
-    try:
-        subject = f"Nouvelle demande de devis - {service_type}"
-        attachment_info = "\nPièce jointe : Oui" if attachment_path else "\nPas de pièce jointe"
+PROTECTION_RAPPROCHEE = "Protection rapprochée"
 
-        body = f"""Nouvelle demande de devis
+
+def format_date_fr(value: Optional[str]) -> Optional[str]:
+    """« 2026-11-20 » (champ date du navigateur) devient « 20/11/2026 » ; toute autre valeur reste telle quelle."""
+    text = (value or "").strip()
+    if not text:
+        return None
+    parts = text.split("-")
+    if len(parts) == 3 and len(parts[0]) == 4 and all(p.isdigit() for p in parts):
+        return f"{parts[2]}/{parts[1]}/{parts[0]}"
+    return text
+
+
+def is_urgent(urgency: Optional[str]) -> bool:
+    return (urgency or "").strip().lower().startswith("urgent")
+
+
+def quote_email_subject(service_type: str, urgency: Optional[str] = None) -> str:
+    """Objet du mail de devis : « URGENT » en tête pour une demande sous 24 h (voie rapide,
+    audit du 30/10/2026, site-104) et la société du groupe pour la protection rapprochée."""
+    subject = f"Nouvelle demande de devis - {service_type}"
+    if service_type == PROTECTION_RAPPROCHEE:
+        subject += " - MTJ Sécurité Rapprochée"
+    if is_urgent(urgency):
+        subject = f"URGENT - {subject}"
+    return subject
+
+
+def quote_email_body(name: str, company: Optional[str], email: str, phone: str, service_type: str,
+                     message: str, attachment_path: Optional[str] = None,
+                     start_date: Optional[str] = None, urgency: Optional[str] = None) -> str:
+    societe = ""
+    if service_type == PROTECTION_RAPPROCHEE:
+        societe = "\nSociété concernée : MTJ Sécurité Rapprochée (devis et contrat à son nom)\n"
+    return f"""Nouvelle demande de devis
 
 Nom : {name}
 Entreprise : {company if company else 'Non renseigné'}
 Email : {email}
 Téléphone : {phone}
 
-Service demandé : {service_type}
+Service demandé : {service_type}{societe}
+Date de début souhaitée : {format_date_fr(start_date) or 'Non précisée'}
+Urgence : {(urgency or '').strip() or 'Non précisée'}
 
 Message :
 {message}
 {"" if not attachment_path else chr(10) + "Une pièce jointe est incluse dans cet email."}
 --
 MTJ Sécurité Privée"""
+
+
+def send_quote_email(name: str, company: Optional[str], email: str, phone: str, service_type: str, message: str,
+                     attachment_path: Optional[str] = None, start_date: Optional[str] = None,
+                     urgency: Optional[str] = None):
+    """
+    Send quote request email to commercial address via SMTP
+    """
+    try:
+        subject = quote_email_subject(service_type, urgency)
+        body = quote_email_body(name, company, email, phone, service_type, message,
+                                attachment_path, start_date, urgency)
 
         attachments = [attachment_path] if attachment_path else None
 
@@ -93,8 +134,9 @@ MTJ Sécurité Privée"""
             attachment_paths=attachments
         )
 
+        # Journal sans donnée personnelle du visiteur (ni nom ni adresse) : 13/11/2026.
         if success:
-            logger.info(f"Quote email sent to {COMMERCIAL_EMAIL} from {name} ({email})")
+            logger.info("Mail de demande de devis envoyé à la boîte commerciale")
         return success
 
     except Exception as e:
@@ -136,7 +178,7 @@ MTJ Sécurité Privée"""
         )
 
         if success:
-            logger.info(f"Contact email sent to {CONTACT_EMAIL} from {name} ({email})")
+            logger.info("Mail de message de contact envoyé à la boîte de contact")
         return success
 
     except Exception as e:
@@ -177,8 +219,7 @@ MTJ Sécurité Privée"""
         )
 
         if success:
-            logger.info(f"Recruitment email sent to {RECRUITMENT_EMAIL}")
-            logger.info(f"Candidate: {first_name} {last_name} ({email})")
+            logger.info("Mail de candidature envoyé à la boîte du recrutement")
         return success
 
     except Exception as e:

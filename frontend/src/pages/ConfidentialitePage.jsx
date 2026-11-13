@@ -105,7 +105,7 @@ const ConfidentialitePage = () => {
             </p>
           </Section>
 
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-400 text-sm">
             Voir aussi nos <Link to="/mentions-legales" className="underline text-amber-400">mentions légales</Link>.
           </p>
         </div>

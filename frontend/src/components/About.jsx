@@ -40,11 +40,15 @@ const About = () => {
           {/* Image */}
           <div className="relative">
             <div className="relative overflow-hidden shadow-2xl">
-              <img
-                src="/images/about-team.jpeg"
-                alt="Équipe MTJ Sécurité"
-                className="w-full h-[500px] object-cover"
-              />
+              <picture>
+                <source srcSet="/images/about-team.webp" type="image/webp" />
+                <img
+                  src="/images/about-team.jpeg"
+                  alt="Équipe MTJ Sécurité"
+                  className="w-full h-[500px] object-cover"
+                  loading="lazy"
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
             

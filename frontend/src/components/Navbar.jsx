@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { companyInfo } from '../data/mock';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,17 +70,17 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div 
-            className="cursor-pointer flex items-center" 
-            onClick={() => navigate('/')}
-          >
-            <img 
-              src="/images/logo-mtj.png" 
-              alt="MTJ Sécurité Privée"
-              className="h-12 md:h-16 w-auto object-contain"
-            />
-          </div>
+          {/* Logo : vrai lien vers l'accueil (atteignable au clavier), image WebP allégée avec repli PNG */}
+          <Link to="/" className="cursor-pointer flex items-center" aria-label="MTJ Sécurité Privée, retour à l'accueil">
+            <picture>
+              <source srcSet="/images/logo-mtj.webp" type="image/webp" />
+              <img
+                src="/images/logo-mtj.png"
+                alt="MTJ Sécurité Privée"
+                className="h-12 md:h-16 w-auto object-contain"
+              />
+            </picture>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
