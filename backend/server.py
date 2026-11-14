@@ -84,25 +84,39 @@ from typing import Optional
 from fastapi import Header, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel as PydanticBaseModel
-from security import dashboard_login, verify_dashboard_token, token_from_authorization, LoginLocked
+from security import (
+    dashboard_login, verify_dashboard_token, token_from_authorization, LoginLocked,
+    LogicielBloque, LogicielIndisponible, MESSAGE_IDENTIFIANTS_REFUSES, message_trop_d_essais,
+)
 from middleware import _get_client_ip
 
 class DashboardLoginRequest(PydanticBaseModel):
-    password: str
-    username: Optional[str] = ""
+    # 13/11/2026 (décision de Théo) : identifiant = adresse e-mail du compte FONDATEUR du
+    # logiciel MTJ, mot de passe = celui du logiciel ; le site ne garde ni l'un ni l'autre.
+    password: str = Field(..., max_length=1024)
+    username: Optional[str] = Field("", max_length=254)
 
 @api_router.post("/dashboard/login")
 async def login_dashboard(req: DashboardLoginRequest, request: Request):
     try:
-        token = dashboard_login(req.password, _get_client_ip(request), req.username or "")
+        token = await dashboard_login(req.password, _get_client_ip(request), req.username or "")
     except LoginLocked as locked:
         return JSONResponse(
             status_code=429,
             headers={"Retry-After": str(locked.retry_after)},
-            content={"status": "error", "message": "Trop d'essais. Réessayez dans quelques minutes."},
+            content={"status": "error", "message": message_trop_d_essais(locked.retry_after)},
         )
+    except LogicielBloque as bloque:
+        return JSONResponse(
+            status_code=429,
+            headers={"Retry-After": str(bloque.retry_after)},
+            content={"status": "error", "message": bloque.message},
+        )
+    except LogicielIndisponible as indisponible:
+        # Jamais d'ouverture par défaut : le logiciel n'a pas pu vérifier, on refuse.
+        return JSONResponse(status_code=503, content={"status": "error", "message": indisponible.message})
     if not token:
-        return {"status": "error", "message": "Identifiants incorrects."}
+        return {"status": "error", "message": MESSAGE_IDENTIFIANTS_REFUSES}
     return {"status": "success", "token": token}
 
 @api_router.get("/dashboard/verify")
