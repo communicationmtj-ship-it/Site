@@ -1,5 +1,6 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { ZONE_DESSERVIE } from '../../data/perimetre';
 
 const data = {
   slug: '/securite-cynophile-maitre-chien',
@@ -7,7 +8,8 @@ const data = {
   metaTitle: 'Sécurité Cynophile & Maître-Chien | MTJ Sécurité Privée Toulon',
   metaDescription: 'MTJ Sécurité Privée propose des équipes cynophiles (maître-chien) d\'intervention à Toulon, Nice et Toulouse. Patrouilles, surveillance renforcée et sécurisation de sites. Devis gratuit.',
   breadcrumbCurrent: 'Sécurité cynophile',
-  areaServed: 'Toulon, Toulouse, Nice, PACA',
+  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
+  areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité Cynophile et Maître-Chien d\'Intervention',
   // 13/11/2026 (audit du site, suite de site-070 à 072) : aucun superlatif absolu, aucune
@@ -70,11 +72,11 @@ const data = {
     },
     {
       question: 'La sécurité cynophile est-elle adaptée aux événements publics ?',
-      answer: 'Absolument. Nos chiens sont sociabilisés et entraînés pour travailler dans des environnements bruyants et très fréquentés. Ils assurent des missions de sécurité événementielle lors de concerts, festivals, salons et compétitions sportives dans le sud de la France.'
+      answer: 'Absolument. Nos chiens sont sociabilisés et entraînés pour travailler dans des environnements bruyants et très fréquentés. Ils assurent des missions de sécurité événementielle lors de concerts, festivals, salons et compétitions sportives sur tout notre secteur, de Bordeaux à Nice et jusqu\'à Annecy.'
     },
     {
       question: 'Quelle zone géographique couvrez-vous pour les prestations cynophiles ?',
-      answer: 'Notre unité cynophile intervient dans tout le sud de la France : PACA (Toulon, Marseille, Nice, Monaco, Cannes), Occitanie (Toulouse) et Nouvelle-Aquitaine. Nous proposons également des missions en grand déplacement sur demande partout en France.'
+      answer: 'Notre unité cynophile intervient sur tout notre secteur, de Bordeaux à Nice en remontant jusqu\'à Annecy : Nouvelle-Aquitaine, Occitanie, Provence-Alpes-Côte d\'Azur (Marseille, Toulon, Nice, Cannes), Auvergne-Rhône-Alpes et Monaco. Nous proposons également des missions en grand déplacement sur demande partout en France.'
     }
   ],
 

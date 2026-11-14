@@ -1,12 +1,13 @@
-// Brouillon à valider par la direction avant mise en ligne (12/11/2026).
-// Éléments sûrs : société, SIRET, siège, hébergeur, autorisations CNAPS (source : logiciel MTJ).
-// À compléter par la direction : nom du directeur de publication, forme juridique et capital, numéro de TVA.
+// Mentions légales (12/11/2026, complétées le 13/11/2026 sur le choix de Théo « Site mentions: A ton
+// nom Kbis ») : société, SIRET, siège, hébergeur et autorisations CNAPS (source : logiciel MTJ) ;
+// directeur de la publication, forme, capital, immatriculation et TVA lus dans data/mock.js
+// (legalInfo : recopiés de l'extrait Kbis à jour au 3 novembre 2026, TVA vérifiée sur VIES).
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SeoHead from '../components/SeoHead';
-import { companyInfo, cnapsCompanies, L612_14 } from '../data/mock';
+import { companyInfo, cnapsCompanies, legalInfo, L612_14 } from '../data/mock';
 
 const Section = ({ title, children }) => (
   <section className="bg-neutral-900 border border-amber-400/10 p-6 lg:p-8">
@@ -41,10 +42,13 @@ const MentionsLegalesPage = () => {
         <div className="container mx-auto px-4 lg:px-8 space-y-8 pb-16 max-w-4xl">
           <Section title="Éditeur du site">
             <p>
-              Le site mtj-securite-privee.fr est édité par <strong>{privee.name}</strong>.
+              Le site mtj-securite-privee.fr est édité par <strong>{privee.name}</strong>, {legalInfo.forme} au
+              capital de {legalInfo.capital}.
             </p>
-            <ul className="space-y-1">
+            <ul className="space-y-1" data-testid="mentions-editeur">
+              <li>Immatriculation : {legalInfo.rcs}, immatriculée le {legalInfo.immatriculation}</li>
               <li>SIRET : {privee.siret} (SIREN 922 208 202)</li>
+              <li>Numéro de TVA intracommunautaire : {legalInfo.tva}</li>
               <li>Siège social : {companyInfo.address}</li>
               <li>
                 Téléphone : <a href={companyInfo.phoneHref} className="underline text-amber-400">{companyInfo.phone}</a>
@@ -56,7 +60,7 @@ const MentionsLegalesPage = () => {
           </Section>
 
           <Section title="Directeur de la publication">
-            <p>Le directeur de la publication est le président de MTJ Sécurité Privée.</p>
+            <p data-testid="mentions-directeur">Le directeur de la publication est {legalInfo.directeurPublication}.</p>
           </Section>
 
           <Section title="Hébergeur">

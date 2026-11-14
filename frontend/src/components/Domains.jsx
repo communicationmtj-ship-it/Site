@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Building2, HardHat, Home, Users, ArrowRight } from 'lucide-react';
 import { interventionDomains } from '../data/mock';
+import { SECTEUR, REGIONS, PAGE_SECTEUR } from '../data/perimetre';
 import FranceMap from './FranceMap';
 
 const Domains = () => {
@@ -91,9 +92,10 @@ const Domains = () => {
                     Notre Secteur Principal
                   </h4>
                   <p className="text-gray-300 mb-4 leading-relaxed">
-                    {/* 13/11/2026 (audit du site, site-067 et 069) : le texte suit la carte et la page
-                        Chantiers (PACA, Occitanie, Nouvelle-Aquitaine) au lieu de « De Toulouse à Nice ». */}
-                    <strong className="text-white">Sud de la France</strong> - Zone d'intervention prioritaire, avec une permanence joignable 24/7. Siège basé à Toulon.
+                    {/* 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : le secteur validé le
+                        11/10/2026, de Bordeaux à Nice en remontant jusqu'à Annecy (data/perimetre.js),
+                        le même que la carte. Siège à Toulon : aucune agence locale annoncée. */}
+                    <strong className="text-white">{SECTEUR.charAt(0).toUpperCase() + SECTEUR.slice(1)}</strong> - Zone d'intervention prioritaire, avec une permanence joignable 24/7. Siège basé à Toulon.
                   </p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex items-start">
@@ -102,7 +104,7 @@ const Domains = () => {
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Équipes locales dédiées basées à Toulon</span>
+                      <span>Siège à Toulon, équipes mobilisées sur tout le secteur</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
@@ -110,9 +112,17 @@ const Domains = () => {
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Couverture : PACA, Occitanie et Nouvelle-Aquitaine</span>
+                      <span>Couverture : {REGIONS.join(', ')} et Monaco</span>
                     </li>
                   </ul>
+                  <Link
+                    to={PAGE_SECTEUR.slug}
+                    className="inline-flex items-center gap-2 mt-5 text-amber-400 text-xs font-semibold uppercase tracking-wider hover:text-amber-300 transition-colors"
+                    data-testid="domains-secteur-link"
+                  >
+                    Voir tout notre secteur, ville par ville
+                    <ArrowRight size={14} />
+                  </Link>
                 </div>
                 
                 <div className="bg-neutral-900 p-6 border-l-4 border-amber-400/50">

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import SeoHead from './SeoHead';
+import { SECTEUR, REGIONS } from '../data/perimetre';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -163,7 +164,9 @@ const Recrutement = () => {
 
             {/* Profils recherchés (repris de la description de la page) et prérequis.
                 13/11/2026 (audit, site-119 et 120) : seules les obligations légales sont écrites ;
-                zones, avantages, « avec ou sans chien » et contact RH attendent la direction. */}
+                avantages, « avec ou sans chien » et contact RH attendent la direction.
+                13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zones de recrutement = le
+                secteur du logiciel (data/perimetre.js). */}
             <div className="mt-10 mb-12 bg-black border border-amber-400/30 p-6 text-left grid md:grid-cols-2 gap-6" data-testid="recrutement-profils">
               <div>
                 <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Profils recherchés</h2>
@@ -180,6 +183,13 @@ const Recrutement = () => {
                   <li>Carte professionnelle délivrée par le CNAPS, en cours de validité : obligatoire pour exercer une activité de sécurité privée (code de la sécurité intérieure).</li>
                   <li>Agents SSIAP : diplôme SSIAP correspondant au poste, à jour de son recyclage.</li>
                 </ul>
+              </div>
+              <div className="md:col-span-2" data-testid="recrutement-zones">
+                <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Zones de recrutement</h2>
+                <p className="text-gray-300 text-sm">
+                  Nous recrutons sur tout notre secteur, {SECTEUR} : {REGIONS.join(', ')} et Monaco.
+                  Les postes sont proposés selon les missions en cours.
+                </p>
               </div>
             </div>
 
@@ -327,7 +337,7 @@ const Recrutement = () => {
                     />
                     <span>
                       J'accepte que MTJ Sécurité Privée traite les informations et documents transmis (CV, lettre de motivation, diplômes) pour étudier ma candidature.
-                      Mes données sont conservées 2 ans après notre dernier échange, puis supprimées. Je peux exercer mon droit d'accès, de rectification et de suppression en écrivant à l'adresse indiquée dans la{' '}
+                      Mes données sont conservées 2 ans après notre dernier échange (durée indiquée dans la politique de confidentialité). Je peux exercer mon droit d'accès, de rectification et d'effacement en écrivant à l'adresse indiquée dans la{' '}
                       <Link to="/politique-de-confidentialite" className="underline text-amber-400 hover:text-amber-300">politique de confidentialité</Link>. *
                     </span>
                   </label>

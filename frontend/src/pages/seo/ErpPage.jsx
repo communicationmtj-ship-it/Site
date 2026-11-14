@@ -1,15 +1,17 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { ZONE_DESSERVIE } from '../../data/perimetre';
 
 const data = {
   slug: '/securite-erp-etablissements-public',
   metaTitle: 'Sécurité ERP — Établissements Recevant du Public | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée assure la sécurité des établissements recevant du public (ERP) : hôpitaux, écoles, musées, centres sportifs. Agents SSIAP, contrôle d\'accès à Toulon, Nice, Toulouse.',
   breadcrumbCurrent: 'Établissements recevant du public',
-  areaServed: 'Toulon, Toulouse, Nice, PACA, Occitanie, France',
+  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
+  areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité des Établissements Recevant du Public (ERP)',
-  introduction: `MTJ Sécurité Privée est spécialisée dans la sécurité des établissements recevant du public (ERP) dans le sud de la France. Hôpitaux, cliniques, établissements scolaires, musées, centres sportifs, administrations : chaque type d'ERP présente des enjeux de sécurité spécifiques que nos agents maîtrisent parfaitement.\n\nNous déployons des dispositifs conformes à la réglementation en vigueur (Code de la construction, règlement de sécurité contre les risques d'incendie) et adaptés à la catégorie et au type de votre établissement.`,
+  introduction: `MTJ Sécurité Privée est spécialisée dans la sécurité des établissements recevant du public (ERP) de Bordeaux à Nice et jusqu'à Annecy. Hôpitaux, cliniques, établissements scolaires, musées, centres sportifs, administrations : chaque type d'ERP présente des enjeux de sécurité spécifiques que nos agents maîtrisent parfaitement.\n\nNous déployons des dispositifs conformes à la réglementation en vigueur (Code de la construction, règlement de sécurité contre les risques d'incendie) et adaptés à la catégorie et au type de votre établissement.`,
 
   sections: [
     {

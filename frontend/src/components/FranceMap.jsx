@@ -1,24 +1,156 @@
 import React from 'react';
 import franceData from '@svg-maps/france.departments';
+import { CODES_CARTE, SECTEUR } from '../data/perimetre';
 
-const SOUTH_DEPARTMENTS = new Set([
-  '04', '05', '06', '07', '09', '11', '12', '13', '15',
-  '24', '26', '30', '31', '32', '33', '34', '40', '43',
-  '46', '47', '48', '64', '65', '66', '81', '82', '83',
-  '84'
-]);
+// 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : la carte colorie exactement le
+// périmètre validé le 11/10/2026 (data/perimetre.js : de Bordeaux à Nice en remontant jusqu'à
+// Annecy), et non plus l'ancienne liste « sud », qui oubliait l'Isère, le Rhône, la Savoie,
+// la Haute-Savoie et l'Ain.
+const SECTOR_DEPARTMENTS = new Set(CODES_CARTE);
 
 const CORSICA_DEPARTMENTS = new Set(['2A', '2B']);
 
-const CITIES = [
+// Boîte englobante d'un tracé SVG (commandes M L H V C S Q T A Z, absolues ou relatives).
+// Les points de contrôle des courbes comptent : la boîte peut être un peu plus grande que le
+// tracé, jamais plus petite. Tracé illisible : null (la ville prend alors sa position de repli).
+export const boiteDuTrace = (d) => {
+  const jetons = String(d || '').match(/[a-zA-Z]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g);
+  if (!jetons) return null;
+  const estLettre = (t) => /^[a-zA-Z]$/.test(t);
+  let i = 0;
+  let cmd = null;
+  let x = 0;
+  let y = 0;
+  let x0 = 0;
+  let y0 = 0;
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  const voir = (px, py) => {
+    minX = Math.min(minX, px);
+    maxX = Math.max(maxX, px);
+    minY = Math.min(minY, py);
+    maxY = Math.max(maxY, py);
+  };
+  const lire = (n) => {
+    const v = [];
+    for (let k = 0; k < n; k += 1) {
+      if (i >= jetons.length || estLettre(jetons[i])) return null;
+      v.push(parseFloat(jetons[i]));
+      i += 1;
+    }
+    return v;
+  };
+  while (i < jetons.length) {
+    if (estLettre(jetons[i])) {
+      cmd = jetons[i];
+      i += 1;
+      if (cmd === 'z' || cmd === 'Z') {
+        x = x0;
+        y = y0;
+        cmd = null;
+        continue;
+      }
+    } else if (cmd === null) {
+      return null;
+    }
+    const rel = cmd === cmd.toLowerCase();
+    const bx = rel ? x : 0;
+    const by = rel ? y : 0;
+    let v;
+    switch (cmd.toLowerCase()) {
+      case 'm':
+        v = lire(2);
+        if (!v) return null;
+        x = bx + v[0];
+        y = by + v[1];
+        x0 = x;
+        y0 = y;
+        voir(x, y);
+        cmd = rel ? 'l' : 'L'; // les paires suivantes sont des segments
+        break;
+      case 'l':
+      case 't':
+        v = lire(2);
+        if (!v) return null;
+        x = bx + v[0];
+        y = by + v[1];
+        voir(x, y);
+        break;
+      case 'h':
+        v = lire(1);
+        if (!v) return null;
+        x = bx + v[0];
+        voir(x, y);
+        break;
+      case 'v':
+        v = lire(1);
+        if (!v) return null;
+        y = by + v[0];
+        voir(x, y);
+        break;
+      case 'c':
+        v = lire(6);
+        if (!v) return null;
+        voir(bx + v[0], by + v[1]);
+        voir(bx + v[2], by + v[3]);
+        x = bx + v[4];
+        y = by + v[5];
+        voir(x, y);
+        break;
+      case 's':
+      case 'q':
+        v = lire(4);
+        if (!v) return null;
+        voir(bx + v[0], by + v[1]);
+        x = bx + v[2];
+        y = by + v[3];
+        voir(x, y);
+        break;
+      case 'a':
+        v = lire(7);
+        if (!v) return null;
+        x = bx + v[5];
+        y = by + v[6];
+        voir(x, y);
+        break;
+      default:
+        return null;
+    }
+  }
+  if (!Number.isFinite(minX) || !Number.isFinite(minY)) return null;
+  return { x: minX, y: minY, largeur: maxX - minX, hauteur: maxY - minY };
+};
+
+// Une ville placée dans la boîte de son département, aux fractions mesurées sur les limites du
+// département (longitude depuis l'ouest, latitude depuis le nord). Repli sur une position
+// estimée si le tracé est absent ou illisible.
+const dansLeDepartement = (code, fx, fy, repli) => {
+  const dep = franceData.locations.find((l) => l.id === code);
+  const b = dep ? boiteDuTrace(dep.path) : null;
+  if (!b || !(b.largeur > 2 && b.largeur < 200 && b.hauteur > 2 && b.hauteur < 200)) return repli;
+  const p = { x: b.x + fx * b.largeur, y: b.y + fy * b.hauteur };
+  return p.x > 0 && p.x < 613 && p.y > 0 && p.y < 600 ? p : repli;
+};
+
+// Repères du secteur (pas des agences : la seule adresse de MTJ Sécurité Privée est le siège de Toulon).
+// Bordeaux : 43 % de la largeur de la Gironde depuis l'ouest, 53 % de sa hauteur depuis le nord.
+// Annecy : 26 % de la largeur de la Haute-Savoie depuis l'ouest, 70 % de sa hauteur depuis le nord.
+const BORDEAUX = dansLeDepartement('33', 0.43, 0.53, { x: 166, y: 382 });
+const ANNECY = dansLeDepartement('74', 0.26, 0.7, { x: 462, y: 316 });
+
+export const CITIES = [
+  { name: 'Bordeaux', x: Math.round(BORDEAUX.x), y: Math.round(BORDEAUX.y) },
   { name: 'Toulouse', x: 255, y: 475 },
-  { name: 'Toulon', x: 458, y: 485 },
+  { name: 'Toulon (siège)', x: 458, y: 485 },
   { name: 'Nice', x: 520, y: 442 },
+  { name: 'Annecy', x: Math.round(ANNECY.x), y: Math.round(ANNECY.y) },
 ];
 
 const FranceMap = () => {
-  const northDepts = franceData.locations.filter(l => !SOUTH_DEPARTMENTS.has(l.id) && !CORSICA_DEPARTMENTS.has(l.id));
-  const southDepts = franceData.locations.filter(l => SOUTH_DEPARTMENTS.has(l.id));
+  const northDepts = franceData.locations.filter(l => !SECTOR_DEPARTMENTS.has(l.id) && !CORSICA_DEPARTMENTS.has(l.id));
+  const southDepts = franceData.locations.filter(l => SECTOR_DEPARTMENTS.has(l.id));
   const corsicaDepts = franceData.locations.filter(l => CORSICA_DEPARTMENTS.has(l.id));
 
   return (
@@ -26,7 +158,12 @@ const FranceMap = () => {
       viewBox="0 0 613 600"
       className="w-full h-auto max-w-lg mx-auto"
       data-testid="france-map-svg"
+      role="img"
+      aria-labelledby="france-map-titre"
     >
+      <title id="france-map-titre">
+        {`Carte de France : notre secteur, ${SECTEUR}, en couleur ; siège à Toulon ; grand déplacement sur demande dans le reste de la France.`}
+      </title>
       <defs>
         {/* Dark muted gradient for north */}
         <linearGradient id="northGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -68,7 +205,7 @@ const FranceMap = () => {
         ))}
       </g>
 
-      {/* South departments - amber/gold */}
+      {/* Départements du secteur - ambre et or */}
       <g filter="url(#texture)" style={{ cursor: 'default' }}>
         {southDepts.map(dept => (
           <path

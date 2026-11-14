@@ -17,6 +17,7 @@ import "./App.css";
 import { safeJsonLd } from "./utils/safeJsonLd";
 import SeoHead from "./components/SeoHead";
 import { companyInfo, postalAddressSchema } from "./data/mock";
+import { PAGES_LOCALES, REGIONS } from "./data/perimetre";
 
 // Pages chargées à la demande : le code de chaque page (et celui du tableau
 // d'administration) n'est plus dans le JavaScript de l'accueil.
@@ -42,6 +43,15 @@ const ErpPage = lazy(() => import("./pages/seo/ErpPage"));
 const ProtectionRapprocheePage = lazy(() => import("./pages/seo/ProtectionRapprocheePage"));
 const GrandDeplacementPage = lazy(() => import("./pages/seo/GrandDeplacementPage"));
 const BordeauxPage = lazy(() => import("./pages/seo/BordeauxPage"));
+// Pages locales d'intervention (choix de Théo du 13/11/2026 : tout le secteur, sans adresse locale).
+const MontpellierPage = lazy(() => import("./pages/seo/MontpellierPage"));
+const NimesPage = lazy(() => import("./pages/seo/NimesPage"));
+const PerpignanPage = lazy(() => import("./pages/seo/PerpignanPage"));
+const MarseillePage = lazy(() => import("./pages/seo/MarseillePage"));
+const AvignonPage = lazy(() => import("./pages/seo/AvignonPage"));
+const LyonPage = lazy(() => import("./pages/seo/LyonPage"));
+const GrenoblePage = lazy(() => import("./pages/seo/GrenoblePage"));
+const AnnecyPage = lazy(() => import("./pages/seo/AnnecyPage"));
 
 const homeSchema = [
   {
@@ -50,18 +60,14 @@ const homeSchema = [
     "name": "MTJ Sécurité Privée",
     "url": "https://mtj-securite-privee.fr",
     "logo": "https://mtj-securite-privee.fr/images/logo-mtj.png",
-    "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX et SSIAP dans le sud de la France ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe.",
+    "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX et SSIAP, de Bordeaux à Nice en remontant jusqu'à Annecy ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe.",
     "telephone": companyInfo.phoneIntl,
     "email": companyInfo.email,
     "address": postalAddressSchema,
+    // 13/11/2026 : le secteur du logiciel (data/perimetre.js), villes des pages locales et régions.
     "areaServed": [
-      { "@type": "City", "name": "Toulon" },
-      { "@type": "City", "name": "Nice" },
-      { "@type": "City", "name": "Monaco" },
-      { "@type": "City", "name": "Toulouse" },
-      { "@type": "AdministrativeArea", "name": "Provence-Alpes-Côte d'Azur" },
-      { "@type": "AdministrativeArea", "name": "Occitanie" },
-      { "@type": "AdministrativeArea", "name": "Nouvelle-Aquitaine" },
+      ...PAGES_LOCALES.flatMap((p) => p.ville.split(" et ").map((v) => ({ "@type": "City", "name": v }))),
+      ...REGIONS.map((r) => ({ "@type": "AdministrativeArea", "name": r })),
       { "@type": "Country", "name": "France" }
     ],
     "sameAs": [companyInfo.instagramUrl],
@@ -99,8 +105,8 @@ const HomePage = () => {
   return (
     <>
       <SeoHead
-        title="MTJ Sécurité Privée | Sécurité, Gardiennage, Cynophile | Toulon, Nice, Toulouse"
-        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe. Interventions à Toulon, Nice, Monaco, Toulouse et sur tout le territoire national. Devis gratuit."
+        title="MTJ Sécurité Privée | Sécurité privée de Bordeaux à Nice et Annecy"
+        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe. Interventions de Bordeaux à Nice en remontant jusqu'à Annecy, et en grand déplacement dans toute la France. Devis gratuit."
         path="/"
       />
       <Navbar />
@@ -198,12 +204,20 @@ function App() {
           <Route path="/securite-erp-etablissements-public" element={<ErpPage />} />
           <Route path="/protection-rapprochee" element={<ProtectionRapprocheePage />} />
           <Route path="/grand-deplacement-securite-france" element={<GrandDeplacementPage />} />
+          {/* SEO - Localisation (pages locales du secteur, data/perimetre.js) */}
           <Route path="/securite-privee-bordeaux" element={<BordeauxPage />} />
-          {/* SEO - Localisation */}
           <Route path="/securite-privee-toulon" element={<ToulonPage />} />
           <Route path="/securite-privee-toulouse" element={<ToulousePage />} />
           <Route path="/securite-privee-nice-monaco" element={<NiceMonacoPage />} />
           <Route path="/securite-privee-sud-france" element={<SudFrancePage />} />
+          <Route path="/securite-privee-montpellier" element={<MontpellierPage />} />
+          <Route path="/securite-privee-nimes" element={<NimesPage />} />
+          <Route path="/securite-privee-perpignan" element={<PerpignanPage />} />
+          <Route path="/securite-privee-marseille" element={<MarseillePage />} />
+          <Route path="/securite-privee-avignon" element={<AvignonPage />} />
+          <Route path="/securite-privee-lyon" element={<LyonPage />} />
+          <Route path="/securite-privee-grenoble" element={<GrenoblePage />} />
+          <Route path="/securite-privee-annecy" element={<AnnecyPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         </Suspense>

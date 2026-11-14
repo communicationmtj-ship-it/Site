@@ -4,14 +4,16 @@ import SeoPageLayout from './SeoPageLayout';
 const data = {
   slug: '/grand-deplacement-securite-france',
   metaTitle: 'Grand Déplacement Sécurité — Intervention sur tout le Territoire National | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée intervient en grand déplacement sur l\'ensemble du territoire français. Paris, Lyon, Bordeaux, Nantes, Strasbourg : déploiement d\'agents de sécurité, cynophile, SSIAP et CYNODEX partout en France.',
+  metaDescription: 'MTJ Sécurité Privée intervient en grand déplacement sur l\'ensemble du territoire français, au-delà de son secteur de Bordeaux à Nice et Annecy. Paris, Nantes, Strasbourg, Lille : déploiement d\'agents de sécurité, cynophile, SSIAP et CYNODEX partout en France.',
   breadcrumbCurrent: 'Grand déplacement national',
   areaServed: 'France métropolitaine',
 
   h1: 'Grand Déplacement — Sécurité sur l\'Ensemble du Territoire National',
   // 13/11/2026 (audit du site de Mathilde, site-061, 064, 083 à 086) : pas de « pôles », pas
   // d'outre-mer ni d'international, aucun délai promis sans devis, suivi décrit sans outil non ouvert.
-  introduction: `Au-delà de notre zone d'intervention principale dans le sud de la France, MTJ Sécurité Privée peut déployer ses équipes en grand déplacement sur l'ensemble du territoire métropolitain.\n\nParis, Lyon, Bordeaux, Nantes, Strasbourg, Lille : où que se trouvent vos besoins en sécurité, nous mobilisons nos agents qualifiés pour des missions ponctuelles ou récurrentes, et vous accompagnons sur tous vos sites en France.`,
+  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : Lyon, Grenoble, Bordeaux et Bayonne sont
+  // dans le secteur (data/perimetre.js) ; le grand déplacement commence au-delà.
+  introduction: `Au-delà de notre secteur, de Bordeaux à Nice en remontant jusqu'à Annecy, MTJ Sécurité Privée peut déployer ses équipes en grand déplacement sur l'ensemble du territoire métropolitain.\n\nParis, Nantes, Rennes, Strasbourg, Lille : où que se trouvent vos besoins en sécurité, nous mobilisons nos agents qualifiés pour des missions ponctuelles ou récurrentes, et vous accompagnons sur tous vos sites en France.`,
 
   sections: [
     {
@@ -25,8 +27,8 @@ const data = {
         },
         {
           h3: 'Villes et régions d\'intervention',
-          content: 'Nous pouvons intervenir hors de notre zone principale pour des missions de sécurité événementielle, de gardiennage temporaire, de sécurité cynophile ou de détection d\'explosifs : Paris et Île-de-France, Lyon et région Auvergne-Rhône-Alpes, Bordeaux et Nouvelle-Aquitaine, Nantes et Pays de la Loire, Strasbourg et Grand Est.',
-          list: ['Paris et Île-de-France', 'Lyon, Grenoble, Saint-Étienne', 'Bordeaux, La Rochelle, Bayonne', 'Nantes, Rennes, Brest', 'Strasbourg, Metz, Nancy', 'Lille, Rouen, Reims']
+          content: 'Nous pouvons intervenir hors de notre secteur pour des missions de sécurité événementielle, de gardiennage temporaire, de sécurité cynophile ou de détection d\'explosifs : Paris et Île-de-France, Pays de la Loire et Bretagne, Grand Est, Hauts-de-France, Normandie, Centre-Val de Loire, Bourgogne, nord de la Nouvelle-Aquitaine et de l\'Auvergne.',
+          list: ['Paris et Île-de-France', 'Nantes, Rennes, Brest', 'Strasbourg, Metz, Nancy', 'Lille, Rouen, Reims', 'Orléans, Tours, Dijon', 'Clermont-Ferrand, Saint-Étienne, Limoges, La Rochelle']
         }
       ]
     },
@@ -92,10 +94,10 @@ const data = {
     }
   ],
 
-  conclusion: `MTJ Sécurité Privée ne se limite pas au sud de la France. Notre capacité de déploiement en grand déplacement vous permet de bénéficier de notre expertise et de notre savoir-faire sur l'ensemble du territoire national, avec un seul interlocuteur.\n\nContactez-nous pour étudier votre projet et recevoir un devis personnalisé qui détaille les frais de déplacement.`,
+  conclusion: `MTJ Sécurité Privée ne se limite pas à son secteur, de Bordeaux à Nice et jusqu'à Annecy. Notre capacité de déploiement en grand déplacement vous permet de bénéficier de notre expertise et de notre savoir-faire sur l'ensemble du territoire national, avec un seul interlocuteur.\n\nContactez-nous pour étudier votre projet et recevoir un devis personnalisé qui détaille les frais de déplacement.`,
 
   relatedLinks: [
-    { href: '/securite-privee-sud-france', label: 'Sécurité privée dans le sud de la France' },
+    { href: '/securite-privee-sud-france', label: 'Tout notre secteur' },
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
     { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },

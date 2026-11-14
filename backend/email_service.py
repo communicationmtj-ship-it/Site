@@ -9,7 +9,6 @@ import os
 
 logger = logging.getLogger(__name__)
 
-COMPANY_EMAIL = "contactsmtjsecuriteprivee@gmail.com"
 RECRUITMENT_EMAIL = os.environ.get("RECRUITMENT_EMAIL", "rex.mtjsecuriteprivee@gmail.com")
 RECRUITMENT_EMAIL_PASSWORD = os.environ.get("RECRUITMENT_EMAIL_PASSWORD")
 CONTACT_EMAIL = os.environ.get("CONTACT_EMAIL", "contactsmtjsecuriteprivee@gmail.com")
@@ -18,6 +17,26 @@ COMMERCIAL_EMAIL_PASSWORD = os.environ.get("COMMERCIAL_EMAIL_PASSWORD")
 
 
 COMMERCIAL_EMAIL = os.environ.get("COMMERCIAL_EMAIL", "commercialmtj.securiteprivee@gmail.com")
+
+# 13/11/2026 (choix de Théo, « Site email: A contact OVH », avec un renvoi vers sa boîte Gmail : « SINON
+# JE NE LES VERRAI JAMAIS, JE N'AI AUCUN MAIL OVH DE CONNECTÉ ») : les mails du site destinés à
+# l'équipe (devis, contact, candidature, rapport mensuel) partent vers l'adresse de la variable
+# NOTIFY_EMAIL du serveur (valeur à poser : README.md ; aucune adresse écrite ici). Les boîtes d'envoi et leurs mots de passe ne
+# changent pas. Variable absente ou illisible : le mail part, comme avant, vers sa boîte d'envoi, et
+# le journal le dit à chaque envoi (règle « échec visible »).
+NOTIFY_EMAIL_VAR = "NOTIFY_EMAIL"
+
+
+def destinataire_equipe(boite_envoi: str) -> str:
+    """Adresse qui reçoit un mail du site destiné à l'équipe, relue à chaque envoi."""
+    adresse = (os.environ.get(NOTIFY_EMAIL_VAR) or "").strip()
+    if adresse and "@" in adresse and not any(c in adresse for c in " ,;\r\n"):
+        return adresse
+    if adresse:
+        logger.error("NOTIFY_EMAIL illisible sur le serveur : le mail part vers sa boîte d'envoi.")
+    else:
+        logger.warning("NOTIFY_EMAIL non posée sur le serveur : le mail part vers sa boîte d'envoi.")
+    return boite_envoi
 
 
 def send_email_smtp(to_email: str, subject: str, body: str, from_email: str, password: str, attachment_paths: list = None, content_type: str = "plain"):
@@ -126,7 +145,7 @@ def send_quote_email(name: str, company: Optional[str], email: str, phone: str, 
         attachments = [attachment_path] if attachment_path else None
 
         success = send_email_smtp(
-            to_email=COMMERCIAL_EMAIL,
+            to_email=destinataire_equipe(COMMERCIAL_EMAIL),
             subject=subject,
             body=body,
             from_email=COMMERCIAL_EMAIL,
@@ -169,7 +188,7 @@ MTJ Sécurité Privée"""
         attachments = [attachment_path] if attachment_path else None
 
         success = send_email_smtp(
-            to_email=CONTACT_EMAIL,
+            to_email=destinataire_equipe(CONTACT_EMAIL),
             subject=email_subject,
             body=body,
             from_email=CONTACT_EMAIL,
@@ -210,7 +229,7 @@ Pièces jointes : {len(attachment_paths) if attachment_paths else 0} fichier(s)
 MTJ Sécurité Privée"""
 
         success = send_email_smtp(
-            to_email=RECRUITMENT_EMAIL,
+            to_email=destinataire_equipe(RECRUITMENT_EMAIL),
             subject=subject,
             body=body,
             from_email=RECRUITMENT_EMAIL,

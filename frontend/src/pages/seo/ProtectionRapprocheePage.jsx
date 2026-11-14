@@ -108,7 +108,7 @@ const data = {
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée à Nice et Monaco' },
-    { href: '/securite-privee-sud-france', label: 'Sécurité privée dans le sud de la France' },
+    { href: '/securite-privee-sud-france', label: 'Tout notre secteur' },
   ]
 };
 

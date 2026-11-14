@@ -6,7 +6,7 @@ import hashlib
 import httpx
 import logging
 
-from email_service import send_email_smtp, CONTACT_EMAIL, CONTACT_EMAIL_PASSWORD
+from email_service import send_email_smtp, destinataire_equipe, CONTACT_EMAIL, CONTACT_EMAIL_PASSWORD
 from security import verify_dashboard_token, token_from_authorization
 
 logger = logging.getLogger(__name__)
@@ -370,8 +370,9 @@ async def generate_monthly_report():
 </table>
 </body></html>'''
 
+    # 13/11/2026 : le rapport part vers l'adresse de l'équipe (NOTIFY_EMAIL), comme les mails des formulaires.
     success = send_email_smtp(
-        to_email=CONTACT_EMAIL,
+        to_email=destinataire_equipe(CONTACT_EMAIL),
         subject=f"Rapport mensuel du site — {month_name}",
         body=body,
         from_email=CONTACT_EMAIL,

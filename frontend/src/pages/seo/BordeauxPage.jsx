@@ -1,17 +1,20 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { PAGE_SECTEUR, lienLocal } from '../../data/perimetre';
 
 const data = {
   slug: '/securite-privee-bordeaux',
   metaTitle: 'Société de Sécurité Privée à Bordeaux (33) | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée à Bordeaux : agents de sécurité, gardiennage, sécurité cynophile et événementielle en Gironde et Nouvelle-Aquitaine. Devis gratuit — 07 60 73 82 06.',
+  breadcrumbParent: { href: PAGE_SECTEUR.slug, label: 'Notre secteur' },
   breadcrumbCurrent: 'Sécurité privée à Bordeaux',
   areaServed: 'Bordeaux, Gironde, Nouvelle-Aquitaine',
 
   h1: 'Sécurité Privée à Bordeaux — Gironde (33)',
   // 13/11/2026 (audit du site de Mathilde, site-062 et 068) : siège à Toulon, intervention à
   // Bordeaux sur demande ; aucune équipe locale ni implantation affirmée sans preuve.
-  // La place de la page dans le menu reste à trancher par la direction.
+  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : Bordeaux est l'extrémité ouest du
+  // secteur ; la page est au menu (« Nos zones ») et au pied de page.
   introduction: `MTJ Sécurité Privée propose son expertise en sécurité privée à Bordeaux et sur l'ensemble de la métropole bordelaise. Sixième ville de France, Bordeaux est un pôle économique majeur avec une activité viticole mondialement reconnue, un secteur aéronautique de pointe et un tissu tertiaire en pleine expansion.\n\nCette dynamique génère des besoins croissants en sécurité privée : surveillance de sites viticoles, gardiennage de zones d'activité, sécurisation d'événements culturels et sportifs. MTJ Sécurité Privée répond à ces besoins avec des solutions professionnelles et adaptées au contexte bordelais.`,
 
   sections: [
@@ -32,7 +35,7 @@ const data = {
     },
     {
       h2: 'Zones d\'intervention en Nouvelle-Aquitaine',
-      intro: 'Nous intervenons sur l\'ensemble de la Gironde et dans les départements limitrophes de Nouvelle-Aquitaine, selon vos besoins.',
+      intro: 'Nous intervenons sur l\'ensemble de la Gironde et dans les départements voisins de notre secteur en Nouvelle-Aquitaine, selon vos besoins.',
       subsections: [
         {
           h3: 'Métropole bordelaise et rive droite',
@@ -45,6 +48,10 @@ const data = {
         {
           h3: 'Vignobles et domaines viticoles',
           content: 'La Gironde abrite certains des vignobles les plus prestigieux au monde : Médoc, Saint-Émilion, Pomerol, Graves. La protection de ces domaines contre le vol, l\'intrusion et le vandalisme est un enjeu crucial. MTJ Sécurité Privée propose la surveillance de propriétés viticoles, de chais et d\'exploitations agricoles avec des prestations adaptées au monde viticole.'
+        },
+        {
+          h3: 'Landes, Lot-et-Garonne, Dordogne et Pyrénées-Atlantiques',
+          content: 'Notre secteur s\'étend aux départements voisins : Mont-de-Marsan et Dax dans les Landes, Agen dans le Lot-et-Garonne, Périgueux et Bergerac en Dordogne, Pau, Bayonne et Biarritz dans les Pyrénées-Atlantiques.'
         }
       ]
     },
@@ -81,8 +88,8 @@ const data = {
   conclusion: `Bordeaux et la Gironde bénéficient désormais de l'expertise de MTJ Sécurité Privée. Agents de sécurité qualifiés, équipes cynophiles, agents SSIAP et unité CYNODEX : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à Bordeaux.`,
 
   relatedLinks: [
-    { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
-    { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
+    lienLocal('/securite-privee-toulouse'),
+    { href: PAGE_SECTEUR.slug, label: 'Tout notre secteur' },
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },

@@ -1,5 +1,6 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { ZONE_DESSERVIE } from '../../data/perimetre';
 
 const data = {
   slug: '/ssiap-securite-incendie',
@@ -8,7 +9,8 @@ const data = {
   metaTitle: 'SSIAP Sécurité Incendie | Agents SSIAP | MTJ Sécurité Privée',
   metaDescription: 'Agents SSIAP certifiés pour la sécurité incendie de vos ERP et IGH à Toulon, Nice et Toulouse. Prévention, évacuation, assistance à personnes. MTJ Sécurité Privée — devis gratuit.',
   breadcrumbCurrent: 'SSIAP — Sécurité incendie',
-  areaServed: 'Toulon, Toulouse, Nice, Sud de la France',
+  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
+  areaServed: ZONE_DESSERVIE,
 
   h1: 'SSIAP — Sécurité Incendie et Assistance à Personnes',
   introduction: `MTJ Sécurité Privée met à votre disposition des agents SSIAP (Service de Sécurité Incendie et d'Assistance à Personnes) qualifiés pour assurer la sécurité incendie de vos établissements. Nos agents interviennent dans les ERP (Établissements Recevant du Public) et les IGH (Immeubles de Grande Hauteur) en conformité avec la réglementation en vigueur.\n\nLa prévention et la gestion du risque incendie sont des obligations légales pour de nombreux établissements. MTJ Sécurité Privée vous aide à respecter ces obligations et à protéger vos occupants et vos biens.`,

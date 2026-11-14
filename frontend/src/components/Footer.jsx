@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Mail, Phone, MapPin, Instagram } from 'lucide-react';
 import { companyInfo, cnapsCompanies, L612_14 } from '../data/mock';
+import { PAGES_LOCALES, PAGE_SECTEUR, libelleMenu } from '../data/perimetre';
 
 const INSTAGRAM_URL = companyInfo.instagramUrl;
 
@@ -145,16 +146,19 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Zones d'intervention */}
+          {/* Zones d'intervention : tout le secteur, une page locale par grande ville (data/perimetre.js).
+              13/11/2026 (choix de Théo, « Site perimetre: A partout ») : Bordeaux y figure, comme au menu. */}
           <div>
             <h4 className="text-amber-400 font-bold uppercase tracking-wide mb-3 text-xs">
               Zones d'intervention
             </h4>
-            <ul className="space-y-1.5 text-xs">
-              <li><Link to="/securite-privee-toulon" className="text-gray-400 hover:text-amber-400 transition-colors">Toulon (83)</Link></li>
-              <li><Link to="/securite-privee-toulouse" className="text-gray-400 hover:text-amber-400 transition-colors">Toulouse (31)</Link></li>
-              <li><Link to="/securite-privee-nice-monaco" className="text-gray-400 hover:text-amber-400 transition-colors">Nice & Monaco (06)</Link></li>
-              <li><Link to="/securite-privee-sud-france" className="text-gray-400 hover:text-amber-400 transition-colors">Sud de la France</Link></li>
+            <ul className="space-y-1.5 text-xs" data-testid="footer-zones">
+              {PAGES_LOCALES.map((page) => (
+                <li key={page.slug}>
+                  <Link to={page.slug} className="text-gray-400 hover:text-amber-400 transition-colors">{libelleMenu(page)}</Link>
+                </li>
+              ))}
+              <li><Link to={PAGE_SECTEUR.slug} className="text-gray-400 hover:text-amber-400 transition-colors">{PAGE_SECTEUR.libelle}</Link></li>
               <li><Link to="/grand-deplacement-securite-france" className="text-gray-400 hover:text-amber-400 transition-colors">Grand déplacement national</Link></li>
             </ul>
           </div>

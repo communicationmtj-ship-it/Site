@@ -1,10 +1,12 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { PAGE_SECTEUR, lienLocal } from '../../data/perimetre';
 
 const data = {
   slug: '/securite-privee-toulouse',
   metaTitle: 'Société de Sécurité Privée à Toulouse (31) | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée à Toulouse : agents de sécurité, gardiennage, sécurité cynophile et événementielle en Haute-Garonne et Occitanie. Devis gratuit — 07 60 73 82 06.',
+  breadcrumbParent: { href: PAGE_SECTEUR.slug, label: 'Notre secteur' },
   breadcrumbCurrent: 'Sécurité privée à Toulouse',
   areaServed: 'Toulouse, Haute-Garonne, Occitanie',
 
@@ -36,6 +38,11 @@ const data = {
         {
           h3: 'Toulouse Métropole et bassin toulousain',
           content: 'Toulouse Métropole regroupe 37 communes et plus de 780 000 habitants. Nos équipes interviennent sur l\'ensemble de ce territoire : Toulouse centre, Blagnac (zones aéroportuaires et aéronautiques), Colomiers, Tournefeuille, Balma, L\'Union, Saint-Orens et l\'ensemble des communes périphériques. Chaque zone présente des enjeux sécuritaires spécifiques que nous maîtrisons.'
+        },
+        {
+          // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : tout le secteur autour de Toulouse.
+          h3: 'Gers, Hautes-Pyrénées, Ariège, Tarn, Tarn-et-Garonne, Aveyron, Lot et Cantal',
+          content: 'Autour de Toulouse, notre secteur couvre Auch, Tarbes et Lourdes, Foix et Pamiers, Albi et Castres, Montauban, Rodez et Millau, Cahors, et, plus au nord, Aurillac dans le Cantal.'
         },
         {
           h3: 'Montpellier, Perpignan et littoral méditerranéen',
@@ -80,8 +87,10 @@ const data = {
   conclusion: `Toulouse et l'Occitanie bénéficient désormais de l'expertise de MTJ Sécurité Privée. Agents de sécurité qualifiés, équipes cynophiles, agents SSIAP et unité CYNODEX : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à Toulouse.`,
 
   relatedLinks: [
-    { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
-    { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
+    lienLocal('/securite-privee-bordeaux'),
+    lienLocal('/securite-privee-montpellier'),
+    lienLocal('/securite-privee-perpignan'),
+    { href: PAGE_SECTEUR.slug, label: 'Tout notre secteur' },
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },

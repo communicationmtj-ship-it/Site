@@ -1,10 +1,12 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { PAGE_SECTEUR, lienLocal } from '../../data/perimetre';
 
 const data = {
   slug: '/securite-privee-nice-monaco',
   metaTitle: 'Sécurité Privée Nice & Monaco | Côte d\'Azur | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée à Nice et Monaco : agents de sécurité, maître-chien, SSIAP, sécurité événementielle sur la Côte d\'Azur. Cannes, Antibes, Menton. Devis gratuit.',
+  breadcrumbParent: { href: PAGE_SECTEUR.slug, label: 'Notre secteur' },
   breadcrumbCurrent: 'Sécurité privée Nice & Monaco',
   areaServed: 'Nice, Monaco, Cannes, Côte d\'Azur, Alpes-Maritimes',
 
@@ -81,7 +83,8 @@ const data = {
 
   relatedLinks: [
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
-    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
+    lienLocal('/securite-privee-marseille'),
+    { href: PAGE_SECTEUR.slug, label: 'Tout notre secteur' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/detection-explosifs-cynodex', label: 'Détection d\'explosifs CYNODEX' },

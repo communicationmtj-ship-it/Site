@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { safeJsonLd } from '../utils/safeJsonLd';
 import { companyInfo } from '../data/mock';
+import { PAGES_LOCALES, SECTEUR } from '../data/perimetre';
 
 // 13/11/2026 (audit du site de Mathilde) : la protection rapprochée est le métier de
 // MTJ Sécurité Rapprochée (société du groupe, autorisation distincte) ; aucune
 // implantation ni « ville principale » non prouvée ; coordonnées lues dans mock.js.
+// 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : le secteur et ses villes sont lus
+// dans data/perimetre.js (de Bordeaux à Nice en remontant jusqu'à Annecy).
+const VILLES = PAGES_LOCALES.map((p) => p.ville);
+const VILLES_TEXTE = `${VILLES.slice(0, -1).join(', ')} et ${VILLES[VILLES.length - 1]}`;
 const faqs = [
   {
     question: "Qu'est-ce que MTJ Sécurité Privée ?",
-    answer: "MTJ Sécurité Privée est une entreprise de sécurité privée dont le siège est à Toulon (Var), spécialisée dans la surveillance, le gardiennage, la sécurité cynophile, le SSIAP et la détection d'explosifs (CYNODEX). La protection rapprochée est assurée par MTJ Sécurité Rapprochée, société du groupe MTJ. Nous intervenons dans le sud de la France et, en grand déplacement, sur tout le territoire national."
+    answer: `MTJ Sécurité Privée est une entreprise de sécurité privée dont le siège est à Toulon (Var), spécialisée dans la surveillance, le gardiennage, la sécurité cynophile, le SSIAP et la détection d'explosifs (CYNODEX). La protection rapprochée est assurée par MTJ Sécurité Rapprochée, société du groupe MTJ. Nous intervenons ${SECTEUR} et, en grand déplacement, sur tout le territoire national.`
   },
   {
     question: "Vos agents sont-ils certifiés CNAPS ?",
@@ -17,7 +22,7 @@ const faqs = [
   },
   {
     question: "Dans quelles villes MTJ Sécurité Privée intervient-elle ?",
-    answer: "MTJ Sécurité Privée intervient notamment à Toulon, Nice, Monaco, Marseille, Toulouse et Bordeaux, en région PACA, en Occitanie et en Nouvelle-Aquitaine. Pour des missions ponctuelles, nous intervenons sur tout le territoire national."
+    answer: `MTJ Sécurité Privée intervient ${SECTEUR}, notamment à ${VILLES_TEXTE} : en Nouvelle-Aquitaine, en Occitanie, en Provence-Alpes-Côte d'Azur, en Auvergne-Rhône-Alpes et à Monaco. Pour des missions ponctuelles, nous intervenons sur tout le territoire national.`
   },
   {
     question: "Comment obtenir un devis pour une mission de sécurité ?",

@@ -7,6 +7,7 @@ import SeoHead from '../../components/SeoHead';
 import FloatingCTA from '../../components/FloatingCTA';
 import { safeJsonLd } from '../../utils/safeJsonLd';
 import { companyInfo, cnapsCompanies, postalAddressSchema } from '../../data/mock';
+import { ZONE_DESSERVIE } from '../../data/perimetre';
 
 const DEFAULT = '#AC8631';
 
@@ -202,7 +203,7 @@ const SeoPageLayout = ({ data }) => {
             ? postalAddressSchema
             : { "@type": "PostalAddress", "addressLocality": societe.ville, "addressCountry": "FR" },
           ...(estSocieteDefaut ? { "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 } } : {}),
-          "areaServed": data.areaServed || "Sud de la France",
+          "areaServed": data.areaServed || ZONE_DESSERVIE,
           "priceRange": "$$",
           "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" }
         })}} />
@@ -213,7 +214,7 @@ const SeoPageLayout = ({ data }) => {
           "description": data.metaDescription,
           "url": `https://mtj-securite-privee.fr${data.slug}`,
           "provider": { "@type": "Organization", "name": societe.nom, "url": "https://mtj-securite-privee.fr", "telephone": companyInfo.phoneIntl },
-          "areaServed": data.areaServed || "Sud de la France",
+          "areaServed": data.areaServed || ZONE_DESSERVIE,
           "serviceType": data.breadcrumbCurrent
         })}} />
       </main>

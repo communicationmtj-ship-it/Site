@@ -1,16 +1,19 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
 import { companyInfo } from '../../data/mock';
+import { PAGE_SECTEUR, lienLocal } from '../../data/perimetre';
 
 const data = {
   slug: '/securite-privee-toulon',
   metaTitle: 'Société de Sécurité Privée à Toulon (83) | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée, société de sécurité basée à Toulon. Agents de sécurité, maître-chien, SSIAP, sécurité événementielle dans le Var et en PACA. Devis gratuit — 07 60 73 82 06.',
+  breadcrumbParent: { href: PAGE_SECTEUR.slug, label: 'Notre secteur' },
   breadcrumbCurrent: 'Sécurité privée à Toulon',
   areaServed: 'Toulon, Le Var, PACA',
 
   h1: 'Société de Sécurité Privée à Toulon — Var (83)',
-  introduction: `Basée au 31 rue Chevalier Paul à Toulon, MTJ Sécurité Privée est votre partenaire de proximité pour tous vos besoins en sécurité dans le Var et la région PACA. Notre connaissance approfondie du tissu économique et social toulonnais nous permet de proposer des prestations parfaitement adaptées aux réalités locales.\n\nCapitale économique du Var, Toulon accueille une activité portuaire majeure (port militaire, port de commerce, ferries vers la Corse), des événements culturels et sportifs d'envergure et un tissu de PME-PMI dynamique. Chacun de ces secteurs génère des besoins spécifiques en matière de sécurité.`,
+  // 13/11/2026 : adresse lue dans data/mock.js (une seule source) ; Toulon est le siège, seule adresse de la société.
+  introduction: `Basée au ${companyInfo.street} à Toulon, MTJ Sécurité Privée est votre partenaire de proximité pour tous vos besoins en sécurité dans le Var et la région PACA. Notre connaissance approfondie du tissu économique et social toulonnais nous permet de proposer des prestations parfaitement adaptées aux réalités locales.\n\nCapitale économique du Var, Toulon accueille une activité portuaire majeure (port militaire, port de commerce, ferries vers la Corse), des événements culturels et sportifs d'envergure et un tissu de PME-PMI dynamique. Chacun de ces secteurs génère des besoins spécifiques en matière de sécurité.`,
 
   sections: [
     {
@@ -81,7 +84,8 @@ const data = {
 
   relatedLinks: [
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
-    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
+    lienLocal('/securite-privee-marseille'),
+    { href: PAGE_SECTEUR.slug, label: 'Tout notre secteur' },
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },

@@ -1,6 +1,8 @@
-// Brouillon à valider par la direction avant mise en ligne (12/11/2026).
-// Les durées de conservation (3 ans, 2 ans, 13 mois) sont des propositions : à confirmer par la direction.
-// Elles doivent rester identiques à celles annoncées dans Contact.jsx, ContactPage.jsx et Recrutement.jsx.
+// Politique de confidentialité (12/11/2026). Durées de conservation : choix de Théo du 13/11/2026
+// (« Site durees: B sans effacement » ; « je veux tout garder, je stocke sur des disques durs avec le
+// délai légal ») : les durées (3 ans, 2 ans, 13 mois) restent affichées ; le site n'efface rien de
+// lui-même et le texte ne promet aucun effacement automatique. Les durées doivent rester identiques
+// à celles annoncées dans Contact.jsx, ContactPage.jsx et Recrutement.jsx.
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -60,7 +62,7 @@ const ConfidentialitePage = () => {
               <li>
                 <strong>Candidatures</strong> : prénom, nom, adresse e-mail, téléphone, message de motivation, CV et documents
                 joints. Finalité : étudier votre candidature et vous recontacter. Base légale : votre consentement (case à
-                cocher). Durée : 2 ans après notre dernier échange, puis suppression. Merci de ne pas joindre de numéro de
+                cocher). Durée : 2 ans après notre dernier échange. Merci de ne pas joindre de numéro de
                 sécurité sociale, de RIB ni d'information de santé.
               </li>
               <li>
@@ -71,6 +73,18 @@ const ConfidentialitePage = () => {
                 votre accord, aucune mesure n'est effectuée.
               </li>
             </ul>
+          </Section>
+
+          <Section title="Durées de conservation et archivage">
+            <p>
+              Les durées indiquées ci-dessus suivent les recommandations de la CNIL. Pendant ces durées, vos données sont
+              conservées dans notre base et archivées sur des supports de sauvegarde tenus par la direction de MTJ Sécurité Privée.
+            </p>
+            <p>
+              Le site ne les efface pas de lui-même : l'archivage et la fin de conservation sont assurés par la direction,
+              dans le respect de ces durées. Vous pouvez à tout moment demander l'effacement de vos données (voir « Vos droits »
+              ci-dessous).
+            </p>
           </Section>
 
           <Section title="Cookies et stockage dans votre navigateur">

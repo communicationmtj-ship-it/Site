@@ -1,15 +1,17 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { ZONE_DESSERVIE } from '../../data/perimetre';
 
 const data = {
   slug: '/securite-evenementielle',
   metaTitle: 'Sécurité Événementielle | Concerts, Festivals, Matchs | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos événements : concerts, festivals, salons, matchs. Agents de sécurité, équipes cynophiles et SSIAP à Toulon, Nice, Toulouse.',
   breadcrumbCurrent: 'Sécurité événementielle',
-  areaServed: 'Toulon, Toulouse, Nice, PACA, France',
+  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
+  areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité Événementielle — Protection de vos Événements',
-  introduction: `MTJ Sécurité Privée est votre partenaire de confiance pour la sécurisation de tous types d'événements dans le sud de la France et sur l'ensemble du territoire national. Concerts, festivals, compétitions sportives, salons professionnels, réceptions privées : nous déployons des dispositifs de sécurité sur mesure adaptés à la taille, la nature et les risques spécifiques de chaque manifestation.\n\nNotre expertise couvre l'ensemble de la chaîne de sécurité événementielle : étude préalable des risques, planification du dispositif, déploiement opérationnel et retour d'expérience.`,
+  introduction: `MTJ Sécurité Privée est votre partenaire de confiance pour la sécurisation de tous types d'événements de Bordeaux à Nice et jusqu'à Annecy, et sur l'ensemble du territoire national. Concerts, festivals, compétitions sportives, salons professionnels, réceptions privées : nous déployons des dispositifs de sécurité sur mesure adaptés à la taille, la nature et les risques spécifiques de chaque manifestation.\n\nNotre expertise couvre l'ensemble de la chaîne de sécurité événementielle : étude préalable des risques, planification du dispositif, déploiement opérationnel et retour d'expérience.`,
 
   sections: [
     {

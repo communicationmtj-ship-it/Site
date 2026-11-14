@@ -1,15 +1,17 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
+import { ZONE_DESSERVIE } from '../../data/perimetre';
 
 const data = {
   slug: '/securite-residentielle',
   metaTitle: 'Sécurité Résidentielle | Résidences, Copropriétés, Domaines | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos résidences privées, copropriétés et domaines. Gardiennage, rondes, contrôle d\'accès à Toulon, Nice, Toulouse et sud de la France.',
+  metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos résidences privées, copropriétés et domaines. Gardiennage, rondes, contrôle d\'accès de Bordeaux à Nice et jusqu\'à Annecy.',
   breadcrumbCurrent: 'Sécurité résidentielle',
-  areaServed: 'Toulon, Toulouse, Nice, PACA, Occitanie, France',
+  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
+  areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité Résidentielle — Protection de vos Résidences et Domaines',
-  introduction: `MTJ Sécurité Privée propose des services de sécurité dédiés aux résidences privées, copropriétés, domaines et propriétés de prestige dans le sud de la France. Nous comprenons que la sécurité de votre lieu de vie est une priorité absolue.\n\nNos agents assurent une présence rassurante et professionnelle, de jour comme de nuit, pour protéger les résidents, leurs biens et garantir la tranquillité de votre voisinage. Du simple gardiennage au dispositif de sécurité complet, nous adaptons nos prestations à vos exigences.`,
+  introduction: `MTJ Sécurité Privée propose des services de sécurité dédiés aux résidences privées, copropriétés, domaines et propriétés de prestige de Bordeaux à Nice et jusqu'à Annecy. Nous comprenons que la sécurité de votre lieu de vie est une priorité absolue.\n\nNos agents assurent une présence rassurante et professionnelle, de jour comme de nuit, pour protéger les résidents, leurs biens et garantir la tranquillité de votre voisinage. Du simple gardiennage au dispositif de sécurité complet, nous adaptons nos prestations à vos exigences.`,
 
   sections: [
     {
@@ -33,7 +35,7 @@ const data = {
       subsections: [
         {
           h3: 'Sécurité de villas et propriétés de prestige',
-          content: 'MTJ Sécurité Privée assure la protection de villas, bastides, châteaux et propriétés de luxe sur la Côte d\'Azur et dans tout le sud de la France. Nos agents, sélectionnés pour leur discrétion et leur professionnalisme, assurent la surveillance de votre propriété en votre présence ou en votre absence.',
+          content: 'MTJ Sécurité Privée assure la protection de villas, bastides, châteaux et propriétés de luxe sur la Côte d\'Azur et sur tout notre secteur, de Bordeaux à Nice et jusqu\'à Annecy. Nos agents, sélectionnés pour leur discrétion et leur professionnalisme, assurent la surveillance de votre propriété en votre présence ou en votre absence.',
           list: ['Surveillance permanente ou ponctuelle', 'Protection pendant les absences prolongées', 'Accueil et filtrage des visiteurs', 'Coordination avec les systèmes d\'alarme existants']
         },
         {

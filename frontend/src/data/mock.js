@@ -3,7 +3,11 @@
 // Coordonnées : UNE seule source pour tout le site (pages, pied de page, données
 // structurées). Changer l'adresse e-mail affichée = changer EMAIL ici, et la même
 // adresse dans frontend/public/index.html (un essai du dépôt vérifie qu'elles sont égales).
-const EMAIL = "contactsmtjsecuriteprivee@gmail.com";
+// 13/11/2026 (choix de Théo, « Site email: A contact OVH ») : l'adresse du domaine, boîte OVH.
+// Théo ne lit aucune boîte OVH : la boîte contact@ doit renvoyer vers sa boîte Gmail (réglage
+// à poser dans OVH, hors du site) ; les mails des formulaires partent vers l'adresse de la
+// variable NOTIFY_EMAIL du serveur (voir README.md).
+const EMAIL = "contact@mtj-securite-privee.fr";
 const STREET = "31 rue Chevalier Paul";
 const POSTAL_CODE = "83000";
 const CITY = "Toulon";
@@ -34,6 +38,21 @@ export const postalAddressSchema = {
   "postalCode": POSTAL_CODE,
   "addressRegion": "Provence-Alpes-Côte d'Azur",
   "addressCountry": "FR",
+};
+
+// Identité légale de MTJ Sécurité Privée (page Mentions légales). Choix de Théo du 13/11/2026
+// (« Site mentions: A ton nom Kbis ») : Théo MERCIER, Président, directeur de la publication.
+// Forme, capital, immatriculation et date d'immatriculation RECOPIÉS de l'extrait Kbis à jour au
+// 3 novembre 2026 (pièce du coffre du logiciel, lue le 13/11/2026). Le numéro de TVA n'est pas
+// imprimé sur un Kbis : calculé depuis le SIREN (clé de la DGFiP) et vérifié « valide » sur le
+// service VIES de la Commission européenne le 13/11/2026. Une valeur qui change = la changer ici.
+export const legalInfo = {
+  forme: "société par actions simplifiée à associé unique (SASU)",
+  capital: "500,00 €",
+  rcs: "922 208 202 R.C.S. Toulon",
+  immatriculation: "12/12/2022",
+  tva: "FR 27 922 208 202",
+  directeurPublication: "Théo MERCIER, Président de MTJ Sécurité Privée",
 };
 
 // Bloc légal unique (CNAPS) : un numéro d'autorisation pour chaque société.
