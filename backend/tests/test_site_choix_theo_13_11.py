@@ -6,9 +6,11 @@ et des constats du bilan SEO du 13/11/2026, construits le 15/11/2026.
    d'immatriculation recopiées du Kbis ; TVA vérifiée ;
 3. durées de conservation affichées, aucun effacement automatique annoncé ni programmé ;
 4. périmètre de Bordeaux à Nice jusqu'à Annecy partout (34 codes du logiciel MTJ) ;
-5. pages locales d'intervention, contenu propre à chaque ville, une seule adresse (Toulon) ;
-6. CYNODEX et SSIAP 1, 2 et 3 présentés sans réserve (réponse de Théo du 15/11/2026, qui remplace le
-   repli prudent du 13/11/2026) ; 7. aucun chiffre sur l'accueil ;
+5. pages de villes : texte repris du site en ligne, sans preuve ni phrase inventée (Théo, 15/11/2026,
+   formulaire 3/4), une seule adresse (Toulon) ;
+6. CYNODEX et SSIAP 1, 2 et 3 présentés sans réserve (réponse de Théo du 15/11/2026) ; CYNODEX = diplôme
+   du maître-chien de détection d'explosifs, jamais une « unité » (Théo, 15/11/2026 05:56) ;
+7. aucun chiffre sur l'accueil ;
 9. pré-rendu : un HTML par page publique, canonique propre, plan du site = pages pré-rendues.
 
 Aucun serveur, aucune base, aucun envoi : les envois de mail sont remplacés par une fonction qui note
@@ -86,12 +88,15 @@ def test_la_carte_colorie_le_perimetre():
 
 
 def test_le_perimetre_est_lu_partout():
-    for fichier in ("components/Navbar.jsx", "components/Footer.jsx", "components/Domains.jsx",
-                    "components/HomeFaq.jsx", "components/Recrutement.jsx", "components/FranceMap.jsx",
-                    "pages/seo/SudFrancePage.jsx", "App.js"):
+    for fichier in ("components/Footer.jsx", "components/Domains.jsx", "components/HomeFaq.jsx",
+                    "components/FranceMap.jsx", "pages/seo/SudFrancePage.jsx", "pages/seo/pageLocale.js", "App.js"):
         assert "data/perimetre" in _lire(SRC / fichier), f"{fichier} ne lit pas data/perimetre.js"
-    recrutement = _lire(SRC / "components" / "Recrutement.jsx")
-    assert 'data-testid="recrutement-zones"' in recrutement and "{SECTEUR}" in recrutement
+    # Les mots exacts du secteur (Théo, 13/11/2026 : « Site perimetre: A partout »).
+    perimetre = _lire(SRC / "data" / "perimetre.js")
+    assert "export const SECTEUR = \"de Bordeaux à Nice jusqu'à Annecy\";" in perimetre
+    # 15/11/2026 (règle de Théo : « soit tu met pas soit tu laisse ce qui etait ») : le bloc « Zones de
+    # recrutement » ajouté à la page Recrutement est retiré.
+    assert 'data-testid="recrutement-zones"' not in _lire(SRC / "components" / "Recrutement.jsx")
 
 
 # ─── 5. Pages locales d'intervention ──────────────────────────────────────────
@@ -121,11 +126,14 @@ def test_une_page_locale_par_grande_ville_du_secteur():
         assert f'["{slug}",' in publiques, f"{slug} absente du plan du site"
 
 
-def test_bordeaux_au_menu_et_au_pied_de_page():
-    for fichier in ("Navbar.jsx", "Footer.jsx"):
-        texte = _lire(SRC / "components" / fichier)
-        assert "PAGES_LOCALES.map" in texte, fichier
-    assert "/securite-privee-bordeaux" in dict(_pages_locales())
+def test_chaque_page_de_ville_au_pied_de_page():
+    """Théo, 15/11/2026 (formulaire 3/4) : les 12 pages de villes sortent. Elles sont reliées par la colonne
+    « Zones d'intervention » du pied de page, comme les pages de villes du site en ligne ; le menu « Nos zones »
+    ajouté au menu est retiré (règle « soit tu met pas soit tu laisse ce qui etait »)."""
+    footer = _lire(SRC / "components" / "Footer.jsx")
+    for slug, _ in _pages_locales():
+        assert f"'{slug}'" in footer or f'"{slug}"' in footer, slug
+    assert "Nos zones" not in _lire(SRC / "components" / "Navbar.jsx")
 
 
 # Mots qui annonceraient un lieu de MTJ Sécurité Privée ailleurs qu'au siège de Toulon (agence, antenne, bureaux,
@@ -205,7 +213,7 @@ def test_pages_locales_sans_fausse_adresse():
             continue  # le siège : la seule adresse réelle, lue dans data/mock.js
         assert not _adresses_trouvees(texte), f"{slug} : « {_adresses_trouvees(texte)} »"
     commun = _lire(SEO / "pageLocale.js")
-    assert "Notre siège est à Toulon" in commun and "companyInfo.address" in commun
+    assert "Siège basé à Toulon." in commun
     # Le texte commun à toutes les pages locales passe le même contrôle.
     assert not _adresses_trouvees(_texte_affiche(commun)), _adresses_trouvees(_texte_affiche(commun))
 
@@ -219,15 +227,36 @@ def _phrases(texte: str) -> set:
     return phrases
 
 
-def test_pages_locales_au_contenu_propre():
+# Les deux seules phrases propres aux pages de villes ajoutées : la ville et le secteur.
+PHRASES_DE_VILLE = ("MTJ Sécurité Privée intervient à ${ville} et dans ${leDepartement}.",)
+
+
+def test_pages_de_villes_sans_phrase_inventee():
+    """Théo, 15/11/2026 (formulaire 3/4) : les pages de villes sortent SANS aucune preuve (ni mission passée,
+    ni client, ni chiffre, ni phrase inventée), seulement ce que le site en ligne dit déjà. Les 8 pages ajoutées
+    n'écrivent aucun texte elles-mêmes ; chaque phrase de pageLocale.js se retrouve, la ville mise à sa place,
+    dans une autre page du site (texte du site en ligne)."""
     fichiers = [_composant(slug) for slug, _ in _pages_locales() if "pageLocale(" in _lire(_composant(slug))]
-    assert len(fichiers) >= 8
-    phrases = {f.name: _phrases(_lire(f)) for f in fichiers}
-    for a, b in combinations(phrases, 2):
-        communes = phrases[a] & phrases[b]
-        assert not communes, f"{a} et {b} partagent : {sorted(communes)[:2]}"
-    for nom, ens in phrases.items():
-        assert len(ens) >= 12, f"{nom} : contenu trop maigre ({len(ens)} phrases)"
+    assert len(fichiers) == 8
+    for f in fichiers:
+        texte = _sans_commentaires(_lire(f))
+        for cle in ("introduction:", "sections:", "faq:", "conclusion:", "content:", "answer:"):
+            assert cle not in texte, f"{f.name} écrit son propre texte ({cle})"
+    autres = " ".join(
+        " ".join(_litteraux(_lire(p))) for p in list(SEO.glob("*.jsx")) + [SRC / "components" / "HomeFaq.jsx", SRC / "data" / "mock.js"]
+        if p.name not in {f.name for f in fichiers}
+    ).replace("\\n", " ")
+    autres = re.sub(r"\s+", " ", autres)
+    # Titre et description pour Google (invisibles sur la page) : hors de ce contrôle.
+    gabarits = re.sub(r"^\s*meta(?:Title|Description): .*$", "", _lire(SEO / "pageLocale.js"), flags=re.MULTILINE)
+    for gabarit in _litteraux(gabarits):
+        for phrase in re.split(r"(?<=[.!?])\s+|\\n", gabarit):
+            phrase = phrase.strip()
+            if len(phrase) < 50 or phrase in PHRASES_DE_VILLE:
+                continue
+            motif = r"\s+".join(re.escape(m) for m in phrase.split())
+            motif = re.sub(r"\\\$\\\{[^}]*\\\}", ".+?", motif)
+            assert re.search(motif, autres), f"phrase sans origine sur le site : « {phrase} »"
 
 
 def test_lyon_et_grenoble_ne_sont_plus_en_grand_deplacement():
@@ -392,16 +421,24 @@ def test_cynodex_et_ssiap_1_2_3_sans_reserve():
         texte = _texte_sans_commentaires(p)
         for reserve in RESERVES_RETIREES:
             assert reserve not in texte, f"{p.relative_to(REPO)} : « {reserve} »"
-    # La prestation est écrite franchement là où la réserve se trouvait.
-    for p in (SRC / "components" / "HomeFaq.jsx", SRC / "data" / "mock.js", SEO / "CynodexPage.jsx",
-              SEO / "BordeauxPage.jsx", SEO / "ToulousePage.jsx", SEO / "pageLocale.js"):
-        assert "maîtres-chiens certifiés cynodex" in _texte_sans_commentaires(p), p.name
+    # La prestation est écrite franchement, avec le vocabulaire de Théo (15/11/2026 : « un cynodex c'est le
+    # diplome de maitre chien de detection d'explosif ») : des maîtres-chiens diplômés CYNODEX, jamais une
+    # « unité », une « équipe », une « cellule » ni des « binômes » CYNODEX.
+    for p in (SRC / "components" / "HomeFaq.jsx", SRC / "data" / "mock.js", SEO / "CynodexPage.jsx"):
+        assert "maîtres-chiens diplômés cynodex" in _texte_sans_commentaires(p), p.name
+    for p in (SEO / "BordeauxPage.jsx", SEO / "ToulousePage.jsx", SEO / "pageLocale.js", SEO / "GrandDeplacementPage.jsx"):
+        assert "maîtres-chiens cynodex" in _texte_sans_commentaires(p), p.name
+    for p in fichiers:
+        texte = _texte_sans_commentaires(p)
+        for faux in ("unité cynodex", "équipes cynodex", "équipe cynodex", "cellule cynodex", "binômes cynodex",
+                     "nos chiens cynodex", "le cynodex est une prestation"):
+            assert faux not in texte, f"{p.relative_to(REPO)} : « {faux} »"
     for p in (SEO / "ErpPage.jsx", SEO / "SudFrancePage.jsx", SEO / "pageLocale.js", SEO / "SsiapPage.jsx"):
-        assert "agents ssiap 1, 2 et 3" in _texte_sans_commentaires(p), p.name
+        assert "ssiap 1, 2 et 3" in _texte_sans_commentaires(p), p.name
     ssiap = _texte_sans_commentaires(SEO / "SsiapPage.jsx")
-    assert "met à disposition des agents ssiap 1." in ssiap
-    assert "met à disposition des chefs d'équipe ssiap 2 et des chefs de service ssiap 3" in ssiap
-    assert "diplôme ssiap 1, 2 ou 3" in _texte_sans_commentaires(SEO / "ToulonPage.jsx")
+    assert "dispose d'un effectif conséquent d'agents ssiap 1 opérationnels" in ssiap
+    assert "peut fournir ce niveau d'expertise" in ssiap
+    assert "ssiap 1/2/3" in _texte_sans_commentaires(SEO / "ToulonPage.jsx")
 
 
 def test_le_controle_des_reserves_voit_le_texte_et_pas_les_commentaires():
@@ -448,7 +485,9 @@ def test_aucune_note_ecrite_a_la_main_ni_affirmation_non_prouvee():
             continue
         texte = _lire(p)
         for motif in ("aggregateRating", "ratingValue", "reviewCount", "antenne toulousaine", "implantation multi-sites",
-                      "multiplie par cinq", "plus de 90 %", "jauges allant de", "Sixième ville de France"):
+                      "multiplie par cinq", "plus de 90 %", "90%", "jauges allant de", "Sixième ville de France",
+                      "Quatrième ville de France", "cinquième ville de France", "trois pôles", "équipes opérationnelles sur",
+                      "plus de 20 familles", "trois agents de sécurité", "1 agent pour", "millions de touristes"):
             assert motif not in texte, f"{p.name} : « {motif} »"
 
 

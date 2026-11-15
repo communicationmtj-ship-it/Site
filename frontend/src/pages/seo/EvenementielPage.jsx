@@ -2,16 +2,20 @@ import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
 import { ZONE_DESSERVIE } from '../../data/perimetre';
 
+// 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : texte du site en
+// ligne (04/11/2026), sauf les décisions de Théo : secteur « de Bordeaux à Nice jusqu'à Annecy » à la place
+// de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
+// (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
+// diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
 const data = {
   slug: '/securite-evenementielle',
   metaTitle: 'Sécurité Événementielle | Concerts, Festivals, Matchs | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos événements : concerts, festivals, salons, matchs. Agents de sécurité, équipes cynophiles et SSIAP, de Bordeaux à Nice et jusqu\'à Annecy.',
+  metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos événements : concerts, festivals, salons, matchs. Agents de sécurité, équipes cynophiles et SSIAP, de Bordeaux à Nice jusqu\'à Annecy.',
   breadcrumbCurrent: 'Sécurité événementielle',
-  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité Événementielle — Protection de vos Événements',
-  introduction: `MTJ Sécurité Privée est votre partenaire de confiance pour la sécurisation de tous types d'événements de Bordeaux à Nice et jusqu'à Annecy, et sur l'ensemble du territoire national. Concerts, festivals, compétitions sportives, salons professionnels, réceptions privées : nous déployons des dispositifs de sécurité sur mesure adaptés à la taille, la nature et les risques spécifiques de chaque manifestation.\n\nNotre expertise couvre l'ensemble de la chaîne de sécurité événementielle : étude préalable des risques, planification du dispositif, déploiement opérationnel et retour d'expérience.`,
+  introduction: `MTJ Sécurité Privée est votre partenaire de confiance pour la sécurisation de tous types d'événements de Bordeaux à Nice jusqu'à Annecy et sur l'ensemble du territoire national. Concerts, festivals, compétitions sportives, salons professionnels, réceptions privées : nous déployons des dispositifs de sécurité sur mesure adaptés à la taille, la nature et les risques spécifiques de chaque manifestation.\n\nNotre expertise couvre l'ensemble de la chaîne de sécurité événementielle : étude préalable des risques, planification du dispositif, déploiement opérationnel et retour d'expérience.`,
 
   sections: [
     {
@@ -35,7 +39,7 @@ const data = {
       subsections: [
         {
           h3: 'Concerts, festivals et événements musicaux',
-          content: 'La sécurité des événements musicaux requiert une expertise spécifique : gestion de foules enthousiastes, prévention des mouvements de foule dangereux, surveillance des zones backstage et protection des artistes. MTJ Sécurité Privée sécurise des concerts et des festivals sur tout son secteur : le dispositif est dimensionné selon la jauge et la configuration de chaque événement.'
+          content: 'La sécurité des événements musicaux requiert une expertise spécifique : gestion de foules enthousiastes, prévention des mouvements de foule dangereux, surveillance des zones backstage et protection des artistes. MTJ Sécurité Privée a sécurisé de nombreux concerts et festivals de Bordeaux à Nice jusqu\'à Annecy.'
         },
         {
           h3: 'Événements sportifs et compétitions',
@@ -66,11 +70,11 @@ const data = {
   faq: [
     {
       question: 'Combien d\'agents faut-il pour sécuriser un événement ?',
-      answer: 'Le nombre d\'agents dépend de la jauge de l\'événement, de la configuration du site, du niveau de risque et des exigences réglementaires. Il comprend le filtrage aux accès et la surveillance en zone. MTJ Sécurité Privée dimensionne précisément le dispositif après l\'étude préalable.'
+      answer: 'Le nombre d\'agents dépend de la jauge de l\'événement, de la configuration du site, du niveau de risque et des exigences réglementaires. MTJ Sécurité Privée dimensionne précisément le dispositif après l\'étude préalable.'
     },
     {
       question: 'Faut-il déclarer la sécurité privée de mon événement en préfecture ?',
-      answer: 'Selon l\'ampleur de la manifestation, l\'organisateur doit la déclarer auprès de la mairie ou de la préfecture, qui examinent le dispositif de sécurité prévu. L\'entreprise de sécurité privée, elle, doit être titulaire d\'une autorisation d\'exercer délivrée par le CNAPS. MTJ Sécurité Privée peut vous aider à préparer le plan de sécurité à présenter aux autorités compétentes.'
+      answer: 'Oui, les organisateurs d\'événements accueillant du public doivent déclarer leur dispositif de sécurité privée auprès du CNAPS et des autorités compétentes. MTJ Sécurité Privée peut vous accompagner dans ces démarches administratives pour garantir la conformité de votre événement.'
     },
     {
       question: 'Intervenez-vous pour des événements privés (mariages, réceptions) ?',

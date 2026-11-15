@@ -2,19 +2,16 @@ import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { safeJsonLd } from '../utils/safeJsonLd';
 import { companyInfo } from '../data/mock';
-import { PAGES_LOCALES, SECTEUR } from '../data/perimetre';
+import { SECTEUR } from '../data/perimetre';
 
-// 13/11/2026 (audit du site de Mathilde) : la protection rapprochée est le métier de
-// MTJ Sécurité Rapprochée (société du groupe, autorisation distincte) ; aucune
-// implantation ni « ville principale » non prouvée ; coordonnées lues dans mock.js.
-// 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : le secteur et ses villes sont lus
-// dans data/perimetre.js (de Bordeaux à Nice en remontant jusqu'à Annecy).
-const VILLES = PAGES_LOCALES.map((p) => p.ville);
-const VILLES_TEXTE = `${VILLES.slice(0, -1).join(', ')} et ${VILLES[VILLES.length - 1]}`;
+// 15/11/2026 (règle de Théo : « soit tu met pas soit tu laisse ce qui etait ») : réponses du site en ligne,
+// sauf le secteur (13/11/2026, « Site perimetre: A partout »), l'adresse e-mail (13/11/2026, « Site email:
+// A contact OVH ») et le CYNODEX, diplôme du maître-chien de détection d'explosifs (Théo, 15/11/2026).
+
 const faqs = [
   {
     question: "Qu'est-ce que MTJ Sécurité Privée ?",
-    answer: `MTJ Sécurité Privée est une entreprise de sécurité privée dont le siège est à Toulon (Var), spécialisée dans la surveillance, le gardiennage, la sécurité cynophile, le SSIAP et la détection d'explosifs (CYNODEX). La protection rapprochée est assurée par MTJ Sécurité Rapprochée, société du groupe MTJ. Nous intervenons ${SECTEUR} et, en grand déplacement, sur tout le territoire national.`
+    answer: `MTJ Sécurité Privée est une entreprise de sécurité privée basée à Toulon (Var), spécialisée dans la surveillance, le gardiennage, la sécurité cynophile, le SSIAP, la protection rapprochée et la détection d'explosifs (CYNODEX). Nous intervenons sur tout le territoire national avec une présence forte ${SECTEUR}.`
   },
   {
     question: "Vos agents sont-ils certifiés CNAPS ?",
@@ -22,11 +19,11 @@ const faqs = [
   },
   {
     question: "Dans quelles villes MTJ Sécurité Privée intervient-elle ?",
-    answer: `MTJ Sécurité Privée intervient ${SECTEUR}, notamment à ${VILLES_TEXTE} : en Nouvelle-Aquitaine, en Occitanie, en Provence-Alpes-Côte d'Azur, en Auvergne-Rhône-Alpes et à Monaco. Pour des missions ponctuelles, nous intervenons sur tout le territoire national.`
+    answer: `MTJ Sécurité Privée intervient principalement à Toulon, Nice, Monaco, Marseille, Toulouse et Bordeaux. Nous couvrons ${SECTEUR}. Pour des missions ponctuelles, nous intervenons sur tout le territoire national.`
   },
   {
     question: "Comment obtenir un devis pour une mission de sécurité ?",
-    answer: `Pour obtenir un devis gratuit et personnalisé, vous pouvez nous contacter par téléphone au ${companyInfo.phone}, par e-mail à ${companyInfo.email}, ou via notre formulaire de devis en ligne. Nous vous répondons sous 24 h et établissons une proposition adaptée à vos besoins.`
+    answer: `Pour obtenir un devis gratuit et personnalisé, vous pouvez nous contacter par téléphone au 07 60 73 82 06, par email à ${companyInfo.email}, ou via notre formulaire de devis en ligne. Nous vous répondons sous 24h et établissons une proposition adaptée à vos besoins.`
   },
   {
     question: "MTJ Sécurité Privée propose-t-elle la sécurité événementielle ?",
@@ -34,7 +31,7 @@ const faqs = [
   },
   {
     question: "Qu'est-ce que le CYNODEX proposé par MTJ Sécurité Privée ?",
-    answer: "Le CYNODEX est une prestation spécialisée de détection d'explosifs par des chiens dressés à cette mission. Nos maîtres-chiens certifiés CYNODEX interviennent pour sécuriser des événements et des lieux accueillant du public. C'est une compétence rare dans le secteur de la sécurité privée."
+    answer: "Le CYNODEX est le diplôme du maître-chien de détection d'engins explosifs improvisés par des chiens dressés. Nos maîtres-chiens diplômés CYNODEX interviennent pour sécuriser des événements sensibles, des sites stratégiques et des infrastructures critiques. C'est une compétence rare dans le secteur de la sécurité privée."
   }
 ];
 
@@ -42,7 +39,7 @@ const HomeFaq = () => {
   const [open, setOpen] = useState(null);
 
   return (
-    <section id="faq" className="py-20 bg-black scroll-mt-20">
+    <section id="faq" className="py-20 bg-black">
       <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-black text-white tracking-wider uppercase mb-4">

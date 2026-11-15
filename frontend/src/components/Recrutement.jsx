@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Send, FileText, Briefcase, Mail } from 'lucide-react';
+import { Send, FileText, Briefcase, Mail, Phone, User } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import SeoHead from './SeoHead';
-import { SECTEUR, REGIONS } from '../data/perimetre';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -81,8 +80,8 @@ const Recrutement = () => {
       },
     })
       .then(response => {
-        // 12/11/2026 — le serveur répond 200 avec status « error » quand il refuse
-        // (consentement, champ invalide) : jamais « envoyé » dans ce cas.
+        // Le serveur répond 200 avec status « error » quand il refuse la candidature (case de
+        // consentement, champ invalide) : jamais « Candidature envoyée ! » dans ce cas.
         if (response?.data?.status !== 'success') {
           toast.error("Envoi refusé", {
             description: response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
@@ -141,7 +140,7 @@ const Recrutement = () => {
               Rejoignez l'équipe MTJ SÉCURITÉ PRIVÉE
             </p>
             
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
               Nous recherchons des professionnels passionnés et qualifiés pour renforcer notre équipe. 
               Si vous partagez nos valeurs de professionnalisme et d'excellence, postulez dès maintenant !
             </p>
@@ -160,37 +159,6 @@ const Recrutement = () => {
               <p className="text-gray-700 text-lg">
                 Remplissez le formulaire ci-dessous et joignez votre CV et lettre de motivation
               </p>
-            </div>
-
-            {/* Profils recherchés (repris de la description de la page) et prérequis.
-                13/11/2026 (audit, site-119 et 120) : seules les obligations légales sont écrites ;
-                avantages, « avec ou sans chien » et contact RH attendent la direction.
-                13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zones de recrutement = le
-                secteur du logiciel (data/perimetre.js). */}
-            <div className="mt-10 mb-12 bg-black border border-amber-400/30 p-6 text-left grid md:grid-cols-2 gap-6" data-testid="recrutement-profils">
-              <div>
-                <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Profils recherchés</h2>
-                <ul className="text-gray-300 space-y-1 text-sm">
-                  <li>Agents de sécurité</li>
-                  <li>Maîtres-chiens</li>
-                  <li>Agents SSIAP</li>
-                  <li>Agents de protection rapprochée (postes de MTJ Sécurité Rapprochée, société du groupe MTJ)</li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Prérequis</h2>
-                <ul className="text-gray-300 space-y-1 text-sm">
-                  <li>Carte professionnelle délivrée par le CNAPS, en cours de validité : obligatoire pour exercer une activité de sécurité privée (code de la sécurité intérieure).</li>
-                  <li>Agents SSIAP : diplôme SSIAP correspondant au poste, à jour de son recyclage.</li>
-                </ul>
-              </div>
-              <div className="md:col-span-2" data-testid="recrutement-zones">
-                <h2 className="text-amber-400 font-bold uppercase tracking-wide text-sm mb-3">Zones de recrutement</h2>
-                <p className="text-gray-300 text-sm">
-                  Nous recrutons sur tout notre secteur, {SECTEUR} : {REGIONS.join(', ')} et Monaco.
-                  Les postes sont proposés selon les missions en cours.
-                </p>
-              </div>
             </div>
 
             <div className="bg-black border-4 border-amber-400/30 p-8 lg:p-12">
@@ -262,7 +230,7 @@ const Recrutement = () => {
                       onChange={handleChange}
                       required
                       className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
-                      placeholder="06 12 34 56 78"
+                      placeholder="06 XX XX XX XX"
                     />
                   </div>
                 </div>
@@ -323,7 +291,8 @@ const Recrutement = () => {
                   )}
                 </div>
 
-                {/* Consentement RGPD */}
+                {/* Consentement RGPD : la case renvoie à la politique de confidentialité (page décidée par
+                    Théo le 13/11/2026) ; le serveur refuse une candidature arrivée sans elle. */}
                 <div>
                   <label htmlFor="recruitment-consent" className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed cursor-pointer">
                     <input
@@ -341,9 +310,6 @@ const Recrutement = () => {
                       <Link to="/politique-de-confidentialite" className="underline text-amber-400 hover:text-amber-300">politique de confidentialité</Link>. *
                     </span>
                   </label>
-                  <p className="text-gray-400 text-xs mt-2 ml-7">
-                    Merci de ne pas joindre de pièce inutile à l'étude de votre candidature (numéro de sécurité sociale, RIB, informations de santé).
-                  </p>
                 </div>
 
                 {/* Submit Button */}

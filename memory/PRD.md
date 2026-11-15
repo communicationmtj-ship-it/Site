@@ -15,8 +15,20 @@ Domaine : https://mtj-securite-privee.fr
 - Homepage (Hero, About, Services, Domains, Quote, Engagement)
 - Contact (/contact), Recrutement (/recrutement)
 - Dashboard analytique (/dashboard) — ouvert avec le compte fondateur du logiciel MTJ (depuis le 13/11/2026)
-- 10 pages métiers, 12 pages locales d'intervention (Bordeaux, Toulouse, Montpellier, Nîmes, Perpignan, Marseille, Toulon, Nice et Monaco, Avignon, Lyon, Grenoble, Annecy ; choix de Théo du 13/11/2026 : « sur tout le secteur », sans adresse locale, une seule adresse réelle : le siège de Toulon), la page de tout le secteur et le grand déplacement
-- Secteur (choix de Théo du 13/11/2026, « partout ») : de Bordeaux à Nice en remontant jusqu'à Annecy, 33 départements et Monaco, liste recopiée de celle du logiciel MTJ (frontend/src/data/perimetre.js)
+- 10 pages métiers, 12 pages de villes (Bordeaux, Toulouse, Nice et Monaco, Toulon, déjà en ligne ; Montpellier, Nîmes, Perpignan, Marseille, Avignon, Lyon, Grenoble, Annecy, ajoutées ; choix de Théo du 13/11/2026 : « sur tout le secteur », sans adresse locale, une seule adresse réelle : le siège de Toulon ; Théo, 15/11/2026, formulaire 3/4 : les 12 sortent, sans preuve ni phrase inventée), la page de tout le secteur et le grand déplacement. Les pages de villes sont reliées dans la colonne « Zones d'intervention » du pied de page.
+- Secteur (choix de Théo du 13/11/2026, « partout ») : « de Bordeaux à Nice jusqu'à Annecy », 33 départements et Monaco, liste recopiée de celle du logiciel MTJ (frontend/src/data/perimetre.js)
+
+### Règle du texte affiché (Théo, 15/11/2026 05:56)
+« soit tu met pas soit tu laisse ce qui etait » : tout texte affiché est celui du site en ligne du 04/11/2026 (9561a0a), mot pour mot, sauf les décisions de Théo :
+- secteur : seul le groupe de mots « sud de la France » (ou son équivalent) devient « de Bordeaux à Nice jusqu'à Annecy » ;
+- adresse affichée contact@mtj-securite-privee.fr ;
+- aucun chiffre non prouvé (pourcentage, population, classement, nombre, note d'avis) : le chiffre est retiré, la phrase n'est pas réécrite ;
+- CYNODEX = diplôme du maître-chien de détection d'explosifs (jamais « unité » ni « équipe ») ; SSIAP 1, 2 et 3 affirmés ;
+- aucune agence, aucun pôle, aucune équipe basée hors du siège de Toulon ; pas de bureau (Théo, 15/11/2026) ;
+- mention CNAPS (autorisation + article L612-14) une fois par société, dans le pied de page ;
+- titre de l'accueil dans Google : celui du site en ligne ; Monaco et délais d'intervention : texte d'origine (« garder les deux ») ;
+- restent : pages Mentions légales et Politique de confidentialité, page introuvable (404), bandeau des cookies conforme, cases de consentement des formulaires, et tout ce qui est invisible (pré-rendu, canoniques, plan du site, titres et descriptions pour Google, nginx, mails vers NOTIFY_EMAIL, connexion du tableau).
+Inventaire des écarts restants : maquette du site (dossier Site-maquette-15-11, hors dépôt).
 
 ### SEO
 - Pré-rendu (choix de Théo du 13/11/2026, « pré-rendu Google ») : à la construction de l'image, frontend/scripts/prerender.js écrit un HTML complet par page publique (titre, description, canonique propre, contenu, liens) dans build/prerendu ; nginx le sert d'abord, React reprend la page ; plan du site = pages pré-rendues (frontend/scripts/pages-publiques.js)

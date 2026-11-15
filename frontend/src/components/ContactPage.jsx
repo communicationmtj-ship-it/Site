@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FloatingCTA from './FloatingCTA';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import { contactInfo, companyInfo, postalAddressSchema } from '../data/mock';
 import { toast } from 'sonner';
@@ -63,16 +64,16 @@ const ContactPage = () => {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
       .then(response => {
-        // 12/11/2026 — le serveur répond 200 avec status « error » quand il refuse
-        // (consentement, champ invalide) : jamais « envoyé » dans ce cas.
+        // Le serveur répond 200 avec status « error » quand il refuse le message (case de
+        // consentement, champ invalide) : jamais « Message envoye ! » dans ce cas.
         if (response?.data?.status !== 'success') {
           toast.error("Envoi refusé", {
             description: response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
           });
           return;
         }
-        toast.success("Message envoyé !", {
-          description: response.data.message || "Nous vous répondrons dans les plus brefs délais.",
+        toast.success("Message envoye !", {
+          description: response.data.message || "Nous vous repondrons dans les plus brefs delais.",
         });
         setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
         setAttachment(null);
@@ -83,7 +84,7 @@ const ContactPage = () => {
       })
       .catch(error => {
         toast.error("Erreur", {
-          description: error.response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
+          description: error.response?.data?.message || "Une erreur est survenue. Veuillez reessayer.",
         });
       });
   };
@@ -92,7 +93,7 @@ const ContactPage = () => {
     <div className="min-h-screen bg-black">
       <SeoHead
         title="Contactez MTJ Sécurité Privée | Devis Gratuit | Toulon"
-        description="Contactez MTJ Sécurité Privée pour toute demande de sécurité privée de Bordeaux à Nice et jusqu'à Annecy. Devis gratuit, réponse sous 24 h. Tél : 07 60 73 82 06."
+        description="Contactez MTJ Sécurité Privée pour toute demande de sécurité privée de Bordeaux à Nice jusqu'à Annecy. Devis gratuit, réponse sous 24 h. Tél : 07 60 73 82 06."
         path="/contact"
       />
       <Navbar />
@@ -122,11 +123,12 @@ const ContactPage = () => {
             {/* Contact Information & Image */}
             <div className="space-y-8">
               <div className="relative h-[400px] overflow-hidden shadow-2xl">
+                {/* Même photo, en WebP plus léger (repli JPEG) : rien ne change à l'écran. */}
                 <picture className="block w-full h-full">
                   <source srcSet="/images/contact-bg.webp" type="image/webp" />
                   <img
                     src="/images/contact-bg.jpeg"
-                    alt="Contact MTJ Sécurité"
+                    alt="Contact MTJ Securite"
                     className="w-full h-full object-cover"
                   />
                 </picture>
@@ -147,8 +149,8 @@ const ContactPage = () => {
                     <Phone size={24} className="text-amber-400" />
                   </div>
                   <div>
-                    <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">Téléphone</h4>
-                    <p className="text-white text-lg"><a href={companyInfo.phoneHref} className="hover:text-amber-400 transition-colors">{companyInfo.phone}</a></p>
+                    <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">Telephone</h4>
+                    <p className="text-white text-lg">{companyInfo.phone}</p>
                     <p className="text-gray-400 text-sm mt-1">Disponible 24/7</p>
                   </div>
                 </div>
@@ -159,8 +161,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">Email</h4>
-                    <p className="text-white text-lg break-all"><a href={companyInfo.emailHref} className="hover:text-amber-400 transition-colors">{companyInfo.email}</a></p>
-                    <p className="text-gray-400 text-sm mt-1">Réponse sous 24 h</p>
+                    <p className="text-white text-lg">{companyInfo.email}</p>
+                    <p className="text-gray-400 text-sm mt-1">Reponse sous 24h</p>
                   </div>
                 </div>
 
@@ -171,16 +173,7 @@ const ContactPage = () => {
                   <div>
                     <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">Adresse</h4>
                     <p className="text-white text-lg">{companyInfo.address}</p>
-                    {/* Carte : simple lien (aucun contenu Google chargé dans la page, donc aucun cookie tiers). */}
-                    <a
-                      href={companyInfo.mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block text-amber-400 text-sm mt-1 underline hover:text-amber-300"
-                      data-testid="contact-maps-link"
-                    >
-                      Voir sur une carte
-                    </a>
+                    <p className="text-gray-400 text-sm mt-1">France</p>
                   </div>
                 </div>
               </div>
@@ -202,8 +195,8 @@ const ContactPage = () => {
                     <input type="email" id="contact-email" name="email" value={formData.email} onChange={handleChange} required className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors" placeholder="votre@email.com" data-testid="contact-email" />
                   </div>
                   <div>
-                    <label htmlFor="contact-phone" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Téléphone</label>
-                    <input type="tel" id="contact-phone" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors" placeholder="06 12 34 56 78" data-testid="contact-phone" />
+                    <label htmlFor="contact-phone" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Telephone</label>
+                    <input type="tel" id="contact-phone" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors" placeholder="+33 6 XX XX XX XX" data-testid="contact-phone" />
                   </div>
                   <div>
                     <label htmlFor="contact-subject" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Sujet *</label>
@@ -214,7 +207,7 @@ const ContactPage = () => {
                     <textarea id="contact-message" name="message" value={formData.message} onChange={handleChange} required rows="5" className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors resize-none" placeholder="Votre message..." data-testid="contact-message" />
                   </div>
                   <div>
-                    <label htmlFor="contact-attachment" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Pièce jointe (optionnel)</label>
+                    <label htmlFor="contact-attachment" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Piece jointe (optionnel)</label>
                     <div className="relative">
                       <input type="file" id="contact-attachment" onChange={handleFileChange} className="hidden" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
                       <label htmlFor="contact-attachment" className="w-full bg-neutral-900 border border-amber-400/30 text-gray-400 px-4 py-3 cursor-pointer hover:border-amber-400 transition-colors flex items-center justify-between">
@@ -222,10 +215,11 @@ const ContactPage = () => {
                         <Send size={20} className="text-amber-400" />
                       </label>
                     </div>
-                    {fileName && <p className="text-sm text-amber-400 mt-2">Fichier sélectionné : {fileName}</p>}
+                    {fileName && <p className="text-sm text-amber-400 mt-2">Fichier selectionne : {fileName}</p>}
                   </div>
 
-                  {/* Consentement RGPD */}
+                  {/* Consentement RGPD : la case renvoie à la politique de confidentialité (page décidée par
+                      Théo le 13/11/2026) ; le serveur refuse un message arrivé sans elle. */}
                   <div>
                     <label htmlFor="contact-consent" className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed cursor-pointer">
                       <input

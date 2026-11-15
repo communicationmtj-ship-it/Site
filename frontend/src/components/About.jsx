@@ -3,7 +3,7 @@ import { aboutUs } from '../data/mock';
 
 const About = () => {
   return (
-    <section id="about" className="relative scroll-mt-20 py-20 bg-black">
+    <section id="about" className="relative py-20 bg-black">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
@@ -26,20 +26,17 @@ const About = () => {
             <div className="pt-6 flex flex-wrap gap-8">
               <div className="text-center">
                 <p className="text-4xl font-bold text-amber-400">24/7</p>
-                <p className="text-sm text-gray-400 uppercase tracking-wide mt-1">Permanence téléphonique</p>
+                <p className="text-sm text-gray-400 uppercase tracking-wide mt-1">Disponibilité</p>
               </div>
-              {/* 12/11/2026 (audit du site, site-074) : « 100 % Engagement » ne disait rien de
-                  vérifiable ; remplacé par un fait : l'autorisation d'exercer du CNAPS. */}
-              <div className="text-center">
-                <p className="text-4xl font-bold text-amber-400">CNAPS</p>
-                <p className="text-sm text-gray-400 uppercase tracking-wide mt-1">Entreprise autorisée</p>
-              </div>
+              {/* 15/11/2026 (décision de Théo du 13/11/2026, « Site chiffres: B aucun ») : le chiffre
+                  « 100% Engagement » est retiré, rien n'est écrit à sa place. */}
             </div>
           </div>
 
           {/* Image */}
           <div className="relative">
             <div className="relative overflow-hidden shadow-2xl">
+              {/* Même photo, en WebP plus léger (repli JPEG) : rien ne change à l'écran. */}
               <picture>
                 <source srcSet="/images/about-team.webp" type="image/webp" />
                 <img

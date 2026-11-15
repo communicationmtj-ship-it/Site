@@ -2,16 +2,20 @@ import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
 import { ZONE_DESSERVIE } from '../../data/perimetre';
 
+// 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : texte du site en
+// ligne (04/11/2026), sauf les décisions de Théo : secteur « de Bordeaux à Nice jusqu'à Annecy » à la place
+// de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
+// (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
+// diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
 const data = {
   slug: '/securite-erp-etablissements-public',
   metaTitle: 'Sécurité ERP — Établissements Recevant du Public | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée assure la sécurité des établissements recevant du public (ERP) : hôpitaux, écoles, musées, centres sportifs. Agents SSIAP, contrôle d\'accès de Bordeaux à Nice et jusqu\'à Annecy.',
+  metaDescription: 'MTJ Sécurité Privée assure la sécurité des établissements recevant du public (ERP) : hôpitaux, écoles, musées, centres sportifs. Agents SSIAP, contrôle d\'accès de Bordeaux à Nice jusqu\'à Annecy.',
   breadcrumbCurrent: 'Établissements recevant du public',
-  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité des Établissements Recevant du Public (ERP)',
-  introduction: `MTJ Sécurité Privée est spécialisée dans la sécurité des établissements recevant du public (ERP) de Bordeaux à Nice et jusqu'à Annecy. Hôpitaux, cliniques, établissements scolaires, musées, centres sportifs, administrations : chaque type d'ERP présente des enjeux de sécurité spécifiques que nos agents maîtrisent parfaitement.\n\nNous déployons des dispositifs conformes à la réglementation en vigueur (Code de la construction, règlement de sécurité contre les risques d'incendie) et adaptés à la catégorie et au type de votre établissement.`,
+  introduction: `MTJ Sécurité Privée est spécialisée dans la sécurité des établissements recevant du public (ERP) de Bordeaux à Nice jusqu'à Annecy. Hôpitaux, cliniques, établissements scolaires, musées, centres sportifs, administrations : chaque type d'ERP présente des enjeux de sécurité spécifiques que nos agents maîtrisent parfaitement.\n\nNous déployons des dispositifs conformes à la réglementation en vigueur (Code de la construction, règlement de sécurité contre les risques d'incendie) et adaptés à la catégorie et au type de votre établissement.`,
 
   sections: [
     {
@@ -25,7 +29,7 @@ const data = {
         },
         {
           h3: 'Agents SSIAP pour la sécurité incendie',
-          content: 'Les ERP de catégories 1 et 2 doivent obligatoirement disposer d\'un service de sécurité incendie composé d\'agents SSIAP. MTJ Sécurité Privée met à disposition des agents SSIAP 1, 2 et 3 diplômés, formés à la prévention incendie, à l\'utilisation des moyens de secours et à la gestion des évacuations.'
+          content: 'Les ERP de catégories 1 et 2 doivent obligatoirement disposer d\'un service de sécurité incendie composé d\'agents SSIAP. MTJ Sécurité Privée met à disposition des agents SSIAP 1, 2 et 3 certifiés, formés à la prévention incendie, à l\'utilisation des moyens de secours et à la gestion des évacuations.'
         }
       ]
     },
@@ -44,7 +48,7 @@ const data = {
         },
         {
           h3: 'Musées, centres culturels et lieux de culte',
-          content: 'La protection des lieux culturels et de culte requiert une surveillance attentive des visiteurs, la prévention des dégradations et du vol d\'œuvres, et la gestion des flux. Nous assurons une présence discrète qui préserve l\'atmosphère du lieu tout en garantissant la sécurité de tous.'
+          content: 'La protection des lieux culturels et de culte requiert une surveillance attentive des visiteurs, la prévention des dégradations et du vol d\'oeuvres, et la gestion des flux. Nous assurons une présence discrète qui préserve l\'atmosphère du lieu tout en garantissant la sécurité de tous.'
         },
         {
           h3: 'Centres sportifs et complexes aquatiques',

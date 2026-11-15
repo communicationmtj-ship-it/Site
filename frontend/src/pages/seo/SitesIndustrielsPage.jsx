@@ -2,16 +2,20 @@ import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
 import { ZONE_DESSERVIE } from '../../data/perimetre';
 
+// 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : texte du site en
+// ligne (04/11/2026), sauf les décisions de Théo : secteur « de Bordeaux à Nice jusqu'à Annecy » à la place
+// de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
+// (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
+// diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
 const data = {
   slug: '/securite-sites-industriels-commerciaux',
   metaTitle: 'Sécurité Sites Industriels et Commerciaux | MTJ Sécurité Privée Toulon',
-  metaDescription: 'MTJ Sécurité Privée protège vos sites industriels, entrepôts, centres commerciaux et espaces professionnels. Surveillance 24/7, contrôle d\'accès, rondes de Bordeaux à Nice et jusqu\'à Annecy.',
+  metaDescription: 'MTJ Sécurité Privée protège vos sites industriels, entrepôts, centres commerciaux et espaces professionnels. Surveillance 24/7, contrôle d\'accès, rondes de Bordeaux à Nice jusqu\'à Annecy.',
   breadcrumbCurrent: 'Sites industriels et commerciaux',
-  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité des Sites Industriels et Commerciaux',
-  introduction: `MTJ Sécurité Privée assure la protection de vos sites industriels, zones commerciales, entrepôts et espaces professionnels de Bordeaux à Nice et jusqu'à Annecy. Nos agents qualifiés garantissent la sécurité de vos installations, de vos marchandises et de vos collaborateurs, 24 heures sur 24, 7 jours sur 7.\n\nQue vous gériez un entrepôt logistique, une zone industrielle, un centre commercial ou un immeuble de bureaux, nous concevons un dispositif de sécurité adapté à la configuration de votre site et à vos contraintes opérationnelles.`,
+  introduction: `MTJ Sécurité Privée assure la protection de vos sites industriels, zones commerciales, entrepôts et espaces professionnels de Bordeaux à Nice jusqu'à Annecy. Nos agents qualifiés garantissent la sécurité de vos installations, de vos marchandises et de vos collaborateurs, 24 heures sur 24, 7 jours sur 7.\n\nQue vous gériez un entrepôt logistique, une zone industrielle, un centre commercial ou un immeuble de bureaux, nous concevons un dispositif de sécurité adapté à la configuration de votre site et à vos contraintes opérationnelles.`,
 
   sections: [
     {

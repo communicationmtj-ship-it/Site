@@ -1,19 +1,19 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
 import { companyInfo } from '../../data/mock';
-import { PAGE_SECTEUR, lienLocal } from '../../data/perimetre';
 
+// 15/11/2026 (Théo, formulaire 3/4 : les pages de villes sortent, sans preuve) : texte du site en ligne,
+// sans chiffre (population, classement), sans client nommé, sans implantation hors du siège de Toulon ;
+// secteur « de Bordeaux à Nice jusqu'à Annecy », adresse contact@, CYNODEX = diplôme du maître-chien.
 const data = {
   slug: '/securite-privee-toulon',
   metaTitle: 'Société de Sécurité Privée à Toulon (83) | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée, société de sécurité basée à Toulon. Agents de sécurité, maître-chien, SSIAP, sécurité événementielle dans le Var et en PACA. Devis gratuit — 07 60 73 82 06.',
-  breadcrumbParent: { href: PAGE_SECTEUR.slug, label: 'Notre secteur' },
   breadcrumbCurrent: 'Sécurité privée à Toulon',
   areaServed: 'Toulon, Le Var, PACA',
 
   h1: 'Société de Sécurité Privée à Toulon — Var (83)',
-  // 13/11/2026 : adresse lue dans data/mock.js (une seule source) ; Toulon est le siège, seule adresse de la société.
-  introduction: `Basée au ${companyInfo.street} à Toulon, MTJ Sécurité Privée est votre partenaire de proximité pour tous vos besoins en sécurité dans le Var et la région PACA. Notre connaissance approfondie du tissu économique et social toulonnais nous permet de proposer des prestations parfaitement adaptées aux réalités locales.\n\nCapitale économique du Var, Toulon accueille une activité portuaire majeure (port militaire, port de commerce, ferries vers la Corse), des événements culturels et sportifs d'envergure et un tissu de PME-PMI dynamique. Chacun de ces secteurs génère des besoins spécifiques en matière de sécurité.`,
+  introduction: `Basée au 31 rue Chevalier Paul à Toulon, MTJ Sécurité Privée est votre partenaire de proximité pour tous vos besoins en sécurité dans le Var et la région PACA. Notre connaissance approfondie du tissu économique et social toulonnais nous permet de proposer des prestations parfaitement adaptées aux réalités locales.\n\nCapitale économique du Var, Toulon accueille une activité portuaire majeure (port militaire, port de commerce, ferries vers la Corse), des événements culturels et sportifs d'envergure et un tissu de PME-PMI dynamique. Chacun de ces secteurs génère des besoins spécifiques en matière de sécurité.`,
 
   sections: [
     {
@@ -27,8 +27,7 @@ const data = {
         },
         {
           h3: 'Sécurité événementielle à Toulon',
-          // 13/11/2026 (audit, site-034) : le nom approximatif du festival de Six-Fours est retiré.
-          content: 'Toulon accueille chaque année de nombreux événements : matchs du RCT (Rugby Club Toulonnais) au stade Mayol, marchés de Noël, fêtes de la Saint-Jean et régates nautiques. MTJ Sécurité Privée sécurise ce type de manifestation avec des dispositifs dimensionnés pour chaque événement, en coordination avec les autorités municipales et préfectorales.'
+          content: 'Toulon accueille chaque année de nombreux événements : matchs du RCT (Rugby Club Toulonnais) au stade Mayol, le festival de musique Six Fours, les marchés de Noël, les fêtes de la Saint-Jean et les régates nautiques. MTJ Sécurité Privée sécurise ces manifestations avec des dispositifs dimensionnés pour chaque type d\'événement, en coordination avec les autorités municipales et préfectorales.'
         }
       ]
     },
@@ -38,8 +37,7 @@ const data = {
       subsections: [
         {
           h3: 'Toulon Provence Méditerranée et bassin toulonnais',
-          // 15/11/2026 (relecture adverse) : population retirée, comme pour Bordeaux et Toulouse (chiffre non sourcé).
-          content: 'L\'agglomération Toulon Provence Méditerranée regroupe 12 communes. Nos équipes interviennent sur l\'ensemble de ce territoire : Toulon, La Seyne-sur-Mer, Hyères, La Valette-du-Var, La Garde, Ollioules, Le Pradet, Carqueiranne, Le Revest-les-Eaux, Saint-Mandrier, Six-Fours-les-Plages et La Crau.'
+          content: 'Nos équipes interviennent sur l\'ensemble de ce territoire : Toulon, La Seyne-sur-Mer, Hyères, La Valette-du-Var, La Garde, Ollioules, Le Pradet, Carqueiranne, Le Revest-les-Eaux, Saint-Mandrier, Six-Fours-les-Plages et La Crau.'
         },
         {
           h3: 'Var Est : Fréjus, Saint-Raphaël, Draguignan',
@@ -69,7 +67,7 @@ const data = {
   faq: [
     {
       question: 'Où se situe MTJ Sécurité Privée à Toulon ?',
-      answer: `Notre siège social est situé au ${companyInfo.address}, à proximité du centre-ville et de la rade de Toulon. Vous pouvez nous joindre par téléphone au ${companyInfo.phone} ou par e-mail à ${companyInfo.email}.`
+      answer: `Notre siège social est situé au 31 rue Chevalier Paul, 83000 Toulon, à proximité du centre-ville et de la rade de Toulon. Vous pouvez nous joindre par téléphone au 07 60 73 82 06 ou par email à ${companyInfo.email}.`
     },
     {
       question: 'Intervenez-vous en urgence sur Toulon ?',
@@ -77,8 +75,7 @@ const data = {
     },
     {
       question: 'Quelles certifications possèdent vos agents ?',
-      // 15/11/2026 (réponse de Théo, « Qualifications ») : les niveaux SSIAP 1, 2 et 3 sont affichés.
-      answer: 'Tous nos agents sont titulaires de la carte professionnelle délivrée par le CNAPS. Selon les missions, ils possèdent également les qualifications requises : diplôme SSIAP 1, 2 ou 3 pour la sécurité incendie, formation cynophile pour les maîtres-chiens, secourisme (SST). MTJ Sécurité Privée est elle-même autorisée par le CNAPS à exercer ses activités de sécurité privée.'
+      answer: 'Tous nos agents sont titulaires de la carte professionnelle délivrée par le CNAPS. Selon les missions, ils possèdent également les certifications TFP APS, TFP Agent Cynophile, SSIAP 1/2/3 et SST (Sauveteur Secouriste du Travail). MTJ Sécurité Privée est elle-même autorisée par le CNAPS à exercer ses activités de sécurité privée.'
     }
   ],
 
@@ -86,8 +83,7 @@ const data = {
 
   relatedLinks: [
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
-    lienLocal('/securite-privee-marseille'),
-    { href: PAGE_SECTEUR.slug, label: 'Tout notre secteur' },
+    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },

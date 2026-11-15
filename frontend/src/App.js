@@ -60,7 +60,7 @@ const homeSchema = [
     "name": "MTJ Sécurité Privée",
     "url": "https://mtj-securite-privee.fr",
     "logo": "https://mtj-securite-privee.fr/images/logo-mtj.png",
-    "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX et SSIAP, de Bordeaux à Nice en remontant jusqu'à Annecy ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe.",
+    "description": "Entreprise de sécurité privée spécialisée en agents de sécurité, cynophile, CYNODEX et SSIAP, de Bordeaux à Nice jusqu'à Annecy ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe.",
     "telephone": companyInfo.phoneIntl,
     "email": companyInfo.email,
     "address": postalAddressSchema,
@@ -105,8 +105,9 @@ const HomePage = () => {
   return (
     <>
       <SeoHead
-        title="MTJ Sécurité Privée | Sécurité privée de Bordeaux à Nice et Annecy"
-        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe. Interventions de Bordeaux à Nice en remontant jusqu'à Annecy, et en grand déplacement dans toute la France. Devis gratuit."
+        // 15/11/2026 (Théo, formulaire 3/4 : titre de l'accueil non choisi) : le titre du site en ligne, tel quel.
+        title="MTJ Sécurité Privée | Sécurité, Gardiennage, Cynophile | Toulon, Nice, Toulouse"
+        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe. Interventions de Bordeaux à Nice jusqu'à Annecy, et en grand déplacement dans toute la France. Devis gratuit."
         path="/"
       />
       <Navbar />

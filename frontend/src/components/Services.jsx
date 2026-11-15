@@ -33,7 +33,7 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="relative scroll-mt-20 py-20 bg-neutral-900">
+    <section id="services" className="relative py-20 bg-neutral-900">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-black text-white tracking-wider mb-4 uppercase">
@@ -66,9 +66,9 @@ const Services = () => {
                 {/* External company badge */}
                 {isExt && (
                   <div data-testid="external-company-badge" className="absolute top-0 left-0 right-0 px-4 py-2 flex items-center gap-2" style={{ backgroundColor: `${c}e6` }}>
-                    <ShieldCheck size={16} className="text-black" />
-                    <span className="text-black text-xs font-bold uppercase tracking-widest">{service.externalCompany}</span>
-                    <span className="ml-auto text-[10px] font-semibold uppercase tracking-wider text-black/80">Société du groupe MTJ</span>
+                    <ShieldCheck size={16} className="text-white" />
+                    <span className="text-white text-xs font-bold uppercase tracking-widest">{service.externalCompany}</span>
+                    <span className="ml-auto text-[10px] uppercase tracking-wider" style={{ color: '#c9a0d6' }}>Societe du groupe MTJ</span>
                   </div>
                 )}
 
@@ -98,7 +98,7 @@ const Services = () => {
 
                 {/* Legal Notice */}
                 {service.legalNotice && (
-                  <p className="text-gray-400 text-xs leading-relaxed whitespace-pre-line mt-4 pt-4" style={{ borderTop: `1px solid ${c}33` }}>
+                  <p className="text-gray-600 text-xs leading-relaxed whitespace-pre-line mt-4 pt-4" style={{ borderTop: `1px solid ${c}33` }}>
                     {service.legalNotice}
                   </p>
                 )}

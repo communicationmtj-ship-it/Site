@@ -1,25 +1,26 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
-import { cnapsCompanies, L612_14 } from '../../data/mock';
+import { cnapsCompanies } from '../../data/mock';
 
+// 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : texte du site en
+// ligne (04/11/2026), sauf les décisions de Théo : secteur « de Bordeaux à Nice jusqu'à Annecy » à la place
+// de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
+// (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
+// diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
 const RAPPROCHEE = cnapsCompanies.rapprochee;
 
-// 13/11/2026 (audit du site de Mathilde, site-065) : autorisation et mention L612-14 lues dans
-// data/mock.js ; « partout en France » sans l'international ; le bouton devis présélectionne
-// la protection rapprochée.
 const data = {
   slug: '/protection-rapprochee',
+  // Invisible à l'écran : dans les données lues par Google, la page est signée par MTJ Sécurité Rapprochée.
   societe: { nom: 'MTJ Sécurité Rapprochée', mention: 'société du groupe MTJ', autorisation: RAPPROCHEE.authorization, activite: RAPPROCHEE.activity, ville: 'Nice', adresse: null },
-  serviceDevis: 'Protection rapprochée',
+  themeColor: '#68187B',
   metaTitle: 'Protection Rapprochée — Sécurité des Personnes | MTJ Sécurité Rapprochée',
   metaDescription: 'MTJ Sécurité Rapprochée assure la protection physique des personnalités, dirigeants, célébrités et particuliers exposés. Agents de protection rapprochée formés, partout en France.',
   breadcrumbCurrent: 'Protection rapprochée',
-  // Données structurées alignées sur le texte (site-065) : l'autorisation du CNAPS vaut pour la
-  // France ; Monaco, État étranger, n'est plus annoncé pour la protection rapprochée (13/11/2026).
   areaServed: 'France',
 
   h1: 'Protection Rapprochée — Sécurité Physique des Personnes',
-  introduction: `MTJ Sécurité Rapprochée, société du groupe MTJ, est spécialisée dans la protection physique des personnes. Nous assurons la sécurité rapprochée de personnalités, dirigeants d'entreprise, célébrités, diplomates et particuliers exposés, partout en France.\n\nNos agents de protection rapprochée (APR), rigoureusement sélectionnés et formés, assurent votre protection en toute discrétion. Chaque mission fait l'objet d'une analyse de risques préalable et d'un dispositif de protection sur mesure.\n\nAutorisation d'exercer du CNAPS n° ${RAPPROCHEE.authorization} (${RAPPROCHEE.activity}).\n${L612_14}`,
+  introduction: `MTJ Sécurité Rapprochée, société du groupe MTJ, est spécialisée dans la protection physique des personnes. Nous assurons la sécurité rapprochée de personnalités, dirigeants d'entreprise, célébrités, diplomates et particuliers exposés, partout en France et à l'international.\n\nNos agents de protection rapprochée (APR), rigoureusement sélectionnés et formés aux techniques les plus avancées, garantissent votre intégrité physique en toute discrétion. Chaque mission fait l'objet d'une analyse de risques préalable et d'un dispositif de protection sur mesure.`,
 
   sections: [
     {
@@ -61,7 +62,7 @@ const data = {
         },
         {
           h3: 'Discrétion et professionnalisme',
-          content: 'La discrétion est au cœur de notre approche. Nos agents de protection rapprochée sont sélectionnés pour leur capacité à assurer une sécurité invisible : tenue adaptée au contexte (costume, tenue décontractée), comportement discret, communication non intrusive. Votre sécurité est assurée sans altérer votre image ou votre confort.'
+          content: 'La discrétion est au coeur de notre approche. Nos agents de protection rapprochée sont sélectionnés pour leur capacité à assurer une sécurité invisible : tenue adaptée au contexte (costume, tenue décontractée), comportement discret, communication non intrusive. Votre sécurité est assurée sans altérer votre image ou votre confort.'
         }
       ]
     },
@@ -70,8 +71,8 @@ const data = {
       subsections: [
         {
           h3: 'Déplacements et voyages',
-          content: 'Pour vos déplacements en France, sur étude préalable, MTJ Sécurité Rapprochée organise la sécurisation de vos trajets : transferts aéroport ou gare, escorte motorisée, reconnaissance des hôtels et lieux de rendez-vous, coordination avec les services de sécurité des lieux.',
-          list: ['Transferts sécurisés aéroport/gare', 'Escorte motorisée', 'Reconnaissance et sécurisation des hébergements', 'Coordination avec les services de sécurité des lieux']
+          content: 'Que ce soit pour des déplacements nationaux ou internationaux, MTJ Sécurité Rapprochée organise la sécurisation complète de vos voyages : transferts aéroport, escorte motorisée, reconnaissance des hôtels et lieux de rendez-vous, coordination avec les services de sécurité locaux.',
+          list: ['Transferts sécurisés aéroport/gare', 'Escorte motorisée', 'Reconnaissance et sécurisation des hébergements', 'Coordination internationale']
         },
         {
           h3: 'Événements et soirées privées',
@@ -100,7 +101,7 @@ const data = {
     }
   ],
 
-  conclusion: `La protection rapprochée est un métier d'excellence qui exige rigueur, discrétion et réactivité. MTJ Sécurité Rapprochée, société du groupe MTJ, met à votre disposition des agents de protection rapprochée formés et expérimentés pour assurer votre sécurité.\n\nContactez-nous en toute confidentialité pour une évaluation personnalisée de vos besoins de protection.`,
+  conclusion: `La protection rapprochée est un métier d'excellence qui exige rigueur, discrétion et réactivité. MTJ Sécurité Rapprochée, société du groupe MTJ, met à votre disposition des agents de protection rapprochée d'élite pour garantir votre sécurité en toutes circonstances.\n\nContactez-nous en toute confidentialité pour une évaluation personnalisée de vos besoins de protection.`,
 
   relatedLinks: [
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
@@ -108,7 +109,7 @@ const data = {
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
     { href: '/securite-privee-nice-monaco', label: 'Sécurité privée à Nice et Monaco' },
-    { href: '/securite-privee-sud-france', label: 'Tout notre secteur' },
+    { href: '/securite-privee-sud-france', label: 'Sécurité privée de Bordeaux à Nice jusqu\'à Annecy' },
   ]
 };
 

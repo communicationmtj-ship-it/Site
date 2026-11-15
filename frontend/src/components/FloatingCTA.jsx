@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, FileText, X } from 'lucide-react';
-import { companyInfo } from '../data/mock';
 
 const FloatingCTA = () => {
+  const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 300);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const scrollToDevis = () => {
     setExpanded(false);
@@ -14,6 +20,8 @@ const FloatingCTA = () => {
       window.location.href = '/#quote';
     }
   };
+
+  if (!visible) return null;
 
   return (
     <div className="fixed bottom-6 right-4 z-50 flex flex-col items-end gap-3 md:hidden">
@@ -30,12 +38,12 @@ const FloatingCTA = () => {
           </button>
 
           <a
-            href={companyInfo.phoneHref}
+            href="tel:0760738206"
             className="flex items-center gap-2 bg-white text-black font-bold px-5 py-3 shadow-lg text-sm uppercase tracking-wide"
             style={{ borderRadius: 2 }}
           >
             <Phone size={16} />
-            {companyInfo.phone} · 24h/24
+            07 60 73 82 06
           </a>
         </div>
       )}

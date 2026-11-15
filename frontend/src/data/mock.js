@@ -12,8 +12,12 @@ const STREET = "31 rue Chevalier Paul";
 const POSTAL_CODE = "83000";
 const CITY = "Toulon";
 
+// 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : chaque texte
+// affiché revient à celui du site en ligne (version du 04/11/2026, 9561a0a), sauf les décisions de Théo
+// (adresse contact@ ; secteur ; aucun chiffre ; CYNODEX = diplôme du maître-chien de détection d'explosifs ;
+// mention CNAPS une fois par société, dans le pied de page).
 export const companyInfo = {
-  name: "MTJ SÉCURITÉ PRIVÉE",
+  name: "MTJ SECURITE PRIVÉE",
   slogan: "VOTRE SÉCURITÉ, NOTRE MISSION.",
   motto: "Avec Force et Honneur Toujours servir",
   phone: "07 60 73 82 06",
@@ -89,7 +93,7 @@ Forte d'une équipe d'experts qualifiés et expérimentés, nous mettons notre s
 
 Notre engagement se traduit par des interventions professionnelles, un respect strict des réglementations en vigueur et une disponibilité 24h/24 et 7j/7.
 
-Nous sommes fiers de notre expertise en sécurité cynophile, avec des maîtres-chiens formés à la surveillance et à la détection.`,
+Nous sommes fiers de notre expertise en sécurité cynophile, avec des maîtres-chiens formés aux techniques les plus avancées de surveillance et de détection.`,
 };
 
 export const services = [
@@ -109,7 +113,7 @@ export const services = [
   },
   {
     id: 2,
-    title: "AGENTS CYNOPHILES D'INTERVENTION",
+    title: "AGENTS CYNOPHILE D'INTERVENTION",
     description: "Notre équipe cyno d'intervention est spécialisée dans la sécurité avec chiens d'intervention. Nos binômes maître-chien sont formés pour intervenir rapidement et efficacement dans toutes les situations nécessitant une sécurité renforcée.",
     icon: "Dog",
     link: "/securite-cynophile-maitre-chien",
@@ -125,7 +129,9 @@ export const services = [
     id: 3,
     title: "CYNODEX",
     subtitle: "Détection d'Explosifs",
-    description: "Notre unité CYNODEX est spécialisée dans la détection d'explosifs avec des chiens entraînés à cette mission. Nos maîtres-chiens certifiés CYNODEX interviennent pour sécuriser vos événements et vos installations.",
+    // 15/11/2026 (Théo : « un cynodex c'est le diplome de maitre chien de detection d'explosif ») : le texte
+    // en ligne parlait d'une « unité » et d'« équipes » ; seuls ces mots changent.
+    description: "Nos maîtres-chiens diplômés CYNODEX sont spécialisés dans la détection d'explosifs avec des chiens hautement entraînés. Ils garantissent la sécurité de vos événements et installations.",
     icon: "Dog",
     link: "/detection-explosifs-cynodex",
     color: "#AC8631",
@@ -140,10 +146,10 @@ export const services = [
     id: 4,
     title: "SSIAP",
     subtitle: "Service de Sécurité Incendie et d'Assistance à Personnes",
-    description: "Nos agents SSIAP diplômés assurent la sécurité incendie de vos établissements recevant du public. Ils veillent au respect des consignes de sécurité incendie et à la protection des personnes.",
+    description: "Nos agents SSIAP certifiés assurent la sécurité incendie de vos établissements recevant du public. Ils garantissent le respect des normes de sécurité et la protection des personnes.",
     icon: "Flame",
     link: "/ssiap-securite-incendie",
-    color: "#AC8631",
+    color: "#B00B0B",
     features: [
       "Prévention incendie",
       "Évacuation d'urgence",
@@ -154,16 +160,15 @@ export const services = [
     id: 5,
     title: "PROTECTION PHYSIQUE DES PERSONNES",
     subtitle: "Sécurité Rapprochée",
-    description: "La protection rapprochée de personnalités, dirigeants d'entreprise, célébrités et particuliers exposés. Des agents de protection rapprochée, formés aux techniques d'évaluation des menaces, d'escorte et de sécurisation de déplacements, assurent votre protection en toute discrétion.",
-    legalNotice: "MTJ SÉCURITÉ RAPPROCHÉE — SIRET 933 244 303 00014\nAutorisation CNAPS AUT-006-2123-10-21-20240955994\nArticle L612-14 du code de la sécurité intérieure : « L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics. »",
+    description: "La protection rapprochée de personnalités, dirigeants d'entreprise, célébrités et particuliers exposés. Des agents de protection rapprochée, formés aux techniques d'évaluation des menaces, d'escorte et de sécurisation de déplacements, garantissent votre intégrité physique en toute discrétion.",
+    // 15/11/2026 : la mention CNAPS de MTJ Sécurité Rapprochée (autorisation + article L612-14) est écrite une
+    // seule fois, dans le pied de page de toutes les pages (Footer.jsx), plus dans cette carte.
     icon: "UserShield",
     features: [],
     wide: true,
     externalCompany: "MTJ SÉCURITÉ RAPPROCHÉE",
     link: "/protection-rapprochee",
-    // Charte noir et doré pour toutes les cartes (audit du 30/10/2026, site-035 à 037) :
-    // la société du groupe se distingue par son bandeau nominatif, pas par une couleur.
-    color: "#AC8631"
+    color: "#68187B"
   }
 ];
 

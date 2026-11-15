@@ -8,9 +8,12 @@
 // Choix du 13/11/2026 (formulaire « site vitrine », « Site perimetre: A partout ») : ce périmètre
 // est celui du texte, de la carte, des zones de recrutement, du menu et du pied de page.
 // L'essai backend/tests/test_site_choix_theo_13_11.py compare cette liste à celle du logiciel.
+// 15/11/2026 (règle de Théo : « soit tu met pas soit tu laisse ce qui etait ») : sur les pages, seul le
+// groupe de mots « sud de la France » (ou son équivalent) du site en ligne est remplacé, par ces mots
+// exacts ; la phrase autour reste celle du site en ligne.
 
-export const SECTEUR = "de Bordeaux à Nice, en remontant jusqu'à Annecy";
-export const SECTEUR_TITRE = "De Bordeaux à Nice, jusqu'à Annecy";
+export const SECTEUR = "de Bordeaux à Nice jusqu'à Annecy";
+export const SECTEUR_TITRE = "De Bordeaux à Nice jusqu'à Annecy";
 
 export const DEPARTEMENTS = [
   // Nouvelle-Aquitaine

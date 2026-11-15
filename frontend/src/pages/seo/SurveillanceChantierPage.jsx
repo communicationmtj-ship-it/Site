@@ -2,16 +2,20 @@ import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
 import { ZONE_DESSERVIE } from '../../data/perimetre';
 
+// 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : texte du site en
+// ligne (04/11/2026), sauf les décisions de Théo : secteur « de Bordeaux à Nice jusqu'à Annecy » à la place
+// de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
+// (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
+// diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
 const data = {
   slug: '/surveillance-chantier-site',
   metaTitle: 'Surveillance de Chantiers et Sites | Gardiennage 24h/24 | MTJ Sécurité Privée',
-  metaDescription: 'Gardiennage et surveillance de chantiers de Bordeaux à Nice et jusqu\'à Annecy. Protection contre le vol, l\'intrusion et le vandalisme. MTJ Sécurité Privée — rondes 24h/24, devis gratuit.',
+  metaDescription: 'Gardiennage et surveillance de chantiers de Bordeaux à Nice jusqu\'à Annecy. Protection contre le vol, l\'intrusion et le vandalisme. MTJ Sécurité Privée — rondes 24h/24, devis gratuit.',
   breadcrumbCurrent: 'Surveillance de chantiers',
-  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,
 
   h1: 'Surveillance de Chantiers et Gardiennage de Sites',
-  introduction: `Les chantiers de construction et les sites industriels sont des cibles privilégiées pour le vol de matériaux, de matériel et d'engins de chantier. MTJ Sécurité Privée assure la surveillance et le gardiennage de vos chantiers et de vos sites de Bordeaux à Nice et jusqu'à Annecy pour prévenir les intrusions, le vandalisme et le vol.\n\nNos agents sont spécifiquement formés aux risques propres aux environnements de chantier et travaillent en coordination étroite avec les chefs de projet et les maîtres d'œuvre.`,
+  introduction: `Les chantiers de construction et les sites industriels sont des cibles privilégiées pour le vol de matériaux, de matériel et d'engins de chantier. MTJ Sécurité Privée assure la surveillance et le gardiennage de vos chantiers et de vos sites de Bordeaux à Nice jusqu'à Annecy pour prévenir les intrusions, le vandalisme et le vol.\n\nNos agents sont spécifiquement formés aux risques propres aux environnements de chantier et travaillent en coordination étroite avec les chefs de projet et les maîtres d'œuvre.`,
 
   sections: [
     {
@@ -20,8 +24,8 @@ const data = {
       subsections: [
         {
           h3: 'Gardiennage permanent et rondes de surveillance',
-          content: 'Nos agents assurent une présence continue sur votre chantier, 24 heures sur 24 et 7 jours sur 7, y compris les nuits, les week-ends et les jours fériés — moments où les chantiers sont les plus vulnérables. Les rondes sont effectuées selon un circuit défini couvrant l\'ensemble du périmètre, avec des points de contrôle consignés à chaque passage.',
-          list: ['Gardiennage de jour et de nuit', 'Rondes avec points de contrôle consignés', 'Week-ends et jours fériés couverts', 'Comptes rendus selon les modalités du devis']
+          content: 'Nos agents assurent une présence continue sur votre chantier, 24 heures sur 24 et 7 jours sur 7, y compris les nuits, les week-ends et les jours fériés — moments où les chantiers sont les plus vulnérables. Les rondes sont effectuées selon un circuit défini couvrant l\'ensemble du périmètre, avec des points de contrôle vérifiables (rondes avec pointeaux ou application mobile).',
+          list: ['Gardiennage de jour et de nuit', 'Rondes avec traçabilité (pointeaux/app)', 'Week-ends et jours fériés couverts', 'Rapports d\'activité quotidiens']
         },
         {
           h3: 'Contrôle d\'accès et gestion des entrées/sorties',
@@ -57,7 +61,7 @@ const data = {
         },
         {
           h3: 'Surveillance cynophile de chantiers',
-          content: 'Pour les chantiers étendus ou les zones à haut risque, nous déployons des binômes maître-chien. La sécurité cynophile renforce la capacité de surveillance et l\'effet dissuasif, particulièrement lors des rondes nocturnes sur de vastes périmètres.'
+          content: 'Pour les chantiers étendus ou les zones à haut risque, nous déployons des binômes maître-chien. La sécurité cynophile multiplie la capacité de surveillance et l\'effet dissuasif, particulièrement efficace lors des rondes nocturnes sur de vastes périmètres.'
         }
       ]
     }
@@ -73,8 +77,8 @@ const data = {
       answer: 'Oui, c\'est d\'ailleurs une formule très demandée. La majorité des vols et des intrusions se produisent la nuit, les week-ends et les jours fériés. Nous proposons des formules de gardiennage nocturne (18h-6h) ou week-end seul, adaptées à votre budget et à votre niveau de risque.'
     },
     {
-      question: 'Intervenez-vous sur les chantiers en dehors de votre secteur ?',
-      answer: 'Notre secteur va de Bordeaux à Nice en remontant jusqu\'à Annecy (Nouvelle-Aquitaine, Occitanie, Provence-Alpes-Côte d\'Azur, Auvergne-Rhône-Alpes et Monaco). Nous pouvons également intervenir en grand déplacement sur l\'ensemble du territoire national pour des chantiers de grande envergure. Contactez-nous pour étudier votre demande.'
+      question: 'Intervenez-vous sur les chantiers en dehors de la zone de Bordeaux à Nice jusqu\'à Annecy ?',
+      answer: 'Notre zone d\'intervention principale va de Bordeaux à Nice jusqu\'à Annecy. Nous pouvons également intervenir en grand déplacement sur l\'ensemble du territoire national pour des chantiers de grande envergure. Contactez-nous pour étudier votre demande.'
     }
   ],
 

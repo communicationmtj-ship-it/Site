@@ -114,6 +114,15 @@ def quote_email_body(name: str, company: Optional[str], email: str, phone: str, 
     societe = ""
     if service_type == PROTECTION_RAPPROCHEE:
         societe = "\nSociété concernée : MTJ Sécurité Rapprochée (devis et contrat à son nom)\n"
+    # 15/11/2026 : le formulaire du site ne demande plus la date de début ni l'urgence (retour au formulaire
+    # en ligne, règle de Théo du 15/11/2026) ; les lignes ne s'écrivent que si la demande les porte.
+    date_debut = format_date_fr(start_date)
+    urgence = (urgency or "").strip()
+    precisions = ""
+    if date_debut:
+        precisions += f"Date de début souhaitée : {date_debut}\n"
+    if urgence:
+        precisions += f"Urgence : {urgence}\n"
     return f"""Nouvelle demande de devis
 
 Nom : {name}
@@ -122,9 +131,7 @@ Email : {email}
 Téléphone : {phone}
 
 Service demandé : {service_type}{societe}
-Date de début souhaitée : {format_date_fr(start_date) or 'Non précisée'}
-Urgence : {(urgency or '').strip() or 'Non précisée'}
-
+{precisions}
 Message :
 {message}
 {"" if not attachment_path else chr(10) + "Une pièce jointe est incluse dans cet email."}

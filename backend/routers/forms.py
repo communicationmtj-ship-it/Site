@@ -20,7 +20,9 @@ router = APIRouter()
 UPLOAD_DIR = Path(__file__).parent.parent / "uploads"
 UPLOAD_DIR.mkdir(exist_ok=True)
 
-GENERIC_ERROR = "Une erreur est survenue. Veuillez réessayer."
+# 15/11/2026 (règle de Théo : « soit tu met pas soit tu laisse ce qui etait ») : les messages affichés au
+# visiteur après un envoi sont ceux du site en ligne, mot pour mot.
+GENERIC_ERROR = "Une erreur est survenue. Veuillez reessayer."
 
 
 def _get_db():
@@ -155,7 +157,7 @@ async def submit_quote(
         )
         await _mark_email_sent(db.quotes, record_id, sent, "devis")
 
-        return {"status": "success", "message": "Votre demande de devis a été envoyée. Nous vous recontactons dans les plus brefs délais."}
+        return {"status": "success", "message": "Votre demande de devis a ete envoyee avec succes. Nous vous contacterons dans les plus brefs delais."}
 
     except ValueError as e:
         logger.warning(f"Validation error (quote): {e}")
@@ -213,7 +215,7 @@ async def submit_contact(
         )
         await _mark_email_sent(db.contacts, record_id, sent, "contact")
 
-        return {"status": "success", "message": "Votre message a été envoyé. Nous vous répondons dans les plus brefs délais."}
+        return {"status": "success", "message": "Votre message a ete envoye avec succes. Nous vous repondrons dans les plus brefs delais."}
 
     except ValueError as e:
         logger.warning(f"Validation error (contact): {e}")
@@ -297,7 +299,7 @@ async def submit_recruitment(
         )
         await _mark_email_sent(db.recruitments, record_id, sent, "recrutement")
 
-        return {"status": "success", "message": "Votre candidature a été envoyée. Nous étudions votre profil et vous recontactons rapidement."}
+        return {"status": "success", "message": "Votre candidature a ete envoyee avec succes. Nous examinerons votre profil et vous contacterons rapidement."}
 
     except ValueError as e:
         logger.warning(f"Validation error (recruitment): {e}")

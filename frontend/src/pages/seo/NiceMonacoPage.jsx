@@ -1,17 +1,18 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
-import { PAGE_SECTEUR, lienLocal } from '../../data/perimetre';
 
+// 15/11/2026 (Théo, formulaire 3/4 : les pages de villes sortent, sans preuve) : texte du site en ligne,
+// sans chiffre (population, classement), sans client nommé, sans implantation hors du siège de Toulon ;
+// secteur « de Bordeaux à Nice jusqu'à Annecy », adresse contact@, CYNODEX = diplôme du maître-chien.
 const data = {
   slug: '/securite-privee-nice-monaco',
   metaTitle: 'Sécurité Privée Nice & Monaco | Côte d\'Azur | MTJ Sécurité Privée',
   metaDescription: 'MTJ Sécurité Privée à Nice et Monaco : agents de sécurité, maître-chien, SSIAP, sécurité événementielle sur la Côte d\'Azur. Cannes, Antibes, Menton. Devis gratuit.',
-  breadcrumbParent: { href: PAGE_SECTEUR.slug, label: 'Notre secteur' },
   breadcrumbCurrent: 'Sécurité privée Nice & Monaco',
   areaServed: 'Nice, Monaco, Cannes, Côte d\'Azur, Alpes-Maritimes',
 
   h1: 'Sécurité Privée à Nice, Monaco et sur la Côte d\'Azur',
-  introduction: `MTJ Sécurité Privée intervient sur l'ensemble de la Côte d'Azur, de Nice à Monaco en passant par Cannes, Antibes et Menton. La French Riviera, destination internationale de prestige, accueille chaque année des millions de touristes, des événements planétaires (Festival de Cannes, Grand Prix de Monaco, Carnaval de Nice) et une clientèle exigeante en matière de sécurité.\n\nNotre expertise en sécurité privée, en sécurité cynophile et en détection d'explosifs répond aux standards les plus élevés requis par les acteurs économiques et les organisateurs d'événements de la Côte d'Azur.`,
+  introduction: `MTJ Sécurité Privée intervient sur l'ensemble de la Côte d'Azur, de Nice à Monaco en passant par Cannes, Antibes et Menton. La French Riviera, destination internationale de prestige, accueille chaque année des événements planétaires (Festival de Cannes, Grand Prix de Monaco, Carnaval de Nice) et une clientèle exigeante en matière de sécurité.\n\nNotre expertise en sécurité privée, en sécurité cynophile et en détection d'explosifs répond aux standards les plus élevés requis par les acteurs économiques et les organisateurs d'événements de la Côte d'Azur.`,
 
   sections: [
     {
@@ -20,12 +21,12 @@ const data = {
       subsections: [
         {
           h3: 'Sécurité privée à Nice et dans les Alpes-Maritimes',
-          content: 'Nice, cinquième ville de France, concentre une activité économique dense et diversifiée. Nos agents assurent le gardiennage de sites commerciaux, la surveillance de résidences de standing, le contrôle d\'accès d\'événements sur la Promenade des Anglais et la protection de sites touristiques. Nous couvrons également les communes limitrophes : Saint-Laurent-du-Var, Cagnes-sur-Mer, Vence, Grasse et l\'arrière-pays niçois.',
+          content: 'Nice concentre une activité économique dense et diversifiée. Nos agents assurent le gardiennage de sites commerciaux, la surveillance de résidences de standing, le contrôle d\'accès d\'événements sur la Promenade des Anglais et la protection de sites touristiques. Nous couvrons également les communes limitrophes : Saint-Laurent-du-Var, Cagnes-sur-Mer, Vence, Grasse et l\'arrière-pays niçois.',
           list: ['Nice centre et Promenade des Anglais', 'Sophia Antipolis et technopole', 'Cannes, La Croisette et Palais des Festivals', 'Antibes, Juan-les-Pins, Mougins']
         },
         {
           h3: 'Sécurité privée à Monaco',
-          content: 'La Principauté de Monaco exige un niveau de sécurité d\'exception. MTJ Sécurité Privée intervient pour la protection de résidences privées, d\'hôtels de luxe, de boutiques de haute joaillerie et d\'événements exclusifs à Monaco. Nos agents, rompus aux exigences de discrétion et de professionnalisme de la clientèle monégasque, assurent des prestations haut de gamme dans le respect de la législation de la Principauté.'
+          content: 'La Principauté de Monaco exige un niveau de sécurité d\'exception. MTJ Sécurité Privée intervient pour la protection de résidences privées, d\'hôtels de luxe, de boutiques de haute joaillerie et d\'événements exclusifs à Monaco. Nos agents, rompus aux exigences de discrétion et de professionnalisme de la clientèle monégasque, assurent des prestations haut de gamme dans le respect de la législation du Principauté.'
         }
       ]
     },
@@ -35,7 +36,7 @@ const data = {
       subsections: [
         {
           h3: 'Festival de Cannes et événements culturels',
-          content: 'Le Festival International du Film de Cannes, le MIPIM, le MIPCOM, le Cannes Lions : ces événements de renommée mondiale nécessitent des dispositifs de sécurité d\'envergure. MTJ Sécurité Privée peut intervenir lors de ce type de manifestation pour le contrôle d\'accès, la surveillance périmétrique et la sécurisation des zones VIP ; la protection de personnalités relève de MTJ Sécurité Rapprochée, société du groupe.'
+          content: 'Le Festival International du Film de Cannes, le MIPIM, le MIPCOM, le Cannes Lions : ces événements de renommée mondiale nécessitent des dispositifs de sécurité d\'envergure. MTJ Sécurité Privée intervient pour le contrôle d\'accès, la surveillance périmétrique, la protection de personnalités et la sécurisation des zones VIP lors de ces manifestations.'
         },
         {
           h3: 'Grand Prix de Monaco et événements sportifs',
@@ -43,9 +44,7 @@ const data = {
         },
         {
           h3: 'Carnaval de Nice et festivités locales',
-          // 15/11/2026 (relecture adverse) : plus de classement (« deuxième plus grand carnaval au monde ») ni de
-          // nombre de spectateurs, invérifiables.
-          content: 'Le Carnaval de Nice, l\'un des carnavals les plus célèbres au monde, attire chaque année un très large public. La sécurisation de cet événement en plein air nécessite un dispositif important : contrôle des accès aux tribunes, surveillance des cortèges, gestion des mouvements de foule et coordination avec les forces de l\'ordre.'
+          content: 'La sécurisation de cet événement en plein air nécessite un dispositif important : contrôle des accès aux tribunes, surveillance des cortèges, gestion des mouvements de foule et coordination avec les forces de l\'ordre.'
         }
       ]
     },
@@ -68,8 +67,7 @@ const data = {
   faq: [
     {
       question: 'Intervenez-vous à Monaco depuis la France ?',
-      // 13/11/2026 (audit du site de Mathilde, site-081) : plus d'accord entre États invoqué sans preuve.
-      answer: 'Oui. MTJ Sécurité Privée intervient à Monaco dans le respect de la réglementation monégasque applicable aux activités de sécurité privée. Pour une mission à Monaco, contactez-nous : le cadre réglementaire applicable est étudié avec vous avant toute proposition.'
+      answer: 'Oui. MTJ Sécurité Privée, société de sécurité privée autorisée par le CNAPS, intervient à Monaco dans le cadre d\'accords transfrontaliers. Nos agents respectent la réglementation monégasque applicable aux prestataires de sécurité privée étrangers. Contactez-nous pour en savoir plus sur nos prestations à Monaco.'
     },
     {
       question: 'Pouvez-vous sécuriser un événement au Palais des Festivals de Cannes ?',
@@ -85,8 +83,7 @@ const data = {
 
   relatedLinks: [
     { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
-    lienLocal('/securite-privee-marseille'),
-    { href: PAGE_SECTEUR.slug, label: 'Tout notre secteur' },
+    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
     { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
     { href: '/securite-cynophile-maitre-chien', label: 'Sécurité cynophile et maître-chien' },
     { href: '/detection-explosifs-cynodex', label: 'Détection d\'explosifs CYNODEX' },

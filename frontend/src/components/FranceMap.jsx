@@ -143,7 +143,7 @@ const ANNECY = dansLeDepartement('74', 0.26, 0.7, { x: 462, y: 316 });
 export const CITIES = [
   { name: 'Bordeaux', x: Math.round(BORDEAUX.x), y: Math.round(BORDEAUX.y) },
   { name: 'Toulouse', x: 255, y: 475 },
-  { name: 'Toulon (siège)', x: 458, y: 485 },
+  { name: 'Toulon', x: 458, y: 485 },
   { name: 'Nice', x: 520, y: 442 },
   { name: 'Annecy', x: Math.round(ANNECY.x), y: Math.round(ANNECY.y) },
 ];
@@ -166,11 +166,8 @@ const FranceMap = () => {
       className="w-full h-auto max-w-lg mx-auto"
       data-testid="france-map-svg"
       role="img"
-      aria-labelledby="france-map-titre"
+      aria-label={`Carte de France : notre secteur, ${SECTEUR}, en couleur ; grand déplacement dans le reste de la France.`}
     >
-      <title id="france-map-titre">
-        {`Carte de France : notre secteur, ${SECTEUR}, en couleur ; siège à Toulon ; grand déplacement sur demande dans le reste de la France.`}
-      </title>
       <defs>
         {/* Dark muted gradient for north */}
         <linearGradient id="northGrad" x1="0%" y1="0%" x2="100%" y2="100%">

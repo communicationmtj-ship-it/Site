@@ -1,44 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import { FileText, Send, CheckCircle } from 'lucide-react';
-import { quoteForm, companyInfo, cnapsCompanies } from '../data/mock';
+import { quoteForm } from '../data/mock';
 import { toast } from '../components/ui/sonner';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-const SERVICE_TYPES = [
-  'Agent de prévention et sécurité',
-  'Sécurité cynophile (Maître-chien)',
-  'CYNODEX',
-  'SSIAP',
-  'Événementiel',
-  'Protection rapprochée',
-  'Autre'
-];
-const PROTECTION_RAPPROCHEE = 'Protection rapprochée';
-
 const Quote = () => {
-  const location = useLocation();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
     email: '',
     phone: '',
     serviceType: '',
-    startDate: '',
-    urgency: '',
     message: '',
   });
-
-  // Une page métier peut ouvrir le formulaire avec le service déjà choisi
-  // (/devis?service=Protection%20rapproch%C3%A9e) : seulement une valeur de la liste.
-  useEffect(() => {
-    const wanted = new URLSearchParams(location.search).get('service');
-    if (wanted && SERVICE_TYPES.includes(wanted)) {
-      setFormData((current) => (current.serviceType ? current : { ...current, serviceType: wanted }));
-    }
-  }, [location.search]);
   const [consent, setConsent] = useState(false);
   const [attachment, setAttachment] = useState(null);
   const [fileName, setFileName] = useState('');
@@ -56,8 +32,8 @@ const Quote = () => {
     if (file) {
       // Limit file size to 10MB
       if (file.size > 10 * 1024 * 1024) {
-        // Notification au format de la bibliothèque utilisée (sonner) : l'ancien appel
-        // toast({ title, … }) ne s'affichait pas.
+        // Même message que le site en ligne ; l'ancien appel toast({ title, … }) faisait disparaître
+        // toute la page au lieu de l'afficher (format de la bibliothèque sonner).
         toast.error("Fichier trop volumineux", { description: "La taille maximale est de 10 Mo." });
         e.target.value = '';
         return;
@@ -77,11 +53,7 @@ const Quote = () => {
     submitData.append('email', formData.email);
     submitData.append('phone', formData.phone);
     submitData.append('serviceType', formData.serviceType);
-    // Date de début et urgence : enregistrées par le serveur et reprises dans le mail
-    // (date au format JJ/MM/AAAA, « URGENT » dans l'objet si la demande est sous 24 h).
     submitData.append('message', formData.message);
-    submitData.append('startDate', formData.startDate);
-    submitData.append('urgency', formData.urgency);
     submitData.append('consent', consent ? 'true' : 'false');
     submitData.append('ts', formLoadedAt);
     // Le champ piège doit partir avec la demande, sinon le serveur ne peut pas le contrôler.
@@ -97,8 +69,8 @@ const Quote = () => {
       },
     })
       .then(response => {
-        // 12/11/2026 — le serveur répond 200 avec status « error » quand il refuse
-        // (consentement, champ invalide) : jamais « envoyé » dans ce cas.
+        // Le serveur répond 200 avec status « error » quand il refuse la demande (case de
+        // consentement, champ invalide) : jamais « Demande envoyée ! » dans ce cas.
         if (response?.data?.status !== 'success') {
           toast.error("Envoi refusé", {
             description: response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
@@ -116,8 +88,6 @@ const Quote = () => {
           email: '',
           phone: '',
           serviceType: '',
-          startDate: '',
-          urgency: '',
           message: '',
         });
         setConsent(false);
@@ -134,10 +104,17 @@ const Quote = () => {
       });
   };
 
-  const rapprochee = cnapsCompanies.rapprochee;
+  const serviceTypes = [
+    'Agent de prévention et sécurité',
+    'Sécurité cynophile (Maître-chien)',
+    'SSIAP',
+    'Événementiel',
+    'Gardiennage',
+    'Autre'
+  ];
 
   return (
-    <section id="quote" className="relative scroll-mt-20 py-20 bg-stone-200">
+    <section id="quote" className="relative py-20 bg-stone-200">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -152,12 +129,6 @@ const Quote = () => {
 
         {/* Quote Form */}
         <div className="max-w-4xl mx-auto">
-          <p className="text-center text-black font-semibold mb-4">
-            Besoin urgent ?{' '}
-            <a href={companyInfo.phoneHref} className="underline hover:text-amber-700">
-              Appelez le {companyInfo.phone}
-            </a>
-          </p>
           <div className="bg-black border-4 border-amber-400/30 p-8 lg:p-12">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -226,7 +197,7 @@ const Quote = () => {
                     onChange={handleChange}
                     required
                     className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
-                    placeholder="06 12 34 56 78"
+                    placeholder="+33 6 XX XX XX XX"
                   />
                 </div>
               </div>
@@ -245,55 +216,12 @@ const Quote = () => {
                   className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
                 >
                   <option value="">Sélectionnez un service</option>
-                  {SERVICE_TYPES.map((type) => (
+                  {serviceTypes.map((type) => (
                     <option key={type} value={type}>
                       {type}
                     </option>
                   ))}
                 </select>
-                {formData.serviceType === PROTECTION_RAPPROCHEE && (
-                  <p className="text-sm text-gray-300 mt-2" data-testid="quote-rapprochee-note">
-                    La protection rapprochée est assurée par MTJ Sécurité Rapprochée, société du groupe MTJ
-                    (autorisation d'exercer du CNAPS n° {rapprochee.authorization}) : le devis et le contrat sont établis à son nom.
-                  </p>
-                )}
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Start date */}
-                <div>
-                  <label htmlFor="startDate" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">
-                    Date de début souhaitée (optionnel)
-                  </label>
-                  <input
-                    type="date"
-                    id="startDate"
-                    name="startDate"
-                    value={formData.startDate}
-                    onChange={handleChange}
-                    className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
-                  />
-                </div>
-
-                {/* Urgency */}
-                <div>
-                  <label htmlFor="urgency" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">
-                    Urgence (optionnel)
-                  </label>
-                  <select
-                    id="urgency"
-                    name="urgency"
-                    value={formData.urgency}
-                    onChange={handleChange}
-                    className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors"
-                  >
-                    <option value="">Non précisée</option>
-                    <option value="Urgent (sous 24 h)">Urgent (sous 24 h)</option>
-                    <option value="Cette semaine">Cette semaine</option>
-                    <option value="Ce mois-ci">Ce mois-ci</option>
-                    <option value="Pas pressé">Pas pressé</option>
-                  </select>
-                </div>
               </div>
 
               {/* Message */}
@@ -339,14 +267,14 @@ const Quote = () => {
                 )}
               </div>
 
-              {/* Champ piège anti-robots, invisible et hors du parcours au clavier.
-                  Il porte une étiquette pour les outils d'accessibilité (audit, site-058). */}
+              {/* Honeypot - invisible to humans (étiquette pour les outils d'accessibilité) */}
               <div className="absolute opacity-0 -z-10" aria-hidden="true" tabIndex={-1}>
                 <label htmlFor="quote-hp">Laisser ce champ vide</label>
                 <input type="text" id="quote-hp" name="hp" tabIndex={-1} autoComplete="off" />
               </div>
 
-              {/* Consentement RGPD */}
+              {/* Consentement RGPD : la case renvoie à la politique de confidentialité (page décidée par
+                  Théo le 13/11/2026) ; le serveur refuse une demande arrivée sans elle. */}
               <div className="flex items-start gap-3">
                 <input
                   type="checkbox"
@@ -366,16 +294,8 @@ const Quote = () => {
                 </label>
               </div>
 
-              {/* Urgence téléphone */}
-              <p className="text-center text-gray-300 pt-2">
-                Besoin urgent ?{' '}
-                <a href={companyInfo.phoneHref} className="text-amber-400 font-semibold underline">
-                  Appelez le {companyInfo.phone}
-                </a>
-              </p>
-
               {/* Submit Button */}
-              <div className="text-center pt-2">
+              <div className="text-center pt-4">
                 <button
                   type="submit"
                   className="group px-10 py-4 bg-amber-400 hover:bg-amber-500 text-black font-bold text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 inline-flex items-center"
@@ -391,7 +311,7 @@ const Quote = () => {
           <div className="mt-8 text-center">
             <p className="text-gray-700 text-sm">
               <CheckCircle className="inline-block mr-2 text-amber-600" size={18} />
-              Réponse sous 24 h • Devis gratuit et sans engagement
+              Réponse sous 24h • Devis gratuit et sans engagement
             </p>
           </div>
         </div>

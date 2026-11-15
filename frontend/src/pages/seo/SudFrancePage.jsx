@@ -1,57 +1,62 @@
 import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
-import { PAGES_LOCALES, REGIONS, SECTEUR, ZONE_DESSERVIE, departementsDe, lienLocal } from '../../data/perimetre';
+import { ZONE_DESSERVIE } from '../../data/perimetre';
 
-// 13/11/2026 (choix de Théo : « Site perimetre: A partout », pages locales « sur tout le
-// secteur ») : cette page présente TOUT le secteur validé le 11/10/2026, de Bordeaux à Nice en
-// remontant jusqu'à Annecy, région par région (data/perimetre.js), avec un lien vers chaque page
-// locale. Adresse inchangée (/securite-privee-sud-france) pour garder son référencement.
-// Un siège à Toulon, aucune « antenne » ni « pôle » annoncé (audit du 30/10/2026, site-061 et 062).
-
-const PRESENTATION_REGIONS = {
-  'Nouvelle-Aquitaine': 'De Bordeaux au Pays basque et au Périgord.',
-  Occitanie: "De Toulouse à Montpellier, Nîmes et Perpignan, jusqu'à l'Aveyron, au Lot et à la Lozère.",
-  "Provence-Alpes-Côte d'Azur": "De Marseille à Nice en passant par Toulon, notre siège, et d'Avignon aux Hautes-Alpes.",
-  'Auvergne-Rhône-Alpes': "En remontant par la Drôme et l'Ardèche jusqu'à Lyon, Grenoble, Chambéry et Annecy, avec le Cantal et la Haute-Loire.",
-};
-
+// 15/11/2026 (Théo, formulaire 3/4 : les pages de villes sortent, sans preuve) : texte du site en ligne,
+// sans chiffre (population, classement), sans client nommé, sans implantation hors du siège de Toulon ;
+// secteur « de Bordeaux à Nice jusqu'à Annecy », adresse contact@, CYNODEX = diplôme du maître-chien.
 const data = {
   slug: '/securite-privee-sud-france',
-  metaTitle: 'Notre secteur : de Bordeaux à Nice et jusqu\'à Annecy | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée intervient de Bordeaux à Nice en remontant jusqu\'à Annecy : Nouvelle-Aquitaine, Occitanie, Provence-Alpes-Côte d\'Azur, Auvergne-Rhône-Alpes et Monaco. Agents de sécurité, cynophile, SSIAP, événementiel. Grand déplacement national sur demande.',
-  breadcrumbCurrent: 'Notre secteur',
+  metaTitle: 'Sécurité Privée de Bordeaux à Nice jusqu\'à Annecy | MTJ',
+  metaDescription: 'MTJ Sécurité Privée intervient de Bordeaux à Nice jusqu\'à Annecy : Nouvelle-Aquitaine, Occitanie, Provence-Alpes-Côte d\'Azur, Auvergne-Rhône-Alpes et Monaco. Agents de sécurité, cynophile, SSIAP, événementiel. Grand déplacement national sur demande.',
+  breadcrumbCurrent: 'Sécurité privée de Bordeaux à Nice jusqu\'à Annecy',
   areaServed: ZONE_DESSERVIE,
 
-  h1: 'Notre secteur : de Bordeaux à Nice, jusqu\'à Annecy',
-  introduction: `Depuis son siège de Toulon, MTJ Sécurité Privée intervient ${SECTEUR} : Nouvelle-Aquitaine, Occitanie, Provence-Alpes-Côte d'Azur, Auvergne-Rhône-Alpes et Monaco.\n\nAu-delà de ce secteur, nous proposons des missions en grand déplacement sur l'ensemble du territoire national, pour les clients multi-sites ou pour des événements ponctuels.`,
+  h1: 'Sécurité Privée de Bordeaux à Nice jusqu\'à Annecy',
+  introduction: `MTJ Sécurité Privée intervient de Bordeaux à Nice jusqu'à Annecy. Siège basé à Toulon.\n\nAu-delà de cette zone principale, nous proposons des missions en grand déplacement sur l'ensemble du territoire national, pour répondre aux besoins de nos clients multi-sites ou pour des événements ponctuels.`,
 
   sections: [
     {
-      h2: 'Nos départements, région par région',
-      intro: 'Nous intervenons dans chacun de ces départements, sur devis. Les grandes villes ont leur page, en bas de celle-ci.',
+      h2: 'Notre couverture géographique',
       subsections: [
-        ...REGIONS.map((region) => ({
-          h3: region,
-          content: PRESENTATION_REGIONS[region],
-          list: departementsDe(region),
-        })),
         {
-          h3: 'Monaco',
-          content: 'Nous intervenons à Monaco dans le respect de la réglementation monégasque applicable aux activités de sécurité privée : le cadre applicable est étudié avec vous avant toute proposition.',
+          h3: 'Pôle Toulon — PACA Est et Var',
+          content: 'Notre siège à Toulon couvre le département du Var et la partie orientale de la région PACA : Toulon, Hyères, Fréjus, Saint-Raphaël, Draguignan, Brignoles et leurs environs. Ce pôle est également la base de notre unité cynophile principale et de nos maîtres-chiens CYNODEX.',
+          list: ['Var (83) : Toulon, Hyères, Fréjus, Saint-Tropez', 'Bouches-du-Rhône (13) : Marseille, Aix-en-Provence', 'Alpes-de-Haute-Provence (04) et Hautes-Alpes (05)', 'Vaucluse (84) : Avignon, Orange, Carpentras']
         },
-      ],
+        {
+          h3: 'Côte d\'Azur et Monaco',
+          content: 'Notre présence à Nice et sur la Côte d\'Azur nous positionne au cœur du marché azuréen : Nice, Monaco, Cannes, Antibes, Grasse, Menton. Nous sommes spécialisés dans la sécurité de prestige, la sécurité événementielle haut de gamme et la protection de propriétés de luxe.',
+          list: ['Alpes-Maritimes (06) : Nice, Cannes, Antibes, Grasse', 'Principauté de Monaco', 'Arrière-pays niçois et montagne']
+        }
+      ]
     },
     {
-      h2: 'L\'ensemble de nos métiers sur tout le secteur',
+      h2: 'Toulouse et grand déplacement national',
+      intro: 'Notre capacité de déploiement national assure une couverture complète.',
+      subsections: [
+        {
+          h3: 'Toulouse — Occitanie',
+          content: 'Nous couvrons la Haute-Garonne et les départements limitrophes d\'Occitanie : Toulouse Métropole, zones aéronautiques de Blagnac et Colomiers, Montpellier, Nîmes, Perpignan.',
+          list: ['Haute-Garonne (31) : Toulouse, Blagnac, Colomiers', 'Hérault (34) : Montpellier, Béziers', 'Gard (30) et Aude (11)', 'Tarn (81) et Tarn-et-Garonne (82)']
+        },
+        {
+          h3: 'Occitanie : Toulouse, Montpellier, Perpignan',
+          content: 'La région Occitanie fait partie intégrante de notre zone d\'intervention. Nous intervenons régulièrement à Toulouse, Montpellier, Nîmes, Perpignan, Béziers et Carcassonne pour des missions de gardiennage, de sécurité événementielle et de sécurité cynophile.'
+        }
+      ]
+    },
+    {
+      h2: 'L\'ensemble de nos métiers déployés de Bordeaux à Nice jusqu\'à Annecy',
       subsections: [
         {
           h3: 'Agents de sécurité, cynophile, SSIAP et CYNODEX',
-          content: 'Où que se trouve votre site dans notre secteur, vous avez accès à l\'ensemble de notre offre : agents de prévention et de sécurité (APS), binômes maître-chien d\'intervention, détection d\'explosifs (CYNODEX) et agents SSIAP pour la sécurité incendie.',
-          list: ['Agents APS titulaires de la carte professionnelle du CNAPS', 'Sécurité cynophile et CYNODEX', 'Agents SSIAP 1, 2 et 3', 'Sécurité événementielle complète']
+          content: 'Quel que soit votre lieu d\'implantation de Bordeaux à Nice jusqu\'à Annecy, vous avez accès à l\'intégralité de notre offre de services : agents de prévention et de sécurité (APS), binômes maître-chien d\'intervention, maîtres-chiens CYNODEX de détection d\'explosifs et agents SSIAP pour la sécurité incendie. Cette polyvalence est un atout unique sur le marché régional.',
+          list: ['Agents APS certifiés CNAPS', 'Sécurité cynophile et CYNODEX', 'SSIAP 1, 2 et 3', 'Sécurité événementielle complète']
         },
         {
           h3: 'Un interlocuteur unique pour tous vos sites',
-          content: 'Pour les entreprises présentes sur plusieurs sites de notre secteur, MTJ Sécurité Privée offre l\'avantage d\'un prestataire unique : un seul contrat, un seul interlocuteur et le même niveau de service sur tous vos sites. Cette centralisation simplifie votre gestion.'
+          content: 'Pour les entreprises multi-sites implantées de Bordeaux à Nice jusqu\'à Annecy, MTJ Sécurité Privée offre l\'avantage d\'un prestataire unique : un seul contrat, un seul interlocuteur, une qualité de service homogène de Bordeaux à Nice jusqu\'à Annecy. Cette centralisation simplifie votre gestion et garantit une cohérence opérationnelle sur l\'ensemble de vos implantations.'
         }
       ]
     }
@@ -60,23 +65,27 @@ const data = {
   faq: [
     {
       question: 'Quelle est votre zone d\'intervention principale ?',
-      answer: `Notre secteur va ${SECTEUR} : Nouvelle-Aquitaine, Occitanie, Provence-Alpes-Côte d'Azur, Auvergne-Rhône-Alpes et Monaco. Notre siège est à Toulon. Ailleurs en France, nous intervenons en grand déplacement, sur demande.`
+      answer: 'Notre zone d\'intervention principale va de Bordeaux à Nice jusqu\'à Annecy. Nous intervenons également en grand déplacement partout en France métropolitaine.'
     },
     {
       question: 'Pouvez-vous intervenir à Paris ?',
-      answer: 'Oui, dans le cadre de missions en grand déplacement, pour des événements ponctuels ou des besoins temporaires partout en France métropolitaine. Contactez-nous pour étudier la faisabilité de votre projet.'
+      answer: 'Oui, dans le cadre de missions en grand déplacement. Nous mobilisons nos équipes pour des événements ponctuels ou des besoins temporaires sur Paris et toute autre ville de France métropolitaine. Contactez-nous pour étudier la faisabilité de votre projet.'
     },
     {
       question: 'Proposez-vous des contrats multi-sites ?',
-      answer: 'Oui. Nous pouvons regrouper plusieurs sites dans un même contrat, avec un interlocuteur unique et le même niveau de service, sur tout notre secteur. Idéal pour les enseignes, les groupes immobiliers et les entreprises ayant plusieurs implantations.'
+      answer: 'Absolument. C\'est l\'un de nos atouts majeurs. Nous gérons des contrats multi-sites avec un interlocuteur unique et une qualité de service uniforme, de Bordeaux à Nice jusqu\'à Annecy, en passant par Toulon. Idéal pour les enseignes, les groupes immobiliers et les entreprises ayant plusieurs implantations de Bordeaux à Nice jusqu\'à Annecy.'
     }
   ],
 
-  conclusion: `De Bordeaux à Nice et jusqu'à Annecy, MTJ Sécurité Privée est votre partenaire de sécurité sur tout son secteur. Nos équipes qualifiées et notre capacité de déploiement national sont à votre service.\n\nContactez-nous pour un devis gratuit adapté à votre localisation et à vos besoins spécifiques.`,
+  conclusion: `MTJ Sécurité Privée est votre partenaire de sécurité de Bordeaux à Nice jusqu'à Annecy. Nos équipes qualifiées et notre capacité de déploiement national font de nous un acteur de référence de la sécurité privée de Bordeaux à Nice jusqu'à Annecy.\n\nContactez-nous pour un devis gratuit adapté à votre localisation et à vos besoins spécifiques.`,
 
   relatedLinks: [
-    ...PAGES_LOCALES.map((p) => lienLocal(p.slug)),
+    { href: '/securite-privee-toulon', label: 'Sécurité privée à Toulon' },
+    { href: '/securite-privee-nice-monaco', label: 'Sécurité privée Nice & Monaco' },
+    { href: '/securite-privee-toulouse', label: 'Sécurité privée à Toulouse' },
     { href: '/grand-deplacement-securite-france', label: 'Grand déplacement national' },
+    { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },
+    { href: '/securite-evenementielle', label: 'Sécurité événementielle' },
   ]
 };
 

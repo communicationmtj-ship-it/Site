@@ -2,16 +2,20 @@ import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
 import { ZONE_DESSERVIE } from '../../data/perimetre';
 
+// 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : texte du site en
+// ligne (04/11/2026), sauf les décisions de Théo : secteur « de Bordeaux à Nice jusqu'à Annecy » à la place
+// de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
+// (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
+// diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
 const data = {
   slug: '/securite-residentielle',
   metaTitle: 'Sécurité Résidentielle | Résidences, Copropriétés, Domaines | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos résidences privées, copropriétés et domaines. Gardiennage, rondes, contrôle d\'accès de Bordeaux à Nice et jusqu\'à Annecy.',
+  metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos résidences privées, copropriétés et domaines. Gardiennage, rondes, contrôle d\'accès de Bordeaux à Nice jusqu\'à Annecy.',
   breadcrumbCurrent: 'Sécurité résidentielle',
-  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité Résidentielle — Protection de vos Résidences et Domaines',
-  introduction: `MTJ Sécurité Privée propose des services de sécurité dédiés aux résidences privées, copropriétés, domaines et propriétés de prestige de Bordeaux à Nice et jusqu'à Annecy. Nous comprenons que la sécurité de votre lieu de vie est une priorité absolue.\n\nNos agents assurent une présence rassurante et professionnelle, de jour comme de nuit, pour protéger les résidents, leurs biens et garantir la tranquillité de votre voisinage. Du simple gardiennage au dispositif de sécurité complet, nous adaptons nos prestations à vos exigences.`,
+  introduction: `MTJ Sécurité Privée propose des services de sécurité dédiés aux résidences privées, copropriétés, domaines et propriétés de prestige de Bordeaux à Nice jusqu'à Annecy. Nous comprenons que la sécurité de votre lieu de vie est une priorité absolue.\n\nNos agents assurent une présence rassurante et professionnelle, de jour comme de nuit, pour protéger les résidents, leurs biens et garantir la tranquillité de votre voisinage. Du simple gardiennage au dispositif de sécurité complet, nous adaptons nos prestations à vos exigences.`,
 
   sections: [
     {
@@ -35,12 +39,12 @@ const data = {
       subsections: [
         {
           h3: 'Sécurité de villas et propriétés de prestige',
-          content: 'MTJ Sécurité Privée assure la protection de villas, bastides, châteaux et propriétés de luxe sur la Côte d\'Azur et sur tout notre secteur, de Bordeaux à Nice et jusqu\'à Annecy. Nos agents, sélectionnés pour leur discrétion et leur professionnalisme, assurent la surveillance de votre propriété en votre présence ou en votre absence.',
+          content: 'MTJ Sécurité Privée assure la protection de villas, bastides, châteaux et propriétés de luxe sur la Côte d\'Azur et de Bordeaux à Nice jusqu\'à Annecy. Nos agents, sélectionnés pour leur discrétion et leur professionnalisme, assurent la surveillance de votre propriété en votre présence ou en votre absence.',
           list: ['Surveillance permanente ou ponctuelle', 'Protection pendant les absences prolongées', 'Accueil et filtrage des visiteurs', 'Coordination avec les systèmes d\'alarme existants']
         },
         {
           h3: 'Sécurité de domaines viticoles et agricoles',
-          content: 'Les domaines viticoles et exploitations agricoles de notre secteur sont exposés aux vols de matériel, de récoltes et au vandalisme. MTJ Sécurité Privée propose des solutions de surveillance adaptées aux grandes superficies : rondes motorisées, équipes cynophiles et surveillance nocturne.'
+          content: 'Les domaines viticoles et exploitations agricoles de Bordeaux à Nice jusqu\'à Annecy sont exposés aux vols de matériel, de récoltes et au vandalisme. MTJ Sécurité Privée propose des solutions de surveillance adaptées aux grandes superficies : rondes motorisées, équipes cynophiles et surveillance nocturne.'
         }
       ]
     },
@@ -49,13 +53,12 @@ const data = {
       subsections: [
         {
           h3: 'Surveillance saisonnière et vacances',
-          // 13/11/2026 (audit, site-082) : la gestion du courrier et des colis n'est pas une prestation de sécurité privée.
-          content: 'Pendant vos périodes d\'absence (vacances, déplacements professionnels), MTJ Sécurité Privée assure la surveillance de votre domicile. Rondes régulières, vérification des accès et simulation de présence : nous veillons sur votre bien comme si vous y étiez.',
-          list: ['Rondes de vérification planifiées', 'Simulation de présence', 'Vérification des accès', 'Rapport d\'intervention quotidien']
+          content: 'Pendant vos périodes d\'absence (vacances, déplacements professionnels), MTJ Sécurité Privée assure la surveillance de votre domicile. Rondes régulières, relevé du courrier, vérification des accès et simulation de présence : nous veillons sur votre bien comme si vous y étiez.',
+          list: ['Rondes de vérification planifiées', 'Simulation de présence', 'Relevé du courrier et des colis', 'Rapport d\'intervention quotidien']
         },
         {
           h3: 'Sécurité cynophile résidentielle',
-          content: 'Pour une protection renforcée de votre propriété, nos équipes cynophiles offrent un niveau de dissuasion supérieur. Le binôme maître-chien assure des rondes périmétriques et une détection optimale de toute tentative d\'intrusion, y compris sur les terrains étendus.'
+          content: 'Pour une protection renforcée de votre propriété, nos équipes cynophiles offrent un niveau de dissuasion supérieur. Le binôme maître-chien assure des rondes périmètriques et une détection optimale de toute tentative d\'intrusion, y compris sur les terrains étendus.'
         }
       ]
     }

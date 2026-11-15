@@ -99,7 +99,10 @@ const echapperAttribut = (texte) =>
 const echapperTexte = (texte) => String(texte).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 // Remplace la première balise qui correspond, ou l'ajoute à la fin de <head>.
-const poser = (html, motif, balise) => (motif.test(html) ? html.replace(motif, balise) : html.replace("</head>", `${balise}</head>`));
+// Remplacements par FONCTION (15/11/2026) : avec une chaîne de remplacement, String.replace interprète « $$ »,
+// « $& », « $1 »… ; la gamme de prix « $$ » des données structurées devenait « $ » dans la page pré-rendue.
+const poser = (html, motif, balise) =>
+  motif.test(html) ? html.replace(motif, () => balise) : html.replace("</head>", () => `${balise}</head>`);
 
 const balisesMeta = (attribut, cle) => new RegExp(`<meta\\b[^>]*\\b${attribut}="${cle.replace(/[.:]/g, "\\$&")}"[^>]*>`, "i");
 
@@ -119,9 +122,9 @@ function composer(gabarit, chemin, seo, contenu) {
   html = poser(html, balisesMeta("name", "twitter:image"), `<meta name="twitter:image" content="${echapperAttribut(seo.image)}"/>`);
   if (chemin !== "/") {
     // L'image de fond de l'accueil n'est préchargée que sur l'accueil.
-    html = html.replace(/<link\b[^>]*\brel="preload"[^>]*hero-bg[^>]*>/i, "");
+    html = html.replace(/<link\b[^>]*\brel="preload"[^>]*hero-bg[^>]*>/i, () => "");
   }
-  return html.replace(RACINE_VIDE, `<div id="root">${contenu}</div>`);
+  return html.replace(RACINE_VIDE, () => `<div id="root">${contenu}</div>`);
 }
 
 // ─── Rendu d'une page ──────────────────────────────────────────────────────────────────────────

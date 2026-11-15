@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Building2, HardHat, Home, Users, ArrowRight } from 'lucide-react';
 import { interventionDomains } from '../data/mock';
-import { SECTEUR, REGIONS, PAGE_SECTEUR } from '../data/perimetre';
+import { SECTEUR, SECTEUR_TITRE } from '../data/perimetre';
 import FranceMap from './FranceMap';
 
 const Domains = () => {
@@ -15,7 +15,7 @@ const Domains = () => {
   };
 
   return (
-    <section id="domains" className="relative scroll-mt-20 py-20 bg-black">
+    <section id="domains" className="relative py-20 bg-black">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -92,19 +92,18 @@ const Domains = () => {
                     Notre Secteur Principal
                   </h4>
                   <p className="text-gray-300 mb-4 leading-relaxed">
-                    {/* 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : le secteur validé le
-                        11/10/2026, de Bordeaux à Nice en remontant jusqu'à Annecy (data/perimetre.js),
-                        le même que la carte. Siège à Toulon : aucune agence locale annoncée. */}
-                    <strong className="text-white">{SECTEUR.charAt(0).toUpperCase() + SECTEUR.slice(1)}</strong> - Zone d'intervention prioritaire, avec une permanence joignable 24/7. Siège basé à Toulon.
+                    {/* 15/11/2026 (décision de Théo du 13/11/2026, « Site perimetre: A partout ») : seul le secteur
+                        « De Toulouse à Nice » change ; le reste de la phrase est celui du site en ligne. */}
+                    <strong className="text-white">{SECTEUR_TITRE}</strong> - Zone d'intervention prioritaire avec nos équipes dédiées disponibles 24/7. Siège basé à Toulon.
                   </p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Intervention rapide sur demande</span>
+                      <span>Intervention rapide - Disponibilité immédiate</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Siège à Toulon, équipes mobilisées sur tout le secteur</span>
+                      <span>Équipes locales dédiées basées à Toulon</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
@@ -112,17 +111,9 @@ const Domains = () => {
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>Couverture : {REGIONS.join(', ')} et Monaco</span>
+                      <span>Couverture : {SECTEUR}</span>
                     </li>
                   </ul>
-                  <Link
-                    to={PAGE_SECTEUR.slug}
-                    className="inline-flex items-center gap-2 mt-5 text-amber-400 text-xs font-semibold uppercase tracking-wider hover:text-amber-300 transition-colors"
-                    data-testid="domains-secteur-link"
-                  >
-                    Voir tout notre secteur, ville par ville
-                    <ArrowRight size={14} />
-                  </Link>
                 </div>
                 
                 <div className="bg-neutral-900 p-6 border-l-4 border-amber-400/50">
@@ -147,7 +138,7 @@ const Domains = () => {
                     </li>
                     <li className="flex items-start">
                       <span className="text-amber-400 mr-2">✓</span>
-                      <span>France métropolitaine, sur étude de votre demande</span>
+                      <span>Couverture nationale complète</span>
                     </li>
                   </ul>
                 </div>

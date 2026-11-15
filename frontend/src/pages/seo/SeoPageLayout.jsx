@@ -11,9 +11,11 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 
 const DEFAULT = '#AC8631';
 
-// Société qui signe la page : par défaut MTJ Sécurité Privée (siège à Toulon).
-// Une page peut fournir data.societe pour une autre société du groupe.
-// Coordonnées et numéro d'autorisation lus dans data/mock.js (une seule source).
+// Société qui signe la page dans les données lues par Google (invisible à l'écran) : par défaut MTJ
+// Sécurité Privée (siège à Toulon) ; une page peut fournir data.societe pour une autre société du groupe.
+// 15/11/2026 (règle de Théo : « soit tu met pas soit tu laisse ce qui etait ») : l'encadré « Demandez votre
+// devis gratuit » affiche le texte du site en ligne, avec l'adresse contact@ (13/11/2026, « Site email: A
+// contact OVH ») ; la mention CNAPS n'est écrite qu'une fois par société, dans le pied de page.
 const SOCIETE_DEFAUT = {
   nom: 'MTJ Sécurité Privée',
   mention: null,
@@ -40,7 +42,7 @@ const SeoPageLayout = ({ data }) => {
       <main id="contenu" tabIndex={-1} className="bg-black min-h-screen pt-20">
         {/* Breadcrumb */}
         <nav className="container mx-auto px-4 lg:px-8 py-4" aria-label="Fil d'Ariane" data-testid="seo-breadcrumb">
-          <ol className="flex items-center text-sm text-gray-400 flex-wrap gap-1">
+          <ol className="flex items-center text-sm text-gray-500 flex-wrap gap-1">
             <li><Link to="/" className="hover:text-amber-400 transition-colors">Accueil</Link></li>
             <li><ChevronRight size={14} /></li>
             {data.breadcrumbParent && (
@@ -132,34 +134,25 @@ const SeoPageLayout = ({ data }) => {
               Demandez votre devis gratuit
             </h2>
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-              Contactez {societe.nom}{societe.mention ? `, ${societe.mention},` : ''} pour obtenir un devis personnalisé adapté à vos besoins en sécurité.
+              Contactez MTJ Sécurité Privée pour obtenir un devis personnalisé adapté à vos besoins en sécurité.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onClick={() => navigate(data.serviceDevis ? `/devis?service=${encodeURIComponent(data.serviceDevis)}` : '/devis')}
+                onClick={() => navigate('/devis')}
                 className="text-black font-bold px-8 py-3 uppercase tracking-wider transition-opacity hover:opacity-90"
                 style={{ backgroundColor: c }}
                 data-testid="seo-cta-devis"
               >
                 Demander un devis
               </button>
-              <a href={companyInfo.phoneHref} className="flex items-center gap-2 font-semibold transition-opacity hover:opacity-80" style={{ color: c }}>
-                <Phone size={18} /> {companyInfo.phone}
+              <a href="tel:0760738206" className="flex items-center gap-2 font-semibold transition-opacity hover:opacity-80" style={{ color: c }}>
+                <Phone size={18} /> 07 60 73 82 06
               </a>
             </div>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 text-gray-400 text-sm">
-              <a href={companyInfo.emailHref} className="flex items-center gap-1 hover:text-amber-400 transition-colors"><Mail size={14} /> {companyInfo.email}</a>
-              {estSocieteDefaut ? (
-                <a href={companyInfo.mapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-amber-400 transition-colors">
-                  <MapPin size={14} /> {societe.adresse}
-                </a>
-              ) : (
-                <span className="flex items-center gap-1"><MapPin size={14} /> {societe.adresse || societe.ville}</span>
-              )}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 text-gray-500 text-sm">
+              <span className="flex items-center gap-1"><Mail size={14} /> {companyInfo.email}</span>
+              <span className="flex items-center gap-1"><MapPin size={14} /> {companyInfo.address}</span>
             </div>
-            <p className="mt-3 text-gray-400 text-xs" data-testid="seo-autorisation-cnaps">
-              {societe.nom}{societe.mention ? `, ${societe.mention}` : ''} — autorisation d'exercer du CNAPS n° {societe.autorisation} ({societe.activite}).
-            </p>
           </div>
 
           {/* Internal Links */}

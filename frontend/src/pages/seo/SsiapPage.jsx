@@ -2,21 +2,21 @@ import React from 'react';
 import SeoPageLayout from './SeoPageLayout';
 import { ZONE_DESSERVIE } from '../../data/perimetre';
 
+// 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : texte du site en
+// ligne (04/11/2026), sauf les décisions de Théo : secteur « de Bordeaux à Nice jusqu'à Annecy » à la place
+// de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
+// (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
+// diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
 const data = {
   slug: '/ssiap-securite-incendie',
-  // 13/11/2026 (audit du site de Mathilde, site-078 et 079) : aucun effectif annoncé, aucune
-  // garantie absolue de conformité.
-  // 15/11/2026 (réponse de Théo, « Qualifications ») : le site est une vitrine commerciale, MTJ recrute
-  // si un client demande un profil et assure la prestation ; agents SSIAP 1, 2 et 3 présentés sans
-  // réserve de disponibilité (le repli du 13/11 sur les SSIAP 2 et 3 est retiré).
+  themeColor: '#B00B0B',
   metaTitle: 'SSIAP Sécurité Incendie | Agents SSIAP 1, 2 et 3 | MTJ Sécurité Privée',
-  metaDescription: 'Agents SSIAP certifiés pour la sécurité incendie de vos ERP et IGH, de Bordeaux à Nice et jusqu\'à Annecy. Prévention, évacuation, assistance à personnes. MTJ Sécurité Privée — devis gratuit.',
+  metaDescription: 'Agents SSIAP certifiés pour la sécurité incendie de vos ERP et IGH, de Bordeaux à Nice jusqu\'à Annecy. Prévention, évacuation, assistance à personnes. MTJ Sécurité Privée — devis gratuit.',
   breadcrumbCurrent: 'SSIAP — Sécurité incendie',
-  // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,
 
   h1: 'SSIAP — Sécurité Incendie et Assistance à Personnes',
-  introduction: `MTJ Sécurité Privée met à votre disposition des agents SSIAP (Service de Sécurité Incendie et d'Assistance à Personnes) qualifiés pour assurer la sécurité incendie de vos établissements. Nos agents interviennent dans les ERP (Établissements Recevant du Public) et les IGH (Immeubles de Grande Hauteur) en conformité avec la réglementation en vigueur.\n\nLa prévention et la gestion du risque incendie sont des obligations légales pour de nombreux établissements. MTJ Sécurité Privée vous aide à respecter ces obligations et à protéger vos occupants et vos biens.`,
+  introduction: `MTJ Sécurité Privée met à votre disposition des agents SSIAP (Service de Sécurité Incendie et d'Assistance à Personnes) qualifiés pour assurer la sécurité incendie de vos établissements. Nos agents interviennent dans les ERP (Établissements Recevant du Public) et les IGH (Immeubles de Grande Hauteur) en conformité avec la réglementation en vigueur.\n\nLa prévention et la gestion du risque incendie sont des obligations légales pour de nombreux établissements. MTJ Sécurité Privée vous garantit une conformité totale et une protection optimale de vos occupants et de vos biens.`,
 
   sections: [
     {
@@ -40,7 +40,7 @@ const data = {
       subsections: [
         {
           h3: 'SSIAP 1 — Agent de sécurité incendie',
-          content: 'L\'agent SSIAP 1 assure les missions de base de la sécurité incendie : rondes, surveillance du PCS, intervention de première urgence, évacuation et assistance à personnes. C\'est le profil le plus déployé dans les ERP et les IGH. MTJ Sécurité Privée met à disposition des agents SSIAP 1.'
+          content: 'L\'agent SSIAP 1 assure les missions de base de la sécurité incendie : rondes, surveillance du PCS, intervention de première urgence, évacuation et assistance à personnes. C\'est le profil le plus déployé dans les ERP et les IGH. MTJ Sécurité Privée dispose d\'un effectif conséquent d\'agents SSIAP 1 opérationnels.'
         },
         {
           h3: 'SSIAP 2 — Chef d\'équipe de sécurité incendie',
@@ -48,7 +48,7 @@ const data = {
         },
         {
           h3: 'SSIAP 3 — Chef de service de sécurité incendie',
-          content: 'Le SSIAP 3 est le plus haut niveau de qualification. Il assure la direction du service de sécurité incendie, définit la politique de prévention, veille à la conformité réglementaire et représente l\'établissement auprès des commissions de sécurité. MTJ Sécurité Privée met à disposition des chefs d\'équipe SSIAP 2 et des chefs de service SSIAP 3 pour vos établissements les plus exigeants.'
+          content: 'Le SSIAP 3 est le plus haut niveau de qualification. Il assure la direction du service de sécurité incendie, définit la politique de prévention, veille à la conformité réglementaire et représente l\'établissement auprès des commissions de sécurité. MTJ Sécurité Privée peut fournir ce niveau d\'expertise pour vos établissements les plus exigeants.'
         }
       ]
     },
@@ -83,7 +83,7 @@ const data = {
     }
   ],
 
-  conclusion: `La sécurité incendie est un enjeu vital pour tout établissement recevant du public. Avec des agents SSIAP certifiés et expérimentés, MTJ Sécurité Privée assure la protection de vos occupants et la prévention des risques, et contribue à la conformité réglementaire de vos établissements.\n\nNe laissez pas le risque incendie menacer votre activité. Faites appel à nos équipes SSIAP pour une protection complète et professionnelle.`,
+  conclusion: `La sécurité incendie est un enjeu vital pour tout établissement recevant du public. Avec des agents SSIAP certifiés et expérimentés, MTJ Sécurité Privée assure la protection de vos occupants, la prévention des risques et la conformité réglementaire de vos établissements.\n\nNe laissez pas le risque incendie menacer votre activité. Faites appel à nos équipes SSIAP pour une protection complète et professionnelle.`,
 
   relatedLinks: [
     { href: '/agent-securite-prevention', label: 'Agent de prévention et sécurité' },

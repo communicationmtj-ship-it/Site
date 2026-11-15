@@ -193,15 +193,34 @@ def test_protection_rapprochee_sans_etat_etranger_dans_les_donnees_structurees()
     assert "Monaco" not in zone and "international" not in zone.lower(), zone
 
 
-PHRASES_NEUTRALISEES = ["intégrité physique", "techniques les plus avancées"]
+# 15/11/2026 05:56, Théo, sur ses captures de la maquette : « tout ce que je t'ai mis en capture c'est de lamerde
+# soit ca veux rien dire donc soit tu met pas soit tu laisse ce qui etait ». Les textes capturés ne reviennent
+# pas ; le texte du site en ligne revient à leur place (« intégrité physique » et « techniques les plus
+# avancées », retirés le 13/11/2026, sont donc de nouveau permis).
+PHRASES_CAPTUREES = [
+    "Intervention 24/7 · Sécurité cynophile avec maître-chien", "formés à la surveillance et à la détection",
+    "avec une permanence joignable 24/7", "Société du groupe MTJ", "Besoin urgent ?", "Permanence téléphonique",
+    "Entreprise autorisée", "Nos engagements en 5 points", "Voir tout notre secteur", "unité CYNODEX",
+    "équipes CYNODEX", "binômes CYNODEX", "cellule CYNODEX", "certifiés CYNODEX",
+]
 
 
-def test_phrases_neutralisees_sur_les_pages_ne_reviennent_pas_sur_l_accueil():
+def _texte_sans_commentaires(texte: str) -> str:
+    return re.sub(r"\{/\*[\s\S]*?\*/\}|/\*[\s\S]*?\*/|^\s*//[^\n]*$", "", texte, flags=re.MULTILINE)
+
+
+def test_les_phrases_capturees_par_theo_ne_reviennent_pas():
     fichiers = [p for p in SRC.rglob("*") if p.suffix in (".js", ".jsx") and "components/ui" not in p.as_posix()]
     trouvees = [
         f"{p.relative_to(REPO)} : « {phrase} »"
         for p in fichiers
-        for phrase in PHRASES_NEUTRALISEES
-        if phrase in _lire(p)
+        for phrase in PHRASES_CAPTUREES
+        if phrase in _texte_sans_commentaires(_lire(p))
     ]
     assert not trouvees, "\n".join(trouvees)
+    mock = _lire(SRC / "data" / "mock.js")
+    assert "maîtres-chiens formés aux techniques les plus avancées de surveillance et de détection" in mock
+    assert "garantissent votre intégrité physique en toute discrétion" in mock
+    # Plus de bloc légal dans la carte « Protection physique des personnes » : la mention CNAPS de chaque
+    # société est écrite une seule fois, dans le pied de page.
+    assert "legalNotice:" not in mock

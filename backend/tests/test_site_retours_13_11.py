@@ -127,7 +127,10 @@ def test_objet_et_corps_du_mail_de_devis():
     assert "Urgence : Cette semaine" in corps
     assert "Société concernée : MTJ Sécurité Rapprochée" in corps
     sans = quote_email_body(VISITEUR_NOM, None, VISITEUR_MAIL, "00 00 00 00 00", "SSIAP", "Besoin fictif")
-    assert "Date de début souhaitée : Non précisée" in sans
+    # 15/11/2026 : le formulaire du site ne demande plus ni date ni urgence (retour au formulaire en ligne,
+    # règle de Théo) ; une demande qui ne les porte pas n'a pas ces lignes dans son mail.
+    assert "Date de début souhaitée" not in sans and "Urgence" not in sans
+    assert "Service demandé : SSIAP\n\nMessage :" in sans
     assert "Société concernée" not in sans
 
 
@@ -266,18 +269,18 @@ def _textes_du_site() -> dict:
     return {p: _lire(p) for p in fichiers}
 
 
-# 15/11/2026 (réponse de Théo, « Qualifications ») : « SSIAP 1, 2 et 3 certifiés » et « SSIAP 1/2/3 » ne sont
-# plus des phrases retirées ; le site présente les agents SSIAP 1, 2 et 3 sans réserve (essai
-# test_cynodex_et_ssiap_1_2_3_sans_reserve de test_site_choix_theo_13_11.py). Les autres phrases restent
-# retirées : chiffres, clients, implantations, garanties et certification de la société non prouvés.
+# 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : le texte du site en
+# ligne revient, mot pour mot (Monaco et délais : « garder les deux », formulaire 3/4 du 15/11/2026). Les
+# phrases du site en ligne qui reviennent ne sont donc plus des phrases retirées (accords transfrontaliers,
+# DOM-TOM et international, festival de Six-Fours, installations nucléaires, partenaire des autorités, effectif
+# conséquent, relevé du courrier, main courante et photos géolocalisées, « Societe du groupe », « inégalé »,
+# usines Airbus, conformité totale). Restent retirés, sur décision de Théo : les chiffres (13/11/2026, « Site
+# chiffres: B aucun »), les implantations hors du siège de Toulon, les clients nommés (15/11/2026, pages de
+# villes « sans preuve »), une certification ISO 9001 non obtenue, la faute « maïtre ».
 PHRASES_RETIREES = [
-    "certifiée ISO 9001", "certifié ISO 9001", "accords transfrontaliers", "plus de 20 familles",
+    "certifiée ISO 9001", "certifié ISO 9001", "plus de 20 familles",
     "pôles opérationnels", "antenne toulousaine", "implantation multi-sites", "équipes opérationnelles sur",
-    "DOM-TOM", "à l'international", "à l\\'international", "festival de musique Six Fours",
-    "installations nucléaires", "partenaire de confiance des autorités", "effectif conséquent",
-    "Relevé du courrier", "relevé du courrier", "photos géolocalisées", "main courante dématérialisée",
-    "multiplie par cinq", "plus de 90 %", "Societe du groupe", "inégalé", "maïtre", "usines Airbus",
-    "Nice Étoile", "conformité totale",
+    "multiplie par cinq", "plus de 90 %", "plus de 90%", "maïtre", "Nice Étoile", "Cap 3000",
 ]
 
 
@@ -309,7 +312,9 @@ def test_aucune_note_ni_nombre_d_avis_ecrit_a_la_main():
     index = _lire(FRONT / "public" / "index.html")
     assert "reviews:" not in footer and "rating:" not in footer
     assert "aggregateRating" not in index and "reviewCount" not in index
-    assert "client=safari" not in footer
+    # 15/11/2026 : les adresses des fiches Google sont revenues à celles du site en ligne (règle de Théo) ;
+    # seules les notes et les nombres d'avis écrits à la main restent retirés.
+    assert "toFixed(1)" not in footer and "avis)" not in footer
     assert "fonts.googleapis.com" not in index
 
 
