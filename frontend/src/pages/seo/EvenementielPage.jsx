@@ -39,7 +39,7 @@ const data = {
       subsections: [
         {
           h3: 'Concerts, festivals et événements musicaux',
-          content: 'La sécurité des événements musicaux requiert une expertise spécifique : gestion de foules enthousiastes, prévention des mouvements de foule dangereux, surveillance des zones backstage et protection des artistes. MTJ Sécurité Privée a sécurisé de nombreux concerts et festivals de Bordeaux à Nice jusqu\'à Annecy.'
+          content: 'La sécurité des événements musicaux requiert une expertise spécifique : gestion de foules enthousiastes, prévention des mouvements de foule dangereux, surveillance des zones backstage et protection des artistes. MTJ Sécurité Privée a sécurisé de nombreux concerts et festivals dans le sud de la France.'
         },
         {
           h3: 'Événements sportifs et compétitions',

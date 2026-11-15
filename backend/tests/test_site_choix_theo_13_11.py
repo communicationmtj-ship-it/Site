@@ -339,10 +339,18 @@ ANCIENS_PERIMETRES = ["à Toulon, Nice, Toulouse", "à Toulon, Toulouse et Nice"
                       "Toulon, Toulouse, Nice, PACA", "dans tout le sud de la France", "dans le sud de la France"]
 
 
+# 15/11/2026 (relecture adverse, site-12, réglage « sans réponse » annoncé à Théo) : une phrase AU PASSÉ garde
+# « dans le sud de la France » ; la remplacer par le secteur affirmerait des missions passées jusqu'à Bordeaux et
+# Annecy. C'est le texte du site en ligne, mot pour mot.
+PHRASES_AU_PASSE_GARDEES = ["MTJ Sécurité Privée a sécurisé de nombreux concerts et festivals dans le sud de la France."]
+
+
 def test_plus_d_ancien_perimetre_dans_les_pages():
     for p in list(SEO.glob("*.jsx")) + [SRC / "components" / "ContactPage.jsx", SRC / "components" / "HomeFaq.jsx",
                                         SRC / "components" / "Domains.jsx", SRC / "App.js"]:
         texte = _lire(p)
+        for gardee in PHRASES_AU_PASSE_GARDEES:
+            texte = texte.replace(gardee, "")
         for phrase in ANCIENS_PERIMETRES:
             assert phrase not in texte, f"{p.name} : « {phrase} »"
 
@@ -839,3 +847,20 @@ def test_chaque_page_publique_a_son_seohead_et_sa_propre_adresse():
         fichier = next(p for p in candidats if p.is_file())
         texte = _lire(fichier)
         assert f"slug: '{chemin}'" in texte or f'path="{chemin}"' in texte, f"{chemin} : SeoHead d'une autre adresse ({fichier.name})"
+
+
+def test_phrase_au_passe_de_l_evenementiel_mot_pour_mot():
+    """site-12 (15/11/2026) : la phrase au passé reste celle du site en ligne, sans le secteur."""
+    texte = _lire(SEO / "EvenementielPage.jsx")
+    assert PHRASES_AU_PASSE_GARDEES[0] in texte
+    assert "a sécurisé de nombreux concerts et festivals de Bordeaux" not in texte
+
+
+def test_aucune_ville_declaree_pour_la_societe_de_protection_rapprochee():
+    """site-17 (15/11/2026) : aucune ville déclarée à Google pour MTJ Sécurité Rapprochée tant que son Kbis
+    n'est pas lu ; l'adresse ne porte que le pays."""
+    page = _lire(SEO / "ProtectionRapprocheePage.jsx")
+    assert "ville: 'Nice'" not in page
+    assert "ville: null" in page
+    gabarit = _lire(SEO / "SeoPageLayout.jsx")
+    assert '{ "@type": "PostalAddress", "addressCountry": "FR" }' in gabarit

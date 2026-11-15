@@ -13,7 +13,7 @@ const RAPPROCHEE = cnapsCompanies.rapprochee;
 const data = {
   slug: '/protection-rapprochee',
   // Invisible à l'écran : dans les données lues par Google, la page est signée par MTJ Sécurité Rapprochée.
-  societe: { nom: 'MTJ Sécurité Rapprochée', mention: 'société du groupe MTJ', autorisation: RAPPROCHEE.authorization, activite: RAPPROCHEE.activity, ville: 'Nice', adresse: null },
+  societe: { nom: 'MTJ Sécurité Rapprochée', mention: 'société du groupe MTJ', autorisation: RAPPROCHEE.authorization, activite: RAPPROCHEE.activity, ville: null, adresse: null },
   themeColor: '#68187B',
   metaTitle: 'Protection Rapprochée — Sécurité des Personnes | MTJ Sécurité Rapprochée',
   metaDescription: 'MTJ Sécurité Rapprochée assure la protection physique des personnalités, dirigeants, célébrités et particuliers exposés. Agents de protection rapprochée formés et certifiés de Bordeaux à Nice jusqu\'à Annecy et dans toute la France.',

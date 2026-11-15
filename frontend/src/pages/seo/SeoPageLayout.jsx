@@ -196,7 +196,11 @@ const SeoPageLayout = ({ data }) => {
           "email": companyInfo.email,
           "address": estSocieteDefaut
             ? postalAddressSchema
-            : { "@type": "PostalAddress", "addressLocality": societe.ville, "addressCountry": "FR" },
+            // 15/11/2026 (relecture, site-17) : aucune ville déclarée à Google pour une société du groupe
+            // tant que son Kbis n'est pas lu ; le pays seul.
+            : (societe.ville
+              ? { "@type": "PostalAddress", "addressLocality": societe.ville, "addressCountry": "FR" }
+              : { "@type": "PostalAddress", "addressCountry": "FR" }),
           ...(estSocieteDefaut ? { "geo": { "@type": "GeoCoordinates", "latitude": 43.1242, "longitude": 5.9280 } } : {}),
           "areaServed": data.areaServed || ZONE_DESSERVIE,
           "priceRange": "$$",
