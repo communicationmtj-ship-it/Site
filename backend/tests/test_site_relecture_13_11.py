@@ -200,7 +200,7 @@ def test_protection_rapprochee_sans_etat_etranger_dans_les_donnees_structurees()
 PHRASES_CAPTUREES = [
     "Intervention 24/7 · Sécurité cynophile avec maître-chien", "formés à la surveillance et à la détection",
     "avec une permanence joignable 24/7", "Société du groupe MTJ", "Besoin urgent ?", "Permanence téléphonique",
-    "Entreprise autorisée", "Nos engagements en 5 points", "Voir tout notre secteur", "unité CYNODEX",
+    "Entreprise autorisée", "Nos engagements en 5 points", "Voir tout notre secteur", "unité CYNODEX", "unités CYNODEX",
     "équipes CYNODEX", "binômes CYNODEX", "cellule CYNODEX", "certifiés CYNODEX",
 ]
 

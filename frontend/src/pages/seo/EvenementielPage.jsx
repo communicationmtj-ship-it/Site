@@ -61,7 +61,7 @@ const data = {
         },
         {
           h3: 'Moyens combinés : APS, cynophile, SSIAP',
-          content: 'Pour les événements d\'envergure, MTJ Sécurité Privée déploie un dispositif combinant agents de sécurité (APS), équipes cynophiles d\'intervention, unités CYNODEX de détection d\'explosifs et agents SSIAP pour la sécurité incendie. Cette approche intégrée offre une couverture complète de tous les risques identifiés.'
+          content: 'Pour les événements d\'envergure, MTJ Sécurité Privée déploie un dispositif combinant agents de sécurité (APS), équipes cynophiles d\'intervention, maîtres-chiens CYNODEX de détection d\'explosifs et agents SSIAP pour la sécurité incendie. Cette approche intégrée offre une couverture complète de tous les risques identifiés.'
         }
       ]
     }

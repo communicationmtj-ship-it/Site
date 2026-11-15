@@ -9,12 +9,13 @@ import SeoPageLayout from './SeoPageLayout';
 const data = {
   slug: '/detection-explosifs-cynodex',
   themeColor: '#AC8631',
-  metaTitle: 'Détection d\'Explosifs CYNODEX | Équipe Cynophile | MTJ Sécurité Privée',
+  metaTitle: 'Détection d\'Explosifs CYNODEX | Maître-Chien | MTJ Sécurité Privée',
   metaDescription: 'Maîtres-chiens diplômés CYNODEX, spécialisés en détection d\'explosifs avec chiens entraînés. MTJ Sécurité Privée intervient de Bordeaux à Nice jusqu\'à Annecy pour sécuriser événements et sites sensibles.',
   breadcrumbCurrent: 'CYNODEX - Détection d\'explosifs',
   areaServed: 'France entière',
 
-  h1: 'CYNODEX — Détection d\'Explosifs par Équipe Cynophile',
+  // Théo, 15/11/2026 : le CYNODEX est le diplôme du maître-chien, jamais une équipe (seuls ces mots changent).
+  h1: 'CYNODEX — Détection d\'Explosifs par Maître-Chien',
   introduction: `Les maîtres-chiens diplômés CYNODEX de MTJ Sécurité Privée sont spécialisés dans la détection d'explosifs à l'aide de chiens hautement entraînés. Face à la menace terroriste et aux risques liés aux engins explosifs improvisés, ils apportent une capacité de détection inégalée par les technologies conventionnelles.\n\nDiplômés et habilités, nos maîtres-chiens CYNODEX interviennent pour sécuriser les événements de grande envergure, les sites sensibles et les lieux accueillant du public sur l'ensemble du territoire national.`,
 
   sections: [

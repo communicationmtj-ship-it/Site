@@ -430,7 +430,8 @@ def test_cynodex_et_ssiap_1_2_3_sans_reserve():
         assert "maîtres-chiens cynodex" in _texte_sans_commentaires(p), p.name
     for p in fichiers:
         texte = _texte_sans_commentaires(p)
-        for faux in ("unité cynodex", "équipes cynodex", "équipe cynodex", "cellule cynodex", "binômes cynodex",
+        for faux in ("unité cynodex", "unités cynodex", "équipes cynodex", "équipe cynodex", "cellule cynodex", "binômes cynodex",
+                     "par équipe cynophile",
                      "nos chiens cynodex", "le cynodex est une prestation"):
             assert faux not in texte, f"{p.relative_to(REPO)} : « {faux} »"
     for p in (SEO / "ErpPage.jsx", SEO / "SudFrancePage.jsx", SEO / "pageLocale.js", SEO / "SsiapPage.jsx"):
