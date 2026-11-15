@@ -19,10 +19,12 @@ l'adresse visée. Les noms et adresses de visiteurs sont fictifs.
 Lancement (depuis backend/) :
     python -m pytest -x -q -p no:cacheprovider tests/test_site_choix_theo_13_11.py
 """
+import html
 import json
 import logging
 import os
 import re
+import subprocess
 import sys
 from itertools import combinations
 from pathlib import Path
@@ -48,6 +50,48 @@ EQUIPE_FICTIVE = "equipe.fictive@example.com"
 
 def _lire(path: Path) -> str:
     return path.read_text(encoding="utf-8")
+
+
+# ─── Texte du site en ligne (relecture adverse du 15/11/2026) ──────────────────
+# Le site en ligne est la version du 04/11/2026 : commit 9561a0a, base de la branche. Un essai qui dit « repris du
+# site en ligne » compare à CE texte, jamais aux autres fichiers de la branche (qu'elle a pu réécrire elle-même).
+COMMIT_EN_LIGNE = "9561a0a"
+SECTEUR = "de Bordeaux à Nice jusqu'à Annecy"
+SECTEUR_TITRE = "De Bordeaux à Nice jusqu'à Annecy"
+# Groupes de mots du site en ligne que la décision « Site perimetre: A partout » (Théo, 13/11/2026) remplace par
+# le secteur, du plus long au plus court ; « De Toulouse à Nice » est la tournure de l'accueil (bloc « Domaines »).
+ANCIENS_SECTEURS = ("dans tout le sud de la France", "dans le sud de la France", "tout le sud de la France",
+                    "le sud de la France", "De Toulouse à Nice")
+
+
+def _git_en_ligne(*args: str) -> str:
+    r = subprocess.run(["git", "-C", str(REPO), *args], capture_output=True, text=True)
+    assert r.returncode == 0, f"texte du site en ligne ({COMMIT_EN_LIGNE}) illisible : {r.stderr.strip()}"
+    return r.stdout
+
+
+def _en_ligne(chemin: str) -> str:
+    """Un fichier tel qu'il est sur le site en ligne."""
+    return _git_en_ligne("show", f"{COMMIT_EN_LIGNE}:{chemin}")
+
+
+def _marques(texte: str) -> str:
+    """Texte ramené à ce qui doit être identique des deux côtés : seuls les remplacements décidés par Théo
+    deviennent une marque (secteur, 13/11/2026 ; adresse e-mail, 13/11/2026 ; CYNODEX = diplôme du maître-chien,
+    15/11/2026). Balises JSX et échappements retirés, espaces réduits."""
+    texte = texte.replace("\\'", "'").replace("\\n", " ").replace("{' '}", " ")
+    texte = re.sub(r"<[^<>]*>", " ", texte)
+    texte = re.sub(r"[\w.+-]+@gmail\.com|contact@mtj-securite-privee\.fr|\$\{companyInfo\.email\}", "«EMAIL»", texte)
+    texte = re.sub(r"\$\{SECTEUR(?:_TITRE)?\}|[Dd]e Bordeaux à Nice jusqu'à Annecy", "«SECTEUR»", texte)
+    for ancien in ANCIENS_SECTEURS:
+        texte = texte.replace(ancien, "«SECTEUR»")
+    texte = re.sub(r"(?:(?:notre|nos|l'|les|son|ses) )?(?:unité|équipes?|maîtres-chiens(?: diplômés)?) CYNODEX",
+                   "«CYNODEX»", texte)
+    return re.sub(r"\s+", " ", texte).strip()
+
+
+def _telephone_du_site() -> str:
+    return re.search(r'  phone: "([^"]+)"', _lire(SRC / "data" / "mock.js")).group(1)
 
 
 # ─── 4. Périmètre : la liste du logiciel MTJ, partout ──────────────────────────
@@ -227,36 +271,61 @@ def _phrases(texte: str) -> set:
     return phrases
 
 
-# Les deux seules phrases propres aux pages de villes ajoutées : la ville et le secteur.
+# La seule phrase propre aux pages de villes ajoutées : la ville et son département.
 PHRASES_DE_VILLE = ("MTJ Sécurité Privée intervient à ${ville} et dans ${leDepartement}.",)
+VILLES_AJOUTEES = ("Montpellier", "Nîmes", "Perpignan", "Marseille", "Avignon", "Lyon", "Grenoble", "Annecy")
+
+
+def _texte_en_ligne_marque() -> str:
+    """Tout le texte des fichiers du site en ligne (frontend/src), remplacements décidés ramenés à leur marque."""
+    fichiers = [f for f in _git_en_ligne("ls-tree", "-r", "--name-only", COMMIT_EN_LIGNE, "frontend/src").split()
+                if f.endswith((".js", ".jsx")) and "/components/ui/" not in f]
+    assert len(fichiers) > 30, "lecture du site en ligne incomplète"
+    return " ¶ ".join(_marques(_en_ligne(f)) for f in fichiers)
+
+
+def _phrases_sans_origine(gabarit_source: str, en_ligne: str) -> list:
+    """Les phrases d'un fichier JS (chaînes hors commentaires, chemins exclus) qui ne sont pas sur le site en ligne,
+    une fois les remplacements décidés ramenés à leur marque ; « ${…} » (ville, département…) et le nom d'une ville
+    ajoutée valent n'importe quel nom de lieu."""
+    telephone = _telephone_du_site()
+    manquantes = []
+    for litteral in _litteraux(gabarit_source):
+        if litteral.startswith((".", "/")):
+            continue  # chemins d'import et adresses des pages
+        for phrase in re.split(r"(?<=[.!?])\s+|\\n", litteral):
+            phrase = phrase.strip()
+            if not phrase or phrase in PHRASES_DE_VILLE:
+                continue
+            marquee = _marques(phrase.replace("${companyInfo.phone}", telephone))
+            for ville in VILLES_AJOUTEES:
+                marquee = marquee.replace(ville, "${ville}")
+            motif = re.sub(r"\\\$\\\{[^}]*\\\}", "[^.¶]+?", re.escape(marquee))
+            if not re.search(motif, en_ligne):
+                manquantes.append(phrase)
+    return manquantes
 
 
 def test_pages_de_villes_sans_phrase_inventee():
     """Théo, 15/11/2026 (formulaire 3/4) : les pages de villes sortent SANS aucune preuve (ni mission passée,
     ni client, ni chiffre, ni phrase inventée), seulement ce que le site en ligne dit déjà. Les 8 pages ajoutées
-    n'écrivent aucun texte elles-mêmes ; chaque phrase de pageLocale.js se retrouve, la ville mise à sa place,
-    dans une autre page du site (texte du site en ligne)."""
+    n'écrivent aucun texte elles-mêmes ; chaque phrase de pageLocale.js, titre et description pour Google compris,
+    se retrouve, la ville mise à sa place, dans le texte du SITE EN LIGNE (commit 9561a0a), avec pour seuls écarts
+    les remplacements décidés. Relecture adverse du 15/11/2026 : l'essai cherchait l'origine dans les autres fichiers
+    de la branche ; « Notre zone d'intervention principale va … », réécrite par la branche, lui servait de preuve."""
     fichiers = [_composant(slug) for slug, _ in _pages_locales() if "pageLocale(" in _lire(_composant(slug))]
     assert len(fichiers) == 8
     for f in fichiers:
         texte = _sans_commentaires(_lire(f))
-        for cle in ("introduction:", "sections:", "faq:", "conclusion:", "content:", "answer:"):
+        for cle in ("introduction:", "sections:", "faq:", "conclusion:", "content:", "answer:", "metaTitle:",
+                    "metaDescription:"):
             assert cle not in texte, f"{f.name} écrit son propre texte ({cle})"
-    autres = " ".join(
-        " ".join(_litteraux(_lire(p))) for p in list(SEO.glob("*.jsx")) + [SRC / "components" / "HomeFaq.jsx", SRC / "data" / "mock.js"]
-        if p.name not in {f.name for f in fichiers}
-    ).replace("\\n", " ")
-    autres = re.sub(r"\s+", " ", autres)
-    # Titre et description pour Google (invisibles sur la page) : hors de ce contrôle.
-    gabarits = re.sub(r"^\s*meta(?:Title|Description): .*$", "", _lire(SEO / "pageLocale.js"), flags=re.MULTILINE)
-    for gabarit in _litteraux(gabarits):
-        for phrase in re.split(r"(?<=[.!?])\s+|\\n", gabarit):
-            phrase = phrase.strip()
-            if len(phrase) < 50 or phrase in PHRASES_DE_VILLE:
-                continue
-            motif = r"\s+".join(re.escape(m) for m in phrase.split())
-            motif = re.sub(r"\\\$\\\{[^}]*\\\}", ".+?", motif)
-            assert re.search(motif, autres), f"phrase sans origine sur le site : « {phrase} »"
+    en_ligne = _texte_en_ligne_marque()
+    # Témoins : la phrase réécrite par la branche est vue ; une phrase recopiée du site en ligne passe.
+    assert _phrases_sans_origine("const t = `Notre zone d'intervention principale va ${SECTEUR}.`;", en_ligne)
+    assert not _phrases_sans_origine("const t = `Siège basé à Toulon.`;", en_ligne)
+    manquantes = _phrases_sans_origine(_lire(SEO / "pageLocale.js"), en_ligne)
+    assert not manquantes, "phrases absentes du site en ligne :\n" + "\n".join(manquantes)
 
 
 def test_lyon_et_grenoble_ne_sont_plus_en_grand_deplacement():
@@ -276,6 +345,186 @@ def test_plus_d_ancien_perimetre_dans_les_pages():
         texte = _lire(p)
         for phrase in ANCIENS_PERIMETRES:
             assert phrase not in texte, f"{p.name} : « {phrase} »"
+
+
+# ─── Règle de Théo du 15/11/2026 (« soit tu met pas soit tu laisse ce qui etait »), relecture adverse ─────────
+# Chaque essai ci-dessous part du texte du SITE EN LIGNE (commit 9561a0a) et n'admet que les écarts décidés :
+# le secteur à la place de « (tout) le sud de la France », une phrase retirée (chiffre ou implantation) sans rien
+# écrire à sa place, et les remplacements nommés dans chaque table.
+
+def _chaine_apres(texte: str, debut: int) -> str:
+    """La chaîne JS (apostrophes, guillemets ou gabarit) qui commence au premier guillemet après `debut`."""
+    m = re.compile(r"(['\"`])((?:\\.|(?!\1).)*)\1", re.S).search(texte, debut)
+    assert m, "chaîne introuvable"
+    return m.group(2)
+
+
+def _propriete(texte: str, cle: str, repere: str = "") -> str:
+    """Valeur de `cle:` (introduction, metaTitle…), après `repere` s'il est donné (un titre h3, une question),
+    sans déborder sur la sous-partie ou la question suivante."""
+    i = texte.index(repere) + len(repere) if repere else 0
+    j = texte.index(f"{cle}:", i)
+    if repere:
+        assert not re.search(r"\b(?:h3|question):", texte[i:j]), f"« {cle} » absent après « {repere} »"
+    return _chaine_apres(texte, j + len(cle) + 1)
+
+
+def _description_seohead(texte: str) -> str:
+    i = texte.index("description=", texte.index("<SeoHead"))
+    return _chaine_apres(texte, i).replace("${companyInfo.phone}", _telephone_du_site())
+
+
+def _sans_phrases(texte: str, debuts: list) -> str:
+    """Le texte sans les phrases qui commencent par l'un des `debuts` (chacune doit y être)."""
+    phrases = re.split(r"(?<=[.!?])\s+", texte)
+    gardees = [p for p in phrases if not p.startswith(tuple(debuts))]
+    assert len(gardees) == len(phrases) - len(debuts), f"phrase à retirer introuvable : {debuts}"
+    return " ".join(gardees)
+
+
+# Site-3 : « Monaco delais: Garder les deux » (Théo, 15/11/2026 06:11). Seul le groupe « (tout) le sud de la France »
+# change ; la liste de villes qui le suivait (Monaco compris) reste. Site-6 : même règle pour la page des chantiers.
+SECTEUR_SEUL = [
+    ("frontend/src/components/HomeFaq.jsx", 'question: "Qu\'est-ce que MTJ Sécurité Privée ?"'),
+    ("frontend/src/pages/seo/SudFrancePage.jsx", "question: 'Quelle est votre zone d\\'intervention principale ?'"),
+    ("frontend/src/pages/seo/CynophilePage.jsx",
+     "question: 'Quelle zone géographique couvrez-vous pour les prestations cynophiles ?'"),
+    ("frontend/src/pages/seo/SurveillanceChantierPage.jsx", "question: 'Intervenez-vous sur les chantiers en dehors"),
+]
+
+
+def test_le_secteur_ne_remplace_que_le_sud_de_la_france():
+    for chemin, question in SECTEUR_SEUL:
+        en_ligne = _propriete(_en_ligne(chemin), "answer", question)
+        branche = _propriete(_lire(REPO / chemin), "answer", question)
+        assert "«SECTEUR»" in _marques(en_ligne), chemin
+        assert _marques(branche) == _marques(en_ligne), f"{chemin} :\n  en ligne : {en_ligne}\n  branche  : {branche}"
+    # Monaco reste là où le site en ligne le citait.
+    for chemin, question in SECTEUR_SEUL[:3]:
+        assert "Monaco" in _propriete(_lire(REPO / chemin), "answer", question), chemin
+
+
+# Site-4 : « Site chiffres: B aucun » (Théo, 13/11/2026) = la phrase qui porte le chiffre est retirée, avec celle qui
+# en dépend ; jamais réécrite (« renonce. », « plusieurs agents », « plusieurs familles »).
+CHIFFRES_RETIRES = [
+    ("frontend/src/pages/seo/CynophilePage.jsx", "content", "h3: 'Dissuasion maximale et détection précoce'",
+     ["Un intrus qui repère un binôme cynophile"]),
+    ("frontend/src/pages/seo/CynophilePage.jsx", "content", "h3: 'Rapport coût-efficacité optimal'",
+     ["Un binôme maître-chien couvre", "Cette productivité accrue"]),
+    ("frontend/src/pages/seo/CynodexPage.jsx", "content", "h3: 'Chiens détecteurs : entraînement spécialisé'",
+     ["Ils sont capables de détecter"]),
+    ("frontend/src/pages/seo/CynodexPage.jsx", "answer",
+     "question: 'Le chien peut-il détecter tous les types d\\'explosifs ?'", ["Nos chiens CYNODEX sont entraînés"]),
+]
+
+
+def test_chiffre_retire_avec_sa_phrase_jamais_reecrite():
+    for chemin, cle, repere, debuts in CHIFFRES_RETIRES:
+        attendu = _sans_phrases(_propriete(_en_ligne(chemin), cle, repere), debuts)
+        branche = _propriete(_lire(REPO / chemin), cle, repere)
+        assert _marques(branche) == _marques(attendu), f"{chemin} ({repere}) :\n  attendu : {attendu}\n  branche : {branche}"
+
+
+# Site-5 : « aucune implantation hors du siège de Toulon » (Théo, 13/11 et 15/11/2026) = la phrase ou la proposition
+# d'implantation est retirée, rien n'est écrit à sa place (pas de « Nous sommes spécialisés… », « Nous couvrons… »).
+def test_implantation_retiree_sans_phrase_neuve():
+    chemin = "frontend/src/pages/seo/SudFrancePage.jsx"
+    en_ligne, branche = _en_ligne(chemin), _lire(REPO / chemin)
+    attendu = _sans_phrases(_propriete(en_ligne, "introduction"), ["MTJ Sécurité Privée est implantée"])
+    assert _marques(_propriete(branche, "introduction")) == _marques(attendu)
+    # Côte d'Azur et Toulouse : toutes les phrases parlaient d'un pôle, d'une antenne ou d'une présence ; il reste le
+    # titre et la liste. La partie « Toulouse et grand déplacement » n'a plus d'introduction.
+    assert re.search(r"h3: 'Côte d\\'Azur et Monaco',\s*list:", branche)
+    assert re.search(r"h3: 'Toulouse — Occitanie',\s*list:", branche)
+    assert re.search(r"h2: 'Toulouse et grand déplacement national',\s*subsections:", branche)
+    chemin = "frontend/src/pages/seo/GrandDeplacementPage.jsx"
+    proposition = "Au-delà de notre zone d'implantation principale dans le sud de la France (Toulon, Nice, Toulouse), "
+    attendu = _propriete(_en_ligne(chemin), "introduction").split("\\n")[0]
+    assert proposition in attendu
+    assert _propriete(_lire(REPO / chemin), "introduction").split("\\n")[0] == attendu.replace(proposition, "")
+    for p in SEO.glob("*.js*"):
+        texte = _sans_commentaires(_lire(p)).replace("\\'", "'")
+        for neuve in ("Nous sommes spécialisés dans la sécurité de prestige", "Nous couvrons la Haute-Garonne",
+                      "Notre capacité de déploiement national assure", "Notre présence à Nice",
+                      "zone d'intervention principale, de", "zone d'intervention principale va"):
+            assert neuve not in texte, f"{p.name} : « {neuve} »"
+
+
+# Site-7 : titres et descriptions lus par Google et par les aperçus de partage = ceux du site en ligne, avec
+# seulement les remplacements décidés, nommés ici un par un.
+ATTRIBUTION = ("SSIAP, protection rapprochée.",
+               "SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe.")  # relecture du 13/11/2026
+TITRES_ET_DESCRIPTIONS = [
+    ("frontend/src/App.js", None, [ATTRIBUTION]),
+    ("frontend/src/components/ContactPage.jsx", None, [("à Toulon, Nice, Toulouse", SECTEUR)]),
+    ("frontend/src/components/Recrutement.jsx", None, [
+        ("maîtres-chiens, SSIAP et agents de protection rapprochée.",
+         "maîtres-chiens et agents SSIAP ; MTJ Sécurité Rapprochée, société du groupe, des agents de protection rapprochée.")]),
+    ("frontend/src/pages/seo/AgentSecuritePage.jsx", "metaDescription", [("à Toulon, Toulouse et Nice", SECTEUR)]),
+    # Lyon et Bordeaux sont dans le secteur : retirés de la liste du grand déplacement (comme dans l'introduction).
+    ("frontend/src/pages/seo/GrandDeplacementPage.jsx", "metaDescription", [("Paris, Lyon, Bordeaux, Nantes", "Paris, Nantes")]),
+    ("frontend/src/pages/seo/GrandDeplacementPage.jsx", "metaTitle", []),
+    ("frontend/src/pages/seo/ProtectionRapprocheePage.jsx", "metaDescription", [("à Toulon, Nice, Toulouse", SECTEUR)]),
+    ("frontend/src/pages/seo/ProtectionRapprocheePage.jsx", "metaTitle", []),
+    ("frontend/src/pages/seo/SsiapPage.jsx", "metaTitle", []),
+    ("frontend/src/pages/seo/AgentSecuritePage.jsx", "metaTitle", []),
+]
+GABARIT_EN_LIGNE = [
+    ("name", "description", [ATTRIBUTION]),
+    ("property", "og:title", [("à Toulon, Nice, Toulouse", SECTEUR)]),
+    ("property", "og:description", [("dans le sud de la France", SECTEUR), ATTRIBUTION]),
+    ("name", "twitter:title", [("Sud de France", SECTEUR)]),
+    ("name", "twitter:description", [ATTRIBUTION, ("Toulon, Nice, Toulouse.", SECTEUR_TITRE + ".")]),
+]
+
+
+def _remplacer(texte: str, remplacements: list) -> str:
+    for ancien, nouveau in remplacements:
+        assert ancien in texte, f"« {ancien} » absent du texte en ligne"
+        texte = texte.replace(ancien, nouveau)
+    return texte
+
+
+def _valeur_affichee(texte: str) -> str:
+    return texte.replace("\\'", "'")
+
+
+def test_titres_et_descriptions_du_site_en_ligne():
+    for chemin, cle, remplacements in TITRES_ET_DESCRIPTIONS:
+        en_ligne, branche = _en_ligne(chemin), _lire(REPO / chemin)
+        lire = _description_seohead if cle is None else (lambda t, c=cle: _propriete(t, c))
+        attendu = _remplacer(_valeur_affichee(lire(en_ligne)), remplacements)
+        assert _valeur_affichee(lire(branche)) == attendu, f"{chemin} ({cle or 'description'})"
+    index_en_ligne, index = _en_ligne("frontend/public/index.html"), _lire(FRONT / "public" / "index.html")
+
+    def meta(texte, attribut, nom):
+        return html.unescape(re.search(rf'<meta {attribut}="{re.escape(nom)}" content="([^"]*)"', texte).group(1))
+
+    for attribut, nom, remplacements in GABARIT_EN_LIGNE:
+        assert meta(index, attribut, nom) == _remplacer(meta(index_en_ligne, attribut, nom), remplacements), nom
+    # Accueil : même description dans le gabarit et dans la page (Monaco compris, comme en ligne).
+    assert meta(index, "name", "description") == _description_seohead(_lire(SRC / "App.js"))
+    assert "Monaco" in meta(index, "name", "description")
+
+    def organisation(texte):
+        return re.search(r'"@type": "Organization",[\s\S]*?"description": "([^"]*)"', texte).group(1)
+
+    attendu = _remplacer(organisation(index_en_ligne), [("dans le sud de la France", SECTEUR), ATTRIBUTION])
+    assert organisation(index) == attendu
+
+
+def test_titre_et_description_des_pages_de_villes_au_modele_en_ligne():
+    """Les 8 pages de villes ajoutées suivent le modèle des pages de villes en ligne (page de Bordeaux), la ville,
+    son numéro et son département mis à leur place (comme la page de Toulon en ligne : « dans le Var et en PACA »)."""
+    bordeaux = _en_ligne("frontend/src/pages/seo/BordeauxPage.jsx")
+    titre = _propriete(bordeaux, "metaTitle").replace("Bordeaux", "${ville}").replace("(33)", "(${code})")
+    description = _remplacer(_propriete(bordeaux, "metaDescription"), [
+        ("Bordeaux", "${ville}"), ("en Gironde et Nouvelle-Aquitaine", "${lieu}"),
+        (_telephone_du_site(), "${companyInfo.phone}")])
+    gabarit = _lire(SEO / "pageLocale.js")
+    assert _propriete(gabarit, "metaTitle") == titre
+    assert _propriete(gabarit, "metaDescription") == description
+    assert "const lieu = `dans ${leDepartement} et en ${region}`;" in gabarit
 
 
 # ─── 1. E-mail affiché et destinataire des mails de l'équipe ───────────────────

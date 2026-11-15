@@ -6,9 +6,11 @@ import { SECTEUR_TITRE } from '../data/perimetre';
 
 // 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : pied de page du site
 // en ligne, sauf :
-// - mention CNAPS : une fois par société, ici seulement ; numéro de MTJ Sécurité Privée corrigé (celui de
-//   l'autorisation rangée au coffre du logiciel MTJ), MTJ Sécurité Rapprochée ajoutée sous la même forme
-//   (sa mention était dans la carte « Protection physique des personnes » de l'accueil) ;
+// - mention CNAPS : numéro de MTJ Sécurité Privée corrigé (celui de l'autorisation rangée au coffre du
+//   logiciel MTJ), MTJ Sécurité Rapprochée ajoutée sous la même forme. Ce bloc est masqué sous 768 px, comme
+//   en ligne : la mention de MTJ Sécurité Rapprochée reste aussi, mot pour mot comme en ligne, dans la carte
+//   « Protection physique des personnes » de l'accueil et à la fin de l'introduction de la page Protection
+//   rapprochée, visibles sur téléphone (relecture adverse du 15/11/2026) ;
 // - zones : les pages de villes du secteur (Théo, 15/11/2026 : les 12 pages de villes sortent) et le secteur
 //   « de Bordeaux à Nice jusqu'à Annecy » à la place de « Sud de la France » (13/11/2026, « Site perimetre: A partout ») ;
 // - vignettes Instagram : les mêmes photos, servies par le site (Théo, 15/11/2026 : les photos restent) ;

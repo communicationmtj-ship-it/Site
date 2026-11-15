@@ -15,7 +15,7 @@ const DEFAULT = '#AC8631';
 // Sécurité Privée (siège à Toulon) ; une page peut fournir data.societe pour une autre société du groupe.
 // 15/11/2026 (règle de Théo : « soit tu met pas soit tu laisse ce qui etait ») : l'encadré « Demandez votre
 // devis gratuit » affiche le texte du site en ligne, avec l'adresse contact@ (13/11/2026, « Site email: A
-// contact OVH ») ; la mention CNAPS n'est écrite qu'une fois par société, dans le pied de page.
+// contact OVH ») ; l'encadré n'ajoute aucune mention CNAPS (comme en ligne).
 const SOCIETE_DEFAUT = {
   nom: 'MTJ Sécurité Privée',
   mention: null,
@@ -80,7 +80,9 @@ const SeoPageLayout = ({ data }) => {
                 {section.subsections.map((sub, j) => (
                   <div key={j} className="pl-4 border-l-2" style={{ borderColor: `${c}44` }}>
                     <h3 className="text-lg font-semibold text-white mb-2">{sub.h3}</h3>
-                    <p className="text-gray-400 leading-relaxed">{sub.content}</p>
+                    {/* Une sous-partie dont toutes les phrases ont été retirées (15/11/2026 : « soit tu met pas soit
+                        tu laisse ce qui etait ») garde son titre et sa liste, sans paragraphe vide. */}
+                    {sub.content && <p className="text-gray-400 leading-relaxed">{sub.content}</p>}
                     {sub.list && (
                       <ul className="mt-3 space-y-1">
                         {sub.list.map((item, k) => (

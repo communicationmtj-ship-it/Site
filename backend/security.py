@@ -116,15 +116,39 @@ FORM_EXPIRED_MESSAGE = (
 )
 
 
-def check_honeypot(honeypot_value: Optional[str], form_loaded_at: Optional[str]) -> None:
-    """Champ piège + horodatage du chargement du formulaire.
+def _duree_de_saisie(valeur: Optional[str]) -> Optional[float]:
+    """Durée de saisie envoyée par le formulaire (champ « elapsed », en secondes), ou None quand elle
+    manque ou ne se lit pas (absente, illisible, non finie, négative)."""
+    try:
+        duree = float(valeur)
+    except (ValueError, TypeError):
+        return None
+    if not math.isfinite(duree) or duree < 0:
+        return None
+    return duree
+
+
+def check_honeypot(honeypot_value: Optional[str], form_loaded_at: Optional[str],
+                   fill_seconds: Optional[str] = None) -> None:
+    """Champ piège + horodatage du chargement du formulaire + durée de saisie.
 
     Les trois formulaires du site (devis, contact, recrutement) envoient toujours
-    le champ « ts » : son absence, une valeur illisible ou non finie, ou un envoi en
-    moins de 3 secondes sont traités comme du spam (réponse silencieuse).
-    Un envoi plus de 24 h après le chargement n'est pas un robot mais un onglet resté
-    ouvert (relecture du 13/11/2026) : refus VISIBLE (FORM_EXPIRED), pour que le
-    visiteur recharge la page au lieu de croire partie une demande ni gardée ni envoyée.
+    le champ « ts » : son absence, ou une valeur illisible ou non finie, est traitée
+    comme du spam (réponse silencieuse).
+
+    15/11/2026 (relecture adverse, règle « échec visible ») : la durée de saisie ne se
+    calcule plus en comparant « ts » (heure de l'appareil du visiteur) à l'heure du
+    serveur : une horloge en avance faisait jeter en silence une vraie demande (le
+    visiteur lisait « Merci » alors que rien n'était gardé ni envoyé), une horloge en
+    retard de plus de 24 h donnait un refus que recharger la page ne réglait pas.
+    Le formulaire envoie « elapsed », la durée entre son chargement et l'envoi, lue
+    deux fois sur la MÊME horloge (celle du visiteur) : un décalage d'horloge s'annule.
+    - envoi en moins de 3 secondes : robot, réponse silencieuse ;
+    - plus de 24 h : onglet resté ouvert, refus VISIBLE (FORM_EXPIRED) que recharger
+      la page règle (relecture du 13/11/2026) ;
+    - durée absente ou illisible (onglet ouvert avant cette version du site) : aucune
+      mesure fiable, la demande passe ; jamais jetée sur la seule foi de l'horloge du
+      visiteur.
     """
     if honeypot_value:
         logger.warning("Honeypot triggered")
@@ -139,12 +163,15 @@ def check_honeypot(honeypot_value: Optional[str], form_loaded_at: Optional[str])
         # « nan » passait toutes les comparaisons de durée.
         logger.warning("Form submitted without a valid timestamp")
         raise ValueError("SPAM_DETECTED")
-    elapsed = datetime.now(timezone.utc).timestamp() - loaded
-    if elapsed < MIN_SUBMIT_TIME_SECONDS:
-        logger.warning(f"Form submitted too fast: {elapsed:.1f}s")
+    duree = _duree_de_saisie(fill_seconds)
+    if duree is None:
+        logger.info("Form without a readable fill time: timing check skipped, request kept")
+        return
+    if duree < MIN_SUBMIT_TIME_SECONDS:
+        logger.warning(f"Form submitted too fast: {duree:.1f}s")
         raise ValueError("SPAM_DETECTED")
-    if elapsed > MAX_FORM_AGE_SECONDS:
-        logger.warning(f"Form older than 24 h: {elapsed:.0f}s")
+    if duree > MAX_FORM_AGE_SECONDS:
+        logger.warning(f"Form older than 24 h: {duree:.0f}s")
         raise ValueError(FORM_EXPIRED)
 
 

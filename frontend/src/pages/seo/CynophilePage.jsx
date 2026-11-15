@@ -7,6 +7,8 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 // de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
 // (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
 // diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
+// Relecture adverse du 15/11/2026 : une phrase qui portait un chiffre est retirée (avec celle qui en dépend),
+// jamais réécrite ; dans la question sur la zone, seul le secteur remplace « sud de la France ».
 const data = {
   slug: '/securite-cynophile-maitre-chien',
   themeColor: '#AC8631',
@@ -57,11 +59,11 @@ const data = {
       subsections: [
         {
           h3: 'Dissuasion maximale et détection précoce',
-          content: 'La présence d\'un chien d\'intervention constitue le niveau de dissuasion le plus élevé en sécurité privée. Un intrus qui repère un binôme cynophile renonce. De plus, l\'odorat du chien détecte une présence humaine à plusieurs centaines de mètres, même dans l\'obscurité totale, offrant une capacité de détection inégalée.'
+          content: 'La présence d\'un chien d\'intervention constitue le niveau de dissuasion le plus élevé en sécurité privée. De plus, l\'odorat du chien détecte une présence humaine à plusieurs centaines de mètres, même dans l\'obscurité totale, offrant une capacité de détection inégalée.'
         },
         {
           h3: 'Rapport coût-efficacité optimal',
-          content: 'Un binôme maître-chien couvre une zone de surveillance équivalente à celle de plusieurs agents de sécurité classiques. Cette productivité accrue se traduit par un meilleur rapport coût-efficacité pour nos clients, tout en offrant un niveau de sécurité supérieur. C\'est une solution particulièrement adaptée aux sites étendus ou aux missions nocturnes.'
+          content: 'C\'est une solution particulièrement adaptée aux sites étendus ou aux missions nocturnes.'
         }
       ]
     }
@@ -78,7 +80,7 @@ const data = {
     },
     {
       question: 'Quelle zone géographique couvrez-vous pour les prestations cynophiles ?',
-      answer: 'Notre unité cynophile est basée à Toulon et intervient de Bordeaux à Nice jusqu\'à Annecy. Nous proposons également des missions en grand déplacement sur demande partout en France.'
+      answer: 'Notre unité cynophile est basée à Toulon et intervient de Bordeaux à Nice jusqu\'à Annecy : PACA (Marseille, Nice, Monaco, Cannes), Occitanie (Toulouse) et le grand sud. Nous proposons également des missions en grand déplacement sur demande partout en France.'
     }
   ],
 

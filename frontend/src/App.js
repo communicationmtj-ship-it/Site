@@ -106,8 +106,10 @@ const HomePage = () => {
     <>
       <SeoHead
         // 15/11/2026 (Théo, formulaire 3/4 : titre de l'accueil non choisi) : le titre du site en ligne, tel quel.
+        // Description : celle du site en ligne (Monaco compris : « Monaco delais: Garder les deux », Théo,
+        // 15/11/2026) ; seule l'attribution de la protection rapprochée à MTJ Sécurité Rapprochée diffère.
         title="MTJ Sécurité Privée | Sécurité, Gardiennage, Cynophile | Toulon, Nice, Toulouse"
-        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe. Interventions de Bordeaux à Nice jusqu'à Annecy, et en grand déplacement dans toute la France. Devis gratuit."
+        description="MTJ Sécurité Privée : agents de sécurité, cynophile, CYNODEX, SSIAP ; protection rapprochée par MTJ Sécurité Rapprochée, société du groupe. Interventions à Toulon, Nice, Monaco, Toulouse et sur tout le territoire national. Devis gratuit."
         path="/"
       />
       <Navbar />

@@ -7,6 +7,8 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 // de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
 // (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
 // diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
+// Relecture adverse du 15/11/2026 : dans la réponse sur la zone, seul « le sud de la France » est remplacé par le
+// secteur ; « Notre zone d'intervention principale va … » n'était pas sur le site en ligne.
 const data = {
   slug: '/surveillance-chantier-site',
   metaTitle: 'Surveillance de Chantiers et Sites | Gardiennage 24h/24 | MTJ Sécurité Privée',
@@ -78,7 +80,7 @@ const data = {
     },
     {
       question: 'Intervenez-vous sur les chantiers en dehors de la zone de Bordeaux à Nice jusqu\'à Annecy ?',
-      answer: 'Notre zone d\'intervention principale va de Bordeaux à Nice jusqu\'à Annecy. Nous pouvons également intervenir en grand déplacement sur l\'ensemble du territoire national pour des chantiers de grande envergure. Contactez-nous pour étudier votre demande.'
+      answer: 'Notre zone d\'intervention principale couvre de Bordeaux à Nice jusqu\'à Annecy (PACA, Occitanie, Nouvelle-Aquitaine). Nous pouvons également intervenir en grand déplacement sur l\'ensemble du territoire national pour des chantiers de grande envergure. Contactez-nous pour étudier votre demande.'
     }
   ],
 

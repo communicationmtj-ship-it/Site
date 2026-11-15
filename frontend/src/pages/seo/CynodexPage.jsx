@@ -6,6 +6,8 @@ import SeoPageLayout from './SeoPageLayout';
 // de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
 // (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
 // diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
+// Relecture adverse du 15/11/2026 : une phrase qui portait un chiffre est retirée, jamais réécrite (pas de
+// « plusieurs » à la place du nombre).
 const data = {
   slug: '/detection-explosifs-cynodex',
   themeColor: '#AC8631',
@@ -44,7 +46,7 @@ const data = {
         },
         {
           h3: 'Chiens détecteurs : entraînement spécialisé',
-          content: 'Les chiens de nos maîtres-chiens CYNODEX suivent un programme d\'entraînement intensif et continu à la détection de matières explosives. Ils sont capables de détecter plusieurs familles d\'explosifs différentes. Leur entraînement est supervisé par des spécialistes et fait l\'objet d\'évaluations régulières pour garantir un taux de détection optimal.'
+          content: 'Les chiens de nos maîtres-chiens CYNODEX suivent un programme d\'entraînement intensif et continu à la détection de matières explosives. Leur entraînement est supervisé par des spécialistes et fait l\'objet d\'évaluations régulières pour garantir un taux de détection optimal.'
         },
         {
           h3: 'Coordination avec les forces de l\'ordre',
@@ -75,7 +77,7 @@ const data = {
     },
     {
       question: 'Le chien peut-il détecter tous les types d\'explosifs ?',
-      answer: 'Les chiens de nos maîtres-chiens CYNODEX sont entraînés à détecter plusieurs familles d\'explosifs, incluant les explosifs militaires (C4, TNT, Semtex), commerciaux (dynamite, détonateurs) et artisanaux (TATP, peroxydes). Leur entraînement est continuellement mis à jour pour intégrer les nouvelles menaces identifiées.'
+      answer: 'Leur entraînement est continuellement mis à jour pour intégrer les nouvelles menaces identifiées.'
     },
     {
       question: 'Dans quels délais pouvez-vous intervenir ?',

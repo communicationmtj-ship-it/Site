@@ -32,9 +32,10 @@ def _get_db():
 
 # ─── Shared helpers ──────────────────────────────────────────────
 
-def _check_spam(hp: Optional[str], ts: Optional[str], fake_msg: str) -> dict | None:
+def _check_spam(hp: Optional[str], ts: Optional[str], elapsed: Optional[str], fake_msg: str) -> dict | None:
+    # « elapsed » : durée de saisie mesurée par le navigateur du visiteur (15/11/2026, security.check_honeypot).
     try:
-        check_honeypot(hp, ts)
+        check_honeypot(hp, ts, elapsed)
     except ValueError as e:
         if str(e) == "SPAM_DETECTED":
             return {"status": "success", "message": fake_msg}
@@ -114,8 +115,9 @@ async def submit_quote(
     urgency: Optional[str] = Form(None),
     hp: Optional[str] = Form(None),
     ts: Optional[str] = Form(None),
+    elapsed: Optional[str] = Form(None),
 ):
-    spam = _check_spam(hp, ts, "Merci pour votre demande.")
+    spam = _check_spam(hp, ts, elapsed, "Merci pour votre demande.")
     if spam:
         return spam
     # 12/11/2026 (audit du site de Mathilde, site-006) : le formulaire de devis envoie la case
@@ -180,8 +182,9 @@ async def submit_contact(
     consent: Optional[str] = Form(None),
     hp: Optional[str] = Form(None),
     ts: Optional[str] = Form(None),
+    elapsed: Optional[str] = Form(None),
 ):
-    spam = _check_spam(hp, ts, "Merci pour votre message.")
+    spam = _check_spam(hp, ts, elapsed, "Merci pour votre message.")
     if spam:
         return spam
 
@@ -263,8 +266,9 @@ async def submit_recruitment(
     consent: Optional[str] = Form(None),
     hp: Optional[str] = Form(None),
     ts: Optional[str] = Form(None),
+    elapsed: Optional[str] = Form(None),
 ):
-    spam = _check_spam(hp, ts, "Merci pour votre candidature.")
+    spam = _check_spam(hp, ts, elapsed, "Merci pour votre candidature.")
     if spam:
         return spam
 

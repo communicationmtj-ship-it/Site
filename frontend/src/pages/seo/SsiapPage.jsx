@@ -10,7 +10,7 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 const data = {
   slug: '/ssiap-securite-incendie',
   themeColor: '#B00B0B',
-  metaTitle: 'SSIAP Sécurité Incendie | Agents SSIAP 1, 2 et 3 | MTJ Sécurité Privée',
+  metaTitle: 'SSIAP Sécurité Incendie | Agent SSIAP 1 2 3 | MTJ Sécurité Privée',
   metaDescription: 'Agents SSIAP certifiés pour la sécurité incendie de vos ERP et IGH, de Bordeaux à Nice jusqu\'à Annecy. Prévention, évacuation, assistance à personnes. MTJ Sécurité Privée — devis gratuit.',
   breadcrumbCurrent: 'SSIAP — Sécurité incendie',
   areaServed: ZONE_DESSERVIE,

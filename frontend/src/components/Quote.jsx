@@ -56,6 +56,9 @@ const Quote = () => {
     submitData.append('message', formData.message);
     submitData.append('consent', consent ? 'true' : 'false');
     submitData.append('ts', formLoadedAt);
+    // Durée de saisie lue deux fois sur l'horloge du visiteur (chargement, envoi) : un appareil à l'heure
+    // fausse ne fait plus jeter la demande par le serveur (15/11/2026, backend/security.py).
+    submitData.append('elapsed', String(Date.now() / 1000 - Number(formLoadedAt)));
     // Le champ piège doit partir avec la demande, sinon le serveur ne peut pas le contrôler.
     submitData.append('hp', e.target.elements?.hp?.value || '');
     if (attachment) {

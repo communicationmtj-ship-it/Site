@@ -64,6 +64,9 @@ const Recrutement = () => {
     submitData.append('phone', formData.phone);
     submitData.append('message', formData.message);
     submitData.append('ts', formLoadedAt);
+    // Durée de saisie lue deux fois sur l'horloge du visiteur (chargement, envoi) : un appareil à l'heure
+    // fausse ne fait plus jeter la demande par le serveur (15/11/2026, backend/security.py).
+    submitData.append('elapsed', String(Date.now() / 1000 - Number(formLoadedAt)));
     // Le champ piège doit partir avec la demande, sinon le serveur ne peut pas le contrôler.
     submitData.append('hp', e.target.elements?.hp?.value || '');
     submitData.append('consent', 'true');
@@ -118,7 +121,7 @@ const Recrutement = () => {
     <div className="min-h-screen bg-black">
       <SeoHead
         title="Recrutement | Rejoignez MTJ Sécurité Privée | Postulez"
-        description="MTJ Sécurité Privée recrute des agents de sécurité, maîtres-chiens et agents SSIAP ; MTJ Sécurité Rapprochée, société du groupe, des agents de protection rapprochée. Postulez en ligne."
+        description="MTJ Sécurité Privée recrute des agents de sécurité, maîtres-chiens et agents SSIAP ; MTJ Sécurité Rapprochée, société du groupe, des agents de protection rapprochée. Postulez en ligne dès maintenant."
         path="/recrutement"
       />
       <Navbar />

@@ -6,15 +6,18 @@ import SeoPageLayout from './SeoPageLayout';
 // de « sud de la France » (13/11/2026, « Site perimetre: A partout ») ; aucun chiffre non prouvé
 // (13/11/2026, « Site chiffres: B aucun ») ; aucune implantation hors du siège de Toulon ; CYNODEX =
 // diplôme du maître-chien de détection d'explosifs (15/11/2026), jamais une « unité » ni une « équipe ».
+// Relecture adverse du 15/11/2026 : la proposition d'implantation de l'introduction (« Au-delà de notre zone
+// d'implantation principale… (Toulon, Nice, Toulouse), ») est retirée sans rien écrire à sa place ; la description
+// pour Google est celle du site en ligne, sans Lyon ni Bordeaux (dans le secteur, comme dans l'introduction).
 const data = {
   slug: '/grand-deplacement-securite-france',
   metaTitle: 'Grand Déplacement Sécurité — Intervention sur tout le Territoire National | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée intervient en grand déplacement sur l\'ensemble du territoire français, au-delà de son secteur de Bordeaux à Nice et Annecy. Paris, Nantes, Strasbourg, Lille : déploiement d\'agents de sécurité, cynophile, SSIAP et CYNODEX partout en France.',
+  metaDescription: 'MTJ Sécurité Privée intervient en grand déplacement sur l\'ensemble du territoire français. Paris, Nantes, Strasbourg : déploiement d\'agents de sécurité, cynophile, SSIAP et CYNODEX partout en France.',
   breadcrumbCurrent: 'Grand déplacement national',
   areaServed: 'France métropolitaine',
 
   h1: 'Grand Déplacement — Sécurité sur l\'Ensemble du Territoire National',
-  introduction: `Au-delà de notre zone d'intervention principale, de Bordeaux à Nice jusqu'à Annecy, MTJ Sécurité Privée dispose de la capacité logistique et opérationnelle pour déployer ses équipes en grand déplacement sur l'ensemble du territoire français.\n\nParis, Nantes, Strasbourg, Lille : où que se trouvent vos besoins en sécurité, nous mobilisons nos agents qualifiés pour des missions ponctuelles ou récurrentes. Cette flexibilité fait de MTJ Sécurité Privée un partenaire unique capable de vous accompagner sur tous vos sites en France.`,
+  introduction: `MTJ Sécurité Privée dispose de la capacité logistique et opérationnelle pour déployer ses équipes en grand déplacement sur l'ensemble du territoire français.\n\nParis, Nantes, Strasbourg, Lille : où que se trouvent vos besoins en sécurité, nous mobilisons nos agents qualifiés pour des missions ponctuelles ou récurrentes. Cette flexibilité fait de MTJ Sécurité Privée un partenaire unique capable de vous accompagner sur tous vos sites en France.`,
 
   sections: [
     {

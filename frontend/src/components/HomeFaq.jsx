@@ -7,11 +7,13 @@ import { SECTEUR } from '../data/perimetre';
 // 15/11/2026 (règle de Théo : « soit tu met pas soit tu laisse ce qui etait ») : réponses du site en ligne,
 // sauf le secteur (13/11/2026, « Site perimetre: A partout »), l'adresse e-mail (13/11/2026, « Site email:
 // A contact OVH ») et le CYNODEX, diplôme du maître-chien de détection d'explosifs (Théo, 15/11/2026).
+// Seul le groupe de mots « sud de la France » (avec sa préposition) est remplacé : la liste de villes qui le suit
+// (Monaco compris, Théo, 15/11/2026 06:11 : « Monaco delais: Garder les deux ») reste mot pour mot.
 
 const faqs = [
   {
     question: "Qu'est-ce que MTJ Sécurité Privée ?",
-    answer: `MTJ Sécurité Privée est une entreprise de sécurité privée basée à Toulon (Var), spécialisée dans la surveillance, le gardiennage, la sécurité cynophile, le SSIAP, la protection rapprochée et la détection d'explosifs (CYNODEX). Nous intervenons sur tout le territoire national avec une présence forte ${SECTEUR}.`
+    answer: `MTJ Sécurité Privée est une entreprise de sécurité privée basée à Toulon (Var), spécialisée dans la surveillance, le gardiennage, la sécurité cynophile, le SSIAP, la protection rapprochée et la détection d'explosifs (CYNODEX). Nous intervenons sur tout le territoire national avec une présence forte ${SECTEUR} (Toulon, Nice, Monaco, Toulouse, Bordeaux).`
   },
   {
     question: "Vos agents sont-ils certifiés CNAPS ?",

@@ -5,6 +5,9 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 // 15/11/2026 (Théo, formulaire 3/4 : les pages de villes sortent, sans preuve) : texte du site en ligne,
 // sans chiffre (population, classement), sans client nommé, sans implantation hors du siège de Toulon ;
 // secteur « de Bordeaux à Nice jusqu'à Annecy », adresse contact@, CYNODEX = diplôme du maître-chien.
+// Relecture adverse du 15/11/2026 : une phrase d'implantation (pôle, antenne, présence hors de Toulon) est
+// retirée sans rien écrire à sa place ; le reste de la page est mot pour mot celui du site en ligne, et seul
+// le groupe « (tout) le sud de la France » est remplacé par le secteur (la liste de villes qui le suit reste).
 const data = {
   slug: '/securite-privee-sud-france',
   metaTitle: 'Sécurité Privée de Bordeaux à Nice jusqu\'à Annecy | MTJ',
@@ -13,7 +16,7 @@ const data = {
   areaServed: ZONE_DESSERVIE,
 
   h1: 'Sécurité Privée de Bordeaux à Nice jusqu\'à Annecy',
-  introduction: `MTJ Sécurité Privée intervient de Bordeaux à Nice jusqu'à Annecy. Siège basé à Toulon.\n\nAu-delà de cette zone principale, nous proposons des missions en grand déplacement sur l'ensemble du territoire national, pour répondre aux besoins de nos clients multi-sites ou pour des événements ponctuels.`,
+  introduction: `Cette couverture géographique nous permet d'intervenir rapidement sur l'ensemble des régions Provence-Alpes-Côte d'Azur (PACA) et Occitanie.\n\nAu-delà de cette zone principale, nous proposons des missions en grand déplacement sur l'ensemble du territoire national, pour répondre aux besoins de nos clients multi-sites ou pour des événements ponctuels.`,
 
   sections: [
     {
@@ -26,18 +29,15 @@ const data = {
         },
         {
           h3: 'Côte d\'Azur et Monaco',
-          content: 'Notre présence à Nice et sur la Côte d\'Azur nous positionne au cœur du marché azuréen : Nice, Monaco, Cannes, Antibes, Grasse, Menton. Nous sommes spécialisés dans la sécurité de prestige, la sécurité événementielle haut de gamme et la protection de propriétés de luxe.',
           list: ['Alpes-Maritimes (06) : Nice, Cannes, Antibes, Grasse', 'Principauté de Monaco', 'Arrière-pays niçois et montagne']
         }
       ]
     },
     {
       h2: 'Toulouse et grand déplacement national',
-      intro: 'Notre capacité de déploiement national assure une couverture complète.',
       subsections: [
         {
           h3: 'Toulouse — Occitanie',
-          content: 'Nous couvrons la Haute-Garonne et les départements limitrophes d\'Occitanie : Toulouse Métropole, zones aéronautiques de Blagnac et Colomiers, Montpellier, Nîmes, Perpignan.',
           list: ['Haute-Garonne (31) : Toulouse, Blagnac, Colomiers', 'Hérault (34) : Montpellier, Béziers', 'Gard (30) et Aude (11)', 'Tarn (81) et Tarn-et-Garonne (82)']
         },
         {
@@ -65,7 +65,7 @@ const data = {
   faq: [
     {
       question: 'Quelle est votre zone d\'intervention principale ?',
-      answer: 'Notre zone d\'intervention principale va de Bordeaux à Nice jusqu\'à Annecy. Nous intervenons également en grand déplacement partout en France métropolitaine.'
+      answer: 'Notre zone d\'intervention principale couvre de Bordeaux à Nice jusqu\'à Annecy : PACA (Toulon, Marseille, Nice, Monaco) et Occitanie (Toulouse, Montpellier). Nous intervenons également en grand déplacement partout en France métropolitaine.'
     },
     {
       question: 'Pouvez-vous intervenir à Paris ?',

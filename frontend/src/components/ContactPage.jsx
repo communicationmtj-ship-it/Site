@@ -56,6 +56,9 @@ const ContactPage = () => {
     submitData.append('message', formData.message);
     submitData.append('consent', 'true');
     submitData.append('ts', formLoadedAt);
+    // Durée de saisie lue deux fois sur l'horloge du visiteur (chargement, envoi) : un appareil à l'heure
+    // fausse ne fait plus jeter la demande par le serveur (15/11/2026, backend/security.py).
+    submitData.append('elapsed', String(Date.now() / 1000 - Number(formLoadedAt)));
     // Le champ piège doit partir avec la demande, sinon le serveur ne peut pas le contrôler.
     submitData.append('hp', e.target.elements?.hp?.value || '');
     if (attachment) submitData.append('attachment', attachment);
@@ -93,7 +96,7 @@ const ContactPage = () => {
     <div className="min-h-screen bg-black">
       <SeoHead
         title="Contactez MTJ Sécurité Privée | Devis Gratuit | Toulon"
-        description="Contactez MTJ Sécurité Privée pour toute demande de sécurité privée de Bordeaux à Nice jusqu'à Annecy. Devis gratuit, réponse sous 24 h. Tél : 07 60 73 82 06."
+        description={`Contactez MTJ Sécurité Privée pour toute demande de sécurité privée de Bordeaux à Nice jusqu'à Annecy. Devis gratuit, réponse sous 24h. Tél : ${companyInfo.phone}.`}
         path="/contact"
       />
       <Navbar />

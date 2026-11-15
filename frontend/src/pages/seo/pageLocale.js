@@ -9,9 +9,13 @@
 // Chaque phrase ci-dessous est donc reprise du site en ligne (cartes « Nos métiers », « Domaine d'intervention »,
 // questions fréquentes, pages de Toulon, Toulouse et Bordeaux), le nom de la ville mis à sa place ; la seule
 // phrase propre à la page dit que MTJ Sécurité Privée intervient dans cette ville et ce département.
-// L'essai backend/tests/test_site_choix_theo_13_11.py relit ces pages.
+// Relecture adverse du 15/11/2026 : « Notre zone d'intervention principale va … » n'était pas sur le site en
+// ligne ; à sa place, la phrase de l'accueil (« De Toulouse à Nice - Zone d'intervention prioritaire… Siège basé
+// à Toulon. »), secteur décidé mis à la place de « De Toulouse à Nice ». Titre et description pour Google : le
+// modèle des pages de villes en ligne (page de Bordeaux), la ville et son département mis à leur place.
+// L'essai backend/tests/test_site_choix_theo_13_11.py compare ces phrases au site en ligne (commit 9561a0a).
 import { companyInfo, services, interventionDomains } from '../../data/mock';
-import { SECTEUR } from '../../data/perimetre';
+import { SECTEUR, SECTEUR_TITRE } from '../../data/perimetre';
 
 // Libellés des liens, tels que le site en ligne les écrit (« Sécurité privée Nice & Monaco »).
 const LIBELLES_VILLES = {
@@ -82,15 +86,17 @@ const faqCommune = () => [
  * `voisines` : adresses des pages de villes proches.
  */
 export function pageLocale({ slug, ville, departement, leDepartement, code, region, voisines = [] }) {
+  const lieu = `dans ${leDepartement} et en ${region}`;
   return {
     slug,
-    // Titre et description pour Google (invisibles sur la page).
-    metaTitle: `Sécurité privée à ${ville} (${code}) | MTJ Sécurité Privée`,
-    metaDescription: `MTJ Sécurité Privée intervient à ${ville} et alentour (${departement}) : agents de sécurité, maîtres-chiens, CYNODEX, agents SSIAP 1, 2 et 3. Devis gratuit — ${companyInfo.phone}.`,
+    // Titre et description pour Google et les aperçus de partage : modèle en ligne de la page de Bordeaux
+    // (« … et événementielle en Gironde et Nouvelle-Aquitaine. ») ; ${lieu} = le département avec son article.
+    metaTitle: `Société de Sécurité Privée à ${ville} (${code}) | MTJ Sécurité Privée`,
+    metaDescription: `MTJ Sécurité Privée à ${ville} : agents de sécurité, gardiennage, sécurité cynophile et événementielle ${lieu}. Devis gratuit — ${companyInfo.phone}.`,
     breadcrumbCurrent: `Sécurité privée à ${ville}`,
     areaServed: `${ville}, ${departement}, ${region}`,
     h1: `Sécurité Privée à ${ville} — ${departement} (${code})`,
-    introduction: `MTJ Sécurité Privée intervient à ${ville} et dans ${leDepartement}. Notre zone d'intervention principale va ${SECTEUR}. Siège basé à Toulon.\n\nNotre engagement se traduit par des interventions professionnelles, un respect strict des réglementations en vigueur et une disponibilité 24h/24 et 7j/7.`,
+    introduction: `MTJ Sécurité Privée intervient à ${ville} et dans ${leDepartement}. ${SECTEUR_TITRE} - Zone d'intervention prioritaire avec nos équipes dédiées disponibles 24/7. Siège basé à Toulon.\n\nNotre engagement se traduit par des interventions professionnelles, un respect strict des réglementations en vigueur et une disponibilité 24h/24 et 7j/7.`,
     sections: [sectionMetiers(ville, leDepartement), sectionDomaines()],
     faq: faqCommune(),
     conclusion: `Agents de sécurité qualifiés, équipes cynophiles, agents SSIAP et maîtres-chiens CYNODEX : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à ${ville}.`,

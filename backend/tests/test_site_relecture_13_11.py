@@ -111,6 +111,7 @@ def client_site(monkeypatch, tmp_path):
     monkeypatch.setattr(forms, "UPLOAD_DIR", tmp_path)
     monkeypatch.setattr(forms, "send_quote_email", lambda **kwargs: envois.append(kwargs) or True)
     monkeypatch.setattr(forms, "send_contact_email", lambda **kwargs: envois.append(kwargs) or True)
+    monkeypatch.setattr(forms, "send_recruitment_email", lambda **kwargs: envois.append(kwargs) or True)
     return TestClient(server.app), base, envois
 
 
@@ -123,9 +124,12 @@ def _devis(ts, **extra):
     return data
 
 
+# Depuis le 15/11/2026, le formulaire envoie aussi « elapsed » : la durée entre son chargement et l'envoi, lue
+# deux fois sur l'horloge du visiteur (backend/security.py). Les essais envoient ce que le navigateur enverrait.
+
 def test_devis_ouvert_depuis_plus_de_24h_refus_visible_et_rien_d_enregistre(client_site):
     client, base, envois = client_site
-    r = client.post("/api/quote", data=_devis(str(time.time() - 25 * 3600)),
+    r = client.post("/api/quote", data=_devis(str(time.time() - 25 * 3600), elapsed=str(25 * 3600)),
                     headers={"X-Forwarded-For": "10.13.11.31"})
     corps = r.json()
     assert corps["status"] == "error", "un onglet ouvert depuis plus de 24 h ne doit pas recevoir « Merci »"
@@ -137,7 +141,7 @@ def test_contact_ouvert_depuis_plus_de_24h_refus_visible(client_site):
     client, base, envois = client_site
     r = client.post("/api/contact", data={
         "name": "Visiteur Fictif", "email": "visiteur.fictif@example.com", "subject": "Sujet", "message": "x",
-        "consent": "true", "ts": str(time.time() - 30 * 3600),
+        "consent": "true", "ts": str(time.time() - 30 * 3600), "elapsed": str(30 * 3600),
     }, headers={"X-Forwarded-For": "10.13.11.32"})
     assert r.json()["status"] == "error"
     assert base.contacts.docs == [] and envois == []
@@ -151,9 +155,78 @@ def test_contact_ouvert_depuis_plus_de_24h_refus_visible(client_site):
 def test_signaux_de_robot_restent_silencieux_et_rien_n_est_enregistre(client_site, cas, ip):
     client, base, envois = client_site
     ts = str(time.time() - 1) if cas == "rapide" else cas  # calculé au moment de l'envoi
-    r = client.post("/api/quote", data=_devis(ts), headers={"X-Forwarded-For": ip})
+    extra = {"elapsed": "1"} if cas == "rapide" else {}
+    r = client.post("/api/quote", data=_devis(ts, **extra), headers={"X-Forwarded-For": ip})
     assert r.json()["status"] == "success"  # réponse silencieuse pour le robot
     assert base.quotes.docs == [] and envois == []
+
+
+# ─── Horloge du visiteur décalée : la vraie demande n'est jamais jetée (relecture adverse du 15/11/2026) ─────
+# Avant : « ts » (heure de l'appareil du visiteur) était comparé à l'heure du serveur. Horloge en avance de 2 min
+# et formulaire rempli en 60 s : écart de -60 s pris pour un robot, « Merci pour votre demande. » affiché alors que
+# rien n'était gardé ni envoyé ; horloge en retard de 25 h : refus que recharger la page ne réglait pas.
+
+SAISIE_SECONDES = 60
+AVANCE_2_MIN, RETARD_25_H = 120, -25 * 3600
+
+
+def _ts_du_visiteur(decalage: int) -> str:
+    """« ts » tel que l'écrit un appareil décalé de `decalage` secondes, formulaire chargé il y a 60 s."""
+    return str(time.time() + decalage - SAISIE_SECONDES)
+
+
+@pytest.mark.parametrize("decalage", [AVANCE_2_MIN, RETARD_25_H])
+def test_check_honeypot_ignore_le_decalage_de_l_horloge(decalage):
+    import security
+
+    security.check_honeypot(None, _ts_du_visiteur(decalage), str(SAISIE_SECONDES))  # ni robot ni formulaire périmé
+
+
+@pytest.mark.parametrize("formulaire, decalage, ip", [
+    ("devis", AVANCE_2_MIN, "10.13.11.60"), ("devis", RETARD_25_H, "10.13.11.61"),
+    ("contact", AVANCE_2_MIN, "10.13.11.62"), ("contact", RETARD_25_H, "10.13.11.63"),
+    ("recrutement", AVANCE_2_MIN, "10.13.11.64"), ("recrutement", RETARD_25_H, "10.13.11.65"),
+])
+def test_horloge_decalee_la_demande_est_gardee_et_envoyee(client_site, formulaire, decalage, ip):
+    client, base, envois = client_site
+    ts = _ts_du_visiteur(decalage)
+    commun = {"email": "visiteur.fictif@example.com", "message": "Besoin fictif", "consent": "true",
+              "ts": ts, "elapsed": str(SAISIE_SECONDES)}
+    if formulaire == "devis":
+        r = client.post("/api/quote", data=_devis(ts, elapsed=str(SAISIE_SECONDES)), headers={"X-Forwarded-For": ip})
+        gardees, attendu = base.quotes.docs, "Votre demande de devis a ete envoyee avec succes."
+    elif formulaire == "contact":
+        r = client.post("/api/contact", data={**commun, "name": "Visiteur Fictif", "subject": "Sujet"},
+                        headers={"X-Forwarded-For": ip})
+        gardees, attendu = base.contacts.docs, "Votre message a ete envoye avec succes."
+    else:
+        r = client.post("/api/recrutement",
+                        data={**commun, "firstName": "Visiteur", "lastName": "Fictif", "phone": "00 00 00 00 00"},
+                        files=[("attachments", ("cv.pdf", b"%PDF-1.4 fictif", "application/pdf"))],
+                        headers={"X-Forwarded-For": ip})
+        gardees, attendu = base.recruitments.docs, "Votre candidature a ete envoyee avec succes."
+    corps = r.json()
+    assert corps["status"] == "success" and corps["message"].startswith(attendu), corps
+    assert len(gardees) == 1 and len(envois) == 1, "demande jetée alors que le visiteur lit « Merci »"
+
+
+@pytest.mark.parametrize("decalage, ip", [(AVANCE_2_MIN, "10.13.11.66"), (RETARD_25_H, "10.13.11.67")])
+def test_onglet_ouvert_avant_la_correction_sans_duree_la_demande_part(client_site, decalage, ip):
+    """Un onglet chargé avant cette version n'envoie pas « elapsed » : aucune mesure fiable, la demande passe."""
+    client, base, envois = client_site
+    r = client.post("/api/quote", data=_devis(_ts_du_visiteur(decalage)), headers={"X-Forwarded-For": ip})
+    assert r.json()["message"].startswith("Votre demande de devis a ete envoyee avec succes.")
+    assert len(base.quotes.docs) == 1 and len(envois) == 1
+
+
+def test_les_trois_formulaires_envoient_la_duree_mesuree_par_le_navigateur():
+    for nom in ("Quote.jsx", "ContactPage.jsx", "Recrutement.jsx"):
+        texte = _lire(SRC / "components" / nom)
+        assert "const [formLoadedAt] = useState(() => String(Date.now() / 1000));" in texte, nom
+        assert "submitData.append('elapsed', String(Date.now() / 1000 - Number(formLoadedAt)));" in texte, nom
+    forms = _lire(BACKEND / "routers" / "forms.py")
+    assert forms.count("elapsed: Optional[str] = Form(None),") == 3
+    assert forms.count("_check_spam(hp, ts, elapsed, ") == 3
 
 
 # ─── Tableau d'administration : un comptage impossible ne devient jamais 0 ───────────
@@ -221,6 +294,38 @@ def test_les_phrases_capturees_par_theo_ne_reviennent_pas():
     mock = _lire(SRC / "data" / "mock.js")
     assert "maîtres-chiens formés aux techniques les plus avancées de surveillance et de détection" in mock
     assert "garantissent votre intégrité physique en toute discrétion" in mock
-    # Plus de bloc légal dans la carte « Protection physique des personnes » : la mention CNAPS de chaque
-    # société est écrite une seule fois, dans le pied de page.
-    assert "legalNotice:" not in mock
+
+
+# ─── Mention CNAPS de MTJ Sécurité Rapprochée visible sur téléphone (relecture adverse du 15/11/2026) ─────────
+# La branche l'avait retirée de la carte de l'accueil et de l'introduction de la page Protection rapprochée pour ne
+# la garder que dans le bloc du pied de page, masqué sous 768 px (« hidden md:block ») : sur téléphone, elle
+# n'apparaissait plus sur aucune page (hors Mentions légales). Elle revient aux deux endroits, mot pour mot.
+
+def _en_ligne(chemin: str) -> str:
+    """Texte d'un fichier tel qu'il est sur le site en ligne (version du 04/11/2026, commit 9561a0a)."""
+    import subprocess
+
+    r = subprocess.run(["git", "-C", str(REPO), "show", f"9561a0a:{chemin}"], capture_output=True, text=True)
+    assert r.returncode == 0, f"texte du site en ligne illisible ({chemin}) : {r.stderr.strip()}"
+    return r.stdout
+
+
+def test_mention_cnaps_de_mtj_securite_rapprochee_visible_sur_telephone():
+    def ligne_legale(texte):
+        return [ligne.strip() for ligne in texte.splitlines() if ligne.strip().startswith("legalNotice:")]
+
+    mock = _lire(SRC / "data" / "mock.js")
+    assert ligne_legale(mock) == ligne_legale(_en_ligne("frontend/src/data/mock.js")), "carte de l'accueil"
+    assert "AUT-006-2123-10-21-20240955994" in ligne_legale(mock)[0]
+    services = _lire(SRC / "components" / "Services.jsx")
+    rendu = services.split("{service.legalNotice && (")[1].split("</p>")[0]
+    assert "hidden" not in rendu, "la carte doit montrer la mention à toutes les largeurs d'écran"
+
+    def introduction(texte):
+        return re.search(r"introduction: `([^`]*)`", texte).group(1)
+
+    chemin = "frontend/src/pages/seo/ProtectionRapprocheePage.jsx"
+    intro = introduction(_lire(REPO / chemin))
+    assert intro == introduction(_en_ligne(chemin)), "introduction de la page Protection rapprochée"
+    assert intro.endswith("Elle n'engage en aucune manière la responsabilité des pouvoirs publics.")
+    assert "AUT-006-2123-10-21-20240955994" in intro
