@@ -45,9 +45,12 @@ export const postalAddressSchema = {
 // Forme, capital, immatriculation et date d'immatriculation RECOPIÉES de l'extrait Kbis « à jour au
 // 3 novembre 2026 » (pièce du coffre fournisseur du logiciel MTJ, relue en lecture seule le 15/11/2026 :
 // « Forme juridique Société par actions simplifiée (Société à associé unique) », « Capital social
-// 500,00 Euros », « Date d'immatriculation 12/12/2022 », durée « jusqu'au 11/12/2121 », cohérente).
+// 500,00 Euros », « Date d'immatriculation 12/12/2022 », « Durée de la personne morale Jusqu'au 12/12/2121 »,
+// cohérente ; relecture adverse du 15/11/2026 : les quatre phrases relues sur le texte du Kbis, la durée
+// était recopiée « 11/12/2121 » dans ce commentaire).
 // Le Kbis n'imprime pas de numéro de TVA : FR + clé + SIREN (clé = (12 + 3 × (SIREN mod 97)) mod 97 = 27),
-// numéro déclaré « valide » par le service VIES de la Commission européenne le 15/11/2026.
+// numéro déclaré « valide » par le service VIES de la Commission européenne le 15/11/2026, au nom de
+// « SAS MTJ SECURITE PRIVEE », 31 rue Chevalier Paul, 83000 Toulon (réponse relue en relecture adverse).
 // Une valeur qui change = la changer ici (l'essai test_site_choix_theo_13_11.py relit ces valeurs).
 export const legalInfo = {
   forme: "société par actions simplifiée (société à associé unique)",

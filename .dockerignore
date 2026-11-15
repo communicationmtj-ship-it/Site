@@ -1,0 +1,9 @@
+# Contexte de construction des deux images du site (Dockerfile, Dockerfile.backend).
+# Relecture adverse du 15/11/2026 : « COPY frontend/ . » vient APRÈS « yarn install ». Un dossier node_modules
+# ou build resté dans le dossier du serveur (non suivi par git, donc invisible à « git status ») écraserait
+# les paquets installés dans l'image : versions mêlées, construction et pré-rendu faussés. Ils ne partent
+# plus dans le contexte de construction ; l'image installe ses paquets elle-même.
+.git
+**/node_modules
+frontend/build
+**/__pycache__

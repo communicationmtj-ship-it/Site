@@ -127,8 +127,13 @@ def test_bordeaux_au_menu_et_au_pied_de_page():
     assert "/securite-privee-bordeaux" in dict(_pages_locales())
 
 
+# Mots qui annonceraient un lieu de MTJ Sécurité Privée ailleurs qu'au siège de Toulon (agence, antenne, bureaux,
+# locaux, adresse). Relecture adverse du 15/11/2026 : « Bureaux de la Part-Dieu » (les bureaux des clients, page de
+# Lyon) reste permis ; « nos bureaux », « notre bureau » et « bureau(x) à/de/sur <ville du secteur> » sont refusés.
+VILLES_DU_SECTEUR = r"(?:Bordeaux|Toulouse|Montpellier|Nîmes|Perpignan|Marseille|Nice|Monaco|Avignon|Lyon|Grenoble|Annecy)"
 ADRESSES_INTERDITES = [
-    r"\bagences?\b", r"\bantennes?\b", r"\bimplantée? à\b", r"\bbureaux? (?:à|de|sur)\b", r"\bbasée? à (?!Toulon)",
+    r"\bagences?\b", r"\bantennes?\b", r"\bimplantée? à\b", r"\b(?:nos|notre) bureaux?\b",
+    r"\bbureaux? (?:à|de|sur) " + VILLES_DU_SECTEUR + r"\b", r"\bbasée? à (?!Toulon)",
     r"équipes? (?:basées?|locales?)\b", r"\bnos locaux\b", r"\brue\b", r"\bavenue\b", r"\bboulevard\b",
 ]
 
@@ -171,15 +176,37 @@ def _litteraux(texte: str) -> list:
     return sortie
 
 
+def _texte_affiche(source: str) -> str:
+    """Les chaînes d'un fichier JS mises bout à bout, chaque saut de paragraphe écrit dans le code (« \\n »)
+    changé en espace. Relecture adverse du 15/11/2026 : sans ce changement, le premier mot d'un paragraphe
+    restait collé au « n » de « \\n » et échappait aux motifs (« \\b » ne voyait pas de début de mot) :
+    « \\n\\nNos bureaux à Lyon » passait l'essai."""
+    return " ".join(_litteraux(source)).replace("\\n", " ")
+
+
+def _adresses_trouvees(texte: str) -> list:
+    return [motif for motif in ADRESSES_INTERDITES if re.search(motif, texte, re.IGNORECASE)]
+
+
+def test_le_controle_des_fausses_adresses_voit_chaque_paragraphe():
+    # Témoins : un texte fautif en début de paragraphe est vu ; les bureaux d'un client ne le sont pas.
+    fautif = "const t = `Introduction.\\n\\nNos bureaux à Lyon vous accueillent.\\nAgence de Nice.`;"
+    trouves = _adresses_trouvees(_texte_affiche(fautif))
+    assert r"\b(?:nos|notre) bureaux?\b" in trouves and r"\bagences?\b" in trouves
+    assert _adresses_trouvees(_texte_affiche("const t = `Intro.\\n\\nBureaux à Lyon.`;")), "« Bureaux à Lyon » doit être vu"
+    assert not _adresses_trouvees("Bureaux de la Part-Dieu ou de Gerland, entrepôts de l'est lyonnais")
+
+
 def test_pages_locales_sans_fausse_adresse():
     for slug, ville in _pages_locales():
-        texte = " ".join(_litteraux(_lire(_composant(slug))))
+        texte = _texte_affiche(_lire(_composant(slug)))
         if ville == "Toulon":
             continue  # le siège : la seule adresse réelle, lue dans data/mock.js
-        for motif in ADRESSES_INTERDITES:
-            assert not re.search(motif, texte, re.IGNORECASE), f"{slug} : « {motif} »"
+        assert not _adresses_trouvees(texte), f"{slug} : « {_adresses_trouvees(texte)} »"
     commun = _lire(SEO / "pageLocale.js")
     assert "Notre siège est à Toulon" in commun and "companyInfo.address" in commun
+    # Le texte commun à toutes les pages locales passe le même contrôle.
+    assert not _adresses_trouvees(_texte_affiche(commun)), _adresses_trouvees(_texte_affiche(commun))
 
 
 def _phrases(texte: str) -> set:
@@ -376,12 +403,33 @@ def test_aucune_note_ecrite_a_la_main_ni_affirmation_non_prouvee():
             assert motif not in texte, f"{p.name} : « {motif} »"
 
 
+def test_aucune_population_ni_classement_inverifiable():
+    """Relecture adverse du 15/11/2026 : les populations des métropoles avaient été retirées des pages de
+    Bordeaux et de Toulouse, pas de celle de Toulon (« plus de 430 000 habitants ») ; la page de Nice
+    classait le carnaval « deuxième plus grand carnaval au monde ». Commentaires du code exclus."""
+    for p in list(SRC.rglob("*.js")) + list(SRC.rglob("*.jsx")) + [FRONT / "public" / "index.html"]:
+        if "components/ui" in p.as_posix():
+            continue
+        texte = re.sub(r"/\*[\s\S]*?\*/|//[^\n]*|<!--[\s\S]*?-->", "", _lire(p))
+        assert not re.search(r"\d[\d\s\u00a0\u202f]*habitants", texte), f"{p.name} : population chiffrée"
+        assert "plus grand carnaval" not in texte and "centaines de milliers de spectateurs" not in texte, p.name
+
+
 def test_aucune_carte_du_code_source_publiee():
     docker = _lire(REPO / "Dockerfile")
     assert "ENV GENERATE_SOURCEMAP=false" in docker
     assert "find build -name '*.map'" in docker
     assert '"build": "GENERATE_SOURCEMAP=false craco build"' in _lire(FRONT / "package.json")
     assert re.search(r"location ~ \\\.map\$ \{\s*return 404;", _lire(REPO / "nginx-site.conf"))
+
+
+def test_le_contexte_de_construction_n_emporte_ni_paquets_ni_construction_du_serveur():
+    """Relecture adverse du 15/11/2026 : « COPY frontend/ . » vient après « yarn install » ; un node_modules ou
+    un build resté dans le dossier du serveur écraserait les paquets de l'image (pré-rendu faussé)."""
+    ignore = [ligne.strip() for ligne in _lire(REPO / ".dockerignore").splitlines()]
+    assert "**/node_modules" in ignore and "frontend/build" in ignore
+    docker = _lire(REPO / "Dockerfile")
+    assert docker.index("yarn install") < docker.index("COPY frontend/ .") < docker.index("RUN yarn build")
 
 
 # ─── 9. Pré-rendu ─────────────────────────────────────────────────────────────

@@ -43,7 +43,9 @@ const data = {
         },
         {
           h3: 'Carnaval de Nice et festivités locales',
-          content: 'Le Carnaval de Nice, deuxième plus grand carnaval au monde, attire des centaines de milliers de spectateurs. La sécurisation de cet événement en plein air nécessite un dispositif important : contrôle des accès aux tribunes, surveillance des cortèges, gestion des mouvements de foule et coordination avec les forces de l\'ordre.'
+          // 15/11/2026 (relecture adverse) : plus de classement (« deuxième plus grand carnaval au monde ») ni de
+          // nombre de spectateurs, invérifiables.
+          content: 'Le Carnaval de Nice, l\'un des carnavals les plus célèbres au monde, attire chaque année un très large public. La sécurisation de cet événement en plein air nécessite un dispositif important : contrôle des accès aux tribunes, surveillance des cortèges, gestion des mouvements de foule et coordination avec les forces de l\'ordre.'
         }
       ]
     },

@@ -38,7 +38,8 @@ const data = {
       subsections: [
         {
           h3: 'Toulon Provence Méditerranée et bassin toulonnais',
-          content: 'L\'agglomération Toulon Provence Méditerranée regroupe 12 communes et plus de 430 000 habitants. Nos équipes interviennent sur l\'ensemble de ce territoire : Toulon, La Seyne-sur-Mer, Hyères, La Valette-du-Var, La Garde, Ollioules, Le Pradet, Carqueiranne, Le Revest-les-Eaux, Saint-Mandrier, Six-Fours-les-Plages et La Crau.'
+          // 15/11/2026 (relecture adverse) : population retirée, comme pour Bordeaux et Toulouse (chiffre non sourcé).
+          content: 'L\'agglomération Toulon Provence Méditerranée regroupe 12 communes. Nos équipes interviennent sur l\'ensemble de ce territoire : Toulon, La Seyne-sur-Mer, Hyères, La Valette-du-Var, La Garde, Ollioules, Le Pradet, Carqueiranne, Le Revest-les-Eaux, Saint-Mandrier, Six-Fours-les-Plages et La Crau.'
         },
         {
           h3: 'Var Est : Fréjus, Saint-Raphaël, Draguignan',

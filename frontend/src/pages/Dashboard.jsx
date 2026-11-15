@@ -117,7 +117,7 @@ export default function Dashboard() {
       const res = await fetch(`${API_URL}/api/send-monthly-report`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } });
       const data = await res.json();
       alert(data.status === 'success' ? 'Rapport envoyé par email !' : 'Erreur lors de l\'envoi');
-    } catch (e) {
+    } catch {
       alert('Erreur réseau');
     } finally {
       setSending(false);
