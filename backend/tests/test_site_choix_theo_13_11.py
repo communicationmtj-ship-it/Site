@@ -7,7 +7,8 @@ et des constats du bilan SEO du 13/11/2026, construits le 15/11/2026.
 3. durées de conservation affichées, aucun effacement automatique annoncé ni programmé ;
 4. périmètre de Bordeaux à Nice jusqu'à Annecy partout (34 codes du logiciel MTJ) ;
 5. pages locales d'intervention, contenu propre à chaque ville, une seule adresse (Toulon) ;
-6. CYNODEX et SSIAP 2-3 : repli prudent gardé ; 7. aucun chiffre sur l'accueil ;
+6. CYNODEX et SSIAP 1, 2 et 3 présentés sans réserve (réponse de Théo du 15/11/2026, qui remplace le
+   repli prudent du 13/11/2026) ; 7. aucun chiffre sur l'accueil ;
 9. pré-rendu : un HTML par page publique, canonique propre, plan du site = pages pré-rendues.
 
 Aucun serveur, aucune base, aucun envoi : les envois de mail sont remplacés par une fonction qui note
@@ -363,15 +364,63 @@ def test_durees_affichees_sans_effacement_automatique():
         assert "expireAfterSeconds" not in texte and "delete_many(" not in texte, p.name
 
 
-# ─── 6 et 7. Repli prudent CYNODEX et SSIAP, aucun chiffre sur l'accueil ─────────
+# ─── 6 et 7. CYNODEX et SSIAP 1, 2 et 3 sans réserve, aucun chiffre sur l'accueil ──
 
-def test_repli_prudent_cynodex_et_ssiap_garde():
+# Réponse de Théo du 15/11/2026 (« Qualifications ») : le site est une vitrine pour le commercial ; si un
+# client demande un profil, MTJ recrute et assure la prestation. Les maîtres-chiens certifiés CYNODEX et
+# les agents SSIAP 1, 2 et 3 sont des prestations que MTJ assure : plus aucune réserve de
+# certification, d'habilitation, de disponibilité ni de niveau « étudié ». Ces essais remplacent celui du
+# repli prudent du 13/11/2026 (test_repli_prudent_cynodex_et_ssiap_garde), qui imposait ces réserves.
+RESERVES_RETIREES = [
+    "selon la certification du binôme", "selon la certification de chaque binôme", "selon leur habilitation",
+    "niveau étudié selon le poste", "selon les agents disponibles", "disponibilité des binômes",
+    "nous étudions chaque demande de ssiap", "demandes de ssiap 2 ou 3", "peut mettre à disposition des agents ssiap",
+]
+
+
+def _texte_sans_commentaires(path: Path) -> str:
+    """Le texte d'un fichier du site sans ses lignes de commentaire (les explications datées du code
+    restent permises), apostrophes échappées rendues, en minuscules."""
+    texte = re.sub(r"^\s*//[^\n]*$|/\*[\s\S]*?\*/|<!--[\s\S]*?-->", "", _lire(path), flags=re.MULTILINE)
+    return texte.replace("\\'", "'").lower()
+
+
+def test_cynodex_et_ssiap_1_2_3_sans_reserve():
+    fichiers = [p for p in SRC.rglob("*") if p.suffix in (".js", ".jsx") and "components/ui" not in p.as_posix()]
+    fichiers.append(FRONT / "public" / "index.html")
+    for p in fichiers:
+        texte = _texte_sans_commentaires(p)
+        for reserve in RESERVES_RETIREES:
+            assert reserve not in texte, f"{p.relative_to(REPO)} : « {reserve} »"
+    # La prestation est écrite franchement là où la réserve se trouvait.
+    for p in (SRC / "components" / "HomeFaq.jsx", SRC / "data" / "mock.js", SEO / "CynodexPage.jsx",
+              SEO / "BordeauxPage.jsx", SEO / "ToulousePage.jsx", SEO / "pageLocale.js"):
+        assert "maîtres-chiens certifiés cynodex" in _texte_sans_commentaires(p), p.name
+    for p in (SEO / "ErpPage.jsx", SEO / "SudFrancePage.jsx", SEO / "pageLocale.js", SEO / "SsiapPage.jsx"):
+        assert "agents ssiap 1, 2 et 3" in _texte_sans_commentaires(p), p.name
+    ssiap = _texte_sans_commentaires(SEO / "SsiapPage.jsx")
+    assert "met à disposition des agents ssiap 1." in ssiap
+    assert "met à disposition des chefs d'équipe ssiap 2 et des chefs de service ssiap 3" in ssiap
+    assert "diplôme ssiap 1, 2 ou 3" in _texte_sans_commentaires(SEO / "ToulonPage.jsx")
+
+
+def test_le_controle_des_reserves_voit_le_texte_et_pas_les_commentaires():
+    # Témoins : une réserve dans une chaîne affichée est vue ; la même dans une ligne de commentaire ne l'est pas.
+    import tempfile
+    with tempfile.TemporaryDirectory() as dossier:
+        fautif = Path(dossier) / "fautif.jsx"
+        fautif.write_text("const t = 'Nos binômes interviennent, selon la certification du binôme.';\n", encoding="utf-8")
+        assert "selon la certification du binôme" in _texte_sans_commentaires(fautif)
+        commente = Path(dossier) / "commente.jsx"
+        commente.write_text("  // 13/11/2026 : selon la certification du binôme (ancienne règle).\nconst t = 'x';\n",
+                            encoding="utf-8")
+        assert "selon la certification du binôme" not in _texte_sans_commentaires(commente)
+
+
+def test_aucune_garantie_absolue_sur_les_ssiap():
+    """Gardé du 13/11/2026 (audit du site de Mathilde) : la prestation est assurée, jamais « garantie »."""
     for p in SEO.glob("*.jsx"):
-        texte = _lire(p)
-        assert "unité CYNODEX :" not in texte and "et unité CYNODEX" not in texte, p.name
-        assert not re.search(r"SSIAP\s*(?:2|3|2 et 3|1, 2 et 3)\s*(?:certifiés|garantis)", texte), p.name
-    commun = _lire(SEO / "pageLocale.js")
-    assert "selon la certification du binôme" in commun and "niveau étudié selon le poste" in commun
+        assert not re.search(r"SSIAP\s*(?:2|3|2 et 3|1, 2 et 3)\s*garantis", _lire(p)), p.name
 
 
 CHIFFRES_INTERDITS = re.compile(

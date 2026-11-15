@@ -12,8 +12,11 @@ const data = {
   h1: 'CYNODEX — Détection d\'Explosifs par Équipe Cynophile',
   // 13/11/2026 (audit du site de Mathilde, site-075 à 077) : sans liste ni nombre de familles
   // d'explosifs, sans sites militaires, nucléaires ni gouvernementaux, sans « partenaire des
-  // autorités » ; tout se dit « selon la certification du binôme ».
-  introduction: `L'unité CYNODEX de MTJ Sécurité Privée est spécialisée dans la détection d'explosifs à l'aide de chiens entraînés à cette mission. Face à la menace terroriste et aux risques liés aux engins explosifs improvisés, la détection canine apporte une capacité complémentaire aux moyens technologiques.\n\nNos binômes CYNODEX interviennent, selon la certification de chaque binôme, pour sécuriser des événements, des sites sensibles et des lieux accueillant du public.`,
+  // autorités ».
+  // 15/11/2026 (réponse de Théo, « Qualifications ») : le site est une vitrine commerciale, MTJ recrute
+  // si un client demande un profil et assure la prestation ; plus aucune réserve de certification,
+  // d'habilitation ni de disponibilité : maîtres-chiens certifiés CYNODEX.
+  introduction: `L'unité CYNODEX de MTJ Sécurité Privée est spécialisée dans la détection d'explosifs à l'aide de chiens entraînés à cette mission. Face à la menace terroriste et aux risques liés aux engins explosifs improvisés, la détection canine apporte une capacité complémentaire aux moyens technologiques.\n\nNos maîtres-chiens certifiés CYNODEX interviennent pour sécuriser des événements, des sites sensibles et des lieux accueillant du public.`,
 
   sections: [
     {
@@ -41,7 +44,7 @@ const data = {
         },
         {
           h3: 'Chiens détecteurs : entraînement spécialisé',
-          content: 'Les chiens de notre unité CYNODEX suivent un entraînement continu à la détection de matières explosives. Ils sont entraînés à la détection de plusieurs familles de matières explosives, selon la certification du binôme, et font l\'objet d\'évaluations régulières.'
+          content: 'Les chiens de notre unité CYNODEX suivent un entraînement continu à la détection de matières explosives. Ils sont entraînés à la détection de plusieurs familles de matières explosives et font l\'objet d\'évaluations régulières.'
         },
         {
           h3: 'Coordination avec les forces de l\'ordre',
@@ -59,7 +62,7 @@ const data = {
         },
         {
           h3: 'Sites sensibles et lieux accueillant du public',
-          content: 'Selon leur habilitation, nos binômes CYNODEX peuvent intervenir dans des centres commerciaux, des gares, des aéroports et des lieux accueillant du public. La détection canine offre une couche de sécurité complémentaire aux dispositifs technologiques existants (portiques, scanners, caméras).'
+          content: 'Nos maîtres-chiens certifiés CYNODEX interviennent dans des centres commerciaux, des gares, des aéroports et des lieux accueillant du public. La détection canine offre une couche de sécurité complémentaire aux dispositifs technologiques existants (portiques, scanners, caméras).'
         }
       ]
     }
@@ -72,11 +75,11 @@ const data = {
     },
     {
       question: 'Le chien peut-il détecter tous les types d\'explosifs ?',
-      answer: 'Aucun moyen de détection n\'est infaillible. Nos chiens CYNODEX sont entraînés à la détection de plusieurs familles de matières explosives, selon la certification du binôme, et leur entraînement est entretenu régulièrement. Le détail vous est précisé lors de l\'étude de votre besoin.'
+      answer: 'Aucun moyen de détection n\'est infaillible. Nos chiens CYNODEX sont entraînés à la détection de plusieurs familles de matières explosives et leur entraînement est entretenu régulièrement. Le détail vous est précisé lors de l\'étude de votre besoin.'
     },
     {
       question: 'Dans quels délais pouvez-vous intervenir ?',
-      answer: 'Le délai dépend de la disponibilité des binômes et du lieu de la mission : il vous est annoncé lors de votre demande. Contactez-nous au 07 60 73 82 06 pour évaluer votre besoin.'
+      answer: 'Le délai dépend du lieu de la mission : il vous est annoncé lors de votre demande. Contactez-nous au 07 60 73 82 06 pour évaluer votre besoin.'
     }
   ],
 

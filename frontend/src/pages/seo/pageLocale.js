@@ -3,8 +3,8 @@
 // - MTJ Sécurité Privée « intervient à <ville> et alentour » depuis son siège de Toulon ;
 // - aucune adresse locale, aucune agence, aucune équipe « basée » sur place, aucun client cité,
 //   aucune mission passée affirmée, aucun chiffre non sourcé ;
-// - CYNODEX et SSIAP décrits avec la prudence du 13/11/2026 (selon la certification du binôme,
-//   niveau SSIAP étudié selon le poste) ;
+// - CYNODEX et SSIAP sans réserve (réponse de Théo du 15/11/2026, « Qualifications », qui remplace
+//   la prudence du 13/11/2026) : maîtres-chiens certifiés CYNODEX, agents SSIAP 1, 2 et 3 ;
 // - coordonnées lues dans data/mock.js, secteur et voisines dans data/perimetre.js.
 // L'essai backend/tests/test_site_choix_theo_13_11.py relit ces pages.
 import { companyInfo } from '../../data/mock';
@@ -34,8 +34,8 @@ const sectionMethode = (ville) => ({
       list: [
         'Agents de prévention et de sécurité',
         'Maîtres-chiens (sécurité cynophile)',
-        "Détection d'explosifs (CYNODEX), selon la certification du binôme",
-        'Agents SSIAP, niveau étudié selon le poste',
+        "Détection d'explosifs par des maîtres-chiens certifiés CYNODEX",
+        'Agents SSIAP 1, 2 et 3',
       ],
     },
   ],

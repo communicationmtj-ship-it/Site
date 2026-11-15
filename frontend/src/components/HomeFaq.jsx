@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     question: "Qu'est-ce que le CYNODEX proposé par MTJ Sécurité Privée ?",
-    answer: "Le CYNODEX est une prestation spécialisée de détection d'explosifs par des chiens dressés à cette mission. Nos binômes maître-chien CYNODEX interviennent pour sécuriser des événements et des lieux accueillant du public, selon la certification de chaque binôme. C'est une compétence rare dans le secteur de la sécurité privée."
+    answer: "Le CYNODEX est une prestation spécialisée de détection d'explosifs par des chiens dressés à cette mission. Nos maîtres-chiens certifiés CYNODEX interviennent pour sécuriser des événements et des lieux accueillant du public. C'est une compétence rare dans le secteur de la sécurité privée."
   }
 ];
 

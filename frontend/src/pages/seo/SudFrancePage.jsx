@@ -47,7 +47,7 @@ const data = {
         {
           h3: 'Agents de sécurité, cynophile, SSIAP et CYNODEX',
           content: 'Où que se trouve votre site dans notre secteur, vous avez accès à l\'ensemble de notre offre : agents de prévention et de sécurité (APS), binômes maître-chien d\'intervention, détection d\'explosifs (CYNODEX) et agents SSIAP pour la sécurité incendie.',
-          list: ['Agents APS titulaires de la carte professionnelle du CNAPS', 'Sécurité cynophile et CYNODEX', 'Agents SSIAP (niveau étudié selon le poste)', 'Sécurité événementielle complète']
+          list: ['Agents APS titulaires de la carte professionnelle du CNAPS', 'Sécurité cynophile et CYNODEX', 'Agents SSIAP 1, 2 et 3', 'Sécurité événementielle complète']
         },
         {
           h3: 'Un interlocuteur unique pour tous vos sites',

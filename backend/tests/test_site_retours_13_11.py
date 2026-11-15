@@ -266,6 +266,10 @@ def _textes_du_site() -> dict:
     return {p: _lire(p) for p in fichiers}
 
 
+# 15/11/2026 (réponse de Théo, « Qualifications ») : « SSIAP 1, 2 et 3 certifiés » et « SSIAP 1/2/3 » ne sont
+# plus des phrases retirées ; le site présente les agents SSIAP 1, 2 et 3 sans réserve (essai
+# test_cynodex_et_ssiap_1_2_3_sans_reserve de test_site_choix_theo_13_11.py). Les autres phrases restent
+# retirées : chiffres, clients, implantations, garanties et certification de la société non prouvés.
 PHRASES_RETIREES = [
     "certifiée ISO 9001", "certifié ISO 9001", "accords transfrontaliers", "plus de 20 familles",
     "pôles opérationnels", "antenne toulousaine", "implantation multi-sites", "équipes opérationnelles sur",
@@ -273,7 +277,7 @@ PHRASES_RETIREES = [
     "installations nucléaires", "partenaire de confiance des autorités", "effectif conséquent",
     "Relevé du courrier", "relevé du courrier", "photos géolocalisées", "main courante dématérialisée",
     "multiplie par cinq", "plus de 90 %", "Societe du groupe", "inégalé", "maïtre", "usines Airbus",
-    "SSIAP 1, 2 et 3 certifiés", "SSIAP 1/2/3", "Nice Étoile", "conformité totale",
+    "Nice Étoile", "conformité totale",
 ]
 
 

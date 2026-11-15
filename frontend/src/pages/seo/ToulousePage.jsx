@@ -58,10 +58,10 @@ const data = {
       h2: 'Pourquoi choisir MTJ Sécurité Privée à Toulouse',
       subsections: [
         {
-          // 15/11/2026 (repli prudent) : plus de « savoir-faire éprouvé » ni de « sites sensibles » sans preuve ;
-          // CYNODEX selon la certification du binôme, comme sur les autres pages.
+          // 15/11/2026 (repli prudent) : plus de « savoir-faire éprouvé » ni de « sites sensibles » sans preuve.
+          // 15/11/2026 (réponse de Théo, « Qualifications ») : CYNODEX sans réserve, maîtres-chiens certifiés.
           h3: 'Un seul interlocuteur sur tout le secteur',
-          content: 'Depuis notre siège de Toulon, nous intervenons de Bordeaux à Nice et jusqu\'à Annecy : vos sites de Haute-Garonne et ceux du reste du secteur peuvent relever d\'un même interlocuteur et d\'un même devis. Nos maîtres-chiens complètent l\'offre ; la détection d\'explosifs (CYNODEX) est proposée selon la certification du binôme.'
+          content: 'Depuis notre siège de Toulon, nous intervenons de Bordeaux à Nice et jusqu\'à Annecy : vos sites de Haute-Garonne et ceux du reste du secteur peuvent relever d\'un même interlocuteur et d\'un même devis. Nos maîtres-chiens complètent l\'offre ; la détection d\'explosifs est assurée par nos maîtres-chiens certifiés CYNODEX.'
         },
         {
           h3: 'Capacité de montée en charge',
@@ -82,11 +82,11 @@ const data = {
     },
     {
       question: 'Proposez-vous des prestations cynophiles à Toulouse ?',
-      answer: 'Oui. Nos maîtres-chiens interviennent à Toulouse pour des missions de surveillance renforcée et de sécurité événementielle ; la détection d\'explosifs (CYNODEX) est proposée selon la certification du binôme. Les binômes maître-chien sont adaptés aux sites étendus et aux grands événements.'
+      answer: 'Oui. Nos maîtres-chiens interviennent à Toulouse pour des missions de surveillance renforcée et de sécurité événementielle ; la détection d\'explosifs est assurée par nos maîtres-chiens certifiés CYNODEX. Les binômes maître-chien sont adaptés aux sites étendus et aux grands événements.'
     }
   ],
 
-  conclusion: `MTJ Sécurité Privée intervient à Toulouse, en Haute-Garonne et dans toute l'Occitanie. Agents de sécurité qualifiés, maîtres-chiens, agents SSIAP et, selon la certification du binôme, détection d'explosifs (CYNODEX) : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à Toulouse.`,
+  conclusion: `MTJ Sécurité Privée intervient à Toulouse, en Haute-Garonne et dans toute l'Occitanie. Agents de sécurité qualifiés, maîtres-chiens, agents SSIAP et détection d'explosifs par nos maîtres-chiens certifiés CYNODEX : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à Toulouse.`,
 
   relatedLinks: [
     lienLocal('/securite-privee-bordeaux'),

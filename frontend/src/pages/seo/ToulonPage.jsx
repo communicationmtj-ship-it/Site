@@ -77,7 +77,8 @@ const data = {
     },
     {
       question: 'Quelles certifications possèdent vos agents ?',
-      answer: 'Tous nos agents sont titulaires de la carte professionnelle délivrée par le CNAPS. Selon les missions, ils possèdent également les qualifications requises : diplôme SSIAP pour la sécurité incendie, formation cynophile pour les maîtres-chiens, secourisme (SST). MTJ Sécurité Privée est elle-même autorisée par le CNAPS à exercer ses activités de sécurité privée.'
+      // 15/11/2026 (réponse de Théo, « Qualifications ») : les niveaux SSIAP 1, 2 et 3 sont affichés.
+      answer: 'Tous nos agents sont titulaires de la carte professionnelle délivrée par le CNAPS. Selon les missions, ils possèdent également les qualifications requises : diplôme SSIAP 1, 2 ou 3 pour la sécurité incendie, formation cynophile pour les maîtres-chiens, secourisme (SST). MTJ Sécurité Privée est elle-même autorisée par le CNAPS à exercer ses activités de sécurité privée.'
     }
   ],
 
