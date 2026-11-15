@@ -57,7 +57,9 @@ const traduire = (module, fichier, source) => {
     sourceMaps: false,
     presets: [[PRESET_REACT_APP, { runtime: "automatic" }]],
   });
-  module._compile(sortie.code, fichier);
+  // Code traduit en CommonJS : forcé comme tel (Node 22 et plus lirait sinon en module ES un fichier d'un
+  // paquet déclaré « type: module ») ; Node 20 ignore ce troisième argument.
+  module._compile(sortie.code, fichier, "commonjs");
 };
 
 // Un fichier de node_modules écrit en modules ES sans le déclarer (cas de la carte de France,
