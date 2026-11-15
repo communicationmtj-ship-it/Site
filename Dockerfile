@@ -21,4 +21,7 @@ RUN test -s build/prerendu/rapport.json && test -s build/prerendu/index.html \
 FROM nginx:alpine
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY nginx-site.conf /etc/nginx/conf.d/default.conf
+# Garde : un réglage nginx illisible arrête la construction (l'ancien conteneur reste en ligne)
+# au lieu de lancer un conteneur qui ne démarre pas.
+RUN nginx -t
 EXPOSE 80

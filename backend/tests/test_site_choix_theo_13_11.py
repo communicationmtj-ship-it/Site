@@ -409,6 +409,7 @@ def test_le_script_de_pre_rendu_ecrit_une_canonique_propre_et_s_arrete_en_cas_d_
     assert '"postbuild": "node scripts/prerender.js"' in _lire(FRONT / "package.json")
     docker = _lire(REPO / "Dockerfile")
     assert "RUN yarn build" in docker and "test -s build/prerendu/rapport.json" in docker
+    assert docker.index("COPY nginx-site.conf") < docker.index("RUN nginx -t"), "nginx -t doit relire le réglage copié"
 
 
 def test_nom_des_fichiers_pre_rendus_et_regle_nginx():
