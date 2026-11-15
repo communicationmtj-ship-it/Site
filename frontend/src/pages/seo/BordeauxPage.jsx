@@ -4,6 +4,9 @@ import SeoPageLayout from './SeoPageLayout';
 // 15/11/2026 (Théo, formulaire 3/4 : les pages de villes sortent, sans preuve) : texte du site en ligne,
 // sans chiffre (population, classement), sans client nommé, sans implantation hors du siège de Toulon ;
 // secteur « de Bordeaux à Nice jusqu'à Annecy », adresse contact@, CYNODEX = diplôme du maître-chien.
+// Théo, 15/11/2026 15:14 (« Site textes: Oui les 4 ») : événements nommés, preuves d'activité locale et phrases
+// de couverture de tout un département (hors du siège) retirés : une phrase sort entière, ou une parenthèse de
+// noms ; une partie vide sort. Rien n'est réécrit.
 const data = {
   slug: '/securite-privee-bordeaux',
   metaTitle: 'Société de Sécurité Privée à Bordeaux (33) | MTJ Sécurité Privée',
@@ -21,23 +24,14 @@ const data = {
       subsections: [
         {
           h3: 'Gardiennage et surveillance en Gironde',
-          content: 'Nos agents assurent le gardiennage de sites industriels, commerciaux et résidentiels dans la métropole bordelaise et en Gironde. Des zones d\'activité de Mérignac et Pessac aux domaines viticoles du Médoc et de Saint-Émilion, en passant par le centre-ville de Bordeaux, nos équipes couvrent l\'ensemble du département.',
+          content: 'Nos agents assurent le gardiennage de sites industriels, commerciaux et résidentiels dans la métropole bordelaise et en Gironde.',
           list: ['Bordeaux centre, Chartrons, Bassins à flot', 'Mérignac, Pessac, Talence', 'Bassin d\'Arcachon et littoral', 'Libournais et vignobles de Saint-Émilion']
-        },
-        {
-          h3: 'Sécurité événementielle à Bordeaux',
-          content: 'Bordeaux accueille des événements majeurs : Bordeaux Fête le Vin, matchs des Girondins et de l\'UBB (rugby), salons professionnels (Vinexpo), festivals de musique et événements à la Cité du Vin. MTJ Sécurité Privée assure la sécurisation de ces manifestations avec des dispositifs dimensionnés et une coordination avec les autorités locales.'
         }
       ]
     },
     {
       h2: 'Zones d\'intervention en Nouvelle-Aquitaine',
-      intro: 'Nous intervenons sur l\'ensemble de la Gironde et dans les départements limitrophes de Nouvelle-Aquitaine.',
       subsections: [
-        {
-          h3: 'Métropole bordelaise et rive droite',
-          content: 'Nos agents couvrent l\'ensemble de ce territoire : Bordeaux centre, Mérignac (zones aéroportuaires), Pessac, Talence, Villenave-d\'Ornon, Bègles, Cenon, Lormont et Floirac. Chaque commune présente des enjeux sécuritaires spécifiques que nous maîtrisons.'
-        },
         {
           h3: 'Bassin d\'Arcachon et littoral girondin',
           content: 'Le Bassin d\'Arcachon, Arcachon, La Teste-de-Buch, Gujan-Mestras et le littoral girondin sont des zones touristiques majeures qui nécessitent une sécurité renforcée en saison estivale. Surveillance de campings, sécurité d\'événements nautiques, gardiennage de résidences secondaires : nous répondons aux besoins saisonniers avec des équipes dédiées.'
@@ -70,7 +64,7 @@ const data = {
     },
     {
       question: 'Pouvez-vous intervenir dans le Médoc ou le Libournais ?',
-      answer: 'Oui. Nos équipes couvrent l\'ensemble du département de la Gironde, y compris les zones rurales du Médoc, du Libournais et de l\'Entre-deux-Mers. Nous intervenons régulièrement pour la surveillance de domaines viticoles et de propriétés privées dans ces secteurs.'
+      answer: 'Oui.'
     },
     {
       question: 'Proposez-vous des prestations cynophiles à Bordeaux ?',

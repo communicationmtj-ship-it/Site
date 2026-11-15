@@ -2,9 +2,9 @@ import React from 'react';
 import { ShieldCheck, CheckCircle } from 'lucide-react';
 
 const engagements = [
-  "Determiner et surveiller les besoins de nos clients, respecter nos obligations de conformité réglementaire ainsi que toutes les exigences légales relatives a nos activités.",
-  "Lutter contre toute forme de corruption et les pratiques contraires à l'ethique.",
-  "Veiller sur la protection des droits humains, des minorités, de l'egalite homme-femme et des données personnelles.",
+  "Déterminer et surveiller les besoins de nos clients, respecter nos obligations de conformité réglementaire ainsi que toutes les exigences légales relatives à nos activités.",
+  "Lutter contre toute forme de corruption et les pratiques contraires à l'éthique.",
+  "Veiller sur la protection des droits humains, des minorités, de l'égalité homme-femme et des données personnelles.",
   "Promouvoir la pratique des achats responsables.",
 ];
 
@@ -21,17 +21,17 @@ const Engagement = () => {
             </h2>
             <div className="w-24 h-1 bg-amber-400 mx-auto mb-6"></div>
             <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-              Politique Qualite et RSE E-SA-01- V1
+              Politique Qualité et RSE E-SA-01- V1
             </p>
           </div>
 
           {/* Introduction */}
           <div className="space-y-6 mb-12">
             <p className="text-gray-300 leading-relaxed text-base lg:text-lg">
-              Entreprise à taille humaine, implantée dans le sud de France, MTJ assure la sécurité des biens et des personnes a savoir : la réactivité et la flexibilité, en vue de satisfaire les besoins de nos clients.
+              Entreprise à taille humaine, implantée dans le sud de France, MTJ assure la sécurité des biens et des personnes à savoir : la réactivité et la flexibilité, en vue de satisfaire les besoins de nos clients.
             </p>
             <p className="text-gray-300 leading-relaxed text-base lg:text-lg">
-              Notre orientation stratégique vise a structurer MTJ de manière à améliorer la satisfaction des besoins de nos clients, avec force et honneur, a travers les valeurs de loyaute et de transparence, en veillant sur notre responsabilité sociétale.
+              Notre orientation stratégique vise à structurer MTJ de manière à améliorer la satisfaction des besoins de nos clients, avec force et honneur, à travers les valeurs de loyauté et de transparence, en veillant sur notre responsabilité sociétale.
             </p>
           </div>
 
@@ -56,17 +56,17 @@ const Engagement = () => {
           {/* Policy text */}
           <div className="space-y-6 mb-12">
             <p className="text-gray-300 leading-relaxed text-base lg:text-lg">
-              La presente politique QRSE fixe le cap pour l'année à venir dans le cadre de notre orientation stratégique. Elle sera revue chaque année a l'occasion d'une revue generale du fonctionnement de notre système de management qualité et RSE, afin qu'il demeure conforme aux exigences de la norme ISO 9001, en suivant les lignes directrices de la norme ISO 26000.
+              La présente politique QRSE fixe le cap pour l'année à venir dans le cadre de notre orientation stratégique. Elle sera revue chaque année à l'occasion d'une revue générale du fonctionnement de notre système de management qualité et RSE, afin qu'il demeure conforme aux exigences de la norme ISO 9001, en suivant les lignes directrices de la norme ISO 26000.
             </p>
             <p className="text-gray-300 leading-relaxed text-base lg:text-lg">
-              Nous nous engageons a fournir les moyens nécessaires a la mise en place de notre système de management QRSE en assumant la responsabilité de son efficacité, et en veillant sur son amélioration continue.
+              Nous nous engageons à fournir les moyens nécessaires à la mise en place de notre système de management QRSE en assumant la responsabilité de son efficacité, et en veillant sur son amélioration continue.
             </p>
           </div>
 
           {/* Signature */}
           <div className="bg-black border-2 border-amber-400/30 p-8 text-center mb-8">
             <p className="text-gray-300 text-base lg:text-lg italic leading-relaxed mb-6">
-              J'invite tous nos collaborateurs à s'engager aux cotes de la direction pour la réussite de notre politique Qualite et RSE.
+              J'invite tous nos collaborateurs à s'engager aux côtés de la direction pour la réussite de notre politique Qualité et RSE.
             </p>
             <p className="text-amber-400 font-bold text-lg uppercase tracking-widest">La Direction</p>
           </div>

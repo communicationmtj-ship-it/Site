@@ -68,15 +68,15 @@ const ContactPage = () => {
     })
       .then(response => {
         // Le serveur répond 200 avec status « error » quand il refuse le message (case de
-        // consentement, champ invalide) : jamais « Message envoye ! » dans ce cas.
+        // consentement, champ invalide) : jamais « Message envoyé ! » dans ce cas.
         if (response?.data?.status !== 'success') {
           toast.error("Envoi refusé", {
             description: response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
           });
           return;
         }
-        toast.success("Message envoye !", {
-          description: response.data.message || "Nous vous repondrons dans les plus brefs delais.",
+        toast.success("Message envoyé !", {
+          description: response.data.message || "Nous vous répondrons dans les plus brefs délais.",
         });
         setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
         setAttachment(null);
@@ -87,7 +87,7 @@ const ContactPage = () => {
       })
       .catch(error => {
         toast.error("Erreur", {
-          description: error.response?.data?.message || "Une erreur est survenue. Veuillez reessayer.",
+          description: error.response?.data?.message || "Une erreur est survenue. Veuillez réessayer.",
         });
       });
   };
@@ -131,7 +131,7 @@ const ContactPage = () => {
                   <source srcSet="/images/contact-bg.webp" type="image/webp" />
                   <img
                     src="/images/contact-bg.jpeg"
-                    alt="Contact MTJ Securite"
+                    alt="Contact MTJ Sécurité"
                     className="w-full h-full object-cover"
                   />
                 </picture>
@@ -152,7 +152,7 @@ const ContactPage = () => {
                     <Phone size={24} className="text-amber-400" />
                   </div>
                   <div>
-                    <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">Telephone</h4>
+                    <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">Téléphone</h4>
                     <p className="text-white text-lg">{companyInfo.phone}</p>
                     <p className="text-gray-400 text-sm mt-1">Disponible 24/7</p>
                   </div>
@@ -165,7 +165,7 @@ const ContactPage = () => {
                   <div>
                     <h4 className="text-amber-400 font-semibold mb-1 uppercase tracking-wide text-sm">Email</h4>
                     <p className="text-white text-lg">{companyInfo.email}</p>
-                    <p className="text-gray-400 text-sm mt-1">Reponse sous 24h</p>
+                    <p className="text-gray-400 text-sm mt-1">Réponse sous 24h</p>
                   </div>
                 </div>
 
@@ -198,7 +198,7 @@ const ContactPage = () => {
                     <input type="email" id="contact-email" name="email" value={formData.email} onChange={handleChange} required className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors" placeholder="votre@email.com" data-testid="contact-email" />
                   </div>
                   <div>
-                    <label htmlFor="contact-phone" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Telephone</label>
+                    <label htmlFor="contact-phone" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Téléphone</label>
                     <input type="tel" id="contact-phone" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors" placeholder="+33 6 XX XX XX XX" data-testid="contact-phone" />
                   </div>
                   <div>
@@ -210,7 +210,7 @@ const ContactPage = () => {
                     <textarea id="contact-message" name="message" value={formData.message} onChange={handleChange} required rows="5" className="w-full bg-neutral-900 border border-amber-400/30 text-white px-4 py-3 focus:outline-none focus:border-amber-400 transition-colors resize-none" placeholder="Votre message..." data-testid="contact-message" />
                   </div>
                   <div>
-                    <label htmlFor="contact-attachment" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Piece jointe (optionnel)</label>
+                    <label htmlFor="contact-attachment" className="block text-amber-400 font-semibold mb-2 uppercase tracking-wide text-sm">Pièce jointe (optionnel)</label>
                     <div className="relative">
                       <input type="file" id="contact-attachment" onChange={handleFileChange} className="hidden" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
                       <label htmlFor="contact-attachment" className="w-full bg-neutral-900 border border-amber-400/30 text-gray-400 px-4 py-3 cursor-pointer hover:border-amber-400 transition-colors flex items-center justify-between">
@@ -218,7 +218,7 @@ const ContactPage = () => {
                         <Send size={20} className="text-amber-400" />
                       </label>
                     </div>
-                    {fileName && <p className="text-sm text-amber-400 mt-2">Fichier selectionne : {fileName}</p>}
+                    {fileName && <p className="text-sm text-amber-400 mt-2">Fichier sélectionné : {fileName}</p>}
                   </div>
 
                   {/* Consentement RGPD : la case renvoie à la politique de confidentialité (page décidée par

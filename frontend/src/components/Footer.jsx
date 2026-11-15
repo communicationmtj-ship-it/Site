@@ -7,10 +7,9 @@ import { SECTEUR_TITRE } from '../data/perimetre';
 // 15/11/2026 (règle de Théo, 05:56 : « soit tu met pas soit tu laisse ce qui etait ») : pied de page du site
 // en ligne, sauf :
 // - mention CNAPS : numéro de MTJ Sécurité Privée corrigé (celui de l'autorisation rangée au coffre du
-//   logiciel MTJ), MTJ Sécurité Rapprochée ajoutée sous la même forme. Ce bloc est masqué sous 768 px, comme
-//   en ligne : la mention de MTJ Sécurité Rapprochée reste aussi, mot pour mot comme en ligne, dans la carte
-//   « Protection physique des personnes » de l'accueil et à la fin de l'introduction de la page Protection
-//   rapprochée, visibles sur téléphone (relecture adverse du 15/11/2026) ;
+//   logiciel MTJ), MTJ Sécurité Rapprochée ajoutée sous la même forme. Théo, 15/11/2026 15:14 (« Site textes:
+//   Oui les 4 ») : la phrase de l'article L612-14 est complète pour les deux sociétés et le bloc se voit aussi
+//   sur téléphone (sous le logo, aligné à gauche) ; sur ordinateur, rien ne bouge ;
 // - zones : les pages de villes du secteur (Théo, 15/11/2026 : les 12 pages de villes sortent) et le secteur
 //   « de Bordeaux à Nice jusqu'à Annecy » à la place de « Sud de la France » (13/11/2026, « Site perimetre: A partout ») ;
 // - vignettes Instagram : les mêmes photos, servies par le site (Théo, 15/11/2026 : les photos restent) ;
@@ -51,7 +50,7 @@ const Footer = () => {
     <footer className="bg-black border-t border-amber-400/20">
       <div className="container mx-auto px-4 lg:px-8 py-10">
         {/* Company header */}
-        <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-800">
+        <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between mb-8 pb-6 border-b border-gray-800">
           <picture>
             <source srcSet="/images/logo-mtj.webp" type="image/webp" />
             <img
@@ -60,9 +59,9 @@ const Footer = () => {
               className="h-14 w-auto object-contain"
             />
           </picture>
-          <div className="text-gray-500 text-[10px] max-w-xs text-right leading-relaxed hidden md:block" data-testid="cnaps-block">
+          <div className="text-gray-500 text-[10px] max-w-xs text-left md:text-right leading-relaxed" data-testid="cnaps-block">
             <p className="font-semibold text-amber-400 text-xs mb-1">{cnapsCompanies.privee.authorization}</p>
-            <p>L612-14 du CSI L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient.</p>
+            <p>L612-14 du CSI L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics.</p>
             <p className="font-semibold text-amber-400 text-xs mb-1 mt-3">{cnapsCompanies.rapprochee.name} {cnapsCompanies.rapprochee.authorization}</p>
             <p>L612-14 du CSI L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics.</p>
           </div>

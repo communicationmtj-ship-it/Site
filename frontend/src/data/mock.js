@@ -16,7 +16,7 @@ const CITY = "Toulon";
 // affiché revient à celui du site en ligne (version du 04/11/2026, 9561a0a), sauf les décisions de Théo
 // (adresse contact@ ; secteur ; aucun chiffre ; CYNODEX = diplôme du maître-chien de détection d'explosifs).
 export const companyInfo = {
-  name: "MTJ SECURITE PRIVÉE",
+  name: "MTJ SÉCURITÉ PRIVÉE",
   slogan: "VOTRE SÉCURITÉ, NOTRE MISSION.",
   motto: "Avec Force et Honneur Toujours servir",
   phone: "07 60 73 82 06",

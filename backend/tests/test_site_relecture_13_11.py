@@ -272,7 +272,9 @@ def test_protection_rapprochee_sans_etat_etranger_dans_les_donnees_structurees()
 # avancées », retirés le 13/11/2026, sont donc de nouveau permis).
 PHRASES_CAPTUREES = [
     "Intervention 24/7 · Sécurité cynophile avec maître-chien", "formés à la surveillance et à la détection",
-    "avec une permanence joignable 24/7", "Société du groupe MTJ", "Besoin urgent ?", "Permanence téléphonique",
+    # « Société du groupe MTJ » n'y est plus : c'est le badge du site en ligne (« Societe du groupe MTJ »), dont
+    # Théo a fait remettre l'accent le 15/11/2026 à 15:14 (« Site textes: Oui les 4 », accents de Mathilde).
+    "avec une permanence joignable 24/7", "Besoin urgent ?", "Permanence téléphonique",
     "Entreprise autorisée", "Nos engagements en 5 points", "Voir tout notre secteur", "unité CYNODEX", "unités CYNODEX",
     "équipes CYNODEX", "binômes CYNODEX", "cellule CYNODEX", "certifiés CYNODEX",
 ]

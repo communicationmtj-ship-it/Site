@@ -5,6 +5,9 @@ import { companyInfo } from '../../data/mock';
 // 15/11/2026 (Théo, formulaire 3/4 : les pages de villes sortent, sans preuve) : texte du site en ligne,
 // sans chiffre (population, classement), sans client nommé, sans implantation hors du siège de Toulon ;
 // secteur « de Bordeaux à Nice jusqu'à Annecy », adresse contact@, CYNODEX = diplôme du maître-chien.
+// Théo, 15/11/2026 15:14 (« Site textes: Oui les 4 ») : événements nommés, preuves d'activité locale et phrases
+// de couverture de tout un département (hors du siège) retirés : une phrase sort entière, ou une parenthèse de
+// noms ; une partie vide sort. Rien n'est réécrit.
 const data = {
   slug: '/securite-privee-toulon',
   metaTitle: 'Société de Sécurité Privée à Toulon (83) | MTJ Sécurité Privée',
@@ -24,10 +27,6 @@ const data = {
           h3: 'Gardiennage et surveillance à Toulon',
           content: 'Nos agents de prévention et de sécurité assurent la surveillance de sites industriels, commerciaux et résidentiels dans toute l\'agglomération toulonnaise. Du centre-ville aux zones d\'activité de La Valette, La Garde, Ollioules et La Seyne-sur-Mer, nos équipes sont opérationnelles 24h/24 et 7j/7. Le gardiennage inclut les rondes de surveillance, le contrôle d\'accès et la gestion des systèmes d\'alarme.',
           list: ['Toulon centre et littoral', 'Zones d\'activité La Valette, La Garde', 'La Seyne-sur-Mer, Ollioules, Sanary', 'Hyères, Le Pradet, Carqueiranne']
-        },
-        {
-          h3: 'Sécurité événementielle à Toulon',
-          content: 'Toulon accueille chaque année de nombreux événements : matchs du RCT (Rugby Club Toulonnais) au stade Mayol, le festival de musique Six Fours, les marchés de Noël, les fêtes de la Saint-Jean et les régates nautiques. MTJ Sécurité Privée sécurise ces manifestations avec des dispositifs dimensionnés pour chaque type d\'événement, en coordination avec les autorités municipales et préfectorales.'
         }
       ]
     },

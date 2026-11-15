@@ -68,7 +68,7 @@ const Services = () => {
                   <div data-testid="external-company-badge" className="absolute top-0 left-0 right-0 px-4 py-2 flex items-center gap-2" style={{ backgroundColor: `${c}e6` }}>
                     <ShieldCheck size={16} className="text-white" />
                     <span className="text-white text-xs font-bold uppercase tracking-widest">{service.externalCompany}</span>
-                    <span className="ml-auto text-[10px] uppercase tracking-wider" style={{ color: '#c9a0d6' }}>Societe du groupe MTJ</span>
+                    <span className="ml-auto text-[10px] uppercase tracking-wider" style={{ color: '#c9a0d6' }}>Société du groupe MTJ</span>
                   </div>
                 )}
 

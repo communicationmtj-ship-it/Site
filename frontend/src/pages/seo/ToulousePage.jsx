@@ -4,6 +4,9 @@ import SeoPageLayout from './SeoPageLayout';
 // 15/11/2026 (Théo, formulaire 3/4 : les pages de villes sortent, sans preuve) : texte du site en ligne,
 // sans chiffre (population, classement), sans client nommé, sans implantation hors du siège de Toulon ;
 // secteur « de Bordeaux à Nice jusqu'à Annecy », adresse contact@, CYNODEX = diplôme du maître-chien.
+// Théo, 15/11/2026 15:14 (« Site textes: Oui les 4 ») : événements nommés, preuves d'activité locale et phrases
+// de couverture de tout un département (hors du siège) retirés : une phrase sort entière, ou une parenthèse de
+// noms ; une partie vide sort. Rien n'est réécrit.
 const data = {
   slug: '/securite-privee-toulouse',
   metaTitle: 'Société de Sécurité Privée à Toulouse (31) | MTJ Sécurité Privée',
@@ -12,7 +15,7 @@ const data = {
   areaServed: 'Toulouse, Haute-Garonne, Occitanie',
 
   h1: 'Sécurité Privée à Toulouse — Haute-Garonne (31)',
-  introduction: `MTJ Sécurité Privée étend son expertise en sécurité privée à Toulouse et sur l'ensemble de la métropole toulousaine. Toulouse est un pôle économique majeur avec un secteur aéronautique de renommée mondiale (Airbus, Thales, Safran), un tissu de start-ups innovantes et une vie culturelle dynamique.\n\nCette dynamique génère des besoins croissants en sécurité privée : surveillance de sites industriels aéronautiques, gardiennage de zones d'activité, sécurisation d'événements culturels et sportifs. MTJ Sécurité Privée répond à ces besoins avec des solutions professionnelles et adaptées au contexte toulousain.`,
+  introduction: `MTJ Sécurité Privée étend son expertise en sécurité privée à Toulouse et sur l'ensemble de la métropole toulousaine. Toulouse est un pôle économique majeur avec un secteur aéronautique de renommée mondiale, un tissu de start-ups innovantes et une vie culturelle dynamique.\n\nCette dynamique génère des besoins croissants en sécurité privée : surveillance de sites industriels aéronautiques, gardiennage de zones d'activité, sécurisation d'événements culturels et sportifs. MTJ Sécurité Privée répond à ces besoins avec des solutions professionnelles et adaptées au contexte toulousain.`,
 
   sections: [
     {
@@ -21,12 +24,8 @@ const data = {
       subsections: [
         {
           h3: 'Gardiennage et surveillance en Haute-Garonne',
-          content: 'Nos agents assurent le gardiennage de sites industriels, commerciaux et résidentiels dans la métropole toulousaine et en Haute-Garonne. Des zones aéronautiques de Blagnac et Colomiers aux quartiers d\'affaires du centre-ville, en passant par les zones d\'activité de Labège et Ramonville, nos équipes couvrent l\'ensemble du département.',
+          content: 'Nos agents assurent le gardiennage de sites industriels, commerciaux et résidentiels dans la métropole toulousaine et en Haute-Garonne.',
           list: ['Toulouse centre, Capitole, Saint-Cyprien', 'Blagnac, Colomiers, zones aéronautiques', 'Labège, Ramonville, Castanet-Tolosan', 'Muret, Saint-Gaudens et sud Haute-Garonne']
-        },
-        {
-          h3: 'Sécurité événementielle à Toulouse',
-          content: 'Toulouse accueille des événements majeurs : matchs du Stade Toulousain au stade Ernest-Wallon, rencontres du TFC au Stadium, le festival Rio Loco, la Fête de la Violette et de nombreux salons professionnels au MEETT. MTJ Sécurité Privée sécurise ces manifestations avec des dispositifs dimensionnés pour chaque type d\'événement, en coordination avec les autorités municipales et préfectorales.'
         }
       ]
     },
@@ -34,16 +33,8 @@ const data = {
       h2: 'Zones d\'intervention en Occitanie',
       subsections: [
         {
-          h3: 'Toulouse Métropole et bassin toulousain',
-          content: 'Nos équipes interviennent sur l\'ensemble de ce territoire : Toulouse centre, Blagnac (zones aéroportuaires et aéronautiques), Colomiers, Tournefeuille, Balma, L\'Union, Saint-Orens et l\'ensemble des communes périphériques. Chaque zone présente des enjeux sécuritaires spécifiques que nous maîtrisons.'
-        },
-        {
-          h3: 'Montpellier, Perpignan et littoral méditerranéen',
-          content: 'Nous assurons des prestations de sécurité dans l\'ensemble de l\'Occitanie : Montpellier, Nîmes, Perpignan, Béziers, Narbonne et le littoral méditerranéen. Ces communes accueillent des zones commerciales, des chantiers de construction et des événements saisonniers qui nécessitent un dispositif de sécurité professionnel.'
-        },
-        {
           h3: 'Sites industriels aéronautiques et de défense',
-          content: 'Toulouse est la capitale européenne de l\'aéronautique. MTJ Sécurité Privée propose des prestations de gardiennage et de contrôle d\'accès adaptées aux exigences de sécurité des sites industriels sensibles : usines Airbus, sous-traitants aéronautiques, centres de recherche et installations liées à la défense. Nos agents sont formés aux procédures de sûreté spécifiques à ces environnements.'
+          content: 'Toulouse est la capitale européenne de l\'aéronautique. MTJ Sécurité Privée propose des prestations de gardiennage et de contrôle d\'accès adaptées aux exigences de sécurité des sites industriels sensibles : sous-traitants aéronautiques, centres de recherche et installations liées à la défense. Nos agents sont formés aux procédures de sûreté spécifiques à ces environnements.'
         }
       ]
     },
@@ -69,7 +60,7 @@ const data = {
     },
     {
       question: 'Pouvez-vous intervenir sur les sites aéronautiques de Blagnac ?',
-      answer: 'Oui. Nos agents sont formés aux exigences de sécurité des sites industriels sensibles. Nous intervenons sur les zones aéronautiques de Blagnac, Colomiers et l\'ensemble du bassin aéronautique toulousain pour des missions de gardiennage, de contrôle d\'accès et de surveillance.'
+      answer: 'Oui. Nos agents sont formés aux exigences de sécurité des sites industriels sensibles.'
     },
     {
       question: 'Proposez-vous des prestations cynophiles à Toulouse ?',
