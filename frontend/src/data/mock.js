@@ -73,7 +73,9 @@ export const cnapsCompanies = {
   privee: {
     name: "MTJ SÉCURITÉ PRIVÉE",
     siret: "922 208 202 00015",
-    authorization: "AUT-083-2123-05-23-20240933884",
+    // 15/11/2026 (Théo, « Numero cnaps: Ancien du site » : la pièce du coffre lue le 13/11 est l'autorisation
+    // provisoire) : le numéro du site en ligne, mot pour mot.
+    authorization: "AUT -083-2024-05-22-2024084324",
     activity: "surveillance ou gardiennage",
   },
   rapprochee: {

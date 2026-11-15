@@ -864,3 +864,14 @@ def test_aucune_ville_declaree_pour_la_societe_de_protection_rapprochee():
     assert "ville: null" in page
     gabarit = _lire(SEO / "SeoPageLayout.jsx")
     assert '{ "@type": "PostalAddress", "addressCountry": "FR" }' in gabarit
+
+
+def test_numero_cnaps_de_mtj_securite_privee_celui_du_site_en_ligne():
+    """15/11/2026, Théo : « Numero cnaps: Ancien du site » (la pièce du coffre lue le 13/11 est l'autorisation
+    provisoire). Le numéro de MTJ Sécurité Privée est celui du site en ligne, mot pour mot ; l'autre n'apparaît
+    nulle part."""
+    donnees = _lire(SRC / "data" / "mock.js")
+    assert 'authorization: "AUT -083-2024-05-22-2024084324"' in donnees
+    for f in list(SEO.glob("*.jsx")) + [SRC / "components" / "Footer.jsx", SRC / "pages" / "MentionsLegalesPage.jsx",
+                                        SRC / "data" / "mock.js"]:
+        assert "20240933884" not in _lire(f), f.name
