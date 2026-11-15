@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, FileText, Briefcase, Mail, Phone, User } from 'lucide-react';
+import { Send, FileText, Briefcase, Mail } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { Link } from 'react-router-dom';

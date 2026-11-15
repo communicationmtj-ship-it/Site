@@ -37,7 +37,7 @@ const data = {
       subsections: [
         {
           h3: 'Toulouse Métropole et bassin toulousain',
-          content: 'Toulouse Métropole regroupe 37 communes et plus de 780 000 habitants. Nos équipes interviennent sur l\'ensemble de ce territoire : Toulouse centre, Blagnac (zones aéroportuaires et aéronautiques), Colomiers, Tournefeuille, Balma, L\'Union, Saint-Orens et l\'ensemble des communes périphériques. Chaque zone présente des enjeux sécuritaires spécifiques que nous maîtrisons.'
+          content: 'Toulouse Métropole regroupe 37 communes. Nos équipes interviennent sur l\'ensemble de ce territoire : Toulouse centre, Blagnac (zones aéroportuaires et aéronautiques), Colomiers, Tournefeuille, Balma, L\'Union, Saint-Orens et l\'ensemble des communes périphériques. Chaque zone présente des enjeux de sécurité propres, que nous étudions avec vous.'
         },
         {
           // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : tout le secteur autour de Toulouse.
@@ -58,12 +58,14 @@ const data = {
       h2: 'Pourquoi choisir MTJ Sécurité Privée à Toulouse',
       subsections: [
         {
-          h3: 'Expertise transposée du sud de la France',
-          content: 'Forte de son expérience acquise dans le sud-est de la France (Toulon, Nice, Monaco), MTJ Sécurité Privée apporte à Toulouse un savoir-faire éprouvé dans la sécurisation de sites sensibles, d\'événements de grande envergure et de milieux exigeants. Notre expertise en sécurité cynophile et en détection d\'explosifs (CYNODEX) complète notre offre toulousaine.'
+          // 15/11/2026 (repli prudent) : plus de « savoir-faire éprouvé » ni de « sites sensibles » sans preuve ;
+          // CYNODEX selon la certification du binôme, comme sur les autres pages.
+          h3: 'Un seul interlocuteur sur tout le secteur',
+          content: 'Depuis notre siège de Toulon, nous intervenons de Bordeaux à Nice et jusqu\'à Annecy : vos sites de Haute-Garonne et ceux du reste du secteur peuvent relever d\'un même interlocuteur et d\'un même devis. Nos maîtres-chiens complètent l\'offre ; la détection d\'explosifs (CYNODEX) est proposée selon la certification du binôme.'
         },
         {
           h3: 'Capacité de montée en charge',
-          content: 'Grâce à notre réseau d\'agents dans le sud de la France, nous pouvons renforcer le dispositif pour vos pics d\'activité ou vos événements exceptionnels. Cette flexibilité est un atout pour les clients ayant des besoins variables ou saisonniers.'
+          content: 'Grâce à notre réseau d\'agents sur tout notre secteur, nous pouvons renforcer le dispositif pour vos pics d\'activité ou vos événements exceptionnels. Cette flexibilité est un atout pour les clients ayant des besoins variables ou saisonniers.'
         }
       ]
     }
@@ -80,11 +82,11 @@ const data = {
     },
     {
       question: 'Proposez-vous des prestations cynophiles à Toulouse ?',
-      answer: 'Absolument. Notre unité cynophile intervient à Toulouse pour des missions de surveillance renforcée, de sécurité événementielle et de détection d\'explosifs (CYNODEX). Les binômes maître-chien sont particulièrement adaptés aux sites étendus et aux événements de grande envergure.'
+      answer: 'Oui. Nos maîtres-chiens interviennent à Toulouse pour des missions de surveillance renforcée et de sécurité événementielle ; la détection d\'explosifs (CYNODEX) est proposée selon la certification du binôme. Les binômes maître-chien sont adaptés aux sites étendus et aux grands événements.'
     }
   ],
 
-  conclusion: `Toulouse et l'Occitanie bénéficient désormais de l'expertise de MTJ Sécurité Privée. Agents de sécurité qualifiés, équipes cynophiles, agents SSIAP et unité CYNODEX : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à Toulouse.`,
+  conclusion: `MTJ Sécurité Privée intervient à Toulouse, en Haute-Garonne et dans toute l'Occitanie. Agents de sécurité qualifiés, maîtres-chiens, agents SSIAP et, selon la certification du binôme, détection d'explosifs (CYNODEX) : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à Toulouse.`,
 
   relatedLinks: [
     lienLocal('/securite-privee-bordeaux'),

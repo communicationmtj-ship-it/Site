@@ -5,7 +5,7 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 const data = {
   slug: '/securite-erp-etablissements-public',
   metaTitle: 'Sécurité ERP — Établissements Recevant du Public | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée assure la sécurité des établissements recevant du public (ERP) : hôpitaux, écoles, musées, centres sportifs. Agents SSIAP, contrôle d\'accès à Toulon, Nice, Toulouse.',
+  metaDescription: 'MTJ Sécurité Privée assure la sécurité des établissements recevant du public (ERP) : hôpitaux, écoles, musées, centres sportifs. Agents SSIAP, contrôle d\'accès de Bordeaux à Nice et jusqu\'à Annecy.',
   breadcrumbCurrent: 'Établissements recevant du public',
   // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,

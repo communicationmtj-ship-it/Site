@@ -283,7 +283,9 @@ const Footer = () => {
               </button>
             </li>
           </ul>
-          <p className="text-gray-400 text-xs text-center">
+          {/* L'année est écrite à la construction dans la page pré-rendue, puis par le navigateur :
+              un écart le 1er janvier ne doit pas faire refaire la page (pré-rendu du 15/11/2026). */}
+          <p className="text-gray-400 text-xs text-center" suppressHydrationWarning>
             © {currentYear} MTJ Sécurité Privée. Tous droits réservés.
           </p>
         </div>

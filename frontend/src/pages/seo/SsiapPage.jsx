@@ -7,7 +7,7 @@ const data = {
   // 13/11/2026 (audit du site de Mathilde, site-078 et 079) : aucun effectif annoncé, SSIAP 2
   // et 3 étudiés selon les agents disponibles, aucune garantie absolue de conformité.
   metaTitle: 'SSIAP Sécurité Incendie | Agents SSIAP | MTJ Sécurité Privée',
-  metaDescription: 'Agents SSIAP certifiés pour la sécurité incendie de vos ERP et IGH à Toulon, Nice et Toulouse. Prévention, évacuation, assistance à personnes. MTJ Sécurité Privée — devis gratuit.',
+  metaDescription: 'Agents SSIAP certifiés pour la sécurité incendie de vos ERP et IGH, de Bordeaux à Nice et jusqu\'à Annecy. Prévention, évacuation, assistance à personnes. MTJ Sécurité Privée — devis gratuit.',
   breadcrumbCurrent: 'SSIAP — Sécurité incendie',
   // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,

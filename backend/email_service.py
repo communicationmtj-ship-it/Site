@@ -18,12 +18,13 @@ COMMERCIAL_EMAIL_PASSWORD = os.environ.get("COMMERCIAL_EMAIL_PASSWORD")
 
 COMMERCIAL_EMAIL = os.environ.get("COMMERCIAL_EMAIL", "commercialmtj.securiteprivee@gmail.com")
 
-# 13/11/2026 (choix de Théo, « Site email: A contact OVH », avec un renvoi vers sa boîte Gmail : « SINON
-# JE NE LES VERRAI JAMAIS, JE N'AI AUCUN MAIL OVH DE CONNECTÉ ») : les mails du site destinés à
-# l'équipe (devis, contact, candidature, rapport mensuel) partent vers l'adresse de la variable
-# NOTIFY_EMAIL du serveur (valeur à poser : README.md ; aucune adresse écrite ici). Les boîtes d'envoi et leurs mots de passe ne
-# changent pas. Variable absente ou illisible : le mail part, comme avant, vers sa boîte d'envoi, et
-# le journal le dit à chaque envoi (règle « échec visible »).
+# 13/11/2026 (choix de Théo, « Site email: A contact OVH », avec un renvoi vers sa boîte Gmail :
+# « si je les verai jamais je aucun mail ovh de conencter ») : le site affiche contact@ (domaine,
+# boîte OVH) ; les mails du site destinés à l'équipe (devis, contact, candidature, rapport mensuel)
+# partent vers l'adresse de la variable NOTIFY_EMAIL du serveur du site (valeur : la boîte Gmail
+# donnée par Théo, notée dans memory/PRD.md ; aucune adresse écrite ici). Les boîtes d'envoi et leurs
+# mots de passe ne changent pas. Variable absente ou illisible : le mail part, comme avant, vers sa
+# boîte d'envoi, et le journal le dit à chaque envoi (règle « échec visible »).
 NOTIFY_EMAIL_VAR = "NOTIFY_EMAIL"
 
 

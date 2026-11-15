@@ -5,7 +5,7 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 const data = {
   slug: '/securite-sites-industriels-commerciaux',
   metaTitle: 'Sécurité Sites Industriels et Commerciaux | MTJ Sécurité Privée Toulon',
-  metaDescription: 'MTJ Sécurité Privée protège vos sites industriels, entrepôts, centres commerciaux et espaces professionnels. Surveillance 24/7, contrôle d\'accès, rondes à Toulon, Nice, Toulouse.',
+  metaDescription: 'MTJ Sécurité Privée protège vos sites industriels, entrepôts, centres commerciaux et espaces professionnels. Surveillance 24/7, contrôle d\'accès, rondes de Bordeaux à Nice et jusqu\'à Annecy.',
   breadcrumbCurrent: 'Sites industriels et commerciaux',
   // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,

@@ -55,7 +55,11 @@ def _routes_nginx() -> set:
 
 
 def _pages_generateur() -> tuple:
-    js = _lire(FRONT / "scripts" / "generate-public-files.js")
+    # 15/11/2026 : la liste unique des pages publiques (plan du site = pages pré-rendues) vit dans
+    # scripts/pages-publiques.js, lue par generate-public-files.js et par prerender.js.
+    js = _lire(FRONT / "scripts" / "pages-publiques.js")
+    for script in ("generate-public-files.js", "prerender.js"):
+        assert 'require("./pages-publiques")' in _lire(FRONT / "scripts" / script), f"{script} doit lire pages-publiques.js"
     pages = re.findall(r'\["(/[^"]*)",\s*"[0-9.]+",\s*"\w+"\]', js)
     extra = re.search(r"EXTRA_ROUTES\s*=\s*\[([^\]]*)\]", js).group(1)
     return set(pages), set(re.findall(r'"(/[^"]*)"', extra))

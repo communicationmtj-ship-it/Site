@@ -5,7 +5,7 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 const data = {
   slug: '/surveillance-chantier-site',
   metaTitle: 'Surveillance de Chantiers et Sites | Gardiennage 24h/24 | MTJ Sécurité Privée',
-  metaDescription: 'Gardiennage et surveillance de chantiers à Toulon, Nice, Toulouse. Protection contre le vol, l\'intrusion et le vandalisme. MTJ Sécurité Privée — rondes 24h/24, devis gratuit.',
+  metaDescription: 'Gardiennage et surveillance de chantiers de Bordeaux à Nice et jusqu\'à Annecy. Protection contre le vol, l\'intrusion et le vandalisme. MTJ Sécurité Privée — rondes 24h/24, devis gratuit.',
   breadcrumbCurrent: 'Surveillance de chantiers',
   // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import franceData from '@svg-maps/france.departments';
 import { CODES_CARTE, SECTEUR } from '../data/perimetre';
 
@@ -149,6 +149,13 @@ export const CITIES = [
 ];
 
 const FranceMap = () => {
+  // Pré-rendu (15/11/2026) : les tracés des départements pèsent lourd ; ils ne sont pas écrits dans le
+  // HTML pré-rendu de l'accueil et se dessinent dans le navigateur, au même endroit (même cadre
+  // 613 × 600). Le premier rendu du navigateur est identique au HTML pré-rendu : React le reprend tel quel.
+  const [traces, setTraces] = useState(false);
+  useEffect(() => {
+    setTraces(true);
+  }, []);
   const northDepts = franceData.locations.filter(l => !SECTOR_DEPARTMENTS.has(l.id) && !CORSICA_DEPARTMENTS.has(l.id));
   const southDepts = franceData.locations.filter(l => SECTOR_DEPARTMENTS.has(l.id));
   const corsicaDepts = franceData.locations.filter(l => CORSICA_DEPARTMENTS.has(l.id));
@@ -191,47 +198,52 @@ const FranceMap = () => {
         </g>
       </defs>
 
-      {/* North departments - dark/muted */}
-      <g filter="url(#texture)" style={{ cursor: 'default' }}>
-        {northDepts.map(dept => (
-          <path
-            key={dept.id}
-            d={dept.path}
-            fill="url(#northGrad)"
-            stroke="#555"
-            strokeWidth="0.5"
-            strokeLinejoin="round"
-          />
-        ))}
-      </g>
+      {traces && (
+        <>
+          {/* North departments - dark/muted */}
+          <g filter="url(#texture)" style={{ cursor: 'default' }}>
+            {northDepts.map(dept => (
+              <path
+                key={dept.id}
+                d={dept.path}
+                fill="url(#northGrad)"
+                stroke="#555"
+                strokeWidth="0.5"
+                strokeLinejoin="round"
+              />
+            ))}
+          </g>
 
-      {/* Départements du secteur - ambre et or */}
-      <g filter="url(#texture)" style={{ cursor: 'default' }}>
-        {southDepts.map(dept => (
-          <path
-            key={dept.id}
-            d={dept.path}
-            fill="url(#southGrad)"
-            stroke="#78350f"
-            strokeWidth="0.5"
-            strokeLinejoin="round"
-          />
-        ))}
-      </g>
+          {/* Départements du secteur - ambre et or */}
+          <g filter="url(#texture)" style={{ cursor: 'default' }}>
+            {southDepts.map(dept => (
+              <path
+                key={dept.id}
+                d={dept.path}
+                fill="url(#southGrad)"
+                stroke="#78350f"
+                strokeWidth="0.5"
+                strokeLinejoin="round"
+              />
+            ))}
+          </g>
 
-      {/* Corsica - gray */}
-      <g filter="url(#texture)" style={{ cursor: 'default' }}>
-        {corsicaDepts.map(dept => (
-          <path
-            key={dept.id}
-            d={dept.path}
-            fill="url(#northGrad)"
-            stroke="#555"
-            strokeWidth="0.5"
-            strokeLinejoin="round"
-          />
-        ))}
-      </g>
+          {/* Corsica - gray */}
+          <g filter="url(#texture)" style={{ cursor: 'default' }}>
+            {corsicaDepts.map(dept => (
+              <path
+                key={dept.id}
+                d={dept.path}
+                fill="url(#northGrad)"
+                stroke="#555"
+                strokeWidth="0.5"
+                strokeLinejoin="round"
+              />
+            ))}
+          </g>
+
+        </>
+      )}
 
       {/* "GRAND DÉPLACEMENT" bordered banner - centered on north zone */}
       <g transform="translate(279, 190)">

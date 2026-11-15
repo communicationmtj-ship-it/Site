@@ -207,10 +207,20 @@ async def sitemap():
         {"loc": "/securite-privee-nice-monaco", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/securite-privee-sud-france", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/securite-privee-bordeaux", "priority": "0.8", "changefreq": "monthly"},
+        # 15/11/2026 : pages locales d'intervention du secteur (choix de Théo du 13/11/2026).
+        {"loc": "/securite-privee-montpellier", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-nimes", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-perpignan", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-marseille", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-avignon", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-lyon", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-grenoble", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": "/securite-privee-annecy", "priority": "0.8", "changefreq": "monthly"},
         {"loc": "/grand-deplacement-securite-france", "priority": "0.8", "changefreq": "monthly"},
     ]
     # 13/11/2026 : la date venait d'un nom inexistant (« lastmod ») et faisait tomber la
-    # page en erreur ; la liste suit celle du plan du site public (même essai du dépôt).
+    # page en erreur ; la liste suit celle du plan du site public (frontend/scripts/pages-publiques.js,
+    # même essai du dépôt : backend/tests/test_site_retours_13_11.py).
     urls = "\n".join([
         f'  <url><loc>{base_url}{p["loc"]}</loc><lastmod>{SITEMAP_LASTMOD}</lastmod><changefreq>{p["changefreq"]}</changefreq><priority>{p["priority"]}</priority></url>'
         for p in pages

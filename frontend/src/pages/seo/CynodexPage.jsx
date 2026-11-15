@@ -5,7 +5,7 @@ const data = {
   slug: '/detection-explosifs-cynodex',
   themeColor: '#AC8631',
   metaTitle: 'Détection d\'Explosifs CYNODEX | Équipe Cynophile | MTJ Sécurité Privée',
-  metaDescription: 'Unité CYNODEX spécialisée en détection d\'explosifs avec chiens entraînés. MTJ Sécurité Privée intervient à Toulon, Nice, Toulouse pour sécuriser événements et sites sensibles.',
+  metaDescription: 'Unité CYNODEX spécialisée en détection d\'explosifs avec chiens entraînés. MTJ Sécurité Privée intervient de Bordeaux à Nice et jusqu\'à Annecy pour sécuriser événements et sites sensibles.',
   breadcrumbCurrent: 'CYNODEX - Détection d\'explosifs',
   areaServed: 'France entière',
 

@@ -5,7 +5,7 @@ import { ZONE_DESSERVIE } from '../../data/perimetre';
 const data = {
   slug: '/securite-evenementielle',
   metaTitle: 'Sécurité Événementielle | Concerts, Festivals, Matchs | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos événements : concerts, festivals, salons, matchs. Agents de sécurité, équipes cynophiles et SSIAP à Toulon, Nice, Toulouse.',
+  metaDescription: 'MTJ Sécurité Privée assure la sécurité de vos événements : concerts, festivals, salons, matchs. Agents de sécurité, équipes cynophiles et SSIAP, de Bordeaux à Nice et jusqu\'à Annecy.',
   breadcrumbCurrent: 'Sécurité événementielle',
   // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,
@@ -35,7 +35,7 @@ const data = {
       subsections: [
         {
           h3: 'Concerts, festivals et événements musicaux',
-          content: 'La sécurité des événements musicaux requiert une expertise spécifique : gestion de foules enthousiastes, prévention des mouvements de foule dangereux, surveillance des zones backstage et protection des artistes. MTJ Sécurité Privée a sécurisé de nombreux concerts et festivals dans le sud de la France, avec des jauges allant de quelques centaines à plusieurs milliers de spectateurs.'
+          content: 'La sécurité des événements musicaux requiert une expertise spécifique : gestion de foules enthousiastes, prévention des mouvements de foule dangereux, surveillance des zones backstage et protection des artistes. MTJ Sécurité Privée sécurise des concerts et des festivals sur tout son secteur : le dispositif est dimensionné selon la jauge et la configuration de chaque événement.'
         },
         {
           h3: 'Événements sportifs et compétitions',

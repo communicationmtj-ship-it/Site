@@ -4,9 +4,9 @@
 // structurées). Changer l'adresse e-mail affichée = changer EMAIL ici, et la même
 // adresse dans frontend/public/index.html (un essai du dépôt vérifie qu'elles sont égales).
 // 13/11/2026 (choix de Théo, « Site email: A contact OVH ») : l'adresse du domaine, boîte OVH.
-// Théo ne lit aucune boîte OVH : la boîte contact@ doit renvoyer vers sa boîte Gmail (réglage
+// Théo ne lit aucune boîte OVH : la boîte contact@ doit renvoyer vers sa boîte Gmail (redirection
 // à poser dans OVH, hors du site) ; les mails des formulaires partent vers l'adresse de la
-// variable NOTIFY_EMAIL du serveur (voir README.md).
+// variable NOTIFY_EMAIL du serveur du site (backend/email_service.py, memory/PRD.md).
 const EMAIL = "contact@mtj-securite-privee.fr";
 const STREET = "31 rue Chevalier Paul";
 const POSTAL_CODE = "83000";
@@ -42,12 +42,15 @@ export const postalAddressSchema = {
 
 // Identité légale de MTJ Sécurité Privée (page Mentions légales). Choix de Théo du 13/11/2026
 // (« Site mentions: A ton nom Kbis ») : Théo MERCIER, Président, directeur de la publication.
-// Forme, capital, immatriculation et date d'immatriculation RECOPIÉS de l'extrait Kbis à jour au
-// 3 novembre 2026 (pièce du coffre du logiciel, lue le 13/11/2026). Le numéro de TVA n'est pas
-// imprimé sur un Kbis : calculé depuis le SIREN (clé de la DGFiP) et vérifié « valide » sur le
-// service VIES de la Commission européenne le 13/11/2026. Une valeur qui change = la changer ici.
+// Forme, capital, immatriculation et date d'immatriculation RECOPIÉES de l'extrait Kbis « à jour au
+// 3 novembre 2026 » (pièce du coffre fournisseur du logiciel MTJ, relue en lecture seule le 15/11/2026 :
+// « Forme juridique Société par actions simplifiée (Société à associé unique) », « Capital social
+// 500,00 Euros », « Date d'immatriculation 12/12/2022 », durée « jusqu'au 11/12/2121 », cohérente).
+// Le Kbis n'imprime pas de numéro de TVA : FR + clé + SIREN (clé = (12 + 3 × (SIREN mod 97)) mod 97 = 27),
+// numéro déclaré « valide » par le service VIES de la Commission européenne le 15/11/2026.
+// Une valeur qui change = la changer ici (l'essai test_site_choix_theo_13_11.py relit ces valeurs).
 export const legalInfo = {
-  forme: "société par actions simplifiée à associé unique (SASU)",
+  forme: "société par actions simplifiée (société à associé unique)",
   capital: "500,00 €",
   rcs: "922 208 202 R.C.S. Toulon",
   immatriculation: "12/12/2022",
@@ -56,8 +59,8 @@ export const legalInfo = {
 };
 
 // Bloc légal unique (CNAPS) : un numéro d'autorisation pour chaque société.
-// Source : identité des sociétés du logiciel MTJ.
-// À faire confirmer par la direction : numéro d'autorisation de MTJ Sécurité Privée (voir rapport).
+// Source : identité des sociétés du logiciel MTJ ; le numéro de MTJ Sécurité Privée est celui que la
+// fiche société du logiciel a lu sur l'autorisation du CNAPS rangée au coffre (relu le 15/11/2026).
 export const L612_14 = "Article L612-14 du code de la sécurité intérieure : « L'autorisation administrative préalable ne confère aucun caractère officiel à l'entreprise ou aux personnes qui en bénéficient. Elle n'engage en aucune manière la responsabilité des pouvoirs publics. »";
 
 export const cnapsCompanies = {

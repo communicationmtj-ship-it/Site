@@ -15,7 +15,7 @@ const data = {
   // Bordeaux sur demande ; aucune équipe locale ni implantation affirmée sans preuve.
   // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : Bordeaux est l'extrémité ouest du
   // secteur ; la page est au menu (« Nos zones ») et au pied de page.
-  introduction: `MTJ Sécurité Privée propose son expertise en sécurité privée à Bordeaux et sur l'ensemble de la métropole bordelaise. Sixième ville de France, Bordeaux est un pôle économique majeur avec une activité viticole mondialement reconnue, un secteur aéronautique de pointe et un tissu tertiaire en pleine expansion.\n\nCette dynamique génère des besoins croissants en sécurité privée : surveillance de sites viticoles, gardiennage de zones d'activité, sécurisation d'événements culturels et sportifs. MTJ Sécurité Privée répond à ces besoins avec des solutions professionnelles et adaptées au contexte bordelais.`,
+  introduction: `MTJ Sécurité Privée propose son expertise en sécurité privée à Bordeaux et sur l'ensemble de la métropole bordelaise. Préfecture de la Gironde et de la région Nouvelle-Aquitaine, Bordeaux est un pôle économique majeur avec une activité viticole mondialement reconnue, un secteur aéronautique de pointe et un tissu tertiaire en pleine expansion.\n\nCette dynamique génère des besoins croissants en sécurité privée : surveillance de sites viticoles, gardiennage de zones d'activité, sécurisation d'événements culturels et sportifs. MTJ Sécurité Privée répond à ces besoins avec des solutions professionnelles et adaptées au contexte bordelais.`,
 
   sections: [
     {
@@ -39,7 +39,7 @@ const data = {
       subsections: [
         {
           h3: 'Métropole bordelaise et rive droite',
-          content: 'La Métropole de Bordeaux regroupe 28 communes et près de 800 000 habitants. Nos agents couvrent l\'ensemble de ce territoire : Bordeaux centre, Mérignac (zones aéroportuaires), Pessac, Talence, Villenave-d\'Ornon, Bègles, Cenon, Lormont et Floirac. Chaque commune présente des enjeux sécuritaires spécifiques que nous maîtrisons.'
+          content: 'La Métropole de Bordeaux regroupe 28 communes. Nos agents couvrent l\'ensemble de ce territoire : Bordeaux centre, Mérignac (zones aéroportuaires), Pessac, Talence, Villenave-d\'Ornon, Bègles, Cenon, Lormont et Floirac. Chaque commune présente des enjeux de sécurité propres, que nous étudions avec vous.'
         },
         {
           h3: 'Bassin d\'Arcachon et littoral girondin',
@@ -59,12 +59,14 @@ const data = {
       h2: 'Pourquoi choisir MTJ Sécurité Privée à Bordeaux',
       subsections: [
         {
-          h3: 'Expertise transposée du sud de la France',
-          content: 'Forte de son expérience acquise dans le sud-est de la France (Toulon, Nice, Monaco), MTJ Sécurité Privée apporte à Bordeaux un savoir-faire éprouvé dans la sécurisation de sites sensibles, d\'événements de grande envergure et de milieux exigeants. Notre expertise en sécurité cynophile et en détection d\'explosifs (CYNODEX) complète notre offre bordelaise.'
+          // 15/11/2026 (repli prudent) : plus de « savoir-faire éprouvé » ni de « sites sensibles » sans preuve ;
+          // CYNODEX selon la certification du binôme, comme sur les autres pages.
+          h3: 'Un seul interlocuteur sur tout le secteur',
+          content: 'Depuis notre siège de Toulon, nous intervenons de Bordeaux à Nice et jusqu\'à Annecy : vos sites de Gironde et ceux du reste du secteur peuvent relever d\'un même interlocuteur et d\'un même devis. Nos maîtres-chiens complètent l\'offre ; la détection d\'explosifs (CYNODEX) est proposée selon la certification du binôme.'
         },
         {
           h3: 'Capacité de montée en charge',
-          content: 'Grâce à notre réseau d\'agents dans le sud de la France, nous pouvons renforcer le dispositif pour vos pics d\'activité ou vos événements exceptionnels. Cette flexibilité est un atout pour les clients ayant des besoins variables ou saisonniers.'
+          content: 'Grâce à notre réseau d\'agents sur tout notre secteur, nous pouvons renforcer le dispositif pour vos pics d\'activité ou vos événements exceptionnels. Cette flexibilité est un atout pour les clients ayant des besoins variables ou saisonniers.'
         }
       ]
     }
@@ -81,11 +83,11 @@ const data = {
     },
     {
       question: 'Proposez-vous des prestations cynophiles à Bordeaux ?',
-      answer: 'Absolument. Notre unité cynophile intervient à Bordeaux pour des missions de surveillance renforcée, de sécurité événementielle et de détection d\'explosifs (CYNODEX). Les binômes maître-chien sont particulièrement adaptés aux sites étendus et aux événements de grande envergure.'
+      answer: 'Oui. Nos maîtres-chiens interviennent à Bordeaux pour des missions de surveillance renforcée et de sécurité événementielle ; la détection d\'explosifs (CYNODEX) est proposée selon la certification du binôme. Les binômes maître-chien sont adaptés aux sites étendus et aux grands événements.'
     }
   ],
 
-  conclusion: `Bordeaux et la Gironde bénéficient désormais de l'expertise de MTJ Sécurité Privée. Agents de sécurité qualifiés, équipes cynophiles, agents SSIAP et unité CYNODEX : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à Bordeaux.`,
+  conclusion: `MTJ Sécurité Privée intervient à Bordeaux et dans toute la Gironde. Agents de sécurité qualifiés, maîtres-chiens, agents SSIAP et, selon la certification du binôme, détection d'explosifs (CYNODEX) : l'ensemble de nos compétences est à votre disposition pour protéger vos sites, vos événements et vos biens.\n\nContactez-nous pour un devis gratuit et découvrez comment MTJ Sécurité Privée peut répondre à vos besoins de sécurité à Bordeaux.`,
 
   relatedLinks: [
     lienLocal('/securite-privee-toulouse'),

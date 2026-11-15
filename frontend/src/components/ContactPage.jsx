@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import FloatingCTA from './FloatingCTA';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import { contactInfo, companyInfo, postalAddressSchema } from '../data/mock';
 import { toast } from 'sonner';
@@ -93,7 +92,7 @@ const ContactPage = () => {
     <div className="min-h-screen bg-black">
       <SeoHead
         title="Contactez MTJ Sécurité Privée | Devis Gratuit | Toulon"
-        description="Contactez MTJ Sécurité Privée pour toute demande de sécurité privée à Toulon, Nice, Toulouse. Devis gratuit, réponse sous 24 h. Tél : 07 60 73 82 06."
+        description="Contactez MTJ Sécurité Privée pour toute demande de sécurité privée de Bordeaux à Nice et jusqu'à Annecy. Devis gratuit, réponse sous 24 h. Tél : 07 60 73 82 06."
         path="/contact"
       />
       <Navbar />

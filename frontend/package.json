@@ -60,6 +60,7 @@
     "start": "craco start",
     "prebuild": "node scripts/generate-public-files.js",
     "build": "GENERATE_SOURCEMAP=false craco build",
+    "postbuild": "node scripts/prerender.js",
     "test": "craco test"
   },
   "browserslist": {

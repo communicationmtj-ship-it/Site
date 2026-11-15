@@ -6,7 +6,7 @@ const data = {
   slug: '/securite-cynophile-maitre-chien',
   themeColor: '#AC8631',
   metaTitle: 'Sécurité Cynophile & Maître-Chien | MTJ Sécurité Privée Toulon',
-  metaDescription: 'MTJ Sécurité Privée propose des équipes cynophiles (maître-chien) d\'intervention à Toulon, Nice et Toulouse. Patrouilles, surveillance renforcée et sécurisation de sites. Devis gratuit.',
+  metaDescription: 'MTJ Sécurité Privée propose des équipes cynophiles (maître-chien) d\'intervention de Bordeaux à Nice et jusqu\'à Annecy. Patrouilles, surveillance renforcée et sécurisation de sites. Devis gratuit.',
   breadcrumbCurrent: 'Sécurité cynophile',
   // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,

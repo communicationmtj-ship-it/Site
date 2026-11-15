@@ -10,7 +10,7 @@ const data = pageLocale({
   departement: 'Isère',
   code: '38',
   region: 'Auvergne-Rhône-Alpes',
-  introduction: `MTJ Sécurité Privée intervient à Grenoble et dans toute l'Isère. Préfecture de l'Isère, Grenoble est un pôle de recherche et d'industrie, entouré de massifs et de stations de montagne.\n\nGardiennage, sécurité événementielle, maîtres-chiens, agents SSIAP : nous vous proposons le dispositif adapté, défini dans un devis.`,
+  introduction: `MTJ Sécurité Privée intervient à Grenoble et dans toute l'Isère. Préfecture de l'Isère, Grenoble est un pôle de recherche et d'industrie, entouré de massifs et de stations de montagne.\n\nLaboratoires et sites industriels de la presqu'île scientifique, commerces, chantiers, stations de l'Oisans et du Vercors : nous adaptons le gardiennage, les rondes et la sécurité incendie à chaque site, et décrivons le dispositif dans un devis.`,
   sections: [
     {
       h2: 'Nos services de sécurité à Grenoble',

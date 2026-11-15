@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-11",
+  "generated": "2026-11-15",
   "routes": [
     "/",
     "/contact",
@@ -17,11 +17,19 @@
     "/securite-erp-etablissements-public",
     "/protection-rapprochee",
     "/grand-deplacement-securite-france",
+    "/securite-privee-sud-france",
     "/securite-privee-toulon",
     "/securite-privee-toulouse",
     "/securite-privee-nice-monaco",
-    "/securite-privee-sud-france",
     "/securite-privee-bordeaux",
+    "/securite-privee-montpellier",
+    "/securite-privee-nimes",
+    "/securite-privee-perpignan",
+    "/securite-privee-marseille",
+    "/securite-privee-avignon",
+    "/securite-privee-lyon",
+    "/securite-privee-grenoble",
+    "/securite-privee-annecy",
     "/devis",
     "/dashboard"
   ]

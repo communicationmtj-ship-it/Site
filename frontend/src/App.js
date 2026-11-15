@@ -176,10 +176,13 @@ const PageLoading = () => (
   <div className="min-h-screen bg-black" role="status" aria-label="Chargement de la page" />
 );
 
-function App() {
+// Contenu de l'application, sans son routeur (pré-rendu du 15/11/2026, choix de Théo « pré-rendu
+// Google ») : le navigateur le place dans BrowserRouter (App, ci-dessous) ; la construction de l'image
+// le rend dans StaticRouter, à l'adresse de chaque page publique (scripts/prerender.js). Même arbre,
+// même HTML : React reprend la page pré-rendue sans la refaire.
+export function AppContenu() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <>
         <SkipLink />
         <TrackVisit />
         <ScrollToHash />
@@ -223,6 +226,15 @@ function App() {
         </Suspense>
         <CookieBanner />
         <Toaster />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <AppContenu />
       </BrowserRouter>
     </div>
   );

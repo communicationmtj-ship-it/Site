@@ -94,7 +94,7 @@ const Navbar = () => {
     <button
       key={link.id}
       onClick={() => handleNavClick(link)}
-      className="text-white hover:text-amber-400 font-medium tracking-wide transition-colors duration-300 text-sm uppercase"
+      className="text-white hover:text-amber-400 font-medium tracking-wide transition-colors duration-300 text-xs xl:text-sm uppercase whitespace-nowrap"
     >
       {link.label}
     </button>
@@ -131,7 +131,9 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          {/* 15/11/2026 : un lien de plus (« Nos zones ») ; entre 1024 et 1279 px, texte et écarts réduits et
+              aucun retour à la ligne, pour que la barre tienne sur une ligne avec le logo et le bouton de devis. */}
+          <div className="hidden lg:flex items-center space-x-4 xl:space-x-8">
             {navLinks.slice(0, 3).map(lienBureau)}
             <div className="relative" ref={zonesRef}>
               <button
@@ -139,7 +141,7 @@ const Navbar = () => {
                 onClick={() => setZonesOuvert((ouvert) => !ouvert)}
                 aria-expanded={zonesOuvert}
                 aria-controls="menu-zones"
-                className="inline-flex items-center gap-1 text-white hover:text-amber-400 font-medium tracking-wide transition-colors duration-300 text-sm uppercase"
+                className="inline-flex items-center gap-1 text-white hover:text-amber-400 font-medium tracking-wide transition-colors duration-300 text-xs xl:text-sm uppercase whitespace-nowrap"
                 data-testid="navbar-zones"
               >
                 Nos zones
@@ -165,7 +167,7 @@ const Navbar = () => {
             {navLinks.slice(3).map(lienBureau)}
             <button
               onClick={() => handleNavClick({ id: 'quote' })}
-              className="bg-amber-400 hover:bg-amber-300 text-black font-bold px-5 py-2.5 text-sm uppercase tracking-wider transition-all duration-300 hover:scale-105"
+              className="bg-amber-400 hover:bg-amber-300 text-black font-bold px-4 xl:px-5 py-2.5 text-xs xl:text-sm uppercase tracking-wider whitespace-nowrap transition-all duration-300 hover:scale-105"
               data-testid="navbar-devis-cta"
             >
               Devis gratuit

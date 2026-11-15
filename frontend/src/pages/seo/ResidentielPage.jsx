@@ -40,7 +40,7 @@ const data = {
         },
         {
           h3: 'Sécurité de domaines viticoles et agricoles',
-          content: 'Les domaines viticoles et exploitations agricoles du sud de la France sont exposés aux vols de matériel, de récoltes et au vandalisme. MTJ Sécurité Privée propose des solutions de surveillance adaptées aux grandes superficies : rondes motorisées, équipes cynophiles et surveillance nocturne.'
+          content: 'Les domaines viticoles et exploitations agricoles de notre secteur sont exposés aux vols de matériel, de récoltes et au vandalisme. MTJ Sécurité Privée propose des solutions de surveillance adaptées aux grandes superficies : rondes motorisées, équipes cynophiles et surveillance nocturne.'
         }
       ]
     },

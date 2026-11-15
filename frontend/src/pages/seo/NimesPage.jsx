@@ -10,7 +10,7 @@ const data = pageLocale({
   departement: 'Gard',
   code: '30',
   region: 'Occitanie',
-  introduction: `MTJ Sécurité Privée intervient à Nîmes et dans tout le Gard. Préfecture du Gard, Nîmes accueille dans ses arènes romaines des concerts et des férias, et son agglomération compte des zones d'activité et logistiques le long des grands axes routiers.\n\nGardiennage, sécurité événementielle, maîtres-chiens, agents SSIAP : nous vous proposons le dispositif adapté, défini dans un devis.`,
+  introduction: `MTJ Sécurité Privée intervient à Nîmes et dans tout le Gard. Préfecture du Gard, Nîmes accueille dans ses arènes romaines des concerts et des férias, et son agglomération compte des zones d'activité et logistiques le long des grands axes routiers.\n\nArènes et lieux de férias, entrepôts le long de l'autoroute, domaines des Costières : nous adaptons le gardiennage, la sécurité des événements et les rondes cynophiles à chaque site, dans un devis détaillé.`,
   sections: [
     {
       h2: 'Nos services de sécurité à Nîmes',

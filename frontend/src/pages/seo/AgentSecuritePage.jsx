@@ -6,7 +6,7 @@ const data = {
   slug: '/agent-securite-prevention',
   themeColor: '#AC8631',
   metaTitle: 'Agent de Prévention et Sécurité Privée | MTJ Sécurité Privée',
-  metaDescription: 'MTJ Sécurité Privée déploie des agents de prévention et de sécurité qualifiés à Toulon, Toulouse et Nice. Surveillance, contrôle d\'accès, rondes et protection 24h/24. Devis gratuit.',
+  metaDescription: 'MTJ Sécurité Privée déploie des agents de prévention et de sécurité qualifiés de Bordeaux à Nice et jusqu\'à Annecy, depuis son siège de Toulon. Surveillance, contrôle d\'accès, rondes et protection 24h/24. Devis gratuit.',
   breadcrumbCurrent: 'Agent de prévention et sécurité',
   // 13/11/2026 (choix de Théo, « Site perimetre: A partout ») : zone desservie = le secteur (data/perimetre.js).
   areaServed: ZONE_DESSERVIE,

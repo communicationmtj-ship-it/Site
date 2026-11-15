@@ -12,11 +12,11 @@ const data = {
   societe: { nom: 'MTJ Sécurité Rapprochée', mention: 'société du groupe MTJ', autorisation: RAPPROCHEE.authorization, activite: RAPPROCHEE.activity, ville: 'Nice', adresse: null },
   serviceDevis: 'Protection rapprochée',
   metaTitle: 'Protection Rapprochée — Sécurité des Personnes | MTJ Sécurité Rapprochée',
-  metaDescription: 'MTJ Sécurité Rapprochée assure la protection physique des personnalités, dirigeants, célébrités et particuliers exposés. Agents de protection rapprochée formés et certifiés à Toulon, Nice, Toulouse et dans toute la France.',
+  metaDescription: 'MTJ Sécurité Rapprochée assure la protection physique des personnalités, dirigeants, célébrités et particuliers exposés. Agents de protection rapprochée formés, partout en France.',
   breadcrumbCurrent: 'Protection rapprochée',
   // Données structurées alignées sur le texte (site-065) : l'autorisation du CNAPS vaut pour la
   // France ; Monaco, État étranger, n'est plus annoncé pour la protection rapprochée (13/11/2026).
-  areaServed: 'Toulon, Toulouse, Nice, PACA, Occitanie, France',
+  areaServed: 'France',
 
   h1: 'Protection Rapprochée — Sécurité Physique des Personnes',
   introduction: `MTJ Sécurité Rapprochée, société du groupe MTJ, est spécialisée dans la protection physique des personnes. Nous assurons la sécurité rapprochée de personnalités, dirigeants d'entreprise, célébrités, diplomates et particuliers exposés, partout en France.\n\nNos agents de protection rapprochée (APR), rigoureusement sélectionnés et formés, assurent votre protection en toute discrétion. Chaque mission fait l'objet d'une analyse de risques préalable et d'un dispositif de protection sur mesure.\n\nAutorisation d'exercer du CNAPS n° ${RAPPROCHEE.authorization} (${RAPPROCHEE.activity}).\n${L612_14}`,

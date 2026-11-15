@@ -10,7 +10,7 @@ const data = pageLocale({
   departement: 'Haute-Savoie',
   code: '74',
   region: 'Auvergne-Rhône-Alpes',
-  introduction: `MTJ Sécurité Privée intervient à Annecy et dans toute la Haute-Savoie, au nord-est de son secteur. Préfecture de la Haute-Savoie, Annecy vit au rythme de son lac, de ses événements et des saisons touristiques, entre stations de ski, vallée industrielle de l'Arve et proximité de Genève.\n\nGardiennage, sécurité événementielle, maîtres-chiens, agents SSIAP : nous vous proposons le dispositif adapté, défini dans un devis.`,
+  introduction: `MTJ Sécurité Privée intervient à Annecy et dans toute la Haute-Savoie, au nord-est de son secteur. Préfecture de la Haute-Savoie, Annecy vit au rythme de son lac, de ses événements et des saisons touristiques, entre stations de ski, vallée industrielle de l'Arve et proximité de Genève.\n\nRésidences au bord du lac, commerces de la vieille ville, sites industriels de la vallée de l'Arve, stations des Aravis : nous adaptons à chaque lieu le gardiennage, les rondes, les maîtres-chiens ou les agents SSIAP, et détaillons le dispositif dans un devis.`,
   sections: [
     {
       h2: 'Nos services de sécurité à Annecy',
@@ -18,7 +18,7 @@ const data = pageLocale({
       subsections: [
         {
           h3: 'Gardiennage et surveillance de sites',
-          content: "Commerces, entrepôts, sites industriels, chantiers et résidences : nos agents assurent rondes, contrôle d'accès et surveillance, de jour comme de nuit.",
+          content: "Commerces, entrepôts, ateliers de décolletage de la vallée de l'Arve, chantiers et résidences : nos agents assurent les rondes, le contrôle des accès et la surveillance, y compris pendant les fermetures de fin de semaine et les absences de saison.",
           list: ['Annecy, Annecy-le-Vieux, Seynod, Cran-Gevrier', 'Rumilly et le bassin annécien', 'Annemasse, Thonon-les-Bains, Évian-les-Bains', "Cluses, Sallanches et la vallée de l'Arve"],
         },
         {

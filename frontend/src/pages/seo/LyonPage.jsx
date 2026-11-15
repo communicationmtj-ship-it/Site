@@ -10,7 +10,7 @@ const data = pageLocale({
   departement: 'Rhône',
   code: '69',
   region: 'Auvergne-Rhône-Alpes',
-  introduction: `MTJ Sécurité Privée intervient à Lyon et dans le Rhône, au nord de son secteur. Préfecture de la région Auvergne-Rhône-Alpes, Lyon concentre quartiers d'affaires, grands lieux d'exposition, zones logistiques et sites industriels, et accueille chaque année de grands événements, comme la Fête des Lumières.\n\nGardiennage, sécurité événementielle, maîtres-chiens, agents SSIAP : nous vous proposons le dispositif adapté, défini dans un devis.`,
+  introduction: `MTJ Sécurité Privée intervient à Lyon et dans le Rhône, au nord de son secteur. Préfecture de la région Auvergne-Rhône-Alpes, Lyon concentre quartiers d'affaires, grands lieux d'exposition, zones logistiques et sites industriels, et accueille chaque année de grands événements, comme la Fête des Lumières.\n\nBureaux de la Part-Dieu ou de Gerland, entrepôts de l'est lyonnais, salons d'Eurexpo : nous établissons le dispositif avec vous, agents de sécurité, maîtres-chiens ou agents SSIAP, et le chiffrons dans un devis.`,
   sections: [
     {
       h2: 'Nos services de sécurité à Lyon',

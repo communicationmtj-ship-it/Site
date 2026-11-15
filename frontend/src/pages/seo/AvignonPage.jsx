@@ -10,7 +10,7 @@ const data = pageLocale({
   departement: 'Vaucluse',
   code: '84',
   region: "Provence-Alpes-Côte d'Azur",
-  introduction: `MTJ Sécurité Privée intervient à Avignon et dans tout le Vaucluse. Préfecture du Vaucluse, Avignon accueille chaque été son festival de théâtre, et son bassin réunit des zones d'activité, des plateformes logistiques et des exploitations agricoles.\n\nGardiennage, sécurité événementielle, maîtres-chiens, agents SSIAP : nous vous proposons le dispositif adapté, défini dans un devis.`,
+  introduction: `MTJ Sécurité Privée intervient à Avignon et dans tout le Vaucluse. Préfecture du Vaucluse, Avignon accueille chaque été son festival de théâtre, et son bassin réunit des zones d'activité, des plateformes logistiques et des exploitations agricoles.\n\nSalles et lieux de spectacle pendant le festival, zones d'activité de Courtine et d'Agroparc, exploitations agricoles du Comtat : nous définissons avec vous le dispositif (agents, rondes, maîtres-chiens, agents SSIAP), puis le décrivons dans un devis.`,
   sections: [
     {
       h2: "Nos services de sécurité à Avignon",
@@ -18,7 +18,7 @@ const data = pageLocale({
       subsections: [
         {
           h3: 'Gardiennage et surveillance de sites',
-          content: "Commerces, entrepôts, bureaux, exploitations agricoles et résidences : nos agents assurent rondes, contrôle d'accès et surveillance, de jour comme de nuit.",
+          content: "Commerces, entrepôts, bureaux, exploitations agricoles et résidences : nos agents surveillent les sites, contrôlent les accès et font des rondes, avec une attention particulière aux périodes de récolte et aux nuits de festival.",
           list: ['Avignon, Le Pontet, Sorgues', "Carpentras, Cavaillon, L'Isle-sur-la-Sorgue", 'Orange et le nord du Vaucluse', 'Pertuis, Apt et le Luberon'],
         },
         {

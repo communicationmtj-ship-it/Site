@@ -10,7 +10,7 @@ const data = pageLocale({
   departement: 'Pyrénées-Orientales',
   code: '66',
   region: 'Occitanie',
-  introduction: `MTJ Sécurité Privée intervient à Perpignan et dans toutes les Pyrénées-Orientales. Préfecture du département, proche de la frontière espagnole, Perpignan est un carrefour logistique, notamment pour les fruits et légumes, entre un littoral touristique et la montagne.\n\nGardiennage, sécurité événementielle, maîtres-chiens, agents SSIAP : nous vous proposons le dispositif adapté, défini dans un devis.`,
+  introduction: `MTJ Sécurité Privée intervient à Perpignan et dans toutes les Pyrénées-Orientales. Préfecture du département, proche de la frontière espagnole, Perpignan est un carrefour logistique, notamment pour les fruits et légumes, entre un littoral touristique et la montagne.\n\nPlateformes logistiques de Saint-Charles, campings et résidences de la côte, commerces du centre : nous adaptons gardiennage, rondes, maîtres-chiens et agents SSIAP à chaque site, et le précisons dans un devis.`,
   sections: [
     {
       h2: 'Nos services de sécurité à Perpignan',
@@ -18,7 +18,7 @@ const data = pageLocale({
       subsections: [
         {
           h3: 'Gardiennage et surveillance de sites',
-          content: "Entrepôts et plateformes logistiques, commerces, bureaux et résidences : nos agents assurent rondes, contrôle d'accès et surveillance, de jour comme de nuit.",
+          content: "Entrepôts et plateformes logistiques, commerces, bureaux et résidences : nos agents contrôlent les entrées de camions, surveillent les quais et font des rondes, au rythme des arrivages.",
           list: ['Perpignan et son agglomération', 'Canet-en-Roussillon, Saint-Cyprien, Argelès-sur-Mer', 'Rivesaltes et la plaine du Roussillon', "Céret, Prades et l'arrière-pays"],
         },
         {
