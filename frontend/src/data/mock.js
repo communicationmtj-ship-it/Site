@@ -73,9 +73,10 @@ export const cnapsCompanies = {
   privee: {
     name: "MTJ SÉCURITÉ PRIVÉE",
     siret: "922 208 202 00015",
-    // 15/11/2026 (Théo, « Numero cnaps: Ancien du site » : la pièce du coffre lue le 13/11 est l'autorisation
-    // provisoire) : le numéro du site en ligne, mot pour mot.
-    authorization: "AUT -083-2024-05-22-2024084324",
+    // 15/11/2026 (Théo, 15/11/2026 16:07, « Numero cnaps: Decision 2123-05-23 ») : numéro de la décision du CNAPS du 23/05/2024 (« une autorisation d'exercer
+    // numéro … est délivrée », sans le mot provisoire ; relue à l'image). L'ancien numéro du site portait la date
+    // de la demande (22/05/2024) et n'est sur aucune pièce ; le logiciel l'écarte de ses PDF depuis le 08/11/2026.
+    authorization: "AUT-083-2123-05-23-20240933884",
     activity: "surveillance ou gardiennage",
   },
   rapprochee: {
